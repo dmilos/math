@@ -2,3 +2,5 @@
 #include "./structure.hpp"
 #include "./inside.hpp"
 #include "./centroid.hpp"
+#include "./circumradius.hpp"
+#include "./inradius.hpp"

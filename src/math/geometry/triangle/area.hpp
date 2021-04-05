@@ -23,6 +23,19 @@
         scalar_name
         area
          (
+           scalar_name const& a
+          ,scalar_name const& b
+          ,scalar_name const& c
+          )
+         {
+          scalar_name s = ( a+b+c)/ scalar_name(2);
+          return sqrt( s*(s-a)*(s-b)*(s-c) );
+         }
+
+       template<  typename scalar_name >
+        scalar_name
+        area
+         (
            ::math::linear::vector::point<scalar_name, 2 > const& a0
           ,::math::linear::vector::point<scalar_name, 2 > const& a1
           ,::math::linear::vector::point<scalar_name, 2 > const& a2
