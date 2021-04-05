@@ -1,0 +1,22 @@
+#include "./circle/circle.hpp"
+#include "./direction/direction.hpp"
+#include "./ellipse/ellipse.hpp"
+#include "./interval/interval.hpp"
+#include "./plane/plane.hpp"
+#include "./projective/projective.hpp"
+#include "./quadric/quadric.hpp"
+#include "./tetrahedron/tetrahedron.hpp"
+#include "./triangle/triangle.hpp"
+
+#include "./deg2rad.hpp"
+#include "./rad2deg.hpp"
+
+
+#include "./cartesian2cylindric.hpp"
+#include "./cartesian2polar.hpp"
+#include "./cartesian2spherical.hpp"
+#include "./cylindric2cartesian.hpp"
+#include "./cylindric2spherical.hpp"
+#include "./polar2cartesian.hpp"
+#include "./spherical2cartesian.hpp"
+#include "./spherical2cylindric.hpp"

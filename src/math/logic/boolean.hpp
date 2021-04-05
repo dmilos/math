@@ -1,0 +1,1 @@
+//https://en.wikipedia.org/wiki/Boolean_algebra_(structure)

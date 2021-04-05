@@ -1,0 +1,10 @@
+#include "./average.hpp"
+#include "./count.hpp"
+#include "./maximum.hpp"
+#include "./minimum.hpp"
+#include "./summae.hpp"
+
+#include "./gaussV.hpp"
+#include "./gaussV1.hpp"
+#include "./gaussV2.hpp"
+#include "./interval.hpp"
