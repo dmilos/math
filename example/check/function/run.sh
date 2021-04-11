@@ -7,7 +7,8 @@ pwd
 ./factorial.exe
 ./gabor.exe
 ./gain.exe
-./peano_test.exe
+./lebesgue_test.exe
+./hilbert_test.exe
 ./power.exe
 ./val.exe
 ./vap.exe

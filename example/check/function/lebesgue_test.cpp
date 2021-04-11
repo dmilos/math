@@ -6,8 +6,6 @@
 int g_calc = 0;
 #include "math/math.hpp"
 
-#define USE_PNM 0
-
 #if USE_PNM
 #include "pnm/pnm.hpp"
 #endif
@@ -22,7 +20,7 @@ int main( int argc, char *argv[] )
   auto height = 600;
   auto width  = 600;
 
-  for( double t=0; t < 0;  t+= 0.000001 )
+  for( double t=0; t < 1;  t+= 0.000001 )
    {
     long double x,y;
     ::math::function::lebesgue2D<long double>( x, y, t, 15 );
@@ -41,22 +39,24 @@ int main( int argc, char *argv[] )
       }
    }
 
-  for( int iteration = 10; iteration < 10; ++iteration )
+  for( int iteration = 1; iteration < 13; ++iteration )
    {
     image.clear(); image.resize( height * width, 0 );
-    for( double t=0; t< 0.9999999999;  t+= 0.0000001 )
+    double step =pow( 0.25, iteration );
+    std::cout << "iteration: " << iteration << std::endl;
+    for( double t=0; t< 0.9999999999;  t+= step )
      {
       long double x,y;
       ::math::function::lebesgue2D<long double>( x, y, t, iteration );
 
-      double xr = ( x*width);
-      double yr = ( y*height);
+      double xr = ( x*width  );
+      double yr = ( y*height );
 
       std::size_t  index = std::size_t( width*int( height - int(yr) - 1)+int( xr ) );
       if( image.size() <= index ) continue;
       image[ index +0 ] //= //std::uint8_t( int( 256*t ) );
       //image[ index +1 ] = //0*std::uint8_t( int( 4*256*t ) );
-      //image[ index +2 ] 
+      //image[ index +2 ]
       = std::uint8_t( int( 256*t ) );
      }
 
@@ -65,29 +65,27 @@ int main( int argc, char *argv[] )
 #endif
    }
 
-   image.clear(); image.resize( 3 * height * width, 0 );
+  for( int iteration = 1; iteration < 13; ++iteration )
+   {
+    image.clear(); image.resize( height * width, 0 );
+    double step =pow( 0.25, iteration );
+    std::cout << "iteration: " << iteration << std::endl;
+    for( double t=0; t< 0.9999999999;  t+= step )
+     {
+      std::array<double,2> point;
+      ::math::function::lebesgueND<double>( point, t, iteration );
 
-   //for( g_calc = 0; g_calc < 10; ++g_calc )           
-    {
-   for( double t=0; t< 1;  t+= 0.000001 )
-    {
-     std::array<double,2> point;
-    ::math::function::hilbert2D( point, t, 10 );
+      int xr = ( point[0]*width  );
+      int yr = ( point[1]*height );
+      std::size_t  index = std::size_t( width*int( height - int(yr) - 1)+int( xr ) );
 
-     int xr = ( point[0]*width);
-     int yr = ( point[1]*height);
-     std::size_t  index = 3*std::size_t( width*( height - yr - 1 )+  xr );
+      if( image.size() <= index ) continue;
+      image[ index +0 ] = std::uint8_t( int( 256*t ) );
+     }
 
-      if( 3*image.size() <= index ) continue;
-      image[ index +2 ] = //std::uint8_t(  int( 256*::math::function::ramp<double>( 4*(t-0.5 ) ) ) );
-      image[ index +1 ] = // std::uint8_t(  int( 256*::math::function::ramp<double>( 4*(t-0.25 ) ) ) );
-      image[ index +0 ] = //std::uint8_t(  int( 256*::math::function::ramp<double>( 4*t ) ) );
-                         std::uint8_t(  int( 256*::math::function::saw<double>( 4 * 4 * t ) ) );
-    }
 #if USE_PNM
    { 
-    std::string time =  __TIME__; std::replace( time.begin(), time.end(), ':', '-');
-    std::ofstream( "hilbertND_" + time+"_" + std::to_string(g_calc) + ".pgm" ) << PNM::save( image, width, height, PNM::P3 ); 
+    { std::ofstream( std::string( "lebesgueND-")+ (iteration < 10?"0":"") +std::to_string( iteration )+"-Rotate-256.pgm" ) << PNM::save( image, width, height, PNM::P2 ); }
    }
 #endif
         }

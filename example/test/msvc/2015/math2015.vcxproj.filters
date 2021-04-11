@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\check\linear\matrix\check.cpp">
+    <ClCompile Include="..\..\..\check\function\hilbert_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

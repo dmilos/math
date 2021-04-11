@@ -24,12 +24,12 @@
          (
            ::math::linear::vector::structure< scalar_name, dimension_number > const& v
          )
-         { // TODO not optimal
+         {
           std::pair<std::size_t, scalar_name > result;
           auto & index = result.first = 0;
           auto & smallest = result.second = fabs( v[index] );
 
-          for( std::size_t i = 1; i < dimension_number; ++i )
+          for( std::size_t i = 1; i < dimension_number; ++i )// TODO not optimal
            {
             scalar_name chalenger = fabs( v[i] );
             if( chalenger < smallest )

@@ -13,5 +13,6 @@
 #include "./factorial.hpp"
 #include "./gcd.hpp"
 #include "./lcm.hpp"
+#include "./power.hpp"
 
 #include "./distribution/distribution.hpp"

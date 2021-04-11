@@ -75,8 +75,12 @@
            ::math::geometry::triangle::structure<scalar_name, dimension_number > const& t
           )
          {
-          // TODO
-          return 0;
+          return ::math::geometry::triangle::area
+           (
+             ::math::linear::vector::distance(  t[0], t[1] )
+            ,::math::linear::vector::distance(  t[0], t[2] )
+            ,::math::linear::vector::distance(  t[1], t[2] )
+           );
          }
 
       }
