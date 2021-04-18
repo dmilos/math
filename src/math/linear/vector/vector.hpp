@@ -42,6 +42,7 @@
 
 #include "./reduce.hpp"
 #include "./extend.hpp"
+#include "./orientation.hpp"
 
 #include "./GramSchmidt.hpp"
 

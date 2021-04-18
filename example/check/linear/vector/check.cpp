@@ -188,19 +188,19 @@ int main( int argc, char *argv[] )
    ::math::linear::vector::combine<double>( p0_3, 1, p1_3, 2, p2_3, 3, p3_3  );
    ::math::linear::vector::combine<double>( p0_4, 1, p1_4, 2, p2_4, 3, p3_4  );
    ::math::linear::vector::combine<double>( p0_5, 1, p1_5, 2, p2_5, 3, p3_5  );
-   
+
     ::math::linear::vector::combine<double>( p0_1,    p1_1, 2, p2_1, 3, p3_1  );
     ::math::linear::vector::combine<double>( p0_2,    p1_2, 2, p2_2, 3, p3_2  );
     ::math::linear::vector::combine<double>( p0_3,    p1_3, 2, p2_3, 3, p3_3  );
     ::math::linear::vector::combine<double>( p0_4,    p1_4, 2, p2_4, 3, p3_4  );
     ::math::linear::vector::combine<double>( p0_5,    p1_5, 2, p2_5, 3, p3_5  );
-   
+
    ::math::linear::vector::combine<double>( p0_1, 1, p1_1, 2, p2_1 );
    ::math::linear::vector::combine<double>( p0_2, 1, p1_2, 2, p2_2 );
    ::math::linear::vector::combine<double>( p0_3, 1, p1_3, 2, p2_3 );
    ::math::linear::vector::combine<double>( p0_4, 1, p1_4, 2, p2_4 );
    ::math::linear::vector::combine<double>( p0_5, 1, p1_5, 2, p2_5 );
-   
+
    ::math::linear::vector::combine<double>( p0_1,    p1_1, 2, p2_1 );
    ::math::linear::vector::combine<double>( p0_2,    p1_2, 2, p2_2 );
    ::math::linear::vector::combine<double>( p0_3,    p1_3, 2, p2_3 );
@@ -212,6 +212,8 @@ int main( int argc, char *argv[] )
    ::math::linear::vector::dominant( p0_3 );
    ::math::linear::vector::dominant( p0_4 );
    ::math::linear::vector::dominant( p0_5 );
+
+   ::math::linear::vector::orientation( p0_2, p1_2 );
 
   return EXIT_SUCCESS;
  }

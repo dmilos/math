@@ -1,7 +1,7 @@
 #ifndef Dh_DDMRM_math_LA_vector_extend_HPP_
  #define Dh_DDMRM_math_LA_vector_extend_HPP_
 
- // ::math::linear::vector::extend<scalar_name,dimension_number>
+ // ::math::linear::vector::extend<dimension_left_number, scalar_name, dimension_right_number>
 
  namespace math
   {

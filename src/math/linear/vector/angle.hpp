@@ -27,7 +27,10 @@
          , ::math::linear::vector::structure< scalar_name, dimension_number > const& right_param
          )
          {
-          return std::acos( ::math::linear::vector::dot( left_param, right_param ) / ::math::linear::vector::length( left_param ) / ::math::linear::vector::length( right_param ) );
+          scalar_name left_len  = ::math::linear::vector::length( left_param );
+          scalar_name right_len = ::math::linear::vector::length( right_param );
+          scalar_name dot       = ::math::linear::vector::dot( left_param, right_param );
+          return std::acos( dot / left_len / right_len );
          }
 
       }
