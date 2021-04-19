@@ -4,10 +4,12 @@
 #include <string>
 
 #include "math/math.hpp"
+
 #include "opencv2/opencv.hpp"
 
 
-int g_step=1;     // 
+int g_step=6;     // 
+
 
 void initUI( )
  {
@@ -43,6 +45,7 @@ void make( cv::Mat & frame )
        if( height< yr+1) continue;
       frame.at<std::uint8_t>( height - (int)yr-1, (int)xr) = std::uint8_t( int( 256*t ) );
      }
+
  }
 
 

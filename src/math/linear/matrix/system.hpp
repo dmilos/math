@@ -122,6 +122,22 @@
           x[3] = m[3][0]; y[3] = m[3][1]; z[3] = m[3][2]; t[3] = m[3][3];
          }
 
+
+       template< typename scalar_name, unsigned dimension_number >
+        void system
+         (
+           ::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number>                           & result
+          ,std::array< ::math::linear::vector::structure<scalar_name,dimension_number>, dimension_number >      const & base
+         )
+         {
+          for( unsigned i = 0; i < dimension_number; ++i )
+           for( unsigned j = 0; j < dimension_number; ++j )
+            {
+             result[i][j] = base[j][i];
+            }
+         }
+
+
       }
     }
   }

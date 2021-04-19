@@ -46,12 +46,15 @@ int main( int argc, char *argv[] )
   for( int iteration = 1; iteration < 13; ++iteration )
    {
     image.clear(); image.resize( channel*height * width, 0 );
+#if USE_COLOR
     ::color::rgb<std::uint8_t> rgb;
+#endif
     double step =pow( 0.25, iteration );
     for( double t=0; t< 0.9999999999;  t+= step )
      {
 #if USE_COLOR
       ::color::hsl<double>       hsv{ 360 * t, 100 ,t*90 + 10  };
+      ::color::gray<double>      gray{ t };
 #endif
       long double x,y;
       ::math::function::hilbert2D<long double>( x, y, t, iteration );
@@ -62,17 +65,22 @@ int main( int argc, char *argv[] )
       std::size_t  index = channel * std::size_t( width*int( height - int(yr) - 1)+int( xr ) );
       if( image.size() <= index ) continue;
 #if USE_COLOR
-      rgb = hsv;
-      image[ index +0 ] = rgb[0]; // std::uint8_t( int( 256*t ) );
-      image[ index +1 ] = rgb[1]; // std::uint8_t( int( 256*(t*3) )%256 );
-      image[ index +2 ] = rgb[2]; // std::uint8_t( int( 256*(t*9) )%256 );
-#endif
+      if( 3 == channel ) rgb = hsv;
+      if( 1 == channel ) rgb = gray;
+                       image[ index +0 ] = rgb[0];
+      if( 1 < channel )image[ index +1 ] = rgb[1];
+      if( 2 < channel )image[ index +2 ] = rgb[2];
+#else
       image[ index +0 ] =  std::uint8_t( int( 256*t ) );
+      if( 1 < channel )image[ index +1 ] =  std::uint8_t( int( 256*t ) );
+      if( 2 < channel )image[ index +2 ] =  std::uint8_t( int( 256*t ) );
+#endif
      }
 
     std::cout << "iteration: " << iteration << std::endl;
 #if USE_PNM
-    { std::ofstream( std::string( "hilbert2D-")+ (iteration < 10?"0":"") +std::to_string( iteration )+"-Rotate-256.pgm", std::ios_base::binary ) << PNM::save( image, width, height, PNM::P6 ); }
+    if( 1 == channel){ std::ofstream( std::string( "hilbert2D-")+ (iteration < 10?"0":"") +std::to_string( iteration )+"-Rotate-256.pgm", std::ios_base::binary ) << PNM::save( image, width, height, PNM::P5 ); }
+    if( 3 == channel){ std::ofstream( std::string( "hilbert2D-")+ (iteration < 10?"0":"") +std::to_string( iteration )+"-Rotate-256.pgm", std::ios_base::binary ) << PNM::save( image, width, height, PNM::P6 ); }
 #endif
    }
 
@@ -90,18 +98,22 @@ int main( int argc, char *argv[] )
       std::size_t  index = channel * std::size_t( width*int( height - int(yr) - 1)+int( xr ) );
 
       if( image.size() <= index ) continue;
-      image[ index +0 ] = std::uint8_t( int( 256*t ) );
+      image[ index +0 ] =  std::uint8_t( int( 256*t ) );
+      if( 1 < channel )image[ index +1 ] =  std::uint8_t( int( 256*t ) );
+      if( 2 < channel )image[ index +2 ] =  std::uint8_t( int( 256*t ) );
      }
 
     std::cout << "iteration: " << iteration << std::endl;
 #if USE_PNM
    { 
-    { std::ofstream( std::string( "hilbertND-")+ (iteration < 10?"0":"") +std::to_string( iteration )+"-Rotate-256.pgm", std::ios_base::binary ) << PNM::save( image, width, height, PNM::P6 ); }
+    if( 1 == channel){ std::ofstream( std::string( "hilbertND-")+ (iteration < 10?"0":"") +std::to_string( iteration )+"-Rotate-256.pgm", std::ios_base::binary ) << PNM::save( image, width, height, PNM::P5 ); }
+    if( 3 == channel){ std::ofstream( std::string( "hilbertND-")+ (iteration < 10?"0":"") +std::to_string( iteration )+"-Rotate-256.pgm", std::ios_base::binary ) << PNM::save( image, width, height, PNM::P6 ); }
    }
 #endif
         }
   std::cout << "End." << std::endl;
-  //
+  double x,y,z;
+  ::math::function::hilbert3D<double>(x,y,z,1,10);
   return EXIT_SUCCESS;
  }
 

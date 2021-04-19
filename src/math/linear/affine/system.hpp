@@ -73,6 +73,18 @@
           result.vector() = vector;
          }
 
+       template< typename scalar_name, unsigned dimension_number >
+        void system
+         (
+           ::math::linear::affine::structure<scalar_name, dimension_number>                     & result
+          ,::math::linear::vector::structure<scalar_name, dimension_number>                const& vector
+          ,std::array< ::math::linear::vector::structure<scalar_name, dimension_number>, dimension_number >  const& base
+         )
+         {
+          ::math::linear::matrix::system( result.matrix(), base );
+          result.vector() = vector;
+         }
+
       }
     }
   }
