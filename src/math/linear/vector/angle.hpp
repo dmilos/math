@@ -30,7 +30,9 @@
           scalar_name left_len  = ::math::linear::vector::length( left_param );
           scalar_name right_len = ::math::linear::vector::length( right_param );
           scalar_name dot       = ::math::linear::vector::dot( left_param, right_param );
-          return std::acos( dot / left_len / right_len );
+          scalar_name   cosinus =  dot / left_len / right_len;
+                        cosinus =  ( ( cosinus < scalar_name(-1) ) ? scalar_name(-1) : ( ( scalar_name(+1) < cosinus ) ? scalar_name(+1) : cosinus ) );
+          return std::acos( cosinus );
          }
 
       }

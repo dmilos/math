@@ -310,6 +310,7 @@ namespace math
                 if( 0 == this->size( dimension ) )
                  {
                   this->m_container.resize( dimension );
+                  if( 0 == dimension ) break;
                   continue;
                  }
                 break;

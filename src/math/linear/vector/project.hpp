@@ -43,7 +43,6 @@
           ,::math::linear::vector::structure< scalar_name, 2 > const& normal_param
          )
          {
-          using namespace ::math::linear::vector;
           scalar_name I_dot = ::math::linear::vector::dot( point_param, normal_param );
           result_param[0] = point_param[0] - I_dot * normal_param[0];
           result_param[1] = point_param[1] - I_dot * normal_param[1];
@@ -59,7 +58,6 @@
           ,::math::linear::vector::structure< scalar_name, 3 > const& normal_param
          )
          {
-          using namespace ::math::linear::vector;
           scalar_name I_dot = ::math::linear::vector::dot( point_param, normal_param );
           result_param[0] = point_param[0] - I_dot * normal_param[0];
           result_param[1] = point_param[1] - I_dot * normal_param[1];
@@ -76,7 +74,6 @@
           ,::math::linear::vector::structure< scalar_name, 4 > const& normal_param
          )
          {
-          using namespace ::math::linear::vector;
           scalar_name I_dot = ::math::linear::vector::dot( point_param, normal_param );
           result_param[0] = point_param[0] - I_dot * normal_param[0];
           result_param[1] = point_param[1] - I_dot * normal_param[1];
