@@ -23,6 +23,11 @@ namespace math
        return exp(-x*x/( scalar_name(2)* variance) )/sqrt( scalar_name(2) * ::math::constants::PHI * variance );
       }
 
+    template< typename scalar_name >
+     inline scalar_name pdf( scalar_name const& x )
+      { // Probability density function
+       return exp(-x*x/( scalar_name(2) ) )/sqrt( scalar_name(2) * ::math::constants::PHI );
+      }
 
    }
  }

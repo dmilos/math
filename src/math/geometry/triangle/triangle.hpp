@@ -4,3 +4,4 @@
 #include "./centroid.hpp"
 #include "./circumradius.hpp"
 #include "./inradius.hpp"
+#include "./barycentric.hpp"

@@ -2,7 +2,7 @@
 #define math_geometry_direction_fit2D
 
 // ::math::geometry::direction::fit2D<double>::process( abc, cloud )
-// ::math::geometry::direction::fit2D<double>::process( abc, samples )
+// ::math::geometry::direction::fit2D<double>::process( a, b, samples )
 
 #include <vector>
 #include "../../linear/vector/vector.hpp"

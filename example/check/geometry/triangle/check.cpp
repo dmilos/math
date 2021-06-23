@@ -14,14 +14,16 @@ int main( int argc, char *argv[] )
   ::math::geometry::triangle::structure<double, 3>   a3;
   ::math::geometry::triangle::structure<double, 2>   a2;
 
-  ::math::linear::vector::structure< float, 2 >  vC, vA0, vA1, vA2;
+  ::math::linear::vector::structure< double, 2 >  vC, vA0, vA1, vA2;
+  ::math::linear::vector::structure< double, 3 >  v3;
 
   ::math::geometry::triangle::area( a2[0], a2[1], a2[2] );
   ::math::geometry::triangle::area( a3 );
   ::math::geometry::triangle::centroid( vC , vA0, vA1, vA2 );
-  
+
   ::math::geometry::triangle::inradius( a3 );
   ::math::geometry::triangle::circumradius( a3 );
+  ::math::geometry::triangle::barycentric( v3, vC, a2 );
 
   return EXIT_SUCCESS;
  }

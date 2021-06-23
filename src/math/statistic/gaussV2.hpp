@@ -1,7 +1,7 @@
 #ifndef math_statistic_gauss_V2
 #define math_statistic_gauss_V2
 
-// ::math::statistic::gauss::V2< double, unsigned, 1 >
+// ::math::statistic::gauss::V2< double, unsigned >
 
 #include "./count.hpp"
 #include "./summae.hpp"
@@ -59,7 +59,7 @@ namespace math
 
           sample_type deviation() const
            {
-            sample_type result =  m_s / ( m_count - 1 );
+            sample_type result =  m_s / ( m_count.value() );
             return result;
            }
 

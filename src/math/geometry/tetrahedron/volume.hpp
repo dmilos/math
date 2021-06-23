@@ -48,6 +48,16 @@
           return ::math::geometry::tetrahedron::volume( t[0], t[1], t[2], t[3] );
          }
 
+       // TODO template<  typename scalar_name, unsigned dimension_number >
+       // TODO  scalar_name
+       // TODO  volume
+       // TODO   (
+       // TODO     ::math::geometry::tetrahedron::structure<scalar_name, dimension_number > const& t
+       // TODO    )
+       // TODO   { // eq with det(M<n,n> ) ;(
+       // TODO    return TODO;
+       // TODO   }
+
       }
     }
   }

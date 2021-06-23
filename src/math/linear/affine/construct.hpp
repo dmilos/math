@@ -1,7 +1,10 @@
 #ifndef Dh_math_linear_affine_construct
  #define Dh_math_linear_affine_construct
 
- // ::math::linear::affine::construct<scalar_name,dimension_number>
+ // ::math::linear::affine::construct<scalar_name,dimension_number>( result, target, source )
+ // ::math::linear::affine::construct<scalar_name,dimension_number>( result, target, source )
+ // ::math::linear::affine::construct<scalar_name,dimension_number>( result, target, source )
+ // ::math::linear::affine::construct<scalar_name,dimension_number>( result, target, source )
 
 #include "./transform.hpp"
 #include "./structure.hpp"
@@ -23,10 +26,10 @@
         bool construct
          (
            ::math::linear::affine::structure<scalar_name,dimension_number>      & result
-          ,::math::linear::affine::structure<scalar_name,dimension_number> const& source_param
           ,::math::linear::affine::structure<scalar_name,dimension_number> const& target_param
+          ,::math::linear::affine::structure<scalar_name,dimension_number> const& source_param
          )
-         { // point t,s; target( t ) = source( s ); t= target^-1( source( s ) );
+         { // point t,s; target( t ) = source( s ); t = target^-1( source( s ) );
           ::math::linear::affine::structure<scalar_name,dimension_number> target_invert;
           if( false == ::math::linear::affine::invert<scalar_name,dimension_number>( target_invert, target_param ) )
            {
@@ -34,6 +37,22 @@
            }
 
           ::math::linear::affine::compose<scalar_name,dimension_number>( result, target_invert, source_param );
+          return true;
+         }
+
+       template< typename scalar_name >
+        bool construct
+         (
+           ::math::linear::affine::structure<scalar_name,2>                   & result
+          ,std::array< ::math::linear::vector::point<scalar_name,2>, 3 > const& target
+         )
+         { // target[i] = result( source[i] )
+          ::math::linear::vector::vector<scalar_name,2> x, y;
+
+          ::math::linear::vector::subtraction( x, target[1], target[0] );
+          ::math::linear::vector::subtraction( y, target[2], target[0] );
+          ::math::linear::affine::system( result, target[0], x, y );
+
           return true;
          }
 
@@ -61,6 +80,23 @@
           ::math::linear::affine::system( tt, target[0], x, y );
 
           ::math::linear::affine::compose( result, tt, fs );
+          return true;
+         }
+
+       template< typename scalar_name >
+        bool construct
+         (
+           ::math::linear::affine::structure<scalar_name,3>                   & result
+          ,std::array< ::math::linear::vector::point<scalar_name,3>, 4 > const& target
+         )
+         { // target[i] = result( source[i] )
+          ::math::linear::vector::vector<scalar_name,3> x, y, z;
+
+          ::math::linear::vector::subtraction( x, target[1], target[0] );
+          ::math::linear::vector::subtraction( y, target[2], target[0] );
+          ::math::linear::vector::subtraction( z, target[3], target[0] );
+          ::math::linear::affine::system( result, target[0], x, y, z );
+
           return true;
          }
 
@@ -121,6 +157,24 @@
           ::math::linear::affine::system( tt, target[0], x, y, z, t );
 
           ::math::linear::affine::compose( result, tt, fs );
+          return true;
+         }
+
+       template< typename scalar_name >
+        bool construct
+         (
+           ::math::linear::affine::structure<scalar_name,4>                   & result
+          ,std::array< ::math::linear::vector::point<scalar_name,4>, 5 > const& target
+         )
+         { // target[i] = result( source[i] )
+          ::math::linear::vector::vector<scalar_name,4> x, y, z, t;
+
+          ::math::linear::vector::subtraction( x, target[1], target[0] );
+          ::math::linear::vector::subtraction( y, target[2], target[0] );
+          ::math::linear::vector::subtraction( z, target[3], target[0] );
+          ::math::linear::vector::subtraction( t, target[4], target[0] );
+          ::math::linear::affine::system( result, target[0], x, y, z, t );
+
           return true;
          }
 

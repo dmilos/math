@@ -6,6 +6,33 @@
 
 using namespace std;
 
+void f()
+ {
+  ::math::statistic::gauss::V1< double, unsigned >   g1;
+  ::math::statistic::gauss::V2< double, unsigned >   g2;
+
+  double mean = 0;
+  int count = 200;
+  for( int i=0; i < count; i++)
+   {
+    g1.push( i );
+    g2.push( i );
+    mean += i;
+   }
+  mean /= count;
+  double deviation = 0;
+  for( int i=0; i < count; i++)
+   {
+    deviation += ( i - mean  ) * ( i - mean  );
+   }
+  deviation = sqrt( deviation / count );
+
+  std::cout << mean      << " - " << deviation << std::endl;
+  std::cout << g1.mean() << " - " << sqrt( g1.deviation() ) << std::endl;
+  std::cout << g2.mean() << " - " << sqrt( g2.deviation() ) << std::endl;
+ }
+
+
 int main( int argc, char *argv[] )
  {
   cout << "Hello World" << endl;

@@ -2,3 +2,4 @@
 #include "./volume.hpp"
 #include "./inside.hpp"
 #include "./centroid.hpp"
+#include "./barycentric.hpp"
