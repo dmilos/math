@@ -9,6 +9,8 @@
 
 
 
+
+
 namespace math
  {
   namespace statistic
@@ -25,9 +27,10 @@ namespace math
        {
         public:
           typedef scalar_name scalar_type;
+          typedef size_name     size_type;
 
-          typedef ::math::statistic::summae< scalar_name, 1 > summae_type;
-          typedef ::math::statistic::count< size_name >     count_type;
+          typedef ::math::statistic::summae< scalar_name, 1 >              summae_type;
+          typedef ::math::statistic::count< size_name >                     count_type;
           typedef ::math::statistic::average< scalar_name, 1, size_name > average_type;
 
           typedef typename average_type::sample_type  sample_type;
@@ -66,6 +69,11 @@ namespace math
           sample_type mean() const
            {
             return m_summae.value() / static_cast<scalar_type> ( m_count.value() );
+           }
+
+          size_type const& count() const
+           {
+            return m_count.value();
            }
 
          private:

@@ -68,6 +68,11 @@ namespace math
            this->reset( 0 );
           }
 
+         void reset()
+          {
+           this->m_value = 0;
+          }
+
          void reset( sample_type const& sample )
           {
            this->m_value = sample;
