@@ -1,6 +1,7 @@
 #ifndef math_geometry_interval_in_hpp_
  #define math_geometry_interval_in_hpp_
 
+// ::math::geometry::interval::in( value, left, right )
 // ::math::geometry::interval::in( interval, point )
 
 #include "./structure.hpp"

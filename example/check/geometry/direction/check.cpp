@@ -48,11 +48,11 @@ int main( int argc, char *argv[] )
    ::math::geometry::direction::L2L< double,3> distance3; distance3.process( pp3, pp3 );
   ::math::geometry::direction::L2L< double, 4> distance4; distance4.process( pp4, pp4 );
   ::math::geometry::direction::L2L< double,10> distance10; distance10.process( pp10, pp10 );
-  
+
   ::math::geometry::direction::distance( pp3, pp3 );
   ::math::geometry::direction::distance( pp, point2  );
   ::math::geometry::direction::distance( abc, point2  );
-  
+
   ::math::geometry::direction::angle( two, two );
   ::math::geometry::direction::angle( pp, pp  );
   ::math::geometry::direction::angle( abc, abc  );
@@ -63,7 +63,10 @@ int main( int argc, char *argv[] )
 
   ::math::geometry::direction::fit2D<double>::process( abc, std::vector< ::math::linear::vector::point<double,2> >() );
 
+  std::vector< ::math::linear::vector::point<double,2> > cloud2D;
+  std::vector< ::math::linear::vector::point<double,3> > cloud3D;
 
-  
+  ::math::geometry::plane::fit( pp3, cloud2D, cloud3D );
+
   return EXIT_SUCCESS;
  }

@@ -14,5 +14,6 @@
 #include "./gcd.hpp"
 #include "./lcm.hpp"
 #include "./power.hpp"
+#include "./signum.hpp"
 
 #include "./distribution/distribution.hpp"
