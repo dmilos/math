@@ -166,7 +166,7 @@ namespace math
              void diagonalFV( scalar_type const& DFoV )
               {
                m_diagonalFV = DFoV;
-               std::tie( this->m_horizontalFV, this->m_verticalFV ) = ::math::geometry::projective::camera::d2hv<scalar_type>( DFoV, scalar_type( this->m_resolution[0] ), scalar_type( this->m_resolution[1] ) ) ;
+               std::tie( this->m_horizontalFV, this->m_verticalFV ) = ::math::geometry::projective::camera::d2hv<scalar_type>( m_diagonalFV, scalar_type( this->m_resolution[0] ), scalar_type( this->m_resolution[1] ) ) ;
                m_maxFV = std::max( this->m_horizontalFV, this->m_verticalFV );
               }
            private:
@@ -190,9 +190,9 @@ namespace math
              void verticalFV( scalar_type const& fv )
               {
                scalar_type aspect = m_resolution[0]/(scalar_type)m_resolution[1];
-               m_verticalFV = fv;
-               m_diagonalFV = ::math::geometry::projective::camera::va2d<scalar_type>( m_verticalFV, aspect );
-               m_verticalFV = ::math::geometry::projective::camera::va2h<scalar_type>( m_verticalFV, aspect );
+               m_verticalFV  = fv;
+               m_diagonalFV   = ::math::geometry::projective::camera::va2d<scalar_type>( m_verticalFV, aspect );
+               m_horizontalFV = ::math::geometry::projective::camera::va2h<scalar_type>( m_verticalFV, aspect );
                m_maxFV = std::max( m_horizontalFV, m_verticalFV );
               }
            private:

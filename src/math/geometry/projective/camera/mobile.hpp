@@ -59,10 +59,10 @@ namespace math
             point3d_type rayUV( uv_type const& uv )const
              {
               point3d_type local = pinhole_type::reproject( uv );
-              point3d_type direction;
-              ::math::linear::matrix::transform( direction, m_2world.matrix(), local );
-              ::math::linear::vector::subtraction( direction, this->to_world().vector() );
-              return direction;
+              point3d_type result;
+              ::math::linear::matrix::transform( result, m_2world.matrix(), local );
+              ::math::linear::vector::subtraction( result, this->to_world().vector() );
+              return result;
              }
 
             template< typename number_name >// accept point in world space return pixel coordinates

@@ -20,14 +20,14 @@ namespace math
          scalar_name
          ha2v
           (
-            scalar_name const& h_alpha  //!< horizontal angle of view
+            scalar_name const& horizontal_alpha  //!< horizontal angle of view
            ,scalar_name const& aspect   //!< Aspect ration width::height .e.g. 16:9
           )
           {
-           scalar_name h_scale = scalar_name(2) * tan( h_alpha / scalar_name(2) );
-           scalar_name v_scale = h_scale / aspect;
+           scalar_name horizontal_scale = scalar_name(2) * tan( horizontal_alpha / scalar_name(2) );
+           scalar_name vertical_scale = horizontal_scale / aspect;
 
-           return scalar_name(2) * atan( v_scale / scalar_name(2) );
+           return scalar_name(2) * atan( vertical_scale / scalar_name(2) );
           }
 
        }

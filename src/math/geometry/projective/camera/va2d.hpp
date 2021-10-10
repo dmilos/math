@@ -20,14 +20,14 @@ namespace math
          scalar_name
          va2d
           (
-            scalar_name const& v_alpha //!< vertical angle of view
+            scalar_name const& vertical_alpha //!< vertical angle of view
            ,scalar_name const& aspect  //!< Aspect ration width::height .e.g. 16:9
           )
           {
-           scalar_name v_scale = scalar_name(2) * tan( v_alpha / scalar_name(2) );
-           scalar_name h_scale = v_scale * aspect;
+           scalar_name vertical_scale   = scalar_name(2) * tan( vertical_alpha / scalar_name(2) );
+           scalar_name horizontal_scale = vertical_scale * aspect;
 
-           scalar_name diagonal = sqrt( h_scale* h_scale + v_scale * v_scale );
+           scalar_name diagonal = sqrt( horizontal_scale* horizontal_scale + vertical_scale * vertical_scale );
 
            return scalar_name(2) * atan( diagonal / scalar_name(2) );
           }
