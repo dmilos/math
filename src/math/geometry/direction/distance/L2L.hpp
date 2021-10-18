@@ -2,6 +2,7 @@
 #define math_geometry_distance_L2L
 
 // ::math::geometry::direction::L2L< scalar, dimension>.process( parametric, parametric )
+// ::math::geometry::direction::distance( median, parametric, parametric, epsilon )
 
 #include "../../../linear/vector/dot.hpp"
 #include "../../../linear/vector/subtraction.hpp"
@@ -101,15 +102,20 @@ namespace math
       template<  typename scalar_name, unsigned dimension_number >
        bool distance
         (
-          ::math::geometry::direction::parametric< scalar_name, dimension_number > const& first
+          scalar_name  & distance
+         ,::math::geometry::direction::parametric< scalar_name, dimension_number > const& first
          ,::math::geometry::direction::parametric< scalar_name, dimension_number > const& second
          ,scalar_name const& epsilon = 1e-12
         )
         {
-         ::math::geometry::direction::L2L<scalar_name,dimension_number> d;
+         ::math::geometry::direction::L2L<scalar_name,dimension_number> calculator;
 
-         d.process( first,second, epsilon );
-         return d.distance();
+         if( false == calculator.process( first, second, epsilon ) )
+          {
+           return false;
+          }
+         distance = calculator.distance();
+         return true;
         }
 
      }

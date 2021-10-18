@@ -1,13 +1,15 @@
 #ifndef math_geometry_projective_camera_optical
 #define math_geometry_projective_camera_optical
 
-// ::math::geometry::projective::camera::optical<scalar_name, size_name = std::size_t >
+// ::math::geometry::projective::camera::optical<scalar_name, size_name = std::size_t >( resolution, DFoV, pixelAR )
 
 #include <cmath>
 #include <tuple>
 
 #include "../../../linear/vector/vector.hpp"
 #include "../../../geometry/interval/interval.hpp"
+#include "../../../function\clamper.hpp"
+
 
 #include "./d2hv.hpp"
 #include "./ha2d.hpp"
@@ -30,7 +32,7 @@ namespace math
            typename  scalar_name
           ,typename    size_name = std::size_t
          >
-         class optical //!< TODO rename to digital
+         class optical //!< TODO rename to digital;
           {
            public:
              typedef scalar_name     scalar_type;
@@ -46,115 +48,63 @@ namespace math
 
              explicit optical( scalar_type const& DFoV = 2*std::atan( std::sqrt(2) ) )
               :m_resolution{ 1, 1 }
-              ,m_pixelAR( 1 )
               {
                this->diagonalFV( DFoV );
                //this->window();
               }
 
-             optical( size_type const& width, size_type const& height, scalar_type const& DFoV = 2*std::atan( std::sqrt(2) ), scalar_type const& pAR = 1 )
+           public:
+             optical( size_type const& width, size_type const& height, scalar_type const& DFoV = 2*std::atan( std::sqrt(2) ) )
               :m_resolution{ width, height }
-              ,m_pixelAR( pAR )
               {
                this->diagonalFV( DFoV );
                //this->window();
               }
 
-             optical( resolution_type const& resolution, scalar_type const& DFoV = 2*std::atan( std::sqrt(2) ), scalar_type const& pAR = 1 )
+             optical( resolution_type const& resolution, scalar_type const& DFoV = 2*std::atan( std::sqrt(2) ) )
               :m_resolution{ resolution }
-              ,m_pixelAR( pAR )
               {
                this->diagonalFV( DFoV );
-               //this->window();
+               //this->window( );
               }
 
+           public:
              //!!! Qube camera([-1,-1]x[1,1]) to display(pixel)
              // (0,0) ->( -1, -1 ) ; (m_resolution[0],m_resolution[1]) ->( +1, +1 ) ;
              template< typename number_name >
               vector_type< number_name > xy( uv_type const& uv )const
                {
-                vector_type< number_name > xy;
-
-                size_type max = std::max<size_type>( m_resolution[0], m_resolution[1] );
-                size_type min = std::min<size_type>( m_resolution[0], m_resolution[1] );
-
-                scalar_type x = uv[0];
-                scalar_type y = uv[1];
-
-                x  /= tan( m_maxFV / 2 );
-                y  /= tan( m_maxFV / 2 );
-
-                x  += scalar_type(1);
-                y  += scalar_type(1);
-
-                x  *= max;
-                y  *= max;
-
-                x  -= max - m_resolution[0];
-                y  -= max - m_resolution[1];
-
-                x  /= scalar_type(2);
-                y  /= scalar_type(2);
-
-              //x  = x;
-                y  = m_resolution[1] - y ;
-
-              //x *= scalar_type(1);
-                y *= m_pixelAR;
-
-                xy[0] = number_name( x );
-                xy[1] = number_name( y );
-
-                return xy;
+                vector_type< number_name > result;
+                auto X = math::function::any_to_any<scalar_type>( uv[0], m_window[0][0], m_window[1][0], scalar_type(0), scalar_type( m_resolution[0] ) );
+                auto Y = math::function::any_to_any<scalar_type>( uv[1], m_window[0][1], m_window[1][1], scalar_type( m_resolution[1] ), scalar_type(0) );
+                result[0] = (number_name)X;
+                result[1] = (number_name)Y;
+                return result;
                }
 
+           public:
               //!!! display(pixel) to cube camera([-1,-1]x[1,1])
               //! ( -1, -1 ) -> (0,0) ; ( +1, +1 ) -> (m_resolution[0],m_resolution[1]);
               template< typename number_name >
                uv_type uv( vector_type< number_name > const& xy )const
                 {
                  uv_type result;
-                 scalar_type max = scalar_type( std::max<size_type>( m_resolution[0], m_resolution[1] ) );
-                 scalar_type min = scalar_type( std::min<size_type>( m_resolution[0], m_resolution[1] ) );
-
-                 scalar_type & u = result[0];
-                 scalar_type & v = result[1];
-
-                 u = scalar_type( xy[0] );
-                 v = scalar_type( xy[1] );
-
-               //u /= scalar_type(1);
-                 v /= m_pixelAR ;
-
-               //u = u;
-                 v = m_resolution[1] - v;
-
-                 u *= scalar_type(2);
-                 v *= scalar_type(2);
-
-                 u += max-m_resolution[0];
-                 v += max-m_resolution[1];
-
-                 u /= max;
-                 v /= max;
-
-                 u -= scalar_type(1);
-                 v -= scalar_type(1);
-
-                 u *= tan( m_maxFV / 2 );
-                 v *= tan( m_maxFV / 2 );
-
+                 auto U = math::function::any_to_any<scalar_type>( scalar_type(xy[0]), scalar_type(0), scalar_type( m_resolution[0] ), m_window[0][0], m_window[1][0] );
+                 auto V = math::function::any_to_any<scalar_type>( scalar_type(xy[1]), scalar_type( m_resolution[1] ), scalar_type(0), m_window[0][1], m_window[1][1] );
+                 result[0] = U; 
+                 result[1] = V;
                  return result;
                 }
 
            public:
-              void FV( scalar_type const& hFV, scalar_type const& vFV )
+              void FV( scalar_type const& horizontalFV, scalar_type const& verticalFV )
               {
-               m_horizontalFV = hFV;
-               m_verticalFV   = vFV;
+               m_horizontalFV = horizontalFV;
+               m_verticalFV   = verticalFV;
                m_diagonalFV   = ::math::geometry::projective::camera::hv2d( m_horizontalFV, m_verticalFV );
-               m_maxFV        = std::max( this->m_horizontalFV, this->m_verticalFV );
-               m_pixelAR      = tan( this->horizontalFV() / scalar_type(2) ) / tan( this->verticalFV()   / scalar_type(2) );
+               m_window[1][0] = tan( this->horizontalFV() / scalar_type(2) );  m_window[0][0] = -m_window[1][0];
+               m_window[1][1] = tan( this->verticalFV()   / scalar_type(2) );  m_window[0][1] = -m_window[1][1];
+               m_pixelAR      =  ( m_resolution[0] / ( m_window[1][0] - m_window[0][0] ) ) /( m_resolution[1] / ( m_window[1][1] - m_window[0][1] ) );
                return ;
               }
 
@@ -167,20 +117,27 @@ namespace math
               {
                m_diagonalFV = DFoV;
                std::tie( this->m_horizontalFV, this->m_verticalFV ) = ::math::geometry::projective::camera::d2hv<scalar_type>( m_diagonalFV, scalar_type( this->m_resolution[0] ), scalar_type( this->m_resolution[1] ) ) ;
-               m_maxFV = std::max( this->m_horizontalFV, this->m_verticalFV );
+               m_window[1][0] = tan( this->horizontalFV() / scalar_type(2) );  m_window[0][0] = -m_window[1][0];
+               m_window[1][1] = tan( this->verticalFV()   / scalar_type(2) );  m_window[0][1] = -m_window[1][1];
+               m_pixelAR      =  ( m_resolution[0] / ( m_window[1][0] - m_window[0][0] ) ) /( m_resolution[1] / ( m_window[1][1] - m_window[0][1] ) );
               }
            private:
              scalar_type     m_diagonalFV;
 
            public:
-             scalar_type const& horizontalFV()const{ return this->m_horizontalFV; }
+             scalar_type const& horizontalFV()const
+              {
+               return this->m_horizontalFV; 
+              }
              void horizontalFV( scalar_type const& fv )
               {
                scalar_type aspect = m_resolution[0]/(scalar_type)m_resolution[1];
                m_horizontalFV = fv;
-               m_diagonalFV = ::math::geometry::projective::camera::ha2d<scalar_type>( m_horizontalFV, aspect );
                m_verticalFV = ::math::geometry::projective::camera::ha2v<scalar_type>( m_horizontalFV, aspect );
-               m_maxFV = std::max( m_horizontalFV, m_verticalFV );
+               m_diagonalFV = ::math::geometry::projective::camera::ha2d<scalar_type>( m_horizontalFV, aspect );
+               m_window[1][0] = tan( this->horizontalFV() / scalar_type(2) );  m_window[0][0] = -m_window[1][0];
+               m_window[1][1] = tan( this->verticalFV()   / scalar_type(2) );  m_window[0][1] = -m_window[1][1];
+               m_pixelAR      =  ( m_resolution[0] / ( m_window[1][0] - m_window[0][0] ) ) /( m_resolution[1] / ( m_window[1][1] - m_window[0][1] ) );
               }
            private:
              scalar_type     m_horizontalFV;
@@ -191,35 +148,42 @@ namespace math
               {
                scalar_type aspect = m_resolution[0]/(scalar_type)m_resolution[1];
                m_verticalFV  = fv;
-               m_diagonalFV   = ::math::geometry::projective::camera::va2d<scalar_type>( m_verticalFV, aspect );
                m_horizontalFV = ::math::geometry::projective::camera::va2h<scalar_type>( m_verticalFV, aspect );
-               m_maxFV = std::max( m_horizontalFV, m_verticalFV );
+               m_diagonalFV   = ::math::geometry::projective::camera::va2d<scalar_type>( m_verticalFV, aspect );
+               m_window[1][0] = tan( this->horizontalFV() / scalar_type(2) );  m_window[0][0] = -m_window[1][0];
+               m_window[1][1] = tan( this->verticalFV()   / scalar_type(2) );  m_window[0][1] = -m_window[1][1];
+               m_pixelAR      =  ( m_resolution[0] / ( m_window[1][0] - m_window[0][0] ) ) /(  m_resolution[1] / ( m_window[1][1] - m_window[0][1] ) );
               }
            private:
              scalar_type     m_verticalFV;
 
-           private:
-             scalar_type     m_maxFV;
-
            public:
+             void window( uv_type const& new_window ) //!< expect positive numbers
+              {
+               m_window[1][0] = new_window[0];  m_window[0][0] = -m_window[1][0];
+               m_window[1][1] = new_window[1];  m_window[0][1] = -m_window[1][1];
+
+               m_horizontalFV = scalar_type(2) * atan( m_window[1][0] );
+               m_verticalFV   = scalar_type(2) * atan( m_window[1][1] );
+               m_diagonalFV   = ::math::geometry::projective::camera::hv2d( m_horizontalFV, m_verticalFV );
+               m_pixelAR      =  ( m_resolution[0] / ( m_window[1][0] - m_window[0][0] ) ) /(  m_resolution[1] / ( m_window[1][1] - m_window[0][1] ) );
+              }
              window_type const& window()const
-              { // On demand value
-               m_window[1][0] = tan( this->horizontalFV() / scalar_type(2) );  m_window[0][0] = -m_window[1][0];
-               m_window[1][1] = tan( this->verticalFV()   / scalar_type(2) );  m_window[0][1] = -m_window[1][1];
+              {
                return m_window;
               }
            private:
-             mutable window_type m_window;
+             window_type m_window;
+
            public:
              resolution_type const& resolution()const
               {
-               return m_resolution; 
+               return m_resolution;
               }
              void resolution( size_type const& width, size_type const& height )
               {
                this->resolution( resolution_type{ width, height } );
               }
-
              void resolution( resolution_type const& resolution )
               {
                this->m_resolution = resolution;
@@ -229,11 +193,15 @@ namespace math
              resolution_type m_resolution;
 
            public:
-             scalar_type const& pixelAR()const{ return m_pixelAR; }
-             void pixelAR( scalar_type const& pAR )
+             scalar_type const& pixelAR()const
               {
-               m_pixelAR = pAR;
+               return m_pixelAR;
               }
+             // No point! void pixelAR( scalar_type const& pAR )
+             // No point!  {
+             // No point!   m_pixelAR = pAR;
+             // No point! 
+             // No point!  }
            private:
              scalar_type     m_pixelAR;
           };

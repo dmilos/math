@@ -1,7 +1,7 @@
 #ifndef math_geometry_projective_camera_d2hv
 #define math_geometry_projective_camera_d2hv
 
-// ::math::geometry::projective::camera::d2hv( alpha, horisontal_scale, v_scale )
+// ::math::geometry::projective::camera::d2hv( alpha, horizontal_scale, v_scale )
 
 //#include <utility>
 

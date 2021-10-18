@@ -24,18 +24,17 @@ namespace math
             {
              public:
                typedef scalar_name scalar_type;
-               typedef ::math::geometry::direction::two<      scalar_name, 3 >              two_type;
+               typedef ::math::geometry::direction::two<      scalar_name, 3 >            trace_type;
                typedef ::math::geometry::interval::structure< scalar_name, 1 >            depth_type;
                typedef ::math::geometry::interval::structure< scalar_name, 2 >           window_type;
 
-               typedef std::tuple< unsigned, scalar_name, unsigned, scalar_name >     intersect_type;
                typedef ::math::geometry::projective::camera::pinhole< scalar_name >     pinhole_type;
-               typedef ::math::geometry::interval::scissors<scalar_name,2>             scissors_type;
-               typedef ::math::geometry::direction::two<scalar_name,2>                    trace_type;
+               typedef ::math::geometry::interval::scissors<scalar_name,2>                 mold_type;
+               typedef ::math::geometry::direction::two<scalar_name,2>                    trail_type;
                typedef ::math::geometry::direction::parametric<scalar_name,3>        parametric_type;
 
              public:
-               bool process( two_type &output, two_type const&input, window_type const& window, depth_type const& depth )
+               bool process( trace_type &output, trace_type const&input, window_type const& window, depth_type const& depth )
                 {
                  auto f = ::math::geometry::projective::camera::frustum::side( input.first() , depth );
                  auto s = ::math::geometry::projective::camera::frustum::side( input.second(), depth );
@@ -69,7 +68,7 @@ namespace math
                    default: break;
                   }
 
-                  switch( state )
+                 switch( state )
                   {
                    case( 4 *0 + 2 ): 
                      if( true == ::math::geometry::plane::intersect(  m_far, pinhole_type::forward(), depth[1], m_parametric ) )
@@ -84,7 +83,7 @@ namespace math
                    default: break;
                   }
 
-                  switch( state )
+                 switch( state )
                   {
                    case( 4 *0 + 1 ): 
                      if( true == ::math::geometry::plane::intersect( m_far, pinhole_type::forward(), depth[1], m_parametric ) )
@@ -100,29 +99,34 @@ namespace math
                   }
 
                  label_scissors:
-                 m_trail.first()  = pinhole_type::project( output.first()  );
-                 m_trail.second() = pinhole_type::project( output.second() );
-                 if( 1 != this->m_scissors.process( m_trace, m_trail, window ) )
+                 m_semi.first()  = pinhole_type::project( output.first()  );
+                 m_semi.second() = pinhole_type::project( output.second() );
+                 if( 1 != this->m_mold.process( m_trail, m_semi, window ) )
                   {
                    return false;
                   }
 
                  m_parametric = output;
-                 ::math::linear::vector::combine( output.first(), m_parametric.origin(),  this->m_scissors.m_far, m_parametric.direction() );
-                 ::math::linear::vector::combine( output.second(), m_parametric.origin(), this->m_scissors.m_near, m_parametric.direction() );
+                 ::math::linear::vector::combine( output.first(),  m_parametric.origin(), this->m_mold.m_near, m_parametric.direction() );
+                 ::math::linear::vector::combine( output.second(), m_parametric.origin(), this->m_mold.m_far,  m_parametric.direction() );
 
                  return true;
                 }
 
              public:
-               trace_type m_trace;
-               parametric_type m_parametric;
+               trail_type const& trail() const
+                {
+                 return m_trail; 
+                }
+             private:
+               trail_type m_trail;
 
              private:
-               trace_type m_trail;       //!< it is confusing
-               scissors_type m_scissors; //!< not correct
-               scalar_type m_near;       //!< not correct
-               scalar_type m_far;        //!< not correct
+               mold_type   m_mold; //!< not correct
+               parametric_type m_parametric;
+               trail_type m_semi;
+               scalar_type m_near; //!< not correct
+               scalar_type m_far;  //!< not correct
             };
 
           template < typename scalar_name >

@@ -6,12 +6,59 @@
 
 using namespace std;
 
+void point2line()
+{
+  typedef ::math::geometry::direction::parametric<double, 3> parametric3d_t;
+  parametric3d_t  direction3( {0,0,0}, {1,1,1} );
+  ::math::linear::vector::point<double,3>              point3{1,1,2}, projection;
+   //double median;
+
+   typedef  ::math::geometry::direction::P2L<double,3> calculator3d_t;
+
+  // std::cout << ::math::geometry::direction::distance( direction3, {0,0,0} ) << " ~ "<< calculator3d_t::process( direction3, {0,0,0}, projection ) << std::endl;
+   std::cout << ::math::geometry::direction::distance( direction3, {1,1,1} ) << " ~ "<< calculator3d_t::process( direction3, {1,1,1}, projection ) << std::endl;
+   std::cout << ::math::geometry::direction::distance( direction3, {1,0,0} ) << " ~ "<< calculator3d_t::process( direction3, {1,0,0}, projection ) << std::endl;
+   std::cout << ::math::geometry::direction::distance( direction3, {0,1,0} ) << " ~ "<< calculator3d_t::process( direction3, {0,1,0}, projection ) << std::endl;
+   std::cout << ::math::geometry::direction::distance( direction3, {0,0,1} ) << " ~ "<< calculator3d_t::process( direction3, {0,0,1}, projection ) << std::endl;
+   std::cout << ::math::geometry::direction::distance( direction3, {0,1,1} ) << " ~ "<< calculator3d_t::process( direction3, {0,1,1}, projection ) << std::endl;
+   std::cout << ::math::geometry::direction::distance( direction3, {1,0,1} ) << " ~ "<< calculator3d_t::process( direction3, {1,0,1}, projection ) << std::endl;
+   std::cout << ::math::geometry::direction::distance( direction3, {1,0,1} ) << " ~ "<< calculator3d_t::process( direction3, {1,0,1}, projection ) << std::endl;
+
+   std::cout << ::math::geometry::direction::distance( parametric3d_t{ { 0,0,0 }, {1,1,0} }, {0,0,0} ) << std::endl;
+   std::cout << ::math::geometry::direction::distance( parametric3d_t{ { 0,0,0 }, {1,1,0} }, {1,0,0} ) << std::endl;
+   std::cout << ::math::geometry::direction::distance( parametric3d_t{ { 0,0,0 }, {1,1,0} }, {0,1,0} ) << std::endl;
+   std::cout << ::math::geometry::direction::distance( parametric3d_t{ { 0,0,0 }, {1,1,0} }, {1,1,0} ) << std::endl;
+
+   double maximal = 0;
+   for( int i=0; i< 10000; ++i )
+    {
+     point3[0] = rand()/double(RAND_MAX) - 0.5;
+     point3[1] = rand()/double(RAND_MAX) - 0.5;
+     point3[2] = rand()/double(RAND_MAX) - 0.5;
+     direction3.origin()    = {rand()/double(RAND_MAX) - 0.5,rand()/double(RAND_MAX) - 0.5,rand()/double(RAND_MAX) - 0.5 } ;
+     direction3.direction() = {rand()/double(RAND_MAX) - 0.5,rand()/double(RAND_MAX) - 0.5,rand()/double(RAND_MAX) - 0.5 } ;
+
+     auto d1 = calculator3d_t::process( direction3, point3, projection );
+     auto d2 = calculator3d_t::process( direction3, point3 );
+     if( maximal < fabs( d1 - d2 ) )
+      {
+       maximal = fabs( d1 - d2 );
+       std::cout << "error: " << maximal << std::endl;
+      }
+
+    }
+
+}
+
 int main( int argc, char *argv[] )
  {
   cout << "Hello World" << endl;
 
+  point2line();
+
   ::math::linear::vector::point<double,2>            point2;
   ::math::linear::vector::point<double,3>            point3{1,1,2}; point3 = point3;
+  double median;
 
   ::math::geometry::direction::two<double,2>            two;
   ::math::geometry::direction::polar<double>            po;
@@ -49,9 +96,7 @@ int main( int argc, char *argv[] )
   ::math::geometry::direction::L2L< double, 4> distance4; distance4.process( pp4, pp4 );
   ::math::geometry::direction::L2L< double,10> distance10; distance10.process( pp10, pp10 );
 
-  ::math::geometry::direction::distance( pp3, pp3 );
-  ::math::geometry::direction::distance( pp, point2  );
-  ::math::geometry::direction::distance( abc, point2  );
+   ::math::geometry::direction::distance( median, pp4, pp4 );
 
   ::math::geometry::direction::angle( two, two );
   ::math::geometry::direction::angle( pp, pp  );

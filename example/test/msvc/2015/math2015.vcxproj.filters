@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\check\function\hilbert_test.cpp">
+    <ClCompile Include="..\..\..\check\geometry\direction\check.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

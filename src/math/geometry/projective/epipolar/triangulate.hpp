@@ -18,11 +18,12 @@ namespace math
       namespace epipolar
        {
 
-        template < typename scalar_name >
+        template < typename scalar_name, typename size_name = std::size_t >
          struct triangulate
           {
            public:
-             typedef scalar_name     scalar_type;
+             typedef scalar_name   scalar_type;
+             typedef size_name       size_type;
 
            private:
              typedef ::math::geometry::direction::parametric< scalar_type, 3 > ray_type;
@@ -33,71 +34,82 @@ namespace math
              typedef ::math::linear::vector::point<  scalar_name, 3 > point3d_type;
              typedef ::math::linear::affine::structure<  scalar_name, 3 > affine_type;
 
-             typedef ::math::geometry::projective::camera::pinhole<scalar_name>   pinhole_type;
-             typedef ::math::geometry::projective::camera::mobile< scalar_name > camera_type;
+             typedef ::math::geometry::projective::camera::pinhole<scalar_name>                pinhole_type;
+             typedef ::math::geometry::projective::camera::optical< scalar_name, size_name >   optical_type;
+             typedef ::math::geometry::projective::camera::mobile< scalar_name >               mobile_type;
 
              template< typename number_name >
               using vector_type = ::math::linear::vector::structure< number_name, 2 >;
 
            public:
+
              // Take two cameras, two pixels from each of them, return point in 3D.
              template< typename number_name >
               bool processXY
                (
-                 camera_type const& camera_left,  vector_type< number_name > const& xy_left
-                ,camera_type const& camera_right, vector_type< number_name > const& xy_right
+                 optical_type const& camera_left,  vector_type< number_name > const& xy_left
+                ,optical_type const& camera_right, vector_type< number_name > const& xy_right
+                ,affine_type const& r2l
                )
                {
-                ray_type ray_left;
-                ray_left.origin() =  camera_left.to_world().vector();
-                ray_left.direction() =  camera_left.rayXY( xy_left );
+                uv_type uv_left = camera_left.uv( xy_left );
+                uv_type uv_right = camera_right.uv( xy_right );
 
-                ray_type ray_right;
-                ray_right.origin() =  camera_right.to_world().vector();
-                ray_right.direction() =  camera_right.rayXY( xy_right );
+                return this->processUV( uv_left, uv_right, r2l );
+               }
 
-                return this->m_L2L.process( ray_left, ray_right );
+             // Take two cameras, two pixels from each of them, return point in 3D.
+             template< typename number_name >
+              bool processXY
+               (
+                 mobile_type const& camera_left,  vector_type< number_name > const& xy_left
+                ,mobile_type const& camera_right, vector_type< number_name > const& xy_right
+               )
+               {
+                m_rayLeft.origin() =  camera_left.to_world().vector();
+                m_rayLeft.direction() =  camera_left.rayXY( xy_left );
+
+                m_rayRight.origin() =  camera_right.to_world().vector();
+                m_rayRight.direction() =  camera_right.rayXY( xy_right );
+
+                return this->m_L2L.process( m_rayLeft, m_rayRight );
                }
 
              // Take two cameras, two UVs from each of them, return point in 3D.
               bool processUV
                (
-                 camera_type const& camera_left,  uv_type const& uv_left
-                ,camera_type const& camera_right, uv_type const& uv_right
+                 mobile_type const& camera_left,  uv_type const& uv_left
+                ,mobile_type const& camera_right, uv_type const& uv_right
                )
                {
-                ray_type ray_left;
-                ray_left.origin() =  camera_left.to_world().vector();
-                ray_left.direction() =  camera_left.rayUV( uv_left );
+                m_rayLeft.origin() =  camera_left.to_world().vector();
+                m_rayLeft.direction() =  camera_left.rayUV( uv_left );
 
-                ray_type ray_right;
-                ray_right.origin() =  camera_right.to_world().vector();
-                ray_right.direction() =  camera_right.rayUV( uv_right );
+                m_rayRight.origin() =  camera_right.to_world().vector();
+                m_rayRight.direction() =  camera_right.rayUV( uv_right );
 
-                return this->m_L2L.process( ray_left, ray_right );
+                return this->m_L2L.process( m_rayLeft, m_rayRight );
                }
 
-                // Take two UVs and right transformation from local to world.
+              // Take two UVs and right transformation from local to world.
               bool processUV
                (
                  uv_type  const& left, uv_type  const& right, affine_type const& r2l
                )
                {
-                ray_type ray_left;
-                ::math::linear::vector::fill( ray_left.origin(), 0 );
+                ::math::linear::vector::fill( m_rayLeft.origin(), 0 );
 
-                ray_left.direction() = pinhole_type::reproject( left );
-                ::math::linear::vector::length( ray_left.direction(), scalar_type(1) );
+                m_rayLeft.direction() = pinhole_type::reproject( left );
+                ::math::linear::vector::length( m_rayLeft.direction(), scalar_type(1) );
 
-                ray_type ray_right;
-                ::math::linear::vector::fill( ray_right.origin(), 0 );
-                ::math::linear::affine::transform( ray_right.origin(),    r2l, ::math::linear::vector::make<scalar_type>( 0, 0, 0 ) );
+                ::math::linear::vector::fill( m_rayRight.origin(), 0 );
+                ::math::linear::affine::transform( m_rayRight.origin(),    r2l, ::math::linear::vector::make<scalar_type>( 0, 0, 0 ) );
 
-                ::math::linear::affine::transform( ray_right.direction(), r2l, pinhole_type::reproject( right ) );
-                ::math::linear::vector::subtraction( ray_right.direction(), ray_right.origin() );
-                ::math::linear::vector::length( ray_right.direction(), scalar_type(1) );
+                ::math::linear::affine::transform( m_rayRight.direction(), r2l, pinhole_type::reproject( right ) );
+                ::math::linear::vector::subtraction( m_rayRight.direction(), m_rayRight.origin() );
+                ::math::linear::vector::length( m_rayRight.direction(), scalar_type(1) );
 
-                return m_L2L.process( ray_left, ray_right );
+                return m_L2L.process( m_rayLeft, m_rayRight );
                }
 
            public:
@@ -113,7 +125,8 @@ namespace math
 
            private:
              L2L_type m_L2L;
-
+             ray_type m_rayLeft;
+             ray_type m_rayRight;
           };
 
        }
