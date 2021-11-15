@@ -13,6 +13,7 @@
 #include "./NaN.hpp"
 #include "./fill.hpp"
 #include "./system.hpp"
+#include "./load.hpp"
 
 #include "./reduce.hpp"
 

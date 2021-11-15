@@ -4,6 +4,8 @@
 // ::math::geometry::projective::epipolar::vertebra( parameter, curvature );
 // ::math::geometry::projective::epipolar::vertebra( parameter, curvature, alpha );
 
+#include "./rotation.hpp"
+#include "./curvature.hpp"
 
 namespace math
  {
@@ -13,7 +15,7 @@ namespace math
      {
       namespace epipolar
        {
-        namespace backbone
+        namespace column
          {
 
           template< typename scalar_name >
@@ -32,14 +34,14 @@ namespace math
             (
               scalar_name const& parameter //!< expect value between -1 and +1
              ,scalar_name const& curvature
-             ,scalar_name const& rotation
+             ,scalar_name const& angle
             )
             {
              ::math::linear::vector::structure<scalar_name,2> result;
-             result[0] = parameter;
-             result[1] = ::math::geometry::projective::epipolar::backbone::vertebra( parameter, curvature );
-             ::math::linear::vector::rotate( result, rotation );
-            return result;
+             result[0] = 0;
+             result[1] = ::math::geometry::projective::epipolar::column::vertebra( parameter, curvature );
+             ::math::linear::vector::rotate( result, angle );
+             return result;
             }
 
           template< typename scalar_name >
@@ -48,7 +50,10 @@ namespace math
               scalar_name                                      const& parameter //!< expect value between -1 and +1
              ,::math::linear::vector::structure<scalar_name,2> const& pole
             )
-            {// TODO
+            {
+             scalar_name angle     = ::math::geometry::projective::epipolar::column::rotation( pole );
+             scalar_name curvature = ::math::geometry::projective::epipolar::column::curvature( pole );
+             return ::math::geometry::projective::epipolar::column::vertebra( parameter, curvature, angle );
             }
 
          }

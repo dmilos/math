@@ -3,6 +3,7 @@
 
 // ::math::linear::homography::transform( result, matrix, point )
 // ::math::linear::homography::transform( result, matrix )
+// ::math::linear::homography::transform( result, matrix, direction )
 
 
 #include "./structure.hpp"

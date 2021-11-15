@@ -3,8 +3,8 @@
 #include "./calibrate.hpp"
 #include "./trail.hpp"
 
-#include "./rotation.hpp"
-#include "./vertex.hpp"
-#include "./curvature.hpp"
-#include "./vertebra.hpp"
+#include "./pole.hpp"
+#include "./fundamental.hpp"
+
+#include "./column/column.hpp"
 

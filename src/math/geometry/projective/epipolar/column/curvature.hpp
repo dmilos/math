@@ -1,10 +1,10 @@
 #ifndef math_geometry_projective_camera_epipolar_curvature
 #define math_geometry_projective_camera_epipolar_curvature
 
-// ::math::geometry::projective::epipolar::backbone::curvature( rotation, & radius, pole )
-// ::math::geometry::projective::epipolar::backbone::curvature( rotation, curvature, /*right_*/eye );
+// ::math::geometry::projective::epipolar::column::curvature( rotation, & radius, pole )
+// ::math::geometry::projective::epipolar::column::curvature( rotation, curvature, /*right_*/eye );
 
-#include "../camera/pinhole.hpp"
+#include "../../camera/pinhole.hpp"
 
 namespace math
  {
@@ -14,7 +14,7 @@ namespace math
      {
       namespace epipolar
        {
-        namespace backbone
+        namespace column
          {
 
           template< typename scalar_name >

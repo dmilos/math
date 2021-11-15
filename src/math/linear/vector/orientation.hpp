@@ -17,21 +17,21 @@
      namespace vector
       {
 
-       template< typename scalar_name >
+       template< typename scalar_name, typename int_name = int >
         inline
-        scalar_name
+        int_name
         orientation
          (
-           ::math::linear::vector::structure< scalar_name, 2 > const& left_param
+           ::math::linear::vector::structure< scalar_name, 2 > const&  left_param
           ,::math::linear::vector::structure< scalar_name, 2 > const& right_param
-          ,scalar_name const& epsilon = 1e-6
+          ,scalar_name                                         const& epsilon      = 1e-6
          )
          {
           scalar_name o =   left_param[0] * right_param[1]  -  left_param[1] * right_param[0];
 
-          if( o < -epsilon ) return -1;
-          if( +epsilon < o ) return +1;
-          return 0;
+          if( o < -epsilon ) return int_name( -1 );
+          if( +epsilon < o ) return int_name( +1 );
+          return int_name( 0 );
          }
 
       }

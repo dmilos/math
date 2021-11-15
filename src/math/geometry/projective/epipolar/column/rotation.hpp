@@ -1,10 +1,10 @@
-#ifndef math_geometry_projective_camera_epipolar_backbone_rotation
-#define math_geometry_projective_camera_epipolar_backbone_rotation
+#ifndef math_geometry_projective_camera_epipolar_column_rotation
+#define math_geometry_projective_camera_epipolar_column_rotation
 
-// ::math::geometry::projective::epipolar::backbone::rotation( pole )
-// ::math::geometry::projective::epipolar::backbone::rotation( eye );
+// ::math::geometry::projective::epipolar::column::rotation( pole )
+// ::math::geometry::projective::epipolar::column::rotation( eye );
 
-#include "../camera/pinhole.hpp"
+#include "../../camera/pinhole.hpp"
 
 namespace math
  {
@@ -14,7 +14,7 @@ namespace math
      {
       namespace epipolar
        {
-        namespace backbone
+        namespace column
          {
 
           template< typename scalar_name >
@@ -33,13 +33,9 @@ namespace math
            scalar_name rotation( ::math::linear::vector::structure< scalar_name , 3 > const& /*right_*/eye, scalar_name const& epsilon = 1e-8 )
             {
              typedef ::math::geometry::projective::camera::pinhole< scalar_name > pinhole_type;
-             scalar_name length =  eye[ pinhole_type::up()    ] * eye[ pinhole_type::up()    ]
-                                 + eye[ pinhole_type::right() ] * eye[ pinhole_type::right() ];
-             if( length < epsilon )
-              {
-               return scalar_name( 0 );
-              }
-             return atan2( eye[ pinhole_type::up() ], eye[ pinhole_type::right() ] );
+             typedef ::math::linear::vector::structure< scalar_name, 2 > point2d_type;
+
+             return  ::math::geometry::projective::epipolar::column::rotation( point2d_type{ eye[ pinhole_type::right() ], eye[ pinhole_type::up() ] }, epsilon );
             }
 
          }

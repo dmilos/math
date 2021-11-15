@@ -37,7 +37,7 @@ namespace math
              typedef ::math::linear::affine::structure<scalar_name,3>          affine_type;
 
              typedef ::math::geometry::projective::camera::pinhole<scalar_name>    pinhole_type;
-             typedef ::math::geometry::projective::camera::mobile< scalar_name >   camera_type;
+             typedef ::math::geometry::projective::camera::mobile< scalar_name >   mobile_type;
              typedef ::math::geometry::projective::camera::optical<scalar_name >   optical_type;
 
              typedef ::math::geometry::plane::no3d<scalar_name> no3d_type;
@@ -92,35 +92,35 @@ namespace math
               (
                line2D_type & epiL, line2D_type & epiR,
                uv_type const& uv_left,
-               camera_type const& camera_left,
-               camera_type const& camera_right
+               mobile_type const& sinister,
+               mobile_type const& dexter
               )
               { //!< Compute line on both camera. TODO Not optimal!! Academically correct.
-               m_leftEye  = camera_left.to_world().vector();
-               m_rightEye = camera_right.to_world().vector();
+               m_leftEye  = sinister.to_world().vector();
+               m_rightEye = dexter.to_world().vector();
 
                m_leftWorld.origin() = pinhole_type::reproject( uv_left );
-               ::math::linear::affine::transform( m_leftWorld.origin(), camera_left.to_world() );
+               ::math::linear::affine::transform( m_leftWorld.origin(), sinister.to_world() );
 
                m_ePlane = three_type{ m_leftEye, m_rightEye, m_leftWorld.origin() };
 
-               ::math::linear::vector::load(     m_leftIP.normal(), camera_left.to_world()[0][1], camera_left.to_world()[1][1], camera_left.to_world()[2][1] );
+               ::math::linear::vector::load(     m_leftIP.normal(), sinister.to_world()[0][1], sinister.to_world()[1][1], sinister.to_world()[2][1] );
                ::math::linear::vector::addition( m_leftIP.origin(), m_leftEye, m_leftIP.normal() );
                if( false == ::math::geometry::plane::intersect( m_leftWorld, m_leftIP, m_ePlane ) )
                 {
                  return false;
                 }
-               ::math::linear::affine::transform( m_leftLocal,  camera_left.to_local(), m_leftWorld );
+               ::math::linear::affine::transform( m_leftLocal,  sinister.to_local(), m_leftWorld );
                ::math::linear::vector::load( epiL.origin(),    m_leftLocal.origin()[0],    m_leftLocal.origin()[2] );
                ::math::linear::vector::load( epiL.direction(), m_leftLocal.direction()[0], m_leftLocal.direction()[2] );
 
-               ::math::linear::vector::load(     m_rightIP.normal(), camera_right.to_world()[0][1], camera_right.to_world()[1][1], camera_right.to_world()[2][1] );
+               ::math::linear::vector::load(     m_rightIP.normal(), dexter.to_world()[0][1], dexter.to_world()[1][1], dexter.to_world()[2][1] );
                ::math::linear::vector::addition( m_rightIP.origin(), m_rightEye, m_rightIP.normal() );
                if( false == ::math::geometry::plane::intersect( m_rightWorld, m_rightIP, m_ePlane ) )
                 {
                  return false;
                 }
-               ::math::linear::affine::transform( m_rightLocal,  camera_right.to_local(), m_rightWorld );
+               ::math::linear::affine::transform( m_rightLocal,  dexter.to_local(), m_rightWorld );
                ::math::linear::vector::load( epiR.origin(),     m_rightLocal.origin()[0],    m_rightLocal.origin()[2] );
                ::math::linear::vector::load( epiR.direction(),  m_rightLocal.direction()[0], m_rightLocal.direction()[2] );
 
@@ -152,47 +152,47 @@ namespace math
                return true;
               }
 
-             bool processL( line2D_type & epiL, uv_type const& uv_left, camera_type const& camera_left, camera_type const& camera_right )
+             bool processL( line2D_type & epiL, uv_type const& uv_left, mobile_type const& sinister, mobile_type const& dexter )
               {
-               m_leftEye  = camera_left.to_world().vector();
-               m_rightEye = camera_right.to_world().vector();
+               m_leftEye  = sinister.to_world().vector();
+               m_rightEye = dexter.to_world().vector();
 
                m_leftWorld.origin() = pinhole_type::reproject( uv_left );
-               ::math::linear::affine::transform( m_leftWorld.origin(), camera_left.to_world() );
+               ::math::linear::affine::transform( m_leftWorld.origin(), sinister.to_world() );
 
                m_ePlane = three_type{ m_leftEye, m_rightEye, m_leftWorld.origin() };
 
-               ::math::linear::vector::load( m_leftIP.normal(), camera_left.to_world()[0][1], camera_left.to_world()[1][1], camera_left.to_world()[2][1] );
+               ::math::linear::vector::load( m_leftIP.normal(), sinister.to_world()[0][1], sinister.to_world()[1][1], sinister.to_world()[2][1] );
                ::math::linear::vector::addition( m_leftIP.origin(), m_leftEye, m_leftIP.normal() );
 
                if( false == ::math::geometry::plane::intersect( m_leftWorld, m_leftIP, m_ePlane ) )
                 {
                  return false;
                 }
-               ::math::linear::affine::transform( m_leftLocal,  camera_left.to_local(), m_leftWorld );
+               ::math::linear::affine::transform( m_leftLocal,  sinister.to_local(), m_leftWorld );
                ::math::linear::vector::load( epiL.origin(),    m_leftLocal.origin()[0],    m_leftLocal.origin()[2] );
                ::math::linear::vector::load( epiL.direction(), m_leftLocal.direction()[0], m_leftLocal.direction()[2] );
 
                return true;
               }
 
-             bool processR( line2D_type & epiR, uv_type const& uv_left, camera_type const& camera_left, camera_type const& camera_right )
+             bool processR( line2D_type & epiR, uv_type const& uv_left, mobile_type const& sinister, mobile_type const& dexter )
               {
-               m_leftEye  = camera_left.to_world().vector();
-               m_rightEye = camera_right.to_world().vector();
+               m_leftEye  = sinister.to_world().vector();
+               m_rightEye = dexter.to_world().vector();
 
                m_leftWorld.origin() = pinhole_type::reproject( uv_left );
-               ::math::linear::affine::transform( m_leftWorld.origin(), camera_left.to_world() );
+               ::math::linear::affine::transform( m_leftWorld.origin(), sinister.to_world() );
 
                m_ePlane = three_type{ m_leftEye, m_rightEye, m_leftWorld.origin() };
 
-               ::math::linear::vector::load( m_rightIP.normal(), camera_right.to_world()[0][1], camera_right.to_world()[1][1], camera_right.to_world()[2][1] );
+               ::math::linear::vector::load( m_rightIP.normal(), dexter.to_world()[0][1], dexter.to_world()[1][1], dexter.to_world()[2][1] );
                ::math::linear::vector::addition( m_rightIP.origin(), m_rightEye, m_rightIP.normal() );
                if( false == ::math::geometry::plane::intersect( m_rightWorld, m_rightIP, m_ePlane ) )
                 {
                  return false;
                 }
-               ::math::linear::affine::transform( m_rightLocal,  camera_right.to_local(), m_rightWorld );
+               ::math::linear::affine::transform( m_rightLocal,  dexter.to_local(), m_rightWorld );
                ::math::linear::vector::load( epiR.origin(),     m_rightLocal.origin()[0],    m_rightLocal.origin()[2] );
                ::math::linear::vector::load( epiR.direction(),  m_rightLocal.direction()[0], m_rightLocal.direction()[2] );
 
@@ -242,11 +242,11 @@ namespace math
             ::math::geometry::direction::parametric<scalar_name, 2>               & epiL
            ,::math::geometry::direction::parametric<scalar_name, 2>               & epiR
            ,::math::linear::vector::structure< scalar_name , 2 >             const& uv_left
-           ,::math::geometry::projective::camera::mobile< scalar_name >      const& camera_right
+           ,::math::geometry::projective::camera::mobile< scalar_name >      const& dexter
           )
           {
            ::math::geometry::projective::epipolar::line<scalar_name> line;
-           line.process( epiL, epiR, uv_left, camera_right );
+           line.process( epiL, epiR, uv_left, dexter );
           }
 
         template < typename scalar_name >
@@ -256,12 +256,12 @@ namespace math
             ::math::geometry::direction::parametric<scalar_name, 2>               & epiL
            ,::math::geometry::direction::parametric<scalar_name, 2>               & epiR
            ,::math::linear::vector::structure< scalar_name , 2 >             const& uv_left
-           ,::math::geometry::projective::camera::mobile< scalar_name >      const& camera_left
-           ,::math::geometry::projective::camera::mobile< scalar_name >      const& camera_right
+           ,::math::geometry::projective::camera::mobile< scalar_name >      const& sinister
+           ,::math::geometry::projective::camera::mobile< scalar_name >      const& dexter
           )
           {
            ::math::geometry::projective::epipolar::line<scalar_name> line;
-           line.process( epiL, epiR, uv_left, camera_right );
+           line.process( epiL, epiR, uv_left, dexter );
           }
 
 
@@ -271,11 +271,11 @@ namespace math
           (
             ::math::geometry::direction::parametric<scalar_name, 2>               & epiL
            ,::math::linear::vector::structure< scalar_name , 2 >             const& uv_left
-           ,::math::geometry::projective::camera::mobile< scalar_name >      const& camera_right
+           ,::math::geometry::projective::camera::mobile< scalar_name >      const& dexter
           )
           {
            ::math::geometry::projective::epipolar::line<scalar_name> line;
-           line.processL( epiL, uv_left, camera_right );
+           line.processL( epiL, uv_left, dexter );
           }
 
         template < typename scalar_name >
@@ -284,11 +284,11 @@ namespace math
           (
             ::math::geometry::direction::parametric<scalar_name, 2>               & epiR
            ,::math::linear::vector::structure< scalar_name , 2 >             const& uv_left
-           ,::math::geometry::projective::camera::mobile< scalar_name >      const& camera_right
+           ,::math::geometry::projective::camera::mobile< scalar_name >      const& dexter
           )
           {
            ::math::geometry::projective::epipolar::line<scalar_name> line;
-           line.processR( epiR, uv_left, camera_right );
+           line.processR( epiR, uv_left, dexter );
           }
 
        }
