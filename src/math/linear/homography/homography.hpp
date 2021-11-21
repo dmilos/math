@@ -1,4 +1,7 @@
-#include "./construct.hpp"
+#include "./construct1.hpp"
+#include "./construct2.hpp"
+#include "./construct3.hpp"
+
 #include "./transform.hpp"
 #include "./opd.hpp"
 #include "./structure.hpp"

@@ -75,6 +75,8 @@
        const ::math::constants::scalar_t PHI_3quarter  =  2.356194490192344840    ;
        const ::math::constants::scalar_t PHI_two       =  6.283185307179586230    ;
 
+       const ::math::constants::scalar_t PHI_SQRT2  =  2.506628274631000502415765284811;//!< sqrt(2*pi)
+
        const ::math::constants::scalar_t PHI_inv       =  0.318309886183790671538    ;
        const ::math::constants::scalar_t PHI_2inv      =  0.636619772367581343076    ;
        const ::math::constants::scalar_t PHI_inv_2     =  0.159154943091895336       ;

@@ -1,6 +1,10 @@
 #ifndef math_function_distribution_normal
 #define math_function_distribution_normal
 
+// ::math::function::distribution::normal( x, stddev, mean )
+// ::math::function::distribution::normal( x, stddev )
+// ::math::function::distribution::normal( x )
+// ::math::function::distribution::normal
 // ::math::function::distribution::normal
 // ::math::function::distribution::normal_invert
 // ::math::function::distribution::normal_PDF
@@ -24,14 +28,15 @@ namespace math
          ,scalar_name const& mean_param
          )
         {
-         scalar_name const & inv2sqrtPHI = math::constants::PHI_invSQRT2;
+         scalar_name const & sqrt2PHI = math::constants::PHI_SQRT2;
 
-         scalar_name e  =  (x - mean_param)/standard_deviation_param;
-                     e *= e;
+         scalar_name power  =  (x - mean_param) / standard_deviation_param;
+                     power *= power;
+                     power *= scalar_name(-0.5);
 
-         scalar_name e_coef  = standard_deviation_param * inv2sqrtPHI;
+         scalar_name coefficient  = standard_deviation_param * sqrt2PHI;
 
-         scalar_name result    = exp( - e / scalar_name(2) ) / e_coef;
+         scalar_name result    = exp( power ) / coefficient;
 
          return result;
         }
@@ -43,14 +48,15 @@ namespace math
          ,scalar_name const& standard_deviation_param
          )
         {
-         scalar_name const & inv2sqrtPHI = math::constants::PHI_invSQRT2;
+         scalar_name const & sqrt2PHI = math::constants::PHI_SQRT2;
 
-         scalar_name e  =  x / standard_deviation_param;
-                     e *= e;
+         scalar_name power  =  x / standard_deviation_param;
+                     power *= power;
+                     power *= scalar_name(-0.5);
 
-         scalar_name e_coef  = standard_deviation_param * inv2sqrtPHI;
+         scalar_name coefficient = standard_deviation_param * sqrt2PHI;
 
-         scalar_name result    = exp( - e / scalar_name(2) ) / e_coef;
+         scalar_name result    = exp( power ) / coefficient;
 
          return result;
         }
@@ -61,9 +67,14 @@ namespace math
           scalar_name const& x
          )
         {
-         scalar_name const & inv2sqrtPHI = math::constants::PHI_invSQRT2;
+         scalar_name const & sqrt2PHI = math::constants::PHI_SQRT2;
 
-         scalar_name result = exp( - (x*x) / scalar_name(2) ) / inv2sqrtPHI;
+         scalar_name power  = x * x;
+                     power *= scalar_name(-0.5);
+
+         scalar_name const& coefficient = sqrt2PHI;
+
+         scalar_name result = exp( power ) / coefficient;
 
          return result;
         }
@@ -76,12 +87,12 @@ namespace math
          ,scalar_name const& mean_param = scalar_name(0)
         )
         {
-         scalar_name const & inv2sqrtPHI = math::constants::PHI_invSQRT2;
+         scalar_name const & sqrt2PHI = math::constants::PHI_SQRT2;
 
          scalar_name x;
-         x = y * standard_deviation_param * inv2sqrtPHI;
-         x = - log( x ) * 2 * standard_deviation_param * standard_deviation_param;
-         x = sqrt( x ) + mean_param;
+         x = y * standard_deviation_param * sqrt2PHI;
+         x = - 2 * log( x )  ;
+         x = standard_deviation_param * sqrt( x ) + mean_param;
 
          return x;
         }
@@ -92,7 +103,7 @@ namespace math
           scalar_name   x
          ,scalar_name const& standard_deviation_param = scalar_name(1)
         )
-        { // TODO refernec here
+        { // TODO reference here
          static scalar_name const a0 =  0.33267;
          static scalar_name const a1 =  0.4361836;
          static scalar_name const a2 = -0.1201676;

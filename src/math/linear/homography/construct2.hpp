@@ -1,7 +1,7 @@
-#ifndef math_geometry_homography_construct
-#define math_geometry_homography_construct
+#ifndef math_geometry_homography_construct2
+#define math_geometry_homography_construct2
 
- // ::math::linear::homography::construct( )
+ // ::math::linear::homography::construct2( )
 
 #include "../vector/vector.hpp"
 #include "../matrix/invert.hpp"
@@ -16,6 +16,41 @@ namespace math
    {
     namespace homography
      {
+         
+      template<  typename scalar_name >
+       void construct //!< This is always true :D
+        (
+          ::math::linear::homography::structure< scalar_name, 2 >        & result
+         ,::math::linear::vector::structure< scalar_name, 2 >       const& T 
+        ) //!< ( 1, 1 ) -> T
+        {
+         static scalar_name one = 1;
+         static scalar_name zero = 0;
+         scalar_name X = T[0];
+         scalar_name Y = T[1];
+
+         result[0][0] =       X;  result[0][1] =    zero;  result[0][2] = zero;
+         result[1][0] =    zero;  result[1][1] =       Y;  result[1][2] = zero;
+         result[2][0] = one - Y;  result[2][1] = one - X;  result[2][2] = X + Y - one;
+        }
+
+      template<  typename scalar_name >
+       void construct_invert //!< This is always true :D
+        (
+          ::math::linear::homography::structure< scalar_name, 2 >        & result
+         ,::math::linear::vector::structure< scalar_name, 2 >       const& T 
+        )//!<  T -> ( 1, 1 )
+        {
+         static scalar_name one = 1;
+         static scalar_name zero = 0;
+         scalar_name X = T[0];
+         scalar_name Y = T[1];
+         scalar_name A = X + Y - one;
+
+         result[0][0] =       Y * A;  result[0][1] =        zero;  result[0][2] = zero;
+         result[1][0] =        zero;  result[1][1] =       X * A;  result[1][2] = zero;
+         result[2][0] = Y*(Y - one);  result[2][1] = X*(X - one);  result[2][2] = X*Y;
+        }
 
       template<  typename scalar_name >
        bool construct
@@ -81,7 +116,7 @@ namespace math
          ,::math::linear::vector::structure< scalar_name, 2 >    const& b1 //!< ( 1,0 ) -> b1
          ,::math::linear::vector::structure< scalar_name, 2 >    const& b2 //!< ( 0,1 ) -> b2
          ,::math::linear::vector::structure< scalar_name, 2 >    const& b3 //!< ( 1,1 ) -> b3
-        )
+        ) //!< construct by using matrix
         {
          ::math::linear::matrix::structure< scalar_name, 8, 8 > m;
 
@@ -130,139 +165,36 @@ namespace math
         }
 
       template<  typename scalar_name >
-       void construct //!< This is always true :D
+       bool constructA
         (
-          ::math::linear::homography::structure<scalar_name,1> & result
-         ,scalar_name const& A
-         ,scalar_name const& B
-        ) // B = homography( A )
+          ::math::linear::homography::structure<scalar_name,2>        & result
+         ,::math::linear::vector::structure< scalar_name, 2 >    const& O //!< { 0, 0 } -> O
+         ,::math::linear::vector::structure< scalar_name, 2 >    const& X //!< { 1, 0 } -> X
+         ,::math::linear::vector::structure< scalar_name, 2 >    const& Y //!< { 0, 1 } -> Y
+         ,::math::linear::vector::structure< scalar_name, 2 >    const& T //!< { 1, 1 } -> T
+        ) //!< construct by using affine, ideally find triplet with highest determinant and form system from them
         {
-         result[0][0] = B-A*B;  result[0][1] =    0;
-         result[1][0] = B-A;    result[1][1] =  A-A*B;
-        }
+         ::math::linear::affine::structure<scalar_name,2>  aa;
+         ::math::linear::affine::construct( aa, { O, X, Y } );
 
-      template<  typename scalar_name >
-       void construct //!< This is always true :D
-        (
-          ::math::linear::homography::structure< scalar_name, 2 >        & result
-         ,::math::linear::vector::structure< scalar_name, 2 >       const& b3 //!< ( 1,1 ) -> b3
-        )
-        {
-         static scalar_name one = 1;
-         static scalar_name zero = 0;
-         scalar_name X = b3[0];
-         scalar_name Y = b3[1];
-
-         result[0][0] =       X;  result[0][1] =    zero;  result[0][2] = zero;
-         result[1][0] =    zero;  result[1][1] =       Y;  result[1][2] = zero;
-         result[2][0] = one - Y;  result[2][1] = one - X;  result[2][2] = Y + X - one;
-        }
-
-       template<  typename scalar_name >
-       void construct //!< This is always true :D
-        (
-          ::math::linear::homography::structure<scalar_name,3>        & result
-         ,::math::linear::vector::structure< scalar_name, 3 >    const& b3 //!< ( 1,1,1 ) -> b3
-        )
-        {
-         scalar_name X = b3[0];
-         scalar_name Y = b3[1];
-         scalar_name Z = b3[2];
-
-         scalar_name delta = scalar_name(8) * X * Y * Z;
-
-         scalar_name A = scalar_name(4) * Y * Z * ( Z + Y - X - scalar_name(1) );
-         scalar_name B = scalar_name(4) * X * Z * ( X - Y + Z - scalar_name(1) );
-         scalar_name C = scalar_name(4) * X * Y * ( X + Y - Z - scalar_name(1) );
-
-         result[0][0] = A + delta;
-         result[0][1] = 0;
-         result[0][2] = 0;
-         result[0][3] = 0;
-
-         result[1][0] = 0;
-         result[1][1] = B + delta;
-         result[1][2] = 0;
-         result[1][3] = 0;
-
-         result[2][0] = 0;
-         result[2][1] = 0;
-         result[2][2] = C + delta;
-         result[2][3] = 0;
-
-         result[3][0] = A;
-         result[3][1] = B;
-         result[3][2] = C;
-         result[3][3] = delta;
-        }
-
-
-      template<  typename scalar_name >
-       bool construct
-        (
-          ::math::linear::homography::structure<scalar_name,3>        & result
-         ,::math::linear::vector::structure< scalar_name, 3 >    const& O //!< { 0, 0, 0 } -> O
-         ,::math::linear::vector::structure< scalar_name, 3 >    const& X //!< { 1, 0, 0 } -> X
-         ,::math::linear::vector::structure< scalar_name, 3 >    const& Y //!< { 0, 1, 0 } -> Y
-         ,::math::linear::vector::structure< scalar_name, 3 >    const& Z //!< { 0, 0, 1 } -> Z
-         ,::math::linear::vector::structure< scalar_name, 3 >    const& T //!< { 1, 1, 1 } -> T
-        )
-        {
-         ::math::linear::homography::structure<scalar_name,3> ha;
-
-         ::math::linear::affine::structure<scalar_name,3>  aa;
-         ::math::linear::affine::construct( aa, { O, X, Y, Z } );
-         ::math::linear::homography::convert( ha, aa );
-         ::math::linear::homography::structure<scalar_name,3> hh;
+         ::math::linear::homography::structure<scalar_name,2> hh;
          {
-          ::math::linear::affine::structure<scalar_name,3>  ai;
+          ::math::linear::affine::structure<scalar_name,2>  ai;
           if( false == ::math::linear::affine::invert( ai, aa ) )
            {
             return false;
            }
-          ::math::linear::vector::structure< scalar_name, 3 > t;
+          ::math::linear::vector::structure< scalar_name, 2 > t;
           ::math::linear::affine::transform( t, ai, T );
-          ::math::linear::homography::structure<scalar_name,3> ht;
-          ::math::linear::homography::construct( ht, t );
-          if( false == ::math::linear::matrix::invert( hh, ht ) )
-           {
-            return false;
-           }
+          ::math::linear::homography::construct( hh, t );
          }
 
+         ::math::linear::homography::structure<scalar_name,2> ha;
+         ::math::linear::homography::convert( ha, aa );
          ::math::linear::matrix::multiply( result, ha, hh );
 
          return true;
         }
-
-      template<  typename scalar_name >
-        bool construct
-         (
-           ::math::linear::homography::structure<scalar_name,3>               & result
-          ,std::array< ::math::linear::vector::point<scalar_name,3>, 5 > const& target
-          ,std::array< ::math::linear::vector::point<scalar_name,3>, 5 > const& source
-         )
-         {
-          ::math::linear::homography::structure<scalar_name,3> hSi, hSd;
-          if( false == ::math::linear::homography::construct( hSd, source[0], source[1], source[2], source[3], source[4] ) )
-           {
-            return false;
-           }
-          if( false == ::math::linear::matrix::invert( hSi, hSd ) )
-           {
-            return false;
-           }
-
-          ::math::linear::homography::structure<scalar_name,3> hT;
-          if( false == ::math::linear::homography::construct( hT, target[0], target[1], target[2], target[3], target[4] ) )
-           {
-            return false;
-           }
-
-          ::math::linear::matrix::multiply( result, hT, hSi );
-
-          return true;
-         }
 
      }
    }

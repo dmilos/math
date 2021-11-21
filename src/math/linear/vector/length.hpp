@@ -1,6 +1,6 @@
 #ifndef math_library_linear_algebra__vector_length_HPP_
  #define math_library_linear_algebra__vector_length_HPP_
- 
+
 // ::math::linear::vector::length( vector )
 // ::math::linear::vector::length( result, model, length  )
 // ::math::linear::vector::length( vector, length )
@@ -38,7 +38,8 @@
          (
            ::math::linear::vector::structure< scalar_name, dimension_number >      & result_param
           ,::math::linear::vector::structure< scalar_name, dimension_number > const& model_param
-          ,scalar_name                                           const& length_param
+          ,scalar_name                                                        const& length_param
+        //,scalar_name                                                        const& epsilon_param
          )
          {
           using namespace ::math::linear::vector;
@@ -58,6 +59,7 @@
          (
            ::math::linear::vector::structure< scalar_name, dimension_number >    & vector_param
           ,scalar_name                                                      const& length_param
+        //,scalar_name                                                      const& epsilon_param
          )
          {
           scalar_name old_length = ::math::linear::vector::length<scalar_name,scalar_name,dimension_number>( vector_param );

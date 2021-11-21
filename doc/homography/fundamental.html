@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html  PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
+  "http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+    <title>Derive fundamental matrix from Rotation</title>
+</head>
+<body>
+    <h1>Derive fundamental matrix from Rotation</h1>
+
+    <dl>
+        <dt>Motivation</dt>
+        <dd>In cases where we have syntacticly generated cameras positions or
+        we calculate cameras position by avoiding calculation fundametal/essential matrix,
+        to calculate epipolar line efficiently we need fundamental matrix.
+        If is done by the book this might lead to some numerical issues like in case when left and right camera are in same place.
+        Presented method is resistant to any kind of cameras position.
+        </dd>
+        <dt>Notation</dt>
+        <dd>
+            <dl>
+                <dt><i>real number</i>s</dt><dd> member of set &real; </dd>
+                <dt><i>scalar</i></dt><dd> or real number. <br/>
+                 Usually used small Greek/Latin letters. &alpha;, &beta;, ..., a, b, c, ...
+
+                 </dd>
+                <dt><i>vector/point</i></dt><dd>
+                 ( a<sub>1</sub>, a<sub>2</sub>, ... a<sub>n</sub> )&isin; &real;<sup>n</sup> <br/>
+                    Where a<sub>1</sub>, a<sub>2</sub>, ... a<sub>n</sub> &isin; &real;<br/>
+                    Used small bold, italic Latin letters. <i><b>a</b></i>,<i><b>b</b></i>, <i><b>c</b></i>, <i><b>d</b></i>, ... <br/>
+                 </dd>
+                <dt><i>matrix</i></dt><dd>
+                    <table>
+                        <tr><td> <b>M</b> =<font size="42">  [</font></td>
+                        <td> a<sub>11</sub>  a<sub>12</sub> ... a<sub>1n</sub> <br/>
+                            a<sub>21</sub>  a<sub>22</sub> ... a<sub>2n</sub> <br/>
+                            ... ... ... <br/>
+                            a<sub>m1</sub>  a<sub>m2</sub> ... a<sub>mn</sub><br/>
+                    </td> <td><font size="42">]</font>
+
+                    </td></tr>
+                    </table><br/>
+                    Where a<sub>11</sub>, ... a<sub>mn</sub> &isin; &real;<br/>
+                    Usually used capital Latin letters in bold.
+                </dd>
+                <dt><i>matrix row</i></dt>
+                <dd>
+                  M<sub>1</sub> = [ a<sub>11</sub>  a<sub>12</sub> ... a<sub>1n</sub> ]<br/>
+                  M<sub>2</sub> = [ a<sub>21</sub>  a<sub>22</sub> ... a<sub>2n</sub> ]<br/>
+                  ... ... ...<br/>
+                  M<sub>m</sub> = [ a<sub>m1</sub>  a<sub>m2</sub> ... a<sub>mn</sub> ]<br/>
+                 </dd>
+                <dt><i>matrix - column</i></dt>
+                 <dd>
+                  M<sub>x</sub> = <table><td> <font size="42">[</font></td> <td> a<sub>11</sub><br/>  a<sub>21</sub><br/> ...<br/> a<sub>m1</sub> </td><td><font size="42">]</font></td></table><br/>
+
+                  M<sub>y</sub> = <table><td> <font size="42">[</font></td> <td> a<sub>12</sub><br/>  a<sub>22</sub><br/> ...<br/> a<sub>m2</sub> </td><td><font size="42">]</font></td></table><br/>
+                  ... ... ...<br/>
+                  M<sub>z</sub> = <table><td> <font size="42">[</font></td> <td> a<sub>1n</sub><br/>  a<sub>2n</sub><br/> ...<br/> a<sub>mn</sub> </td><td><font size="42">]</font></td></table><br/>
+
+                 </dd>
+                <dt><i>affine</i></dt><dd>[R|t] where R is 3x3 matrix, t &isin; &real;<sup>3</sup> </dd>
+                <dt><i>homography</i></dt><dd>TODO</dd>
+                <dt><i>direction</i> in 2d plane camera</dt>
+                <dd>
+                  Implicit formula: a&middot;X + b&middot;Y+c = 0;  where a,b &isin; &real;<br/>
+                  Vector form: <i><b>p</b></i> = &lambda; &middot; <i><b>d</b></i> + <i><b>o</b></i>;  where &lambda; &isin; &real; and <i><b>d</b></i>, <i><b>o</b></i> &isin; &real; <sup>2</sup>
+                </dd>
+                <dt><i>pinhole </i>camera</dt>
+                 <dd>
+                  Project any &real;<sup>3</sup> on z = 1 plane.
+                 </dd>
+            </dl>
+        </dd>
+      <dt>Derivation</dt>
+       <dd>
+         Lets start from  <b>x</b> &isin; &real; <sup>2</sup>.<br/>
+         <b>x</b> will define direction <i><b>p</b></i> = &lambda; &middot; <i><b>d</b></i> + <i><b>o</b></i>. 
+         Where: <i><b>o</b></i> = (0,0,0), <i><b>d</b></i> = (x<sub>0</sub>,x<sub>1</sub>,1) and &lambda; &isin; &real; <br/>
+
+         By transforming with [R|t] we have: <br/>
+         [R|t]( <i><b>p</b></i> = &lambda; &middot; <i><b>d</b></i> + <i><b>o</b></i> ) = <br/>
+         = R( &lambda; &middot; <i><b>d</b></i> + <i><b>o</b></i> ) + <i><b>t</b></i>  <br/>
+         = R( &lambda; &middot; <i><b>d</b></i> ) + <i><b>o</b></i> + <i><b>t</b></i>  <br/>
+         = R( &lambda; &middot; <i><b>d</b></i> ) + <i><b>t</b></i>  <br/>
+         = &lambda; &middot; R( <i><b>d</b></i> ) + <i><b>t</b></i>
+         &isin; &real; <sup>3</sup> <br/><br/>
+         Projected on z=1 we have:<br/>
+         (1) <math xmlns="http://www.w3.org/1998/Math/MathML" >
+
+            x = <mfrac>
+            <mrow> &lambda; <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i> + <msub><mi>t</mi><mn>x</mn></msub></mrow>
+            <mrow> &lambda; <msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i> + <msub><mi>t</mi><mn>z</mn></msub></mrow>
+            </mfrac>
+            </math><br />
+
+            <math xmlns="http://www.w3.org/1998/Math/MathML" >
+          (2) y = <mfrac>
+            <mrow> &lambda; <msub><mi>R</mi><mn>2</mn></msub> &sdot; <i><b>d</b></i> + <msub><mi>t</mi><mn>y</mn></msub></mrow>
+            <mrow> &lambda; <msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i> + <msub><mi>t</mi><mn>z</mn></msub></mrow>
+            </mfrac>
+            </math>
+
+         <br/>
+         Let's eliminate &lambda;.<br/>
+         <blockquote>
+         We will brave and assume that: &lambda; R<sub>3</sub> &sdot; <i><b>d</b></i> + <i><b>t</b></i><sub>z</sub> &ne; 0
+         </blockquote>
+         From <i>(1)</i> :<br/>
+         ( &lambda; R<sub>3</sub> &sdot; <i><b>d</b></i> + <i><b>t</b></i><sub>z</sub> ) &sdot; x = &lambda; R<sub>1</sub> &sdot; <i><b>d</b></i> + <i><b>t</b></i><sub>x</sub>;<br/>
+
+         &lambda; R<sub>3</sub> &sdot; <i><b>d</b></i>&middot; x  + <i><b>t</b></i><sub>z</sub> &middot; x = &lambda; R<sub>1</sub> &sdot; <i><b>d</b></i> + <i><b>t</b></i><sub>x</sub>;<br/>
+         &lambda; R<sub>3</sub> &sdot; <i><b>d</b></i>&middot; x - &lambda; R<sub>1</sub> &sdot; <i><b>d</b></i>  =  <i><b>t</b></i><sub>x</sub> - <i><b>t</b></i><sub>z</sub> &sdot; x; <br/>
+
+         <math xmlns="http://www.w3.org/1998/Math/MathML" >
+         &lambda; = <mfrac>
+            <mrow> <msub><mi>t</mi><mn>x</mn></msub> - <msub><mi>t</mi><mn>z</mn></msub> &sdot;  x</mrow>
+            <mrow> <msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i> &sdot; x - <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i></mrow>
+            </mfrac>
+          </math>
+        <br/>
+
+         Then replace in <i>(2)</i> <br/>
+          <math xmlns="http://www.w3.org/1998/Math/MathML" >
+             y =<mfrac><mrow>
+             <mfrac><mrow>
+              <msub><mi>t</mi><mn>x</mn></msub> - <msub><mi>t</mi><mn>z</mn></msub> &sdot; x
+              </mrow><mrow>
+                <msub><mi>R</mi><mn>3</mn></msub>  &sdot; <i><b>d</b></i> &middot; x - <msub><mi>R</mi><mn>1</mn></msub>  &sdot; <i><b>d</b></i>
+             </mrow>
+             </mfrac><msub><mi>R</mi><mn>2</mn></msub>  &sdot; <i><b>d</b></i> + <msub><mi>t</mi><mn>y</mn></msub>
+             </mrow><mrow>
+             <mfrac>
+               <mrow><msub><mi>t</mi><mn>x</mn></msub> - <msub><mi>t</mi><mn>z</mn></msub> &sdot; x</mrow>
+               <mrow><msub><mi>R</mi><mn>3</mn></msub>  &sdot; <i><b>d</b></i>&middot; x - <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i></mrow>
+             </mfrac> <msub><mi>R</mi><mn>3</mn></msub>  &sdot; <i><b>d</b></i> + <msub><mi>t</mi><mn>z</mn></msub>
+               </mrow>
+             </mfrac></math>
+         <br/>
+          <math xmlns="http://www.w3.org/1998/Math/MathML" >
+             y =
+             <mfrac><mrow>
+
+             (<msub><mi>t</mi><mn>x</mn></msub> - <msub><mi>t</mi><mn>z</mn></msub> &middot; x) &dot; ( <msub><mi>R</mi><mn>2</mn></msub> &sdot; <i><b>d</b></i> ) + <msub><mi>t</mi><mn>y</mn></msub> &sdot; ( (<msub><mi>R</mi><mn>3</mn></msub>  &sdot; <i><b>d</b></i> ) &middot; x - ( <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i> ) )
+              </mrow>
+
+              <mrow>
+
+              (<msub><mi>t</mi><mn>x</mn></msub> - <msub><mi>t</mi><mn>z</mn></msub> &middot; x) &sdot; ( <msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i>) + <msub><mi>t</mi><mn>z</mn></msub> &sdot; ( ( <msub><mi>R</mi><mn>3</mn></msub>  &sdot; <i><b>d</b></i> )&middot; x - ( <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i> ) )
+              </mrow>
+             </mfrac>
+             </math>
+
+         <br/>
+          <math xmlns="http://www.w3.org/1998/Math/MathML" >
+             y =
+             <mfrac><mrow>
+
+             (<msub><mi>t</mi><mn>x</mn></msub> - <msub><mi>t</mi><mn>z</mn></msub> &middot; x) &sdot; ( <msub><mi>R</mi><mn>2</mn></msub> &sdot; <i><b>d</b></i> ) + <msub><mi>t</mi><mn>y</mn></msub> &sdot; ( ( <msub><mi>R</mi><mn>3</mn></msub>  &sdot; <i><b>d</b></i> ) &middot; x - ( <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i> ) )
+              </mrow>
+
+              <mrow>
+              <msub><mi>t</mi><mn>x</mn></msub> &sdot; ( <msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i> )
+              - <msub><mi>t</mi><mn>z</mn></msub> &sdot; x  &sdot; ( <msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i> )
+              + <msub><mi>t</mi><mn>z</mn></msub> &sdot;           ( <msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i> ) &sdot; x
+              - <msub><mi>t</mi><mn>z</mn></msub> &sdot; ( <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i>) )
+              </mrow>
+             </mfrac>
+             </math> <br />
+
+          <math xmlns="http://www.w3.org/1998/Math/MathML" >
+             y =
+             <mfrac><mrow>
+
+             (<msub><mi>t</mi><mn>x</mn></msub> - <msub><mi>t</mi><mn>z</mn></msub> &middot; x) &sdot; ( <msub><mi>R</mi><mn>2</mn></msub> &sdot; <i><b>d</b></i> ) + <msub><mi>t</mi><mn>y</mn></msub> &sdot; ( ( <msub><mi>R</mi><mn>3</mn></msub>  &sdot; <i><b>d</b></i> ) &middot; x - ( <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i> ) )
+              </mrow>
+
+              <mrow>
+                <msub><mi>t</mi><mn>x</mn></msub> &sdot; ( <msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i> )
+              - <msub><mi>t</mi><mn>z</mn></msub> &sdot; ( <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i>) )
+              </mrow>
+             </mfrac>
+             </math> <br />
+
+
+           <math xmlns="http://www.w3.org/1998/Math/MathML" >
+               <mtable>
+                  <mtr>
+                     <mtd><mi><msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i></mi></mtd>
+                     <mtd><mi><msub><mi>R</mi><mn>2</mn></msub> &sdot; <i><b>d</b></i></mi></mtd>
+                  </mtr>
+
+                  <mtr>
+                     <mtd><mi> <msub><mi>t</mi><mn>z</mn></msub> </mi></mtd>
+                     <mtd><mi><msub><mi>t</mi><mn>y</mn></msub></mi></mtd>
+                  </mtr>
+               </mtable> * X  -
+
+            <mfenced open = "[" close="]">
+               <mtable>
+                  <mtr>
+                     <mtd><mi><msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i></mi></mtd>
+                     <mtd><mi><msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i></mi></mtd>
+                  </mtr>
+
+                  <mtr>
+                     <mtd><mi> <msub><mi>t</mi><mn>z</mn></msub> </mi></mtd>
+                     <mtd><mi><msub><mi>t</mi><mn>x</mn></msub></mi></mtd>
+                  </mtr>
+               </mtable>
+
+            </mfenced> * Y +
+
+               <mtable>
+                  <mtr>
+                     <mtd><mi><msub><mi>R</mi><mn>2</mn></msub> &sdot; <i><b>d</b></i></mi></mtd>
+                     <mtd><mi><msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i></mi></mtd>
+                  </mtr>
+
+                  <mtr>
+                     <mtd><mi><msub><mi>t</mi><mn>y</mn></msub></mi></mtd>
+                     <mtd><mi><msub><mi>t</mi><mn>x</mn></msub></mi></mtd>
+                  </mtr>
+               </mtable>
+               = 0
+             </math>
+
+            <br />
+            From here it is obvious that:<br />
+            <blockquote>
+             F<sub>1</sub> = t<sub>y</sub> &sdot; R<sub>3</sub> - t<sub>z</sub> &sdot; R<sub>2</sub> <br />
+             F<sub>2</sub> = -( t<sub>x</sub> &sdot; R<sub>3</sub> - t<sub>z</sub> &sdot; R<sub>1</sub> ) <br />
+             F<sub>3</sub> = t<sub>x</sub> &sdot; R<sub>2</sub> - t<sub>y</sub> &sdot; R<sub>1</sub> <br />
+            </blockquote>
+
+
+        </dd>
+      <dt>Comment</dt>
+       <dd>
+          This library use right hand oriented coordinate system and projection plane is y=(0,1,0).<br>
+          Enable MathML in your browser.
+       </dd>
+
+    </dl>
+</body>
+</html>
