@@ -94,6 +94,7 @@ namespace math
 
              return true;
             }
+
            static bool process
             (
               point_type             & point
@@ -131,8 +132,6 @@ namespace math
              point[1] /= denominator;
 
              return true;
-
-
             }
 
         };
@@ -166,7 +165,7 @@ namespace math
       template<  typename scalar_name >
        bool intersect
         (
-          ::math::linear::vector::point<  scalar_name, 2 >            & point
+          ::math::linear::vector::point<  scalar_name, 2 >                    & point
          ,::math::geometry::direction::parametric < scalar_name, 2 >    const & left
          ,::math::geometry::direction::parametric < scalar_name, 2 >    const & right
          ,scalar_name const & epsilon = 1e-6

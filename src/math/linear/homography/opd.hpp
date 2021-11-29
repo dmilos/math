@@ -23,7 +23,7 @@ namespace math
           ::math::linear::affine::structure< scalar_name, 3 >         & affine
          ,::math::linear::homography::structure<scalar_name,2>   const& homography
         )
-        {
+        { //  TODO need ppinhole camera::forward, up, right. move to camera
          ::math::linear::vector::structure<scalar_name, 3> x,y,z,t;
 
          t = { homography[0][2], homography[2][2], -homography[1][2] };

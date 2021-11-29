@@ -5,7 +5,7 @@
 
 #include "../../linear/vector/structure.hpp"
 
-
+#include "noNd.hpp"
 
 namespace math
  {
@@ -17,9 +17,6 @@ namespace math
       template < typename scalar_name >
        class ABCD3D;
 
-      template< typename scalar_name >
-        class no3d;
-
       template < typename scalar_name >
        class parametric3d;
 
@@ -28,9 +25,9 @@ namespace math
 
       template
        <
-         typename scalar_name = double
+         typename scalar_name
        >
-       class no3d // normal _dot_ ( point - normal ) = 0
+       class noNd< scalar_name, 3 > // normal _dot_ ( point - normal ) = 0;
         {
          public:
 
@@ -38,33 +35,33 @@ namespace math
            typedef ::math::linear::vector::structure<scalar_name,3>  point3d_type, point_type, vector3d_type;
 
            typedef ::math::geometry::plane::ABCD3D<scalar_name>              ABCD3D_type;
-           typedef ::math::geometry::plane::no3d<scalar_name>                  no3d_type, this_type;
+           typedef ::math::geometry::plane::noNd<scalar_name,3>                no3d_type, this_type;
            typedef ::math::geometry::plane::parametric3d<scalar_name>  parametric3d_type;
            typedef ::math::geometry::plane::three<scalar_name>                three_type;
 
         public:
-           no3d()
+           noNd()
             {
             }
 
-           no3d( point3d_type const& origin, point3d_type const& normal )
+           noNd( point3d_type const& origin, point3d_type const& normal )
             :m_origin( origin )
             ,m_normal( normal )
             {
             }
 
         public:
-           explicit no3d( ABCD3D_type const& abcd )
+           explicit noNd( ABCD3D_type const& abcd )
             {
              *this = abcd;
             }
 
-           explicit no3d( parametric3d_type const& parametric )
+           explicit noNd( parametric3d_type const& parametric )
             {
              *this = parametric;
             }
 
-           explicit no3d( three_type const& three )
+           explicit noNd( three_type const& three )
             {
               *this = three;
             }
@@ -127,6 +124,12 @@ namespace math
         private:
           point_type m_normal;
         };
+
+      template
+       <
+         typename scalar_name
+       >
+       using no3d = noNd< scalar_name, 3 >;
 
      }
    }

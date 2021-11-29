@@ -44,16 +44,15 @@ namespace math
             {
              ::math::linear::vector::cross( m_l01, homogeneous_type{ a0[0], a0[1], 1 }, homogeneous_type{ a1[0], a1[1], 1 } );
 
-             ::math::linear::vector::cross( m_l12, homogeneous_type{ a1[0], a1[1], 1 }, homogeneous_type{ a2[0], a2[1], 1 } );
-
            //::math::linear::vector::cross( m_l23, homogeneous_type{ a2[0], a2[1], 1 }, homogeneous_type{ a3[0], a3[1], 1 } );
              ::math::linear::vector::cross( m_l23, homogeneous_type{ a3[0], a3[1], 1 }, homogeneous_type{ a2[0], a2[1], 1 } );
 
            //::math::linear::vector::cross( m_l30, homogeneous_type{ a3[0], a3[1], 1 }, homogeneous_type{ a0[0], a0[1], 1 } );
              ::math::linear::vector::cross( m_l30, homogeneous_type{ a0[0], a0[1], 1 }, homogeneous_type{ a3[0], a3[1], 1 } );
+             ::math::linear::vector::cross( m_l12, homogeneous_type{ a1[0], a1[1], 1 }, homogeneous_type{ a2[0], a2[1], 1 } );
 
-             ::math::linear::vector::cross( m_p30_12, m_l30, m_l12 );
              ::math::linear::vector::cross( m_p01_23, m_l01, m_l23 );
+             ::math::linear::vector::cross( m_p30_12, m_l30, m_l12 );
 
              ::math::linear::vector::cross( m_line, m_p30_12, m_p01_23 );
             }
@@ -107,10 +106,19 @@ namespace math
             }
 
          public:
-           homogeneous_type const& line()const  { return m_line;   }
+           homogeneous_type const& line()const   
+            {
+             return m_line; //!< vanish line in original form.
+            }
 
-           homogeneous_type const& first()const { return m_p30_12; } //!< first  = process( left, right )
-           homogeneous_type const& second()const{ return m_p01_23; } //!< second = process( down, up )
+           homogeneous_type const& first()const //!< First vanish point
+            {
+             return m_p30_12; //!< first  = process( left, right )
+            }
+           homogeneous_type const& second()const //!< Second vanish point
+            {
+             return m_p01_23;//!< second = process( down, up )
+            }
 
            homogeneous_type const& left()const { return m_l30; }
            homogeneous_type const& right()const{ return m_l12; }

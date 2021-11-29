@@ -1,7 +1,7 @@
 #ifndef math_geometry_projective_camera_va2h
 #define math_geometry_projective_camera_va2h
 
-// ::math::geometry::projective::camera::va2h( h_alpha, aspect )
+// ::math::geometry::projective::camera::va2h( v_alpha, aspect )
 
 //#include <utility>
 

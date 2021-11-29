@@ -1,3 +1,4 @@
+#include "opencv2/opencv.hpp"
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -5,7 +6,6 @@
 
 #include "math/math.hpp"
 
-#include "opencv2/opencv.hpp"
 
 
 int g_step=6;     // 
@@ -18,7 +18,7 @@ void initUI( )
   ::cv::createTrackbar( "step", "Command", &g_step, 8,  NULL );
  }
 
-void make( cv::Mat & frame )
+void monitor( cv::Mat & frame )
  {
      int width = frame.cols;
      int height = frame.rows;
@@ -53,12 +53,14 @@ int mainOCV( int argc, char *argv[] )
  {
   int frame_height = 600;
   int frame_width  = 800;
+  
+    Mat frame( frame_height,frame_width,CV_8UC3 );
 
  initUI( );
   cv::Mat frame( frame_height, frame_width,  CV_8UC1 );
   while( true )
    {
-    make( frame );
+    monitor( frame );
     cv::imshow( "Frame-frame", frame );
     char c = (char)cv::waitKey(1);
     if( c == 27 ) break;

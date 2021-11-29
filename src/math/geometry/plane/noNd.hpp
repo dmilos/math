@@ -13,13 +13,6 @@ namespace math
    {
     namespace plane
      {
-         
-      template
-       <
-         typename scalar_name
-       >
-       class no3d;
-
 
       template
        <

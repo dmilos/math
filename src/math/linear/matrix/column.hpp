@@ -1,7 +1,7 @@
 #ifndef Dh_math_linear_matrix_column
  #define Dh_math_linear_matrix_column
 
- // ::math::linear::matrix::column<scalar_name,width_number,height_number>
+ // ::math::linear::matrix::column/*<scalar_name,width_number,height_number>*/( column , matrix, index );
 
 #include "./structure.hpp"
 
@@ -32,3 +32,4 @@
   }
 
 #endif
+

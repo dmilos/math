@@ -11,5 +11,7 @@
 #include "./ha2d.hpp"
 #include "./d2hv.hpp"
 
+#include "./focus/focus.hpp"
+
 #include "./projection.hpp"
 #include "./principal.hpp"

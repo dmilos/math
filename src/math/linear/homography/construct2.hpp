@@ -196,6 +196,39 @@ namespace math
          return true;
         }
 
+      template<  typename scalar_name >
+       bool constructA
+        (
+          ::math::linear::homography::structure<scalar_name,2> & result
+         ,::math::linear::vector::structure< scalar_name, 2 >    const& a0, ::math::linear::vector::structure< scalar_name, 2 >    const& b0
+         ,::math::linear::vector::structure< scalar_name, 2 >    const& a1, ::math::linear::vector::structure< scalar_name, 2 >    const& b1
+         ,::math::linear::vector::structure< scalar_name, 2 >    const& a2, ::math::linear::vector::structure< scalar_name, 2 >    const& b2
+         ,::math::linear::vector::structure< scalar_name, 2 >    const& a3, ::math::linear::vector::structure< scalar_name, 2 >    const& b3
+        )
+        {
+          ::math::linear::homography::structure<scalar_name,2> hSd;
+          if( false == ::math::linear::homography::constructA( hSd, a0, a1, a2, a3  ) )
+           {
+            return false;
+           }
+
+          ::math::linear::homography::structure<scalar_name,2> hSi;
+          if( false == ::math::linear::matrix::invert( hSi, hSd ) )
+           {
+            return false;
+           }
+
+          ::math::linear::homography::structure<scalar_name,2> hT;
+          if( false == ::math::linear::homography::constructA( hT, b0, b1, b2, b3 ) )
+           {
+            return false;
+           }
+
+          ::math::linear::matrix::multiply( result, hT, hSi );
+
+          return true;
+        }
+
      }
    }
  }

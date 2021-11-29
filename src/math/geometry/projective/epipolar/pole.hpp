@@ -5,6 +5,8 @@
 
 #include "../camera/mobile.hpp"
 #include "../../../linear/affine/transform.hpp"
+#include "../../../linear/homography/structure.hpp"
+#include "../../../geometry/projective/camera/principal.hpp"
 
 
 namespace math
@@ -31,8 +33,11 @@ namespace math
              typedef ::math::linear::vector::point<scalar_name,3>   homogeneous_type;
 
              typedef ::math::linear::affine::structure< scalar_name, 3 >       affine_type;
+             typedef ::math::linear::homography::structure<scalar_name,2>  homography_type;
 
              typedef ::math::geometry::projective::camera::mobile< scalar_name, size_name > mobile_type;
+
+             typedef ::math::geometry::projective::epipolar::pole<scalar_name,size_name> this_type;
 
            public:
              static bool left( point_type & result, affine_type const& left_to_local, point_type const& right_eye/* in world coord */ )
@@ -42,18 +47,21 @@ namespace math
 
              static bool left( homogeneous_type & result, mobile_type const& sinister/*left*/, mobile_type const& dexter/*right*/ )
               {
-               return left( result, sinister.to_local(), dexter.to_world().vector() );
+               return this_type::left( result, sinister.to_local(), dexter.to_world().vector() );
               }
-
 
              static bool right( point_type & result, affine_type const& right_to_local, point_type const& left_eye /* in world coord */ )
               {
                ::math::linear::affine::transform( result, right_to_local, left_eye );
               }
 
-             static bool right( homogeneous_type & result, mobile_type const& sinister/*left*/, mobile_type const& dexter/*right*/ )
+             static void self( homogeneous_type & result, homography_type const& h )
               {
-               return left( result, dexter.to_local(), sinister.to_world().vector() );
+               ::math::geometry::projective::camera::principal<double>  princip;
+
+               princip.process( h );
+
+               math::linear::vector::cross( result, princip.horizon().array(), princip.axis().array() );
               }
 
           };

@@ -20,9 +20,6 @@ namespace math
       template < typename scalar_name >
        class ABCD3D;
 
-      template< typename scalar_name >
-        class no3d;
-
       template < typename scalar_name >
        class parametric3d;
 

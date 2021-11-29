@@ -23,7 +23,9 @@ namespace math
      {
       namespace camera
        {
-
+        /*
+         "Camera Calibration using Vanishing Points", Paul Beardsley David Murray, BMVC 1992
+        */
         template< typename scalar_name >
          class principal //!< calculate principal axis.
           {
@@ -80,14 +82,14 @@ namespace math
                return m_horizon;
               }
            private:
-             ABC_type m_horizon;  //!< in screen cordinates
+             ABC_type m_horizon;  //!< in screen coordinates
            public:
              ABC_type const& axis()const
               {
                return m_axis;
               }
            private:
-             ABC_type m_axis;     //!< in screen cordinates
+             ABC_type m_axis;     //!< in screen coordinates
            private:
              homography_type m_space2display, m_space2displayT;
              homography_type m_display2space, m_display2spaceT;
