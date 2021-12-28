@@ -1,7 +1,7 @@
-#ifndef math_geometry_plane_ABCD2D
-#define math_geometry_plane_ABCD2D
+#ifndef math_geometry_plane_ABCD3D
+#define math_geometry_plane_ABCD3D
 
-// ::math::geometry::plane::ABCD2D<scalar_name>
+// ::math::geometry::plane::ABCD3D<scalar_name>
 #include <array>
 #include "../../linear/vector/structure.hpp"
 

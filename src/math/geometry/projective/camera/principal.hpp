@@ -67,8 +67,8 @@ namespace math
                 auto A = constant[0] * m_horizon.A();
                 auto B = constant[1] * m_horizon.B();
 
-                auto D = combined[0][2]* m_horizon.A();
-                auto E = combined[1][2]* m_horizon.B();
+                auto D = combined[0][2] * m_horizon.A();
+                auto E = combined[1][2] * m_horizon.B();
 
                 auto alpha = -( A + B )/ ( D + E );
 

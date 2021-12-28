@@ -32,9 +32,9 @@ namespace math
            scalar_name
            unit2d
             (
-             scalar_name const& Z   //!< position on y=focus screen
+             scalar_name const& Z   //!< position on y = focus screen
             )
-            { //! box =[ ( -1, focus ), ( +1, focus + 1  ) ]
+            { //! box =[ ( -1, focus ), ( +1, focus + 1 ) ]
              scalar_name focus = Z / ( scalar_name(1) - Z );
              return focus;
             }

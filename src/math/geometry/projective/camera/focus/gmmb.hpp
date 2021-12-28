@@ -45,6 +45,7 @@ namespace math
                 }
 
              public:
+             // four points on some quad
                bool process( scalar_type & focus, uv_type const& O, uv_type const& X, uv_type const& Y, uv_type const& z, scalar_type const& epsilon = 1e-4  )
                 {
                  m_horizon.process( O, X, z, Y );
@@ -77,7 +78,6 @@ namespace math
                    return false;
                   }
                  focus = sqrt( fabs( focus ) );
-                 // auto vertical = 2 * acos( focus / sqrt( 1 + focus * focus ) );
                  return true;
                 }
 

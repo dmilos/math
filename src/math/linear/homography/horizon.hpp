@@ -20,10 +20,22 @@
          (
            ::math::linear::vector::structure<      scalar_name, 3 >         & result_in_display
           ,::math::linear::homography::structure<  scalar_name, 2 >    const& display2space
-          )
+         )
          {
-          return ::math::geometry::direction::ABC2D<>( display2space[2][0], display2space[2][1],  display2space[2][2] );
+          return ::math::geometry::direction::ABC2D<>( display2space[2][0], display2space[2][1], display2space[2][2] );
          }
+
+       template<  typename scalar_name >
+        ::math::geometry::direction::ABC2D<scalar_name> horizon_invert
+         (
+           ::math::linear::vector::structure<      scalar_name, 3 >         & result_in_display
+          ,::math::linear::homography::structure<  scalar_name, 2 >    const& space2display
+         )
+         {
+          ::math::linear::homography::structure<  scalar_name, 2 > display2space;
+          ::math::linear::matrix::invert( display2space, space2display );
+          return ::math::linear::homography::horizon( result_in_display, display2space );
+        }
 
       }
     }

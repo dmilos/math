@@ -57,7 +57,7 @@ namespace math
              auto nn = ::math::linear::vector::dot( left.normal(), right.normal() );
 
              auto sD = ( nL * nR - nn*nn );
-             if( ( -epsilon  < sD ) && (sD < epsilon ) )
+             if( ( -epsilon  < sD ) && ( sD < epsilon ) )
               {
                return false;
               }

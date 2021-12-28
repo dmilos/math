@@ -20,9 +20,9 @@ namespace math
          std::pair<scalar_name,scalar_name>
          d2hv
           (
-            scalar_name const& alpha //!< diagonal angle of view
+            scalar_name const& alpha             //!< diagonal angle of view
            ,scalar_name const& horizontal_scale  //!< 16
-           ,scalar_name const& vertical_scale  //!<  9
+           ,scalar_name const& vertical_scale    //!<  9
           )
           { //! See also http://therandomlab.blogspot.com/2013/03/logitech-c920-and-c910-fields-of-view.html
            scalar_name diagonal = sqrt( horizontal_scale* horizontal_scale + vertical_scale * vertical_scale );

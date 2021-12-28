@@ -20,8 +20,8 @@ namespace math
          scalar_name
          va2d
           (
-            scalar_name const& vertical_alpha //!< vertical angle of view
-           ,scalar_name const& aspect  //!< Aspect ration width::height .e.g. 16:9
+            scalar_name const& vertical_alpha  //!< vertical angle of view
+           ,scalar_name const& aspect          //!< Aspect ration width::height .e.g. 16:9
           )
           {
            scalar_name vertical_scale   = scalar_name(2) * tan( vertical_alpha / scalar_name(2) );

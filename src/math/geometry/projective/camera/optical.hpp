@@ -69,7 +69,7 @@ namespace math
               }
 
            public:
-             //!!! Qube camera([-1,-1]x[1,1]) to display(pixel)
+             //!!! Cube camera([-1,-1]x[1,1]) to display(pixel)
              // (0,0) ->( -1, -1 ) ; (m_resolution[0],m_resolution[1]) ->( +1, +1 ) ;
              template< typename number_name >
               vector_type< number_name > xy( uv_type const& uv )const

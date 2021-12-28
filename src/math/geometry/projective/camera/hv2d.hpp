@@ -20,12 +20,12 @@ namespace math
          scalar_name
          hv2d
           (
-            scalar_name const& h_alpha //!< horizontal angle of view
-           ,scalar_name const& v_alpha //!< vertical   angle of view
+            scalar_name const& horizontal_alpha //!< horizontal angle of view
+           ,scalar_name const& vertical_alpha   //!< vertical   angle of view
           )
           {
-           scalar_name h_scale = scalar_name(2) * tan( h_alpha / scalar_name(2) );
-           scalar_name v_scale = scalar_name(2) * tan( v_alpha / scalar_name(2) );
+           scalar_name h_scale = scalar_name(2) * tan( horizontal_alpha / scalar_name(2) );
+           scalar_name v_scale = scalar_name(2) * tan( vertical_alpha   / scalar_name(2) );
 
            scalar_name diagonal = sqrt( h_scale* h_scale  +  v_scale * v_scale );
 

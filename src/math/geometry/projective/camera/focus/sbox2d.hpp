@@ -41,7 +41,7 @@ namespace math
              ,scalar_name const& depth       //!< depth of box
              ,scalar_name const& p           //!< position on y=focus screen
             )
-            {
+            { //! box =[ ( -base/2, focus ), ( +base/2, focus + depth) ]
              scalar_name focus = p * depth / ( base/scalar_name(2) - p );
              return focus;
             }
