@@ -1,5 +1,5 @@
 #ifndef math_geometry_projective_anharmonic
-#define math_geometry_projective_plane
+#define math_geometry_projective_anharmonic
 
 // ::math::geometry::projective::anharmonic::value( A, B, C, D )
 // ::math::geometry::projective::anharmonic::D( A, B, C, coefficient )
