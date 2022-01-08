@@ -75,9 +75,9 @@ namespace math
           ::math::geometry::plane::no3d<scalar_name>         & no3d
          ,::math::linear::vector::point<scalar_name, 2> const& a0 //!< (0,0) point
          ,::math::linear::vector::point<scalar_name, 2> const& a1 //!< (1,0) point
-         ,::math::linear::vector::point<scalar_name, 2> const& a2 //!< (1,1) point
-         ,::math::linear::vector::point<scalar_name, 2> const& a3 //!< (0,1) point
-        )
+         ,::math::linear::vector::point<scalar_name, 2> const& a2 //!< (0,1) point
+         ,::math::linear::vector::point<scalar_name, 2> const& a3 //!< (1,1) point
+        ) //!< input is standard zig-zag
         {
          typedef ::math::geometry::direction::ABC2D<scalar_name>                abc2d_type;
          typedef ::math::linear::vector::point<scalar_name, 3>                point3D_type;
@@ -85,7 +85,7 @@ namespace math
          typedef ::math::geometry::projective::camera::pinhole<scalar_name>   pinhole_type;
 
          horizon_type vanish;
-         vanish.process( a0, a1, a2, a3 );
+         vanish.process( a0, a1, a3, a2 ); //!< not zig-zag
 
          point3D_type origin = pinhole_type::reproject( a0 );
 

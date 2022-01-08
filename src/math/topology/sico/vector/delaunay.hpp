@@ -1,7 +1,8 @@
 #ifndef math_topology_sico_delaunay
 #define math_topology_sico_delaunay
 
-// ::math::topology::sico::delaunay<data_name>
+// ::math::topology::sico::delaunay2<data_name>
+// ::math::topology::sico::delaunay3<data_name>( sico )
 
 #include <vector>
 #include <array>
