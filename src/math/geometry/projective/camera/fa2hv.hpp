@@ -1,7 +1,7 @@
 #ifndef math_geometry_projective_camera_fa2hv
 #define math_geometry_projective_camera_fa2hv
 
-// ::math::geometry::projective::camera::fa2hv( alpha, horizontal_scale, v_scale )
+// ::math::geometry::projective::camera::fa2hv( focus, aspect )
 
 //#include <utility>
 

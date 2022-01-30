@@ -1,7 +1,7 @@
 #ifndef math_polynomial_quadric_solve_HPP_
  #define math_polynomial_quadric_solve_HPP_
 
-// ::math::polynomial::solve::quadric::general<scalar_name>( root, coefficient, epsilon = 1e-6 )
+// ::math::polynomial::quadric::solve::general<scalar_name>( root, coefficient, epsilon = 1e-6 )
 
 #include "../linear/solve.hpp"
 

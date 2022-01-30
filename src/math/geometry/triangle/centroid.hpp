@@ -14,18 +14,20 @@
       {
 
 
-       template<  typename scalar_name >
+       template<  typename scalar_name, unsigned dimension_number >
         void
         centroid
          (
-           ::math::linear::vector::point<scalar_name, 2 >      & result
-          ,::math::linear::vector::point<scalar_name, 2 > const& a0
-          ,::math::linear::vector::point<scalar_name, 2 > const& a1
-          ,::math::linear::vector::point<scalar_name, 2 > const& a2
+           ::math::linear::vector::point<scalar_name, dimension_number >      & result
+          ,::math::linear::vector::point<scalar_name, dimension_number > const& a0
+          ,::math::linear::vector::point<scalar_name, dimension_number > const& a1
+          ,::math::linear::vector::point<scalar_name, dimension_number > const& a2
           )
          {
-          result[0] = ( a0[0] + a1[0] + a2[0] ) / scalar_name(3);
-          result[1] = ( a0[1] + a1[1] + a2[1] ) / scalar_name(3);
+          result = a0;
+          ::math::linear::vector::addition( result, a1 );
+          ::math::linear::vector::addition( result, a2 );
+          ::math::linear::vector::scale( result, scalar_name(1) / scalar_name(3) );
          }
 
       }

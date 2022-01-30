@@ -8,6 +8,7 @@
 
 
 
+
  namespace math
   {
    namespace geometry
@@ -19,13 +20,11 @@
         scalar_name
         inradius
          (
-           ::math::geometry::triangle::structure<scalar_name, 3 > const& t
+           scalar_name const& a
+          ,scalar_name const& b
+          ,scalar_name const& c
           )
          {
-          scalar_name a = ::math::linear::vector::distance( t[0], t[1] );
-          scalar_name b = ::math::linear::vector::distance( t[0], t[2] );
-          scalar_name c = ::math::linear::vector::distance( t[1], t[2] );
-
           scalar_name f0 =  +a + b + c;
           scalar_name fA =  -a + b + c;
           scalar_name fB =  +a - b + c;
@@ -34,6 +33,19 @@
           return scalar_name(0.5) * sqrt( ( fA * fB * fC ) / f0 );
          }
 
+       template<  typename scalar_name, unsigned dimension_number >
+        scalar_name
+        inradius
+         (
+           ::math::geometry::triangle::structure<scalar_name, dimension_number > const& t
+          )
+         {
+          scalar_name a = ::math::linear::vector::distance( t[0], t[1] );
+          scalar_name b = ::math::linear::vector::distance( t[0], t[2] );
+          scalar_name c = ::math::linear::vector::distance( t[1], t[2] );
+
+          return ::math::geometry::triangle::inradius( a, b, c );
+         }
       }
     }
   }

@@ -5,3 +5,6 @@
 #include "./circumradius.hpp"
 #include "./inradius.hpp"
 #include "./barycentric.hpp"
+#include "./angle.hpp"
+#include "./height.hpp"
+#include "./valid.hpp"

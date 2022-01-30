@@ -4,8 +4,9 @@
 
 #include "math/math.hpp"
 
-using namespace std;
+#include "math/geometry/projective/camera/focus/wand2d.hpp"
 
+using namespace std;
 
 void anharmonic( )
  {
@@ -41,6 +42,7 @@ void anharmonic( )
   std::cout << "c: " << ::math::geometry::projective::anharmonic::c<double>( 7, 8,    ::math::geometry::projective::anharmonic::value<double>( 7, 8, 6  ) ) << std::endl; 
 
  }
+
 
 int main( int argc, char *argv[] )
  {

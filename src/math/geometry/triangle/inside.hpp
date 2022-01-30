@@ -37,7 +37,7 @@
 
           return    ( scalar_name(0) < p[0] )
                  && ( scalar_name(0) < p[1] )
-                 && (  ( p[0] + p[1] )  <  scalar_name(1) );
+                 && ( ( p[0] + p[1] ) <  scalar_name(1) );
           }
 
       }

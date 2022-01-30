@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\check\geometry\projective\test.cpp">
+    <ClCompile Include="..\..\..\check\geometry\projective\camera\focus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

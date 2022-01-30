@@ -18,7 +18,7 @@
      namespace tetrahedron
       {
 
-       template< typename scalar_name, unsigned dimension_number   >
+       template< typename scalar_name, unsigned dimension_number >
         inline
         bool
         barycentric
@@ -29,10 +29,10 @@
           ,scalar_name const& epsilon = 1e-6
          )
          {
-          auto whole = ::math::geometry::tetrahedron::volume( tetrahedron_param );
+          auto volume = ::math::geometry::tetrahedron::volume( tetrahedron_param );
           auto sub = tetrahedron_param;
 
-          if( ( -epsilon < whole ) && ( whole < epsilon ) )
+          if( ( -epsilon < volume ) && ( volume < epsilon ) )
            {
             return false;
            }
@@ -40,7 +40,7 @@
           for( std::size_t index=0; index < tetrahedron_param.size(); ++index )
            {
             sub[index] = point_param;
-            result_param[index] = ::math::geometry::tetrahedron::volume( sub ) / whole;
+            result_param[index] = ::math::geometry::tetrahedron::volume( sub ) / volume;
             sub[index] = tetrahedron_param[index];
            }
 

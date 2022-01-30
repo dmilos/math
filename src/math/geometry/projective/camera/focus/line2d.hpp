@@ -1,7 +1,7 @@
 #ifndef math_geometry_projective_camera_focus_wand2d
 #define math_geometry_projective_camera_focus_wand2d
 
-// ::math::geometry::projective::camera::focus::wand2d( f, alpha, origin, X, Y )
+// ::math::geometry::projective::camera::focus::line2d( focus, A, B, length, distance )
 
 //#include <utility>
 
@@ -13,7 +13,7 @@ namespace math
    {
     namespace projective
      {
-      namespace cameraf
+      namespace camera
        {
         namespace focus
          {
