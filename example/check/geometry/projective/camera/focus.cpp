@@ -160,6 +160,34 @@ int main( int argc, char *argv[] )
  ::math::geometry::projective::camera::focus::wand2d<double>( focus, -380/640.0, 380/640.0, 268, 268, 200 );
   std::cout << "Fh: " << focus << " ~ " << ::math::geometry::rad2deg( ::math::geometry::projective::camera::f2h( focus ) ) << std::endl;
 
+ ::math::geometry::projective::camera::focus::wand2d<double>( focus, -1, 1, 225, 180, 229 );
+  std::cout << "Fh: " << focus << " ~ " << ::math::geometry::rad2deg( ::math::geometry::projective::camera::f2h( focus ) ) << std::endl;
+
+  std::cout << " --- " << std::endl;
+
+
+  double gamma;
+  ::math::geometry::triangle::angle_gamma<double>( gamma, 225, 180, 229 );  std::cout << "Fh: " << ::math::geometry::rad2deg( gamma ) <<  std::endl;
+
+  ::math::geometry::triangle::angle_gamma<double>( gamma, 225, 180, 228 );  std::cout << "Fh: " << ::math::geometry::rad2deg( gamma ) <<  std::endl;
+  ::math::geometry::triangle::angle_gamma<double>( gamma, 225, 180, 230 );  std::cout << "Fh: " << ::math::geometry::rad2deg( gamma ) <<  std::endl;
+
+  ::math::geometry::triangle::angle_gamma<double>( gamma, 225, 179, 228 );  std::cout << "Fh: " << ::math::geometry::rad2deg( gamma ) <<  std::endl;
+  ::math::geometry::triangle::angle_gamma<double>( gamma, 225, 180, 229 );  std::cout << "Fh: " << ::math::geometry::rad2deg( gamma ) <<  std::endl;
+  ::math::geometry::triangle::angle_gamma<double>( gamma, 225, 181, 230 );  std::cout << "Fh: " << ::math::geometry::rad2deg( gamma ) <<  std::endl;
+
+  ::math::geometry::triangle::angle_gamma<double>( gamma, 224, 179, 228 );  std::cout << "Fh: " << ::math::geometry::rad2deg( gamma ) <<  std::endl;
+  ::math::geometry::triangle::angle_gamma<double>( gamma, 225, 180, 229 );  std::cout << "Fh: " << ::math::geometry::rad2deg( gamma ) <<  std::endl;
+  ::math::geometry::triangle::angle_gamma<double>( gamma, 226, 181, 230 );  std::cout << "Fh: " << ::math::geometry::rad2deg( gamma ) <<  std::endl;
+
+  ::math::geometry::triangle::angle_gamma<double>( gamma, 225, 179, 229 );  std::cout << "Fh: " << ::math::geometry::rad2deg( gamma ) <<  std::endl;
+  ::math::geometry::triangle::angle_gamma<double>( gamma, 225, 180, 229 );  std::cout << "Fh: " << ::math::geometry::rad2deg( gamma ) <<  std::endl;
+  ::math::geometry::triangle::angle_gamma<double>( gamma, 225, 181, 229 );  std::cout << "Fh: " << ::math::geometry::rad2deg( gamma ) <<  std::endl;
+
+  ::math::geometry::triangle::angle_gamma<double>( gamma, 224, 180, 229 );  std::cout << "Fh: " << ::math::geometry::rad2deg( gamma ) <<  std::endl;
+  ::math::geometry::triangle::angle_gamma<double>( gamma, 225, 180, 229 );  std::cout << "Fh: " << ::math::geometry::rad2deg( gamma ) <<  std::endl;
+  ::math::geometry::triangle::angle_gamma<double>( gamma, 226, 180, 229 );  std::cout << "Fh: " << ::math::geometry::rad2deg( gamma ) <<  std::endl;
+
 
   return EXIT_SUCCESS;
  }

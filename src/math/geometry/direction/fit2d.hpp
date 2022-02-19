@@ -23,12 +23,11 @@ namespace math
        struct fit2D
         {
          public:
-
            typedef scalar_name scalar_type;
-           typedef ::math::linear::vector::point<scalar_name,2>    point_type;
+           typedef ::math::linear::vector::point<scalar_name,2>       point_type;
            typedef ::math::geometry::direction::ABC2D<scalar_type>    line_type;
 
-           typedef std::vector< point_type > cloud_type;
+           typedef std::vector< point_type >   cloud_type;
            typedef std::vector< scalar_type > sample_type;
 
            static bool process( line_type & line, cloud_type const& cloud )

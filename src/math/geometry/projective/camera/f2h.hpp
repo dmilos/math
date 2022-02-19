@@ -21,8 +21,8 @@ namespace math
          f2h
           (
             scalar_name const& focus    //!< focus
-          )//! Display1D [ -1, +1 ]
-          {
+          )//! Display1D [ -1, +1 ] //!< 1D display viewed under horizontal angle
+          { //!< convert focus to angle
            return scalar_name(2) * atan( scalar_name(1) / focus );
           }
 

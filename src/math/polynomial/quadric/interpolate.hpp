@@ -1,7 +1,7 @@
-#ifndef math_polynomial_interpolate_quadric_HPP_
- #define math_polynomial_interpolate_quadric_HPP_
+#ifndef math_polynomial_quadric_interpolate_HPP_
+ #define math_polynomial_quadric_interpolate_HPP_
 
- // ::math::polynomial::solve::quadric<scalar_name>( coefficient, x, y )
+ // ::math::polynomial::quadric::interpolate<scalar_name>( coefficient, x, y )
 
 
 

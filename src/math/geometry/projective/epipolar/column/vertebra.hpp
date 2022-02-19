@@ -7,6 +7,10 @@
 #include "./rotation.hpp"
 #include "./curvature.hpp"
 
+
+#include "../../../../geometry/direction/parametric.hpp"
+#include "../../../../linear/vector/vector.hpp"
+
 namespace math
  {
   namespace geometry
@@ -19,17 +23,6 @@ namespace math
          {
 
           template< typename scalar_name >
-           scalar_name vertebra
-            (
-              scalar_name const& parameter //!< expect value between -1 and +1
-             ,scalar_name const& curvature
-            )
-            { // TODO
-             return parameter;
-             return curvature * ( scalar_name(1) - sqrt( scalar_name(1) - parameter*parameter ) );
-            }
-
-          template< typename scalar_name >
            ::math::linear::vector::structure<scalar_name,2> vertebra
             (
               scalar_name const& parameter //!< expect value between -1 and +1
@@ -37,11 +30,22 @@ namespace math
              ,scalar_name const& angle
             )
             {
-             ::math::linear::vector::structure<scalar_name,2> result;
-             result[0] = 0;
-             result[1] = ::math::geometry::projective::epipolar::column::vertebra( parameter, curvature );
-             ::math::linear::vector::rotate( result, angle );
-             return result;
+             ::math::geometry::direction::parametric< scalar_name, 2 > parametric;
+
+             ::math::linear::vector::fill( parametric.origin(),    0 );
+             ::math::linear::vector::load( parametric.direction(), cos( angle + ::math::constants::PHI_half ), sin( angle + ::math::constants::PHI_half ) );
+
+             scalar_name X = fabs( parametric.direction()[0] );
+             scalar_name Y = fabs( parametric.direction()[1] );
+
+             ::math::linear::vector::scale( parametric.direction(), scalar_name(1)/( X < Y ? Y : X ) );
+
+             return parametric.point( parameter );
+
+             // TODO ::math::linear::vector::structure<scalar_name,2> result;
+             // TODO result[0] = 0;
+             // TODO result[1] = ::math::geometry::projective::epipolar::column::vertebra( parameter, curvature );
+             // TODO ::math::linear::vector::rotate( result, angle );
             }
 
           template< typename scalar_name >

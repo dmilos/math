@@ -131,7 +131,8 @@ namespace math
          ,::math::geometry::plane::no3d <scalar_name>          const& no3d //!< Note: do not forget to adjust origin() after this call
          ,::math::linear::vector::structure<scalar_name, 2>    const& x //!< point on X axis in y=(0,1,0) plane coordinate
          ,::math::linear::vector::structure<scalar_name, 2>    const& y //!< point on Y axis in y=(0,1,0) plane coordinate
-         ,scalar_name const& unit
+         ,scalar_name const& width             //!< Expected length of X axis
+         ,scalar_name const& height            //!< Expected length of Y axis
         )
         {
          if( false == ::math::geometry::projective::plane( parametric, no3d, x, y ) )
@@ -139,18 +140,16 @@ namespace math
            return false;
           }
 
-         auto meter_x = ::math::linear::vector::length( parametric.x() );
-         auto meter_y = ::math::linear::vector::length( parametric.y() );
+         auto scale_width  = width  / ::math::linear::vector::length( parametric.x() );
+         auto scale_height = height / ::math::linear::vector::length( parametric.y() );
 
-         auto meter_average = ( meter_x + meter_y)/scalar_name(2);
+         auto scale_average = ( scale_width + scale_height ) / scalar_name(2);
 
-         auto scale =  unit / meter_average; //!< Common ground between length of X and Y
+         ::math::linear::vector::scale<scalar_name>( parametric.x(),      scale_average );
+         ::math::linear::vector::scale<scalar_name>( parametric.y() ,     scale_average );
+         ::math::linear::vector::scale<scalar_name>( parametric.origin(), scale_average );
 
-         ::math::linear::vector::scale<scalar_name>( parametric.x(),      scale );
-         ::math::linear::vector::scale<scalar_name>( parametric.y() ,     scale );
-         ::math::linear::vector::scale<scalar_name>( parametric.origin(), scale );
-
-         //auto dot = ::math::linear::linear::dot( parametric.x() , parametric.y() );
+         //debug auto dot = ::math::linear::linear::dot( parametric.x() , parametric.y() );
 
          return true;
         }

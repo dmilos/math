@@ -7,7 +7,10 @@
 #include "math/math.hpp"
 
 
-//#include "pnm/pnm.hpp"
+#if USE_PNM
+#include "pnm/pnm.hpp"
+#endif
+
 
 
 void normal()
@@ -70,14 +73,13 @@ int main( int argc, char *argv[] )
   image.resize( height * width, 0 );
   double lo_x = -4;
   double hi_x = +4;
-  double lo_y = -4;
-  double hi_y = +4;
+  double lo_y = -2;
+  double hi_y = +2;
 
+    double y;
   for( int i=0; i< width; ++i)
    {
     double x = ::math::function::any_to_any<double>( i, 0, width, lo_x, hi_x );
-
-    double y;
 
     y=0;
     putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x, hi_y }, {x,y} );
@@ -91,25 +93,25 @@ int main( int argc, char *argv[] )
     y = ::math::function::distribution::normal<double>( x );
     putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x, hi_y }, {x,y} );
 
-    y = ::math::function::distribution::normal<double>( x, sqrt( 2 * 3.141 ), 0 );
+    y = ::math::function::distribution::normal<double>( x, sqrt(2*3.141),0);
     putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x, hi_y }, {x,y} );
-
-    y = ::math::function::distribution::normal<double>( x, 0.9, 0 );
+    
+    y = ::math::function::distribution::normal<double>( x, 0.9,     0 );
     putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x, hi_y }, {x,y} );
-
+    
     y = ::math::function::distribution::normal<double>( x, 0.8, 0 );
     putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x, hi_y }, {x,y} );
-
+    
     y = ::math::function::distribution::normal<double>( x, 0.7, -0.1 );
     putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x, hi_y }, {x,y} );
-
+    
     y = ::math::function::distribution::normal<double>( x, 0.6, 0.1 );
     putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x, hi_y }, {x,y} );
-
-    y = -1*::math::function::distribution::normal_cumulative<double>( x, 0.8 ) + ::math::function::distribution::normal_cumulative_ZS<double>( x, 0.8 );
-    putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x, hi_y }, {x,y} );
-
-    y = -1*::math::function::distribution::normal_cumulative<double>( x, 0.7 ) + ::math::function::distribution::normal_cumulative_ZS<double>( x, 0.7 );
+    
+    y   = -1*::math::function::distribution::normal_cumulative<double>( x, 0.8 ) + ::math::function::distribution::normal_cumulative_ZS<double>( x, 0.8 );  
+    putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x,hi_y},{x,y});
+                    
+y=-1*::math::function::distribution::normal_cumulative<double>(x,0.7)+::math::function::distribution::normal_cumulative_ZS<double>(x,0.7);
     putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x, hi_y }, {x,y} );
 
     y = -1*::math::function::distribution::normal_cumulative<double>( x, 0.6 ) + ::math::function::distribution::normal_cumulative_ZS<double>( x, 0.6 );

@@ -13,4 +13,5 @@
 @cl /EHsc  -I../../../src evaluate.cpp
 @cl /EHsc  -I../../../src normalize.cpp
 @cl /EHsc  -I../../../src optimize.cpp
+@cl /EHsc  -I../../../src fit.cpp
 @

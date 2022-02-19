@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+ <head>
+  <title>Naive Homography Construction</title>
+ </head>
+ <body>
+  <h1 align="center">Naive Homography Construction</h1>
+
+ <dl>
+
+ <dt>  <h3>TOC</h3></dt>
+ <dd>
+  <ul>
+      <li>Description</li>
+      <li>Links</li>
+      <li>Nomenclature</li>
+      <li>Bricks
+        <ul>
+            <li>Identical transformation</li>
+            <li>Translation</li>
+            <li>Rotation</li>
+            <li>Scale</li>
+            <li>Skew</li>
+            <li>Projective</li>
+        </ul>
+      <li>Building </li>
+      <li>Assembling all transformation in one.</li>
+  </ul>
+
+ </dd>
+
+
+  <dt><h3>Description</h3></dt>
+   <dd> Computing the plane to plane homography without fancy thing such as inversion of big matrix or eugen vectors values.
+   In here it will be present method in step-by-step manner where every step has some meaning.
+
+   </dd>
+  <dt><h3>Nomenclature</h3></dt>
+   <dd>
+     <dl>
+        <dt><h4>2D Euclid vector</h4></dt>
+        <dd>
+         Uredjeni par od dva realna broja.<br>
+        <b>p</b> = ( x, y ) = [x,y] <sup>T</sup></dd>
+        <dt><h4>2D Homography vector</h4></dt>
+        <dd>
+                 Uredjeni par od tri realna broja.<br>
+        <b>p</b> = ( x, y, z ) = [x,y, z] <sup>T</sup></dd>
+        </dd>
+        <dt><h4>2D Euclid matrix</h4></dt>
+        <dd> 2x2 table of real number
+            <table>
+              <tr> <td rowspan=2 > [ </td> <td> a <sub>00</sub> </td> <td> a <sub>01</sub> </td> <td rowspan=2 > ] </td> <td> </tr>
+              <tr>                         <td> a <sub>11</sub> </td> <td> a <sub>11</sub> </td>  </tr>
+            </table>
+             Note: Indexing start from zero.
+        </dd>
+        <dt><h4>2D Homography matrix</h4></dt>
+        <dd>
+            <table>
+              <tr> <td rowspan=3 > [ </td> <td> a <sub>00</sub> </td> <td> a <sub>01</sub> </td> <td> a <sub>02</sub> </td> <td rowspan=3 >  ] </td> <td> </tr>
+              <tr>                         <td> a <sub>10</sub> </td> <td> a <sub>11</sub> </td> <td> a <sub>12</sub> </td> </tr>
+              <tr>                         <td> a <sub>20</sub> </td> <td> a <sub>21</sub> </td> <td> a <sub>22</sub> </td> </tr>
+            </table>
+        </dd>
+     </dl>
+
+
+   </dd>
+  <dt><h3>Bricks</h3></dt>
+   <dd>
+     ... or what we need to assemble  to get our matrix.
+
+     <dl>
+       <dt><h4>Identical transformation</h4></dt>
+       <dd>
+        Nothing happens.
+       </dd>
+       <dt><h4>Translation</h4></dt>
+       <dd>
+        Move for some vector.
+       </dd>
+       <dt><h4>Rotation</h4></dt>
+       <dd>
+         Mathematically, a rotation is a rigid body movement which, unlike a translation, keeps a point fixed. This definition applies to rotations within both two and three dimensions (in a plane and in space, respectively.)<br>
+
+         Wikipedia link: https://en.wikipedia.org/wiki/Rotation <br>
+
+        2D rotation: <br>
+
+        :<math>A = <br>
+        \begin{bmatrix} <br>
+          \cos \theta & -\sin \theta\\ <br>
+          \sin \theta &  \cos \theta <br>
+        \end{bmatrix} <br>
+        </math>         <br>
+
+
+       </dd>
+
+       <dt><h4>Scale</h4></dt>
+       <dd>
+
+            <table>
+              <tr> <td rowspan=3 > [ </td> <td> X </td> <td> 0 </td> <td rowspan=3 >  ] </td> <td> </tr>
+              <tr>                         <td> 0 </td> <td> Y </td> </tr>
+            </table>
+
+            Where X, Y &in;  &real;
+
+       </dd>
+       <dt><h4>Skew/Shear</h4></dt>
+       <dd>
+
+            <table>
+              <tr> <td rowspan=3 > [ </td> <td> 1 </td> <td> ctg( &alpha; ) </td> <td rowspan=3 >  ] </td> <td> </tr>
+              <tr>                         <td> 0 </td> <td> 1 </td> </tr>
+            </table>
+
+            <table>
+              <tr> <td rowspan=3 > [ </td> <td> 1 </td> <td> 0 </td> <td rowspan=3 >  ] </td> <td> </tr>
+              <tr>                         <td> ctg( &alpha; ) </td> <td> 1 </td> </tr>
+            </table>
+
+            Where &alpha; &in;  &real;
+
+       </dd>
+       <dt><h4>Perspective</h4></dt>
+       <dd>
+        (0,0) -> (0,0);<br>
+        (1,0) -> (1,0);<br>
+        (0,1) -> (0,1);<br>
+        (1,1) -> (T,T);<br>
+
+       </dd>
+
+     </dl>
+
+
+   </dd>
+
+  <dt><h3>Building</h3></dt>
+   <dd>
+     ... or what we need to assemble  to get our matrix.
+   </dd>
+
+   <dt>
+    <ul>
+      <li> Translate </li>
+      <li>  </li>
+      <li> </li>
+      <li> </li>
+      <li> </li>
+      <li> </li>
+    </ul>
+   
+   <h3></h3></dt>
+    <dd>
+
+      Here is c++ code ready for use e.g. copy/paste.<br>
+      Note: <br> - This is not speed champion.<br> - Can be compete for accuracy, but this is still under investigation.<br>
+
+
+    </dd>
+
+ </dl>
+
+
+ </body>
+</html>
+

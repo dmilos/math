@@ -2,7 +2,8 @@
  #define math_geometry_interval_confine_hpp_
 
 // ::math::geometry::interval::confine( result, point, interval )
-// ::math::geometry::interval::confine( result, interval )
+// ::math::geometry::interval::confine( point, interval )
+// ::math::geometry::interval::confine( line, interval )
 
 #include "./structure.hpp"
 

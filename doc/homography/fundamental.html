@@ -32,7 +32,7 @@
                  </dd>
                 <dt><i>matrix</i></dt><dd>
                     <table>
-                        <tr><td> <b>M</b> =<font size="42">  [</font></td>
+                        <tr><td> <b>M</b> =<font size="42">[</font></td>
                         <td> a<sub>11</sub>  a<sub>12</sub> ... a<sub>1n</sub> <br/>
                             a<sub>21</sub>  a<sub>22</sub> ... a<sub>2n</sub> <br/>
                             ... ... ... <br/>
@@ -75,9 +75,9 @@
         </dd>
       <dt>Derivation</dt>
        <dd>
-         Lets start from  <b>x</b> &isin; &real; <sup>2</sup>.<br/>
-         <b>x</b> will define direction <i><b>p</b></i> = &lambda; &middot; <i><b>d</b></i> + <i><b>o</b></i>. 
-         Where: <i><b>o</b></i> = (0,0,0), <i><b>d</b></i> = (x<sub>0</sub>,x<sub>1</sub>,1) and &lambda; &isin; &real; <br/>
+         Lets start from screen point on left camera (u,v) &isin; &real; <sup>2</sup>.<br/>
+         We have ray <i><b>p</b></i> = &lambda; &middot; <i><b>d</b></i> + <i><b>o</b></i>.
+         Where: <i><b>o</b></i> = (0,0,0), <i><b>d</b></i> = (u,v,1) and &lambda; &isin; &real; <br/>
 
          By transforming with [R|t] we have: <br/>
          [R|t]( <i><b>p</b></i> = &lambda; &middot; <i><b>d</b></i> + <i><b>o</b></i> ) = <br/>
@@ -87,20 +87,26 @@
          = &lambda; &middot; R( <i><b>d</b></i> ) + <i><b>t</b></i>
          &isin; &real; <sup>3</sup> <br/><br/>
          Projected on z=1 we have:<br/>
-         (1) <math xmlns="http://www.w3.org/1998/Math/MathML" >
 
-            x = <mfrac>
-            <mrow> &lambda; <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i> + <msub><mi>t</mi><mn>x</mn></msub></mrow>
-            <mrow> &lambda; <msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i> + <msub><mi>t</mi><mn>z</mn></msub></mrow>
-            </mfrac>
-            </math><br />
+          <table>
+          <tr><td>(1) x= </td>
+          <td> <table>
+            <tr><td> &lambda; R<sub>1</sub> &sdot; <i><b>d</b></i> + t<sub>x</sub></td></tr>
+            <tr><td> <hr/></td></tr>
+            <tr><td> &lambda; R<sub>3</sub> &sdot; <i><b>d</b></i> + t<sub>z</sub></td></tr>
+            </table> </td>
+          </table>
 
-            <math xmlns="http://www.w3.org/1998/Math/MathML" >
-          (2) y = <mfrac>
-            <mrow> &lambda; <msub><mi>R</mi><mn>2</mn></msub> &sdot; <i><b>d</b></i> + <msub><mi>t</mi><mn>y</mn></msub></mrow>
-            <mrow> &lambda; <msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i> + <msub><mi>t</mi><mn>z</mn></msub></mrow>
-            </mfrac>
-            </math>
+         <table>
+          <tr><td>
+
+         (2) y = </td>
+          <td> <table>
+            <tr><td> &lambda; R<sub>2</sub> &sdot; <i><b>d</b></i> + t<sub>y</sub></td></tr>
+            <tr><td> <hr/></td></tr>
+            <tr><td> &lambda; R<sub>3</sub> &sdot; <i><b>d</b></i> + t<sub>z</sub></td></tr>
+            </table> </td>
+          </table>
 
          <br/>
          Let's eliminate &lambda;.<br/>
@@ -115,8 +121,8 @@
 
          <math xmlns="http://www.w3.org/1998/Math/MathML" >
          &lambda; = <mfrac>
-            <mrow> <msub><mi>t</mi><mn>x</mn></msub> - <msub><mi>t</mi><mn>z</mn></msub> &sdot;  x</mrow>
-            <mrow> <msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i> &sdot; x - <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i></mrow>
+            <mrow> t<sub>x</sub> - t<sub>z</sub> &sdot;  x</mrow>
+            <mrow> R<sub>3</sub> &sdot; <i><b>d</b></i> &sdot; x - R<sub>1</sub> &sdot; <i><b>d</b></i></mrow>
             </mfrac>
           </math>
         <br/>
@@ -125,16 +131,16 @@
           <math xmlns="http://www.w3.org/1998/Math/MathML" >
              y =<mfrac><mrow>
              <mfrac><mrow>
-              <msub><mi>t</mi><mn>x</mn></msub> - <msub><mi>t</mi><mn>z</mn></msub> &sdot; x
+              t<sub>x</sub> - t<sub>z</sub> &sdot; x
               </mrow><mrow>
-                <msub><mi>R</mi><mn>3</mn></msub>  &sdot; <i><b>d</b></i> &middot; x - <msub><mi>R</mi><mn>1</mn></msub>  &sdot; <i><b>d</b></i>
+                R<sub>3</sub>  &sdot; <i><b>d</b></i> &middot; x - R<sub>1</sub>  &sdot; <i><b>d</b></i>
              </mrow>
-             </mfrac><msub><mi>R</mi><mn>2</mn></msub>  &sdot; <i><b>d</b></i> + <msub><mi>t</mi><mn>y</mn></msub>
+             </mfrac>R<sub>2</sub>  &sdot; <i><b>d</b></i> + t<sub>y</sub>
              </mrow><mrow>
              <mfrac>
-               <mrow><msub><mi>t</mi><mn>x</mn></msub> - <msub><mi>t</mi><mn>z</mn></msub> &sdot; x</mrow>
-               <mrow><msub><mi>R</mi><mn>3</mn></msub>  &sdot; <i><b>d</b></i>&middot; x - <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i></mrow>
-             </mfrac> <msub><mi>R</mi><mn>3</mn></msub>  &sdot; <i><b>d</b></i> + <msub><mi>t</mi><mn>z</mn></msub>
+               <mrow>t<sub>x</sub> - t<sub>z</sub> &sdot; x</mrow>
+               <mrow>R<sub>3</sub>  &sdot; <i><b>d</b></i>&middot; x - R<sub>1</sub> &sdot; <i><b>d</b></i></mrow>
+             </mfrac> R<sub>3</sub>  &sdot; <i><b>d</b></i> + t<sub>z</sub>
                </mrow>
              </mfrac></math>
          <br/>
@@ -142,12 +148,12 @@
              y =
              <mfrac><mrow>
 
-             (<msub><mi>t</mi><mn>x</mn></msub> - <msub><mi>t</mi><mn>z</mn></msub> &middot; x) &dot; ( <msub><mi>R</mi><mn>2</mn></msub> &sdot; <i><b>d</b></i> ) + <msub><mi>t</mi><mn>y</mn></msub> &sdot; ( (<msub><mi>R</mi><mn>3</mn></msub>  &sdot; <i><b>d</b></i> ) &middot; x - ( <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i> ) )
+             (t<sub>x</sub> - t<sub>z</sub> &middot; x) &dot; ( R<sub>2</sub> &sdot; <i><b>d</b></i> ) + t<sub>y</sub> &sdot; ( (R<sub>3</sub>  &sdot; <i><b>d</b></i> ) &middot; x - ( R<sub>1</sub> &sdot; <i><b>d</b></i> ) )
               </mrow>
 
               <mrow>
 
-              (<msub><mi>t</mi><mn>x</mn></msub> - <msub><mi>t</mi><mn>z</mn></msub> &middot; x) &sdot; ( <msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i>) + <msub><mi>t</mi><mn>z</mn></msub> &sdot; ( ( <msub><mi>R</mi><mn>3</mn></msub>  &sdot; <i><b>d</b></i> )&middot; x - ( <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i> ) )
+              (t<sub>x</sub> - t<sub>z</sub> &middot; x) &sdot; ( R<sub>3</sub> &sdot; <i><b>d</b></i>) + t<sub>z</sub> &sdot; ( ( R<sub>3</sub>  &sdot; <i><b>d</b></i> )&middot; x - ( R<sub>1</sub> &sdot; <i><b>d</b></i> ) )
               </mrow>
              </mfrac>
              </math>
@@ -157,14 +163,14 @@
              y =
              <mfrac><mrow>
 
-             (<msub><mi>t</mi><mn>x</mn></msub> - <msub><mi>t</mi><mn>z</mn></msub> &middot; x) &sdot; ( <msub><mi>R</mi><mn>2</mn></msub> &sdot; <i><b>d</b></i> ) + <msub><mi>t</mi><mn>y</mn></msub> &sdot; ( ( <msub><mi>R</mi><mn>3</mn></msub>  &sdot; <i><b>d</b></i> ) &middot; x - ( <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i> ) )
+             (t<sub>x</sub> - t<sub>z</sub> &middot; x) &sdot; ( R<sub>2</sub> &sdot; <i><b>d</b></i> ) + t<sub>y</sub> &sdot; ( ( R<sub>3</sub>  &sdot; <i><b>d</b></i> ) &middot; x - ( R<sub>1</sub> &sdot; <i><b>d</b></i> ) )
               </mrow>
 
               <mrow>
-              <msub><mi>t</mi><mn>x</mn></msub> &sdot; ( <msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i> )
-              - <msub><mi>t</mi><mn>z</mn></msub> &sdot; x  &sdot; ( <msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i> )
-              + <msub><mi>t</mi><mn>z</mn></msub> &sdot;           ( <msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i> ) &sdot; x
-              - <msub><mi>t</mi><mn>z</mn></msub> &sdot; ( <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i>) )
+              t<sub>x</sub> &sdot; ( R<sub>3</sub> &sdot; <i><b>d</b></i> )
+              - t<sub>z</sub> &sdot; x  &sdot; ( R<sub>3</sub> &sdot; <i><b>d</b></i> )
+              + t<sub>z</sub> &sdot;           ( R<sub>3</sub> &sdot; <i><b>d</b></i> ) &sdot; x
+              - t<sub>z</sub> &sdot; ( R<sub>1</sub> &sdot; <i><b>d</b></i>) )
               </mrow>
              </mfrac>
              </math> <br />
@@ -173,12 +179,12 @@
              y =
              <mfrac><mrow>
 
-             (<msub><mi>t</mi><mn>x</mn></msub> - <msub><mi>t</mi><mn>z</mn></msub> &middot; x) &sdot; ( <msub><mi>R</mi><mn>2</mn></msub> &sdot; <i><b>d</b></i> ) + <msub><mi>t</mi><mn>y</mn></msub> &sdot; ( ( <msub><mi>R</mi><mn>3</mn></msub>  &sdot; <i><b>d</b></i> ) &middot; x - ( <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i> ) )
+             (t<sub>x</sub> - t<sub>z</sub> &middot; x) &sdot; ( R<sub>2</sub> &sdot; <i><b>d</b></i> ) + t<sub>y</sub> &sdot; ( ( R<sub>3</sub>  &sdot; <i><b>d</b></i> ) &middot; x - ( R<sub>1</sub> &sdot; <i><b>d</b></i> ) )
               </mrow>
 
               <mrow>
-                <msub><mi>t</mi><mn>x</mn></msub> &sdot; ( <msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i> )
-              - <msub><mi>t</mi><mn>z</mn></msub> &sdot; ( <msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i>) )
+                t<sub>x</sub> &sdot; ( R<sub>3</sub> &sdot; <i><b>d</b></i> )
+              - t<sub>z</sub> &sdot; ( R<sub>1</sub> &sdot; <i><b>d</b></i>) )
               </mrow>
              </mfrac>
              </math> <br />
@@ -187,26 +193,26 @@
            <math xmlns="http://www.w3.org/1998/Math/MathML" >
                <mtable>
                   <mtr>
-                     <mtd><mi><msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i></mi></mtd>
-                     <mtd><mi><msub><mi>R</mi><mn>2</mn></msub> &sdot; <i><b>d</b></i></mi></mtd>
+                     <mtd><mi>R<sub>3</sub> &sdot; <i><b>d</b></i></mi></mtd>
+                     <mtd><mi>R<sub>2</sub> &sdot; <i><b>d</b></i></mi></mtd>
                   </mtr>
 
                   <mtr>
-                     <mtd><mi> <msub><mi>t</mi><mn>z</mn></msub> </mi></mtd>
-                     <mtd><mi><msub><mi>t</mi><mn>y</mn></msub></mi></mtd>
+                     <mtd><mi> t<sub>z</sub> </mi></mtd>
+                     <mtd><mi>t<sub>y</sub></mi></mtd>
                   </mtr>
                </mtable> * X  -
 
             <mfenced open = "[" close="]">
                <mtable>
                   <mtr>
-                     <mtd><mi><msub><mi>R</mi><mn>3</mn></msub> &sdot; <i><b>d</b></i></mi></mtd>
-                     <mtd><mi><msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i></mi></mtd>
+                     <mtd><mi>R<sub>3</sub> &sdot; <i><b>d</b></i></mi></mtd>
+                     <mtd><mi>R<sub>1</sub> &sdot; <i><b>d</b></i></mi></mtd>
                   </mtr>
 
                   <mtr>
-                     <mtd><mi> <msub><mi>t</mi><mn>z</mn></msub> </mi></mtd>
-                     <mtd><mi><msub><mi>t</mi><mn>x</mn></msub></mi></mtd>
+                     <mtd><mi> t<sub>z</sub> </mi></mtd>
+                     <mtd><mi>t<sub>x</sub></mi></mtd>
                   </mtr>
                </mtable>
 
@@ -214,13 +220,13 @@
 
                <mtable>
                   <mtr>
-                     <mtd><mi><msub><mi>R</mi><mn>2</mn></msub> &sdot; <i><b>d</b></i></mi></mtd>
-                     <mtd><mi><msub><mi>R</mi><mn>1</mn></msub> &sdot; <i><b>d</b></i></mi></mtd>
+                     <mtd><mi>R<sub>2</sub> &sdot; <i><b>d</b></i></mi></mtd>
+                     <mtd><mi>R<sub>1</sub> &sdot; <i><b>d</b></i></mi></mtd>
                   </mtr>
 
                   <mtr>
-                     <mtd><mi><msub><mi>t</mi><mn>y</mn></msub></mi></mtd>
-                     <mtd><mi><msub><mi>t</mi><mn>x</mn></msub></mi></mtd>
+                     <mtd><mi>t<sub>y</sub></mi></mtd>
+                     <mtd><mi>t<sub>x</sub></mi></mtd>
                   </mtr>
                </mtable>
                = 0
@@ -234,11 +240,27 @@
              F<sub>3</sub> = t<sub>x</sub> &sdot; R<sub>2</sub> - t<sub>y</sub> &sdot; R<sub>1</sub> <br />
             </blockquote>
 
+    <table>
+     <tr><td>F = <font size="42">[</font></td>
+
+     <td>
+      <table cellspacing=5>
+      <tr> <td>0</td><td>-t<sub>z</sub></td><td>t<sub>y</sub></td>    </tr>
+      <tr> <td>t<sub>z</sub></td> <td>0</td><td>-t<sub>y</sub></td>    </tr>
+      <tr> <td>-t<sub>y</sub></td><td>t<sub>x</sub></td> <td>0</td>    </tr>
+
+      </table>
+
+     </td>
+
+
+     <td><font size="42">]</font> R </td>
+    </table>
 
         </dd>
       <dt>Comment</dt>
        <dd>
-          This library use right hand oriented coordinate system and projection plane is y=(0,1,0).<br>
+          This library use right hand oriented coordinate system and projection plane is z=(0,0,1).<br>
           Enable MathML in your browser.
        </dd>
 
