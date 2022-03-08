@@ -1,5 +1,5 @@
-#ifndef Dh_math_geometry_homography_convert
-#define Dh_math_geometry_homography_convert
+#ifndef Dh_math_linear_homography_convert
+#define Dh_math_linear_homography_convert
 
 // ::math::linear::homography::convert( result, affine )
 

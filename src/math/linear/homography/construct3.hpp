@@ -1,5 +1,5 @@
-#ifndef math_geometry_homography_construct3
-#define math_geometry_homography_construct3
+#ifndef Dh_math_linear_homography_construct3
+#define Dh_math_linear_homography_construct3
 
  // ::math::linear::homography::construct( result, T );
  // ::math::linear::homography::construct_invert( result, T );

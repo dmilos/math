@@ -28,13 +28,13 @@
         scalar_name distance
          (
            ::math::geometry::ellipse::base2D<scalar_name>   const& ellipse
-          ,::math::linear::vector::point<scalar_name,2>           const& point
+          ,::math::linear::vector::point<scalar_name,2>     const& point
          )
          {
-          ::math::linear::vector::point<scalar_name,2>           p;
-          ::math::linear::vector::divide( p, ellipse.size(), point );
-          ::math::geometry::circle::unit<scalar_name,2> unit;
-          return ::math::geometry::circle::distance<scalar_name>( unit, p );
+          ::math::linear::vector::point<scalar_name,2>           point_local;
+          ::math::linear::vector::divide( point_local, ellipse.size(), point );
+          ::math::geometry::circle::unit<scalar_name,2> unit_local;
+          return ::math::geometry::circle::distance<scalar_name>( unit_local, point_local );
          }
 
        template

@@ -172,10 +172,10 @@ namespace math
          ,::math::linear::vector::structure< scalar_name, 2 >    const& X //!< { 1, 0 } -> X
          ,::math::linear::vector::structure< scalar_name, 2 >    const& Y //!< { 0, 1 } -> Y
          ,::math::linear::vector::structure< scalar_name, 2 >    const& T //!< { 1, 1 } -> T
-        ) //!< construct by using affine, ideally find triplet with highest determinant and form system from them
+        ) //!< construct by using affine
         {
          ::math::linear::affine::structure<scalar_name,2>  aa;
-         ::math::linear::affine::construct( aa, { O, X, Y } );
+         ::math::linear::affine::construct( aa, { O, X, Y } ); //!< ideally find triplet with abs(highest) determinant and form system from them
 
          ::math::linear::homography::structure<scalar_name,2> hh;
          {
@@ -204,7 +204,7 @@ namespace math
          ,::math::linear::vector::structure< scalar_name, 2 >    const& a1, ::math::linear::vector::structure< scalar_name, 2 >    const& b1
          ,::math::linear::vector::structure< scalar_name, 2 >    const& a2, ::math::linear::vector::structure< scalar_name, 2 >    const& b2
          ,::math::linear::vector::structure< scalar_name, 2 >    const& a3, ::math::linear::vector::structure< scalar_name, 2 >    const& b3
-        )
+        ) //!< construct by using affine
         {
           ::math::linear::homography::structure<scalar_name,2> hSd;
           if( false == ::math::linear::homography::constructA( hSd, a0, a1, a2, a3  ) )

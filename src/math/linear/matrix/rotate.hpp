@@ -2,6 +2,9 @@
  #define math_linear_matrix_rotate
 
 // math::linear::matrix::rotate( result, angle )
+// math::linear::matrix::rotateX( result, angle )
+// math::linear::matrix::rotateY( result, angle )
+// math::linear::matrix::rotateZ( result, angle )
 // math::linear::matrix::rotate( result, direction, angle, epsilon )
 
 #include "../vector/structure.hpp"

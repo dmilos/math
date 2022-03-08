@@ -28,6 +28,7 @@
              ::math::linear::vector::addition( result, vertex );
             }
            ::math::linear::vector::scale( result, scalar_name(1)/scalar_name(dimension_number) );
+           return true;
           }
 
       }

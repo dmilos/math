@@ -23,11 +23,11 @@
         >
         scalar_name distance
          (
-           ::math::geometry::circle::unit<scalar_name,dimension_number>  const& circle
-          ,::math::linear::vector::point<scalar_name,dimension_number>        const& point
+           ::math::geometry::circle::unit<scalar_name,dimension_number>  const& dummy
+          ,::math::linear::vector::point<scalar_name,dimension_number>   const& point_param
          )
          { // positive for out, negative for in
-          return ::math::linear::vector::length<scalar_name>( point ) - scalar_name( 1 );
+          return ::math::linear::vector::length( point_param ) - scalar_name( 1 );
          }
 
        template
@@ -38,15 +38,14 @@
         scalar_name distance
          (
            ::math::geometry::circle::simple<scalar_name,dimension_number>  const& circle
-          ,::math::linear::vector::point<scalar_name,dimension_number>          const& point
+          ,::math::linear::vector::point<scalar_name,dimension_number>     const& point_param
          )
          {
-          ::math::linear::vector::point<scalar_name,dimension_number>          p;
+          ::math::linear::vector::point<scalar_name,dimension_number>          point_local;
 
-          ::math::linear::vector::subtraction( p, point, circle.center() );
-          return ::math::linear::vector::length<scalar_name>( p ) - circle.radius();
+          ::math::linear::vector::subtraction( point_local, point_param, circle.center() );
+          return ::math::linear::vector::length( point_local ) - circle.radius();
          }
-
 
       }
     }

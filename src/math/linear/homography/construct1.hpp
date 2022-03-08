@@ -1,9 +1,16 @@
-#ifndef math_geometry_homography_construct1
-#define math_geometry_homography_construct1
+#ifndef Dh_math_linear_homography_construct1
+#define Dh_math_linear_homography_construct1
 
  // ::math::linear::homography::construct( result, A, B )
 
 #include "./structure.hpp"
+
+
+
+
+
+
+
 
 
 namespace math

@@ -1,7 +1,7 @@
 #ifndef math_constants_math_hpp_VERSION_1_0_
  #define math_constants_math_hpp_VERSION_1_0_
 
- // math::constants
+ // math::constants::PHI
 
  namespace math
   {

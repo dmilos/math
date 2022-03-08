@@ -27,10 +27,10 @@
           ,scalar_name                                         const& epsilon      = 1e-6
          )
          {
-          scalar_name o =   left_param[0] * right_param[1]  -  left_param[1] * right_param[0];
+          scalar_name value =  left_param[0] * right_param[1]  -  left_param[1] * right_param[0];
 
-          if( o < -epsilon ) return int_name( -1 );
-          if( +epsilon < o ) return int_name( +1 );
+          if( value < -epsilon ) return int_name( -1 );
+          if( +epsilon < value ) return int_name( +1 );
           return int_name( 0 );
          }
 

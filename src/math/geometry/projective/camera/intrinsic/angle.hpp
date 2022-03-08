@@ -24,7 +24,7 @@ namespace math
             (
               ::math::linear::vector::structure< scalar_name, 2 > & result  // [0] = horizontal angle, [1] = vertical angle
              ,::math::linear::matrix::structure< scalar_name, 3 > & matrix  //!< intrinsic matrix
-             ,::math::linear::vector::structure< scalar_name, 3 > & point  //!< point in space
+             ,::math::linear::vector::structure< scalar_name, 3 > & point   //!< point in space
             )
             {
              ::math::linear::vector::structure< scalar_name, 3 > screen;

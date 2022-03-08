@@ -43,6 +43,7 @@ namespace math
              static bool left( point_type & result, affine_type const& left_to_local, point_type const& right_eye/* in world coord */ )
               {
                ::math::linear::affine::transform( result, left_to_local, right_eye );
+               return true;
               }
 
              static bool left( homogeneous_type & result, mobile_type const& sinister/*left*/, mobile_type const& dexter/*right*/ )
@@ -53,15 +54,15 @@ namespace math
              static bool right( point_type & result, affine_type const& right_to_local, point_type const& left_eye /* in world coord */ )
               {
                ::math::linear::affine::transform( result, right_to_local, left_eye );
+               return true;
               }
 
-             static void self( homogeneous_type & result, homography_type const& h )
+             static void self( homogeneous_type & result, homography_type const& right2left )
               {
-               ::math::geometry::projective::camera::principal<double>  princip;
-
-               princip.process( h );
-
-               math::linear::vector::cross( result, princip.horizon().array(), princip.axis().array() );
+               auto const & H = right2left;
+               result[0] =  H[0][2]*H[1][1] - H[0][1]*H[1][2];
+               result[1] =  H[0][0]*H[1][2] - H[0][2]*H[1][0];
+               result[2] =  H[0][0]*H[1][1] - H[0][1]*H[1][0];
               }
 
           };

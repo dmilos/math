@@ -6,9 +6,34 @@
 
 using namespace std;
 
+
+void angle() 
+ {
+   ::math::linear::vector::structure<double,2>   p0_2, p1_2;
+
+   p0_2 = { 0.00, 0.00 }; p1_2 = { 0.00, 0.00 };  std::cout << ::math::geometry::rad2deg( ::math::linear::vector::angle( p0_2, p1_2 ) ) << std::endl;
+   p0_2 = { 1.00, 0.00 }; p1_2 = { 0.00, 1.00 };  std::cout << ::math::geometry::rad2deg( ::math::linear::vector::angle( p0_2, p1_2 ) ) << std::endl;
+   p0_2 = { 0.00, 1.00 }; p1_2 = { 1.00, 0.00 };  std::cout << ::math::geometry::rad2deg( ::math::linear::vector::angle( p0_2, p1_2 ) ) << std::endl;
+   p0_2 = { 0.50, 0.50 }; p1_2 = { 0.50, 0.50 };  std::cout << ::math::geometry::rad2deg( ::math::linear::vector::angle( p0_2, p1_2 ) ) << std::endl;
+   p0_2 = { 0.50, 0.50 }; p1_2 = {-0.50, 0.50 };  std::cout << ::math::geometry::rad2deg( ::math::linear::vector::angle( p0_2, p1_2 ) ) << std::endl;
+   p0_2 = {-0.50, 0.50 }; p1_2 = { 0.50, 0.50 };  std::cout << ::math::geometry::rad2deg( ::math::linear::vector::angle( p0_2, p1_2 ) ) << std::endl;
+
+   p0_2 = { 1.00, 0.50 }; p1_2 = { 0.00, 1.00 };  std::cout << ::math::geometry::rad2deg( ::math::linear::vector::angle( p0_2, p1_2 ) ) << std::endl;
+   p0_2 = { 0.00, 1.00 }; p1_2 = { 1.00, 0.50 };  std::cout << ::math::geometry::rad2deg( ::math::linear::vector::angle( p0_2, p1_2 ) ) << std::endl;
+
+   p0_2 = { 1.00, 1.00 }; p1_2 = { 1.00,-1.00 };  std::cout << ::math::geometry::rad2deg( ::math::linear::vector::angle( p0_2, p1_2 ) ) << std::endl;
+   p0_2 = { 1.00,-1.00 }; p1_2 = { 1.00, 1.00 };  std::cout << ::math::geometry::rad2deg( ::math::linear::vector::angle( p0_2, p1_2 ) ) << std::endl;
+
+   p0_2 = { 5.00,+1.00 }; p1_2 = { 5.00,-1.00 };  std::cout << ::math::geometry::rad2deg( ::math::linear::vector::angle( p0_2, p1_2 ) ) << std::endl;
+   p0_2 = { 5.00,-1.00 }; p1_2 = { 5.00,+1.00 };  std::cout << ::math::geometry::rad2deg( ::math::linear::vector::angle( p0_2, p1_2 ) ) << std::endl;
+
+
+}
+
 int main( int argc, char *argv[] )
  {
   cout << "Hello World" << endl;
+  angle();
 
    ::math::linear::vector::structure<double,1>   p0_1, p1_1, p2_1, p3_1;
    ::math::linear::vector::structure<double,2>   p0_2, p1_2, p2_2, p3_2;
