@@ -1,5 +1,5 @@
-#ifndef math_geometry_homography_construct2
-#define math_geometry_homography_construct2
+#ifndef Dh_math_linear_homography_construct2
+#define Dh_math_linear_homography_construct2
 
  // ::math::linear::homography::construct2( )
 
@@ -8,6 +8,9 @@
 #include "../matrix/transform.hpp"
 #include "./structure.hpp"
 #include "./convert.hpp"
+
+
+
 
 
 namespace math

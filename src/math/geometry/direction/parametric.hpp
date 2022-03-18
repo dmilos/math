@@ -24,7 +24,7 @@ namespace math
         typename    scalar_name
        ,unsigned   dimension_number
        >
-       class parametric
+       class parametric //! defined by origin and  direction
         {
          public:
 

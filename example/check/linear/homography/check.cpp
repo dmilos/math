@@ -13,7 +13,7 @@ template< typename scalar_name, unsigned width_number, unsigned height_number >
     {
      for( unsigned i=0; i< height_number; i++ )
       {
-       maximal = std::max<scalar_name>( fabs( m[j][i] ), maximal ); 
+       maximal = std::max<scalar_name>( fabs( m[j][i] ), maximal );
       }
     }
 
@@ -260,11 +260,11 @@ void hg2_single_direct_brute()
      }
     if( 0.00001 < fabs (r[1] - 0 ) )
      { ++fail;
-      std::cout << "P: "<< x << ","<< y << " _00_1_ " << r[0] << ", "<<  r[1] <<std::endl; 
+      std::cout << "P: "<< x << ","<< y << " _00_1_ " << r[0] << ", "<<  r[1] <<std::endl;
      }
 
     ::math::linear::homography::transform( r, h2, {1,0} );
-    if( 0.00001 < fabs (r[0] - 1 ) )                                                             
+    if( 0.00001 < fabs (r[0] - 1 ) )
      { ++fail; /*std::cout << "P: "<< x << ","<< y << " _10_0_ "<< r[0] << ", "<<  r[1] <<std::endl; */ }
     if( 0.00001 < fabs (r[1] - 0 ) )
      { ++fail; /*std::cout << "P: "<< x << ","<< y << " _10_1_ "<< r[0] << ", "<<  r[1] <<std::endl;*/ }
@@ -542,10 +542,10 @@ void hg3_complete()
       , { 0, 0, 0,  1, 0, 0,  0, 1, 0,  0, 0, 1,  1, 2, 3 }
         );
   monic(h3); print( h3, "ID{1,2,3}" );
-  std::cout << "    "; apply<double,3>( h3, {0, 0, 0} ); std::cout << std::endl; 
-  std::cout << "    "; apply<double,3>( h3, {1, 0, 0} ); std::cout << std::endl; 
-  std::cout << "    "; apply<double,3>( h3, {0, 1, 0} ); std::cout << std::endl; 
-  std::cout << "    "; apply<double,3>( h3, {0, 0, 1} ); std::cout << std::endl; 
+  std::cout << "    "; apply<double,3>( h3, {0, 0, 0} ); std::cout << std::endl;
+  std::cout << "    "; apply<double,3>( h3, {1, 0, 0} ); std::cout << std::endl;
+  std::cout << "    "; apply<double,3>( h3, {0, 1, 0} ); std::cout << std::endl;
+  std::cout << "    "; apply<double,3>( h3, {0, 0, 1} ); std::cout << std::endl;
   std::cout << "    "; apply<double,3>( h3, {1, 1, 1} ); std::cout << std::endl; std::cout << std::endl;
 
    ::math::linear::homography::construct<double>(
@@ -553,18 +553,36 @@ void hg3_complete()
       , { 0, 0, 0,  1, 0, 0,  0, 1, 0,  0, 0, 1,  1, 1, 1 }
         );
   monic(h3); print( h3, "ID{1,1,1}" );
-  std::cout << "    "; apply<double,3>( h3, {0, 0, 0} ); std::cout << std::endl;  
-  std::cout << "    "; apply<double,3>( h3, {1, 0, 0} ); std::cout << std::endl; 
-  std::cout << "    "; apply<double,3>( h3, {0, 1, 0} ); std::cout << std::endl; 
-  std::cout << "    "; apply<double,3>( h3, {0, 0, 1} ); std::cout << std::endl;  
+  std::cout << "    "; apply<double,3>( h3, {0, 0, 0} ); std::cout << std::endl;
+  std::cout << "    "; apply<double,3>( h3, {1, 0, 0} ); std::cout << std::endl;
+  std::cout << "    "; apply<double,3>( h3, {0, 1, 0} ); std::cout << std::endl;
+  std::cout << "    "; apply<double,3>( h3, {0, 0, 1} ); std::cout << std::endl;
   std::cout << "    "; apply<double,3>( h3, {1, 1, 1} ); std::cout << std::endl; std::cout << std::endl;
+ }
+
+void retarget()
+ {
+  ::math::linear::homography::structure<double,2>  result;
+  ::math::linear::homography::structure<double,2>  H     ;
+  ::math::geometry::interval::structure<double,2>  target;
+  ::math::geometry::interval::structure<double,2>  source;
+
+  ::math::linear::homography::retarget( result, H, target, source );
+
  }
 
 int main( int argc, char*argv[] )
  {
   std::cout << " ------------- 1 -----------" << std::endl; hg1();
-  std::cout << " ------------- 2 -----------" << std::endl; hg2_single_specific(); hg2_simple(); hg2_complete(); hg2_single_direct_brute(); hg2_single_invert_brute(); 
+  std::cout << " ------------- 2 -----------" << std::endl; hg2_single_specific(); hg2_simple(); hg2_complete(); hg2_single_direct_brute(); hg2_single_invert_brute();
   std::cout << " ------------- 3 -----------" << std::endl; hg3_single();          hg3_simple(); hg3_complete(); hg3_single_direct_brute(); hg3_single_invert_brute();
+
+  //{
+  // ::math::linear::homography::structure<double,15>   m15;
+  // ::math::linear::homography::zero<double,15>( m15 );
+  //}
+
+
   //std::cin.get();
   return 0;
  }

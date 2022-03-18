@@ -10,4 +10,7 @@
 #include "./horizon.hpp"
 
 #include "./principal.hpp"
+#include "./normalize.hpp"
 
+//#include "./zero.hpp"
+#include "./retarget.hpp"

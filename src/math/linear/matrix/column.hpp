@@ -2,6 +2,7 @@
  #define Dh_math_linear_matrix_column
 
  // ::math::linear::matrix::column/*<scalar_name,width_number,height_number>*/( column , matrix, index );
+ // ::math::linear::matrix::column/*<scalar_name,width_number,height_number>*/(  matrix, index, column );
 
 #include "./structure.hpp"
 
@@ -24,6 +25,20 @@
           for( std::size_t i=0; i < height_number; ++i )
            {
             c[ i ] = m[ i ][ index ];
+           }
+         }
+
+       template< typename scalar_name, unsigned width_number, unsigned height_number >
+        void column
+         (
+           ::math::linear::matrix::structure<scalar_name, width_number, height_number >      & m
+          , std::size_t                                                                 const& index
+          ,::math::linear::vector::structure<scalar_name, height_number>                const& c
+         )
+         {
+          for( std::size_t i=0; i < height_number; ++i )
+           {
+            m[ i ][ index ] = c[ i ];
            }
          }
 

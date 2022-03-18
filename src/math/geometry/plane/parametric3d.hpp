@@ -35,6 +35,7 @@ namespace math
          public:
 
            typedef scalar_name scalar_type;
+           typedef ::math::linear::vector::structure<scalar_name,2>  uv_type;
            typedef ::math::linear::vector::structure<scalar_name,3>  point3d_type, point_type;
 
            typedef ::math::geometry::plane::ABCD3D<scalar_name>              ABCD3D_type;
@@ -120,11 +121,20 @@ namespace math
              *this = parametric3d( no3d_type( this->m_origin, normal ) );
             }
 
-           point_type const& point( scalar_type const&u, scalar_type const& v )const
+
+           point_type  point( uv_type const& uv )const
             {
              using namespace ::math::linear::vector;
              point_type result( this->m_origin );
-             this->m_origin += u * this->x() + v * this->y();
+             result += uv[0] * this->x() + uv[0] * this->y();
+             return result;
+            }
+
+           point_type  point( scalar_type const&u, scalar_type const& v )const
+            {
+             using namespace ::math::linear::vector;
+             point_type result( this->m_origin );
+             result += u * this->x() + v * this->y();
              return result;
             }
 

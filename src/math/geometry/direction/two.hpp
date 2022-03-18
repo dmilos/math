@@ -24,7 +24,7 @@ namespace math
         typename        scalar_name
        ,unsigned   dimension_number
        >
-       class two
+       class two //!< defined with two points: first and second
         {
          public:
 

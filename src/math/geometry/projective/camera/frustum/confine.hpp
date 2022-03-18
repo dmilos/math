@@ -62,10 +62,10 @@ namespace math
           template < typename scalar_name >
             bool confine
              (
-               ::math::geometry::direction::parametric< scalar_name, 3 >       & output
-              ,::math::geometry::direction::parametric< scalar_name, 3 >  const& input
-              ,::math::geometry::interval::structure<scalar_name, 2>      const& window
-              ,::math::geometry::interval::structure<scalar_name, 1 >     const& depth
+               ::math::geometry::direction::parametric< scalar_name, 3 >         & output
+              ,::math::geometry::direction::parametric< scalar_name, 3 >    const& input
+              ,::math::geometry::interval::structure<scalar_name, 2>        const& window
+              ,::math::geometry::interval::structure<scalar_name, 1 >       const& depth
              )
              {
               ::math::geometry::projective::camera::frustum::guard<scalar_name> guard;
@@ -75,9 +75,9 @@ namespace math
           template < typename scalar_name >
             bool confine
              (
-               ::math::geometry::direction::parametric<      scalar_name, 3 >      & parametric
-              ,::math::geometry::interval::structure<scalar_name, 2>   const& window
-              ,::math::geometry::interval::structure<scalar_name, 1 >  const& depth
+               ::math::geometry::direction::parametric< scalar_name, 3 >       & parametric
+              ,::math::geometry::interval::structure<scalar_name, 2>      const& window
+              ,::math::geometry::interval::structure<scalar_name, 1 >     const& depth
              )
              {
               ::math::geometry::projective::camera::frustum::guard<scalar_name> guard;

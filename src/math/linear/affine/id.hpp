@@ -1,7 +1,9 @@
 #ifndef Dh_math_linear_affine_id
  #define Dh_math_linear_affine_id
 
- // ::math::linear::affine::id<scalar_name,dimension_number>
+ // ::math::linear::affine::id( A )
+ // ::math::linear::affine::id<scalar_name,dimension_number>()
+ // ::math::linear::affine::id( dymmu )
 
 #include "./one.hpp"
 

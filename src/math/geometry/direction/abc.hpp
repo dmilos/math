@@ -29,7 +29,7 @@ namespace math
        <
          typename scalar_name = double
        >
-       class ABC2D
+       class ABC2D // A * x  +  B * y  +  C = 0
         {
          public:
 

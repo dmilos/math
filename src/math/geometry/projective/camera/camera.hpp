@@ -21,6 +21,3 @@
 
 #include "./projection.hpp"
 #include "./principal.hpp"
-
-#include "./rectify2.hpp"
-#include "./rectify3.hpp"

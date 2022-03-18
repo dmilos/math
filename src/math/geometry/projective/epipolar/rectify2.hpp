@@ -1,5 +1,5 @@
-#ifndef math_geometry_projective_camera_rectify
-#define math_geometry_projective_camera_rectify
+#ifndef math_geometry_projective_epipolar_rectify2
+#define math_geometry_projective_epipolar_rectify2
 
 // ::math::geometry::projective::camera::rectify( left, right, right2left )
 // ::math::geometry::projective::camera::rectify( left, right, left2world, right2world )
@@ -13,7 +13,7 @@ namespace math
    {
     namespace projective
      {
-      namespace camera
+      namespace epipolar
        {
 
         template < typename scalar_name >
@@ -29,8 +29,8 @@ namespace math
 
            auto const& heading   = right2left.vector();
            auto left_angle = ::math::linear::vector::angle( X, heading  ) ;
-
            ::math::linear::matrix::rotate( left_param, left_angle );
+
            ::math::linear::vector::structure< scalar_name, 2 > direction{ right2left.matrix()[0][0],right2left.matrix()[1][0] };
            auto right_angle = ::math::linear::vector::angle( direction,  heading );
            ::math::linear::matrix::rotate( right_param, right_angle );
@@ -56,7 +56,7 @@ namespace math
 
            ::math::linear::affine::structure< scalar_name, 2 > right2left;
            ::math::linear::affine::compose( right2left, world2left, right2world );
-           return ::math::geometry::projective::camera::rectify( left, right, right2left );
+           return ::math::geometry::projective::epipolar::rectify( left, right, right2left );
           }
 
        }

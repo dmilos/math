@@ -4,3 +4,4 @@
 #include "./confine.hpp"
 #include "./in.hpp"
 #include "./out.hpp"
+#include "./structure.hpp"

@@ -1,9 +1,11 @@
 #ifndef Dh_math_linear_matrix_id
  #define Dh_math_linear_matrix_id
 
- // ::math::linear::matrix::id<scalar_name,width_number,height_number>
+ // ::math::linear::matrix::id<scalar_name,width_number,height_number>()
+ // ::math::linear::matrix::id( m )
 
 #include "./one.hpp"
+
 
  namespace math
   {

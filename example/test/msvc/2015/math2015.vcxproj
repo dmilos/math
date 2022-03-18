@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\check\polynomial\fit.cpp" />
+    <ClCompile Include="..\..\..\check\geometry\plane\test.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2C841EBC-D1AD-4014-B6C5-E5DB57440417}</ProjectGuid>

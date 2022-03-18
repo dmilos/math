@@ -33,6 +33,8 @@ namespace math
          ,::math::linear::vector::point<scalar_name, 3>   const& origin   //!< Any point of plane in (x,y,z)
         )
         {
+         typedef ::math::geometry::projective::camera::pinhole<scalar_name>   pinhole_type; //!< TODO
+
          no3d.normal()[0] = -horizon.A();
          no3d.normal()[1] = -horizon.C();
          no3d.normal()[2] = -horizon.B();

@@ -26,7 +26,7 @@ namespace math
        class parametric;
 
       template< typename scalar_name>
-       class polar
+       class polar //!< defined with one point and angle against X-axis
         {
          public:
 

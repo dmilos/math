@@ -24,12 +24,14 @@
        struct structure
         {
          public:
-           typedef ::math::linear::vector::point<scalar_name, dimension_number > point_type;
-           typedef std::array<point_type, 2 > container_type;
+           typedef scalar_name scalar_type;
 
-           structure() {}
-           structure( point_type const& first, point_type const& second ):m_corner{ first, second }{}
-           explicit structure( container_type const& c ):m_corner{ c }{}
+           typedef ::math::linear::vector::point< scalar_name, dimension_number > point_type;
+           typedef std::array< point_type, 2 > container_type;
+
+                    structure(){}
+                    structure( point_type const& first, point_type const& second ):m_corner{ first, second }{}
+           explicit structure( container_type const& container_param ):m_corner{ container_param }{}
 
            point_type const& operator[]( unsigned const index )const{ return m_corner[index]; }
            point_type      & operator[]( unsigned const index )     { return m_corner[index]; }
@@ -57,6 +59,7 @@
        struct structure< scalar_name, 1 >
         {
          public:
+           typedef scalar_name scalar_type;
            typedef scalar_name point_type;
 
            structure() {}
@@ -77,7 +80,6 @@
          public:
            point_type m_corner[2];
         };
-
 
       }
     }

@@ -5,7 +5,7 @@
  // ::math::linear::matrix::load(m,x,y,z)
  // ::math::linear::matrix::load(m,x,y,z,t)
 
-#include "../vector/vector.hpp"
+#include "../vector/structure.hpp"
 #include "./structure.hpp"
 
 
