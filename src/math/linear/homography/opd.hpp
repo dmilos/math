@@ -23,20 +23,16 @@ namespace math
       template<  typename scalar_name >
        void opd
         (
-          ::math::linear::affine::structure< scalar_name, 3 >         & affine
-         ,::math::linear::homography::structure<scalar_name,2>   const& display2spaces //!< TODO check this
+          ::math::linear::affine::structure< scalar_name, 3 >         & plane2world   //< ! world is NOT display
+         ,::math::linear::homography::structure<scalar_name,2>   const& plane2display
         )
-        { //  TODO need pinhole camera::forward, up, right. move to camera
-         ::math::linear::vector::structure<scalar_name, 3> x,y,z,t;
+        {
+         ::math::linear::vector::structure< scalar_name, 3 > X; ::math::linear::matrix::column( X, plane2display, 0 );
+         ::math::linear::vector::structure< scalar_name, 3 > Y; ::math::linear::matrix::column( Y, plane2display, 1 );
+         ::math::linear::vector::structure< scalar_name, 3 > T; ::math::linear::matrix::column( T, plane2display, 2 );
+         ::math::linear::vector::structure< scalar_name, 3 > Z; ::math::linear::vector::cross( Z, X, Y );
 
-         t = { display2spaces[0][2], display2spaces[2][2], -display2spaces[1][2] };
-         x = { display2spaces[0][0], display2spaces[2][0], -display2spaces[1][0] };
-         y = { display2spaces[0][1], display2spaces[2][1], -display2spaces[1][1] };
-
-         ::math::linear::vector::cross( z, x, y );
-         ::math::linear::affine::system( affine, t, x, y, z );
-
-         return ;
+         ::math::linear::affine::system( plane2world, T, X, Y, Z );
         }
 
      }

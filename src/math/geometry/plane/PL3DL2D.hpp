@@ -6,6 +6,7 @@
 // ::math::geometry::plane::intersect( point, plane, parametric, epsilon )
 // ::math::geometry::plane::intersect( point, lambda, plane, parametric, epsilon )
 // ::math::geometry::plane::intersect( point, plane, two, epsilon )
+// ::math::geometry::plane::intersect( lambda, uv, plane, parametric );
 
 // ::math::geometry::plane::PL3DL2D<scalar_name>::process
 
@@ -14,6 +15,8 @@
 
 #include "./no3d.hpp"
 #include "./parametric3d.hpp"
+#include "../../linear/matrix/column.hpp"
+#include "../../linear/matrix/invert.hpp"
 
 
 
@@ -31,8 +34,11 @@ namespace math
            typedef scalar_name scalar_type;
            typedef size_name size_type;
 
+           typedef ::math::linear::vector::point<scalar_type,2>                uv_type;
            typedef ::math::linear::vector::point<scalar_type,3>             point_type;
+
            typedef ::math::geometry::plane::no3d <scalar_type>              no3d_type;
+           typedef ::math::geometry::plane::parametric3d<scalar_name>   parametric3d_type;
 
            typedef ::math::geometry::direction::parametric<scalar_name, 3 > line_type;
 
@@ -98,6 +104,38 @@ namespace math
               }
 
              line.point( point, lambda );
+             return true;
+            }
+
+           static bool process
+            (
+              scalar_type              & lambda
+             ,uv_type                  & uv
+             ,parametric3d_type  const & plane
+             ,line_type          const & line
+             ,scalar_type        const & epsilon = 1e-6
+            )
+            {
+             ::math::linear::matrix::structure< scalar_type, 3, 3 > M, I;
+
+             ::math::linear::matrix::column( M, 0, plane.x()        );
+             ::math::linear::matrix::column( M, 1, plane.y()        );
+             ::math::linear::matrix::column( M, 2, line.direction() );
+
+             if( false == ::math::linear::matrix::invert( I, M ) )
+              {
+               return false;
+              }
+
+             point_type heading;
+             ::math::linear::vector::subtraction( heading, line.origin(), plane.origin() );
+             point_type result;
+
+            ::math::linear::matrix::transform( result, I, heading );
+
+             uv[0]  = result[0];
+             uv[1]  = result[1];
+             lambda = result[2];
              return true;
             }
 
@@ -168,9 +206,22 @@ namespace math
          return ::math::geometry::plane::PL3DL2D<scalar_name,size_name>::process( point, lambda, plane, parametric, epsilon );
        }
 
+
+      template<  typename scalar_name, typename size_name = std::size_t >
+       bool intersect
+       (
+          scalar_name                                                      & lambda
+         ,::math::linear::vector::point<scalar_name,2>                     & uv
+         ,::math::geometry::plane::parametric3d<scalar_name>         const & plane
+         ,::math::geometry::direction::parametric<scalar_name, 3 >   const & parametric
+         ,scalar_name                                                const & epsilon = 1e-6
+       )
+       {
+         return ::math::geometry::plane::PL3DL2D<scalar_name,size_name>::process( lambda, uv, plane, parametric, epsilon );
+       }
+
      }
    }
  }
 
 #endif
-

@@ -4,6 +4,8 @@
  // ::math::linear::homography::horizon<scalar_name>( result, display2space )
 
 #include "./structure.hpp"
+#include "../matrix/row.hpp"
+#include "../vector/cross.hpp"
 #include "../../geometry/direction/abc.hpp"
 
 
@@ -18,33 +20,25 @@ namespace math
       template<  typename scalar_name >
        ::math::geometry::direction::ABC2D<scalar_name> horizon
         (
-          ::math::linear::vector::structure<      scalar_name, 3 >         & result_in_display
-         ,::math::linear::homography::structure<  scalar_name, 2 >    const& display2space
+          ::math::geometry::direction::ABC2D<>                             & result_in_display
+         ,::math::linear::homography::structure<  scalar_name, 2 >    const& display2plane
         )
-        {
-         return ::math::geometry::direction::ABC2D<>( display2space[2][0], display2space[2][1], display2space[2][2] );
+        {  //! display = N(0,0,1) + O(0,0,0)
+         ::math::linear::matrix::row( result_in_display.array(), display2plane, 2 );
+         return result_in_display;
         }
 
       template<  typename scalar_name >
-       ::math::geometry::direction::ABC2D<scalar_name> horizon_invert
+       void horizon_invert
         (
-          ::math::linear::vector::structure<      scalar_name, 3 >         & result_in_display
-         ,::math::linear::homography::structure<  scalar_name, 2 >    const& space2display
+          ::math::geometry::direction::ABC2D<>                             & result_in_display
+         ,::math::linear::homography::structure<  scalar_name, 2 >    const& plane2display
         )
-        {
-         //::math::linear::vector::structure< scalar_name, 3 > X;
-         //::math::linear::vector::structure< scalar_name, 3 > Y;
-         //::math::linear::vector::load( X, space2display[0][0], space2display[0][1], space2display[0][2] );
-         //::math::linear::vector::load( Y, space2display[1][0], space2display[1][1], space2display[1][2] );
-         //::math::geometry::direction::ABC2D<scalar_name> result;
-         //
-         //::math::linear::vector::cross( result.vector(), X, Y );
-         //return result;
-
-         ::math::linear::homography::structure<  scalar_name, 2 > display2space;
-         ::math::linear::matrix::invert( display2space, space2display );
-         return ::math::linear::homography::horizon( result_in_display, display2space );
-       }
+        {   //! display = N(0,0,1) + O(0,0,0)
+         ::math::linear::vector::structure<  scalar_name, 3 > X; ::math::linear::matrix::column( X, plane2display, 0 );
+         ::math::linear::vector::structure<  scalar_name, 3 > Y; ::math::linear::matrix::column( Y, plane2display, 1 );
+         ::math::linear::vector::cross( result_in_display.array(), X, Y );
+        }
 
      }
    }

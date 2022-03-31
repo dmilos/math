@@ -124,17 +124,15 @@ namespace math
 
            point_type  point( uv_type const& uv )const
             {
-             using namespace ::math::linear::vector;
-             point_type result( this->m_origin );
-             result += uv[0] * this->x() + uv[0] * this->y();
+             point_type result;
+             ::math::linear::vector::combine( result, this->origin(), uv[0], this->x(), uv[1], this->y() );
              return result;
             }
 
            point_type  point( scalar_type const&u, scalar_type const& v )const
             {
-             using namespace ::math::linear::vector;
-             point_type result( this->m_origin );
-             result += u * this->x() + v * this->y();
+             point_type result;
+             ::math::linear::vector::combine( result, this->origin(),     u, this->x(),     v, this->y() );
              return result;
             }
 

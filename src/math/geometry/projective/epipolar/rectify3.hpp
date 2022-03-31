@@ -41,31 +41,27 @@ namespace math
                ::math::linear::matrix::column( left_up, left2world.matrix(), pinhole_type::up() );
                ::math::linear::matrix::column( right_up, right2world.matrix(), pinhole_type::up() );
                ::math::linear::vector::addition( common_up, left_up, right_up );
-               ::math::linear::vector::scale( common_up, 0.5  );
-               
+               //::math::linear::vector::scale( common_up, 0.5  );
+
                ::math::linear::vector::structure< scalar_name, 3 >   common_forward, left_forward, right_forward;
                ::math::linear::matrix::column( left_forward,  left2world.matrix(), pinhole_type::forward() );
                ::math::linear::matrix::column( right_forward, right2world.matrix(), pinhole_type::forward() );
                ::math::linear::vector::addition( common_forward, left_forward, right_forward );
-               ::math::linear::vector::scale( common_forward, 0.5  );
-               
-               ::math::linear::vector::structure< scalar_name, 3 >   common_right, left_right, right_right;
-               ::math::linear::matrix::column( left_right,  left2world.matrix(), pinhole_type::right() );
-               ::math::linear::matrix::column( right_right, right2world.matrix(), pinhole_type::right() );
-               ::math::linear::vector::addition( common_right, left_right, right_right );
-               ::math::linear::vector::scale( common_right, 0.5 );
+               //::math::linear::vector::scale( common_forward, 0.5  );
 
-               std::array< scalar_name, 3 >  dot;
-               dot[ 0 ] = fabs( ::math::linear::vector::dot( common_up,      axis ) );
-               dot[ 1 ] = fabs( ::math::linear::vector::dot( common_right,   axis ) );
-               dot[ 2 ] = fabs( ::math::linear::vector::dot( common_forward, axis ) );
+               //::math::linear::vector::structure< scalar_name, 3 >   common_right, left_right, right_right;
+               //::math::linear::matrix::column( left_right,  left2world.matrix(), pinhole_type::right() );
+               //::math::linear::matrix::column( right_right, right2world.matrix(), pinhole_type::right() );
+               //::math::linear::vector::addition( common_right, left_right, right_right );
+               //::math::linear::vector::scale( common_right, 0.5 );
 
-               //switch( std::min_element( dot.begin(), dot.end() ) - dot.begin() )
+               //if( fabs( ::math::linear::vector::dot( axis, common_forward )  ) < epsilon )
                // {
-               //  case(0): ::math::linear::vector::cross( common_forward, common_up, axis ); ::math::linear::vector::cross( common_up,      axis, common_forward ); break;
-               //  case(1): ::math::linear::vector::cross( common_up, common_right,   axis ); ::math::linear::vector::cross( common_right,   axis, common_forward ); break;
-               //  case(2): ::math::linear::vector::cross( common_up, common_forward, axis ); ::math::linear::vector::cross( common_forward, axis, common_up      ); break;
+               //  return false;
                // }
+
+               ::math::linear::vector::cross( common_up, axis,      common_forward ); ::math::linear::vector::cross( common_forward, common_up, axis      ); 
+
                ::math::linear::vector::length<scalar_name>( common_forward, 1 );
                ::math::linear::vector::length<scalar_name>( common_up, 1 );
 

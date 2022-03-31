@@ -64,7 +64,7 @@ namespace math
          ,::math::linear::vector::structure< scalar_name, 2 >    const& a2, ::math::linear::vector::structure< scalar_name, 2 >    const& b2
          ,::math::linear::vector::structure< scalar_name, 2 >    const& a3, ::math::linear::vector::structure< scalar_name, 2 >    const& b3
         )
-        {
+        { // a= source; b = target
          ::math::linear::matrix::structure< scalar_name, 8, 8 > m;
 
          m[0][0] = a0[0]; m[0][1] = a0[1]; m[0][2] = 1;  m[0][3] =     0; m[0][4] =     0; m[0][5] = 0;  m[0][6] = -a0[0]*b0[0]; m[0][7] = -a0[1]*b0[0];
@@ -207,7 +207,7 @@ namespace math
          ,::math::linear::vector::structure< scalar_name, 2 >    const& a1, ::math::linear::vector::structure< scalar_name, 2 >    const& b1
          ,::math::linear::vector::structure< scalar_name, 2 >    const& a2, ::math::linear::vector::structure< scalar_name, 2 >    const& b2
          ,::math::linear::vector::structure< scalar_name, 2 >    const& a3, ::math::linear::vector::structure< scalar_name, 2 >    const& b3
-        ) //!< construct by using affine
+        ) //!< construct by using affine // a= source; b = target
         {
           ::math::linear::homography::structure<scalar_name,2> hSd;
           if( false == ::math::linear::homography::constructA( hSd, a0, a1, a2, a3  ) )

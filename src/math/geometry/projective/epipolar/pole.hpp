@@ -6,7 +6,6 @@
 #include "../camera/mobile.hpp"
 #include "../../../linear/affine/transform.hpp"
 #include "../../../linear/homography/structure.hpp"
-#include "../../../geometry/projective/camera/principal.hpp"
 
 
 namespace math
