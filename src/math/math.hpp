@@ -2,6 +2,9 @@
 #define math_6B6F3CC0_BF60_4B84_BC92_C3D25AB1135E
 
 #include <cmath>
+#include <array>
+#include <utility>
+
 
 #include "./constants.hpp"
 

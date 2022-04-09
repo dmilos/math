@@ -3,7 +3,7 @@
 
 // ::math::geometry::projective::camera::intrinsic::focus( result, base, depth )
 
-//#include <utility>
+
 
 #include "../../../../linear/homography/structure.hpp"
 

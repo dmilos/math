@@ -26,9 +26,6 @@ namespace math
     namespace homography
      {
 
-      /*
-       "Camera Calibration using Vanishing Points", Paul Beardsley David Murray, BMVC 1992
-      */
       template< typename scalar_name >
        class principal //!< calculate principal axis and point.
         {
@@ -39,51 +36,24 @@ namespace math
            typedef ::math::linear::matrix::structure<double,3,3> matrix_type;
            typedef ::math::geometry::direction::ABC2D<scalar_type> ABC_type;
 
+           typedef ::math::linear::homography::principal<scalar_type> this_type;
+
          public:
-           bool axis( homography_type const& plane2display, scalar_type const& epsilon = 1e-8 )
-            {  // display = N(0,1,0) + O(0,0,0) << TODO check and adjust to N(0,0,1)
-             static matrix_type   s_rotation{ 0, -1, 0,
-                                              1,  0, 0 ,
-                                              0 , 0, 1 };
-             m_plane2display = plane2display;
-             if( false == ::math::linear::matrix::invert( m_display2plane, m_plane2display, epsilon ) )
-              {
-               return false;
-              }
+           ABC_type const& axis( homography_type const& plane2display )
+            { //!< exists always  // display = N(0,0,1) + O(0,0,0)
+             ::math::linear::homography::horizon_invert<scalar_name>( m_horizon, plane2display );
+             this_type::point( m_point, plane2display );
 
-             ::math::linear::matrix::transpose( m_display2planeT, m_display2plane );
-             ::math::linear::matrix::transpose( m_plane2displayT, m_plane2display );
-
-             m_horizon.set( m_display2plane[2][0], m_display2plane[2][1], m_display2plane[2][2] );
-
-             auto length = sqrt( m_horizon.A() * m_horizon.A()  +  m_horizon.B() * m_horizon.B() );
-             if( length < epsilon )
-              {
-               return false;
-              }
-
-             matrix_type combined, tmp;
-
-             ::math::linear::matrix::multiply( tmp, s_rotation, m_plane2displayT );
-             ::math::linear::matrix::multiply( combined, m_display2planeT, tmp );
-
-             ::math::linear::vector::structure<scalar_name,3> constant;
-             ::math::linear::matrix::transform( constant, combined, m_horizon.array() );
-
-              auto A = constant[0] * m_horizon.A();
-              auto B = constant[1] * m_horizon.B();
-
-              auto D = combined[0][2] * m_horizon.A();
-              auto E = combined[1][2] * m_horizon.B();
-
-              auto alpha = -( A + B )/ ( D + E );
-
-             ::math::linear::matrix::transform( m_axis.array(), combined, { m_horizon.A(), m_horizon.B(), m_horizon.C() + alpha } );
-             return true;
+             m_axis.A() = +m_horizon.B();
+             m_axis.B() = -m_horizon.A();
+             m_axis.A() *= m_point[2];
+             m_axis.B() *= m_point[2];
+             m_axis.C( { m_point[0], m_point[1] } );
+             return m_axis;
             }
 
-           static void point( point_type & result, homography_type const&  plane2display, scalar_type const& epsilon = 1e-8 )
-            { // display = N(0,0,1) + O(0,0,0)
+           static void point( point_type & result, homography_type const&  plane2display )
+            { //! display = N(0,0,1) + O(0,0,0)
              point_type X, Y;
              ::math::linear::matrix::column( X, plane2display, 0 );
              ::math::linear::matrix::column( Y, plane2display, 1 );
@@ -91,9 +61,9 @@ namespace math
              ::math::linear::vector::cross( result, X, Y );
             }
 
-           void point( homography_type const&  plane2display, scalar_type const& epsilon = 1e-8 )
+           void point( homography_type const&  plane2display )
             { // display = N(0,0,1) + O(0,0,0)
-             return  point( m_point, plane2display, epsilon );
+             return  this_type::point( m_point, plane2display );
             }
 
          public:
@@ -118,7 +88,7 @@ namespace math
              return m_point;
             }
          private:
-           point_type m_point;     //!< in screen coordinates
+           point_type m_point;     //!< in homography coordinates
 
          private:
            homography_type m_plane2display, m_plane2displayT;

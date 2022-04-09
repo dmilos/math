@@ -3,7 +3,7 @@
 
 // ::math::geometry::projective::camera::ha2d( h_alpha, aspect )
 
-//#include <utility>
+
 
 
 

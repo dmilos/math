@@ -3,7 +3,7 @@
 
 // ::math::geometry::projective::camera::intrinsic::angle( h_alpha, aspect )
 
-//#include <utility>
+
 
 
 

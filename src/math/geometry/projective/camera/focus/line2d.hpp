@@ -3,7 +3,7 @@
 
 // ::math::geometry::projective::camera::focus::line2d( focus, A, B, length, distance )
 
-//#include <utility>
+
 
 
 

@@ -3,7 +3,7 @@
 
 // ::math::geometry::projective::camera::va2h( v_alpha, aspect )
 
-//#include <utility>
+
 
 
 

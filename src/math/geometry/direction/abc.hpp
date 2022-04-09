@@ -189,19 +189,24 @@ namespace math
              return result;
             }
 
-        public:
+         public:
            array_type const&  array()const{ return m_array; }
            array_type      &  array()     { return m_array; }
 
-        public:
-           // A * x  +  B * y  +  C = 0
-          scalar_type const& A()const{ return m_array[0]; }
-          scalar_type      & A()     { return m_array[0]; }
-          scalar_type const& B()const{ return m_array[1]; }
-          scalar_type      & B()     { return m_array[1]; }
-          scalar_type      & C()     { return m_array[2]; }
-          scalar_type const& C()const{ return m_array[2]; }
-        private:
+         public:
+            // A * x  +  B * y  +  C = 0
+           scalar_type const& A()const{ return m_array[0]; }
+           scalar_type      & A()     { return m_array[0]; }
+           scalar_type const& B()const{ return m_array[1]; }
+           scalar_type      & B()     { return m_array[1]; }
+           scalar_type      & C()     { return m_array[2]; }
+           scalar_type const& C()const{ return m_array[2]; }
+           scalar_type const& C( point2_type const& point )
+            {
+             return this->C() = -( this->A() * point[0] + this->B() * point[1] );
+            }
+
+         private:
            array_type m_array;
         };
 
@@ -210,4 +215,3 @@ namespace math
  }
 
 #endif
-

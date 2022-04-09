@@ -1,12 +1,13 @@
 #ifndef Dh_math_linear_affine_retarget
  #define Dh_math_linear_affine_retarget
 
- // ::math::linear::affine::retarget<scalar_name,dimension_number>
+ // ::math::linear::affine::retarget<scalar_name,dimension_number>(result, A, source, target )
 
 #include <limits>
 
 #include "./structure.hpp"
-#include "./compose.hpp"
+#include "./structure.hpp"
+#include "../../geometry/interval/structure.hpp"
 
 
 
@@ -18,36 +19,36 @@ namespace math
     namespace affine
      {
 
-      template < typename scala_name, unsigned dimension_number  >
+      template < typename scalar_name, unsigned dimension_number  >
        bool retarget
         (
-          ::math::linear::affine::structure<scala_name,dimension_number>            & result //!<  operates on source give result on target
-         ,::math::linear::affine::structure<scala_name,dimension_number>       const& affine //!< operates on [-1,...,-1] x [ +1, ..., +1 ]
+          ::math::linear::affine::structure<scalar_name,dimension_number>            & result //!< operates on @source give result on @target
+         ,::math::linear::affine::structure<scalar_name,dimension_number>       const&      A //!< operates on [-1,...,-1] x [ +1, ..., +1 ]
          ,::math::geometry::interval::structure<scalar_name,dimension_number>  const& target
          ,::math::geometry::interval::structure<scalar_name,dimension_number>  const& source
-        )
+        ) // result = target * A * source
         {
-         /* TODO
-         ::math::linear::affine::structure<scala_name,dimension_number>  pre;  ::math::linear::affine::zero( pre );
-         ::math::linear::affine::structure<scala_name,dimension_number>  post; ::math::linear::affine::zero( post );
+         ::math::linear::affine::structure<scalar_name,dimension_number>  pre;  ::math::linear::affine::one( pre );
+         ::math::linear::affine::structure<scalar_name,dimension_number>  post; ::math::linear::affine::one( post );
 
-         for( int index =0; i< dimension_number-1; ++index  )
+         for( int index = 0; index < dimension_number; ++index )
           {
            auto const& a = source[0][index];
            auto const& b = source[1][index];
 
-           pre [ index ][ index ] = scala_name(2)/( b - a );  pre[ index ][ dimension_number - 1 ] = -( scala_name(2)*a/(b-a) + scala_name(1) );
+           pre.matrix() [ index ][ index ] = scalar_name(2)/( b - a );  
+           pre.vector()[ index ] = -( scalar_name(2)*a/(b-a) + scalar_name(1) );
 
            auto const& A = target[0][index];
            auto const& B = target[1][index];
-           post[ index ][ index ] = ( B - A )/scala_name(2);  post[ index ][ dimension_number - 1 ] = ( B + A ) / scala_name(2) ;
+           post.matrix()[ index ][ index ] = ( B - A )/scalar_name(2);  
+           post.vector()[ index ] = ( B + A ) / scalar_name(2) ;
           }
 
-         ::math::linear::affine::structure<scala_name,dimension_number>  tmp;
-         ::math::linear::affine::multiply( tmp, matrix,  pre );
-         ::math::linear::affine::multiply( result, post,  tmp );
-          */
-         return false;
+         ::math::linear::affine::structure<scalar_name,dimension_number>  tmp;
+         ::math::linear::affine::compose( tmp, A,  pre );
+         ::math::linear::affine::compose( result, post,  tmp );
+         return true;
         }
 
      }

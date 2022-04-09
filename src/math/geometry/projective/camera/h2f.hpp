@@ -3,7 +3,7 @@
 
 // ::math::geometry::projective::camera::h2f( horisontal_alpha )
 
-//#include <utility>
+
 
 
 

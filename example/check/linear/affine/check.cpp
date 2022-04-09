@@ -39,7 +39,7 @@ void check2d()
   ::math::linear::affine::construct( a1, { v1, v2, v3, v4, v5 }, { v1, v2, v3, v4, v5 } );
   ::math::linear::affine::construct( a1, { v1, v2, v3, v4, v5 }  );
   ::math::linear::affine::construct( a1, a2, a3 );
-  
+
   a1 =  ::math::linear::affine::id<double,4>();
   ::math::linear::affine::id<double,4>( a2 );
   ::math::linear::affine::id( ::math::linear::affine::structure<double,4>{} );
@@ -57,6 +57,8 @@ int main( int argc, char *argv[] )
   ::math::linear::affine::structure<double,3> a1,a2,a3;
   ::math::linear::vector::structure<double,3> v1,v2,v3,v4;
   ::math::linear::matrix::structure<double,3,3> m1,m2,m3{0}; m2 = m3;
+  ::math::geometry::interval::structure<double,3>   i0, i1, i2;
+
 
   a1 =  ::math::linear::affine::id<double,3>();
   ::math::linear::affine::id<double,3>( a2 );
@@ -93,6 +95,10 @@ int main( int argc, char *argv[] )
   ::math::linear::affine::construct( a1, { v1, v2, v3, v4 }, { v1, v2, v3, v4 } );
   ::math::linear::affine::construct( a1, { v1, v2, v3, v4 } );
   ::math::linear::affine::construct( a1, a2, a3 );
+
+
+  ::math::linear::affine::retarget(a1, a2, i0, i1 );
+
 
   return EXIT_SUCCESS;
  }
