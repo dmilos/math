@@ -39,17 +39,19 @@ namespace math
            typedef ::math::linear::homography::principal<scalar_type> this_type;
 
          public:
-           ABC_type const& axis( homography_type const& plane2display )
+           static void process( ABC_type & axis, point_type & point, ABC_type & horizon, homography_type const& plane2display )
             { //!< exists always  // display = N(0,0,1) + O(0,0,0)
-             ::math::linear::homography::horizon_invert<scalar_name>( m_horizon, plane2display );
-             this_type::point( m_point, plane2display );
+             this_type::horizon( horizon, plane2display );
+             this_type::point(     point, plane2display );
 
-             m_axis.A() = +m_horizon.B();
-             m_axis.B() = -m_horizon.A();
-             m_axis.A() *= m_point[2];
-             m_axis.B() *= m_point[2];
-             m_axis.C( { m_point[0], m_point[1] } );
-             return m_axis;
+             axis.A() = +horizon.B() * point[2];
+             axis.B() = -horizon.A() * point[2];
+             axis.C()= -( axis.A() * point[0] + axis.B() * point[1] );
+            }
+
+           void process( homography_type const& plane2display )
+            { // display = N(0,0,1) + O(0,0,0)
+             this_type::process( m_axis, m_point, m_horizon, plane2display );
             }
 
            static void point( point_type & result, homography_type const&  plane2display )
@@ -64,6 +66,16 @@ namespace math
            void point( homography_type const&  plane2display )
             { // display = N(0,0,1) + O(0,0,0)
              return  this_type::point( m_point, plane2display );
+            }
+
+           static void horizon( ABC_type & result, homography_type const&  plane2display ) //!< just warapper for homography::horizon_invert 
+            { //! display = N(0,0,1) + O(0,0,0)
+             ::math::linear::homography::horizon_invert<scalar_name>( result, plane2display );
+            }
+
+           void horizon( homography_type const&  plane2display )
+            { // display = N(0,0,1) + O(0,0,0)
+             return  this_type::horizon( m_horizon, plane2display );
             }
 
          public:
@@ -89,10 +101,6 @@ namespace math
             }
          private:
            point_type m_point;     //!< in homography coordinates
-
-         private:
-           homography_type m_plane2display, m_plane2displayT;
-           homography_type m_display2plane, m_display2planeT;
         };
 
      }

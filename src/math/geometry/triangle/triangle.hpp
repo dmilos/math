@@ -8,3 +8,6 @@
 #include "./angle.hpp"
 #include "./height.hpp"
 #include "./valid.hpp"
+
+#include "./circumcenter.hpp"
+#include "./orthocenter.hpp"
