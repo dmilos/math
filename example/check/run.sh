@@ -5,6 +5,10 @@ cd ./algorithm
 ./run.sh
 cd ..
 
+cd ./complex
+./run.sh
+cd ..
+
 cd ./function
 ./run.sh
 cd ..

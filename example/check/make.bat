@@ -6,6 +6,11 @@
 @call make.bat
 @cd ..
 @
+@
+@cd complex
+@call make.bat
+@cd ..
+@
 @cd geometry
 @call make.bat
 @cd ..
@@ -27,3 +32,4 @@
 @cd topology
 @call make.bat
 @cd ..
+

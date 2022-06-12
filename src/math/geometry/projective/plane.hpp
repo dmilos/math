@@ -28,7 +28,7 @@ namespace math
       template<  typename scalar_name>
        void plane // Assumed pinhole camera z-up, x-right, y-strait ahead ahead, project on to plane Z0X ( 0*x + 1*y + 0*z=0 )
         (
-          ::math::geometry::plane::no3d<scalar_name>            & no3d
+          ::math::geometry::plane::no3d<scalar_name>           & no3d
          ,::math::geometry::direction::ABC2D<scalar_name> const& horizon
          ,::math::linear::vector::point<scalar_name, 3>   const& origin   //!< Any point of plane in (x,y,z)
         )
@@ -43,9 +43,24 @@ namespace math
         }
 
       template<  typename scalar_name >
+       void plane // Assumed pinhole camera z-up, x-right, y-strait ahead ahead, project on to plane Z0X ( 0*x + 1*y + 0*z=0 )
+        (
+           ::math::geometry::plane::no3d<scalar_name>               & no3d
+          ,::math::linear::vector::point<scalar_name, 3>       const& first    //!< Homogeneous coordinate of horizon point
+          ,::math::linear::vector::point<scalar_name, 3>       const& second   //!< Homogeneous coordinate of horizon point
+          ,::math::linear::vector::point<scalar_name, 3>       const& origin   //!< Any point of plane
+        )
+       {
+        typedef ::math::geometry::direction::horizon<scalar_name>   horizon_type;
+        horizon_type vanish;
+        vanish.process( first, second );
+        ::math::geometry::projective::plane( no3d, ::math::geometry::direction::ABC2D<scalar_name>( vanish.line() ), origin );
+       }
+
+      template<  typename scalar_name >
        void plane  // Assumed pinhole camera z-up, x-right, y-strait ahead, project on to plane Z0X ( 0*x + 1*y + 0*z=0 )
         (
-          ::math::geometry::plane::no3d<scalar_name>           & no3d
+          ::math::geometry::plane::no3d<scalar_name>           & no3d //!< no3d.origin() just dummy.
          ,::math::geometry::direction::ABC2D<scalar_name> const& left
          ,::math::geometry::direction::ABC2D<scalar_name> const& right
          ,::math::geometry::direction::ABC2D<scalar_name> const& down
@@ -70,11 +85,10 @@ namespace math
          }
         }
 
-
       template<  typename scalar_name >
        void plane // Assumed pinhole camera z-up, x-right, y-strait ahead ahead, project on to plane Z0X ( 0*x + 1*y + 0*z=0 )
         (
-          ::math::geometry::plane::no3d<scalar_name>         & no3d
+          ::math::geometry::plane::no3d<scalar_name>         & no3d //!< no3d.origin() will be at( x, y, 1 ).
          ,::math::linear::vector::point<scalar_name, 2> const& a0 //!< (0,0) point
          ,::math::linear::vector::point<scalar_name, 2> const& a1 //!< (1,0) point
          ,::math::linear::vector::point<scalar_name, 2> const& a2 //!< (0,1) point
@@ -99,8 +113,8 @@ namespace math
         (
           ::math::geometry::plane::parametric3d<scalar_name>       & parametric
          ,::math::geometry::plane::no3d<scalar_name>          const& no3d
-         ,::math::linear::vector::point<scalar_name, 2>       const& x  //! Point on X axis in y=N(0,1,0) + P(0,1,0) plane
-         ,::math::linear::vector::point<scalar_name, 2>       const& y  //! Point on Y axis in y=N(0,1,0) + P(0,1,0) plane
+         ,::math::linear::vector::point<scalar_name, 2>       const& x          //! Point on X axis in y=N(0,1,0) + P(0,1,0) plane
+         ,::math::linear::vector::point<scalar_name, 2>       const& y          //! Point on Y axis in y=N(0,1,0) + P(0,1,0) plane
         )
         {
          typedef ::math::geometry::direction::parametric<scalar_name, 3 >      line3D_type;
@@ -129,12 +143,12 @@ namespace math
       template< typename scalar_name >
        bool plane // Assumed pinhole camera z-up, x-right, y-strait ahead ahead, project on to plane Z0X ( 0*x + 1*y + 0*z=0 )
         (
-          ::math::geometry::plane::parametric3d<scalar_name>        & parametric
-         ,::math::geometry::plane::no3d <scalar_name>          const& no3d //!< Note: do not forget to adjust origin() after this call
-         ,::math::linear::vector::structure<scalar_name, 2>    const& x //!< point on X axis in y=(0,1,0) plane coordinate
-         ,::math::linear::vector::structure<scalar_name, 2>    const& y //!< point on Y axis in y=(0,1,0) plane coordinate
-         ,scalar_name const& width             //!< Expected length of X axis
-         ,scalar_name const& height            //!< Expected length of Y axis
+          ::math::geometry::plane::parametric3d<scalar_name>        & parametric //!<
+         ,::math::geometry::plane::no3d <scalar_name>          const& no3d  //!< Note: do not forget to re-adjust origin() after this call
+         ,::math::linear::vector::structure<scalar_name, 2>    const& x     //!< point on X axis in y=(0,1,0) plane coordinate
+         ,::math::linear::vector::structure<scalar_name, 2>    const& y     //!< point on Y axis in y=(0,1,0) plane coordinate
+         ,scalar_name const& width                                          //!< Expected length of X axis
+         ,scalar_name const& height                                         //!< Expected length of Y axis
         )
         {
          if( false == ::math::geometry::projective::plane( parametric, no3d, x, y ) )
@@ -155,21 +169,6 @@ namespace math
 
          return true;
         }
-
-      template<  typename scalar_name >
-       void plane // Assumed pinhole camera z-up, x-right, y-strait ahead ahead, project on to plane Z0X ( 0*x + 1*y + 0*z=0 )
-        (
-           ::math::geometry::plane::no3d<scalar_name>               & no3d
-          ,::math::linear::vector::point<scalar_name, 3>       const& first    //!< Homogeneous coordinate of horizon point
-          ,::math::linear::vector::point<scalar_name, 3>       const& second   //!< Homogeneous coordinate of horizon point
-          ,::math::linear::vector::point<scalar_name, 3>       const& origin   //!< Any point of plane
-        )
-       {
-        typedef ::math::geometry::direction::horizon<scalar_name>   horizon_type;
-        horizon_type vanish;
-        vanish.process( first, second );
-        ::math::geometry::projective::plane( no3d, ::math::geometry::direction::ABC2D<scalar_name>( vanish.line() ), origin );
-       }
 
      }
    }

@@ -11,7 +11,7 @@
     {
 
      template< typename scalar_name, typename size_name = unsigned >
-      inline scalar_name VanDerCorput( size_name index, scalar_name const& base )
+      inline scalar_name VanDerCorput( size_name index, size_name const& base )
        { //! RosettaCodeData copy/paste. However optimize this is result :) 
         scalar_name result = 0, denominator = 1;
         while( index )

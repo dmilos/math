@@ -26,6 +26,8 @@ int main( int argc, char *argv[] )
   two10_t     dt0;
 
   ::math::geometry::interval::center( p1, i1 );
+  ::math::geometry::interval::center( i1 );
+  ::math::geometry::interval::center( i1, p1 );
 
   ::math::geometry::interval::volume( i1 );
   ::math::geometry::interval::valid( i1 );

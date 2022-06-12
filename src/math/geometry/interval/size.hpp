@@ -1,7 +1,8 @@
 #ifndef math_geometry_interval_size_hpp_
  #define math_geometry_interval_size_hpp_
  
-// ::math::geometry::interval::size( )
+// ::math::geometry::interval::size( point, instance )
+// ::math::geometry::interval::size( instance )
 
 #include "./structure.hpp"
 #include "../../linear/vector/addition.hpp"

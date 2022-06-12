@@ -31,7 +31,7 @@ namespace math
 
             auto length2 = ::math::linear::vector::dot( no3d.normal(), no3d.normal() );
             auto lambda = ::math::linear::vector::dot( contra_heading, no3d.normal() );
-            lambda /=  length2;
+            lambda /= length2;
 
             ::math::linear::vector::combine( projection, 1, point, lambda, no3d.normal() );
            }

@@ -207,4 +207,3 @@ namespace math
  }
 
 #endif
-

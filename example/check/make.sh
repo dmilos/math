@@ -6,6 +6,10 @@ cd ./algorithm
 ./make.sh
 cd ..
 
+cd ./complex
+./make.sh
+cd ..
+
 cd ./function
 ./make.sh
 cd ..
@@ -33,3 +37,4 @@ cd ..
 cd ./topology
 ./make.sh
 cd ..
+

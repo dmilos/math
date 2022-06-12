@@ -6,3 +6,4 @@
 #include "./multiply.hpp"
 #include "./scale.hpp"
 #include "./subtraction.hpp"
+#include "./length.hpp"

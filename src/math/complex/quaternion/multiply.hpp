@@ -31,6 +31,19 @@
           result_param[3] = l[0]*r[3] + l[1]*r[2] - l[2]*r[1] + l[3]*r[0];
          }
 
+       template< typename scalar_name >
+        inline
+        void
+        multiply
+         (
+           ::math::complex::quaternion::structure< scalar_name >      & result_param
+          ,::math::complex::quaternion::structure< scalar_name > const& l
+         )
+         {
+          ::math::complex::quaternion::structure< scalar_name > t = result_param;
+          ::math::complex::quaternion::multiply( result_param, t, l );
+         }
+
       }
     }
   }
