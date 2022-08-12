@@ -66,7 +66,7 @@
          {
           ::math::linear::vector::structure< scalar_name, dimension_number > pivot;
           ::math::linear::vector::convex<scalar_name>( pivot, scalar_name(0.5), model[0], model[1] );
-          return ::math::geometry::interval::inflate<scalar_name>( result, pivot, scale, model );
+          return ::math::geometry::interval::inflate<scalar_name,dimension_number>( result, pivot, scale, model );
          }
          
        template< typename scalar_name, unsigned dimension_number >
@@ -81,7 +81,7 @@
          {
           ::math::linear::vector::structure< scalar_name, dimension_number > pivot;
           ::math::linear::vector::convex<scalar_name>( pivot, scalar_name(0.5), model[0],model[1] );
-          return ::math::geometry::interval::inflate<scalar_name>( result, pivot, scale, model );
+          return ::math::geometry::interval::inflate<scalar_name,dimension_number>( result, pivot, scale, model );
          }
 
       }
