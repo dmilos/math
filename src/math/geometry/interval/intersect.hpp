@@ -25,7 +25,7 @@
      namespace interval
       {
 
-       template < typename scalar_name,unsigned dimension_number >
+       template < typename scalar_name,::math::type::size_type dimension_number >
         bool
         intersect
          (
@@ -48,7 +48,7 @@
           return true;
          }
 
-       template < typename scalar_name,unsigned dimension_number >
+       template < typename scalar_name,::math::type::size_type dimension_number >
         bool
         intersect
          (
@@ -70,7 +70,7 @@
           return true;
          }
 
-       template < typename scalar_name,unsigned dimension_number >
+       template < typename scalar_name,::math::type::size_type dimension_number >
         bool
         intersect_check
          (
@@ -89,7 +89,7 @@
           return true;
          }
 
-       template < typename scalar_name,unsigned dimension_number >
+       template < typename scalar_name,::math::type::size_type dimension_number >
         void
         intersect_weak
          (
@@ -107,7 +107,7 @@
            }
          }
 
-       template < typename scalar_name,unsigned dimension_number >
+       template < typename scalar_name,::math::type::size_type dimension_number >
         void
         intersect_weak
          (
@@ -124,7 +124,7 @@
            }
          }
 
-       template < typename scalar_name,unsigned dimension_number >
+       template < typename scalar_name,::math::type::size_type dimension_number >
         bool
         intersect
          (

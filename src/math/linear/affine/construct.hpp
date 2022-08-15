@@ -22,7 +22,7 @@
      namespace affine
       {
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         bool construct
          (
            ::math::linear::affine::structure<scalar_name,dimension_number>      & result

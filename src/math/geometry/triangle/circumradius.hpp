@@ -33,7 +33,7 @@
           return a*b*c/sqrt( f0 * fA * fB * fC );
          }
 
-       template<  typename scalar_name, unsigned dimension_number >
+       template<  typename scalar_name, ::math::type::size_type dimension_number >
         scalar_name
         circumradius
          (

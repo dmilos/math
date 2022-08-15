@@ -57,7 +57,7 @@
      template
       <
         typename scalar_name
-       ,unsigned  size_number
+       ,::math::type::size_type  size_number
        ,typename parameter_name
       >
       scalar_name evaluate( parameter_name const& paramter, std::array<scalar_name,size_number> const& coefficient )

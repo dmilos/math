@@ -17,19 +17,19 @@
      namespace vector
       {
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
-        std::pair<std::size_t, scalar_name >
+        std::pair<::math::type::size_type, scalar_name >
         inferior
          (
            ::math::linear::vector::structure< scalar_name, dimension_number > const& v
          )
          {
-          std::pair<std::size_t, scalar_name > result;
+          std::pair<::math::type::size_type, scalar_name > result;
           auto & index = result.first = 0;
           auto & smallest = result.second = fabs( v[index] );
 
-          for( std::size_t i = 1; i < dimension_number; ++i )// TODO not optimal
+          for( ::math::type::size_type i = 1; i < dimension_number; ++i )// TODO not optimal
            {
             scalar_name chalenger = fabs( v[i] );
             if( chalenger < smallest )
@@ -44,13 +44,13 @@
 
        template< typename scalar_name >
         inline
-        std::pair<std::size_t, scalar_name >
+        std::pair<::math::type::size_type, scalar_name >
         inferior
          (
            ::math::linear::vector::structure< scalar_name, 2 > const& v
          )
          {
-          std::pair<std::size_t, scalar_name > result;
+          std::pair<::math::type::size_type, scalar_name > result;
           auto & index = result.first = 0;
           auto & smallest = result.second = fabs( v[index] );
 
@@ -61,13 +61,13 @@
 
        template< typename scalar_name >
         inline
-        std::pair<std::size_t, scalar_name >
+        std::pair<::math::type::size_type, scalar_name >
         inferior
          (
            ::math::linear::vector::structure< scalar_name, 3 > const& v
          )
          {
-          std::pair<std::size_t, scalar_name > result;
+          std::pair<::math::type::size_type, scalar_name > result;
           auto & index=result.first = 0;
           auto & smallest = result.second = fabs( v[index] );
 
@@ -79,13 +79,13 @@
 
        template< typename scalar_name >
         inline
-        std::pair<std::size_t, scalar_name >
+        std::pair<::math::type::size_type, scalar_name >
         inferior
          (
            ::math::linear::vector::structure< scalar_name, 4 > const& v
          )
          {
-          std::pair<std::size_t, scalar_name > result;
+          std::pair<::math::type::size_type, scalar_name > result;
           auto & index=result.first = 0;
           auto & smallest = result.second = fabs( v[index] );
 

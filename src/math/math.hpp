@@ -5,6 +5,7 @@
 #include <array>
 #include <utility>
 
+#include "./type/type.hpp"
 
 #include "./constants.hpp"
 

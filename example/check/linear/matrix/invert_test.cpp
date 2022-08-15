@@ -5,13 +5,13 @@
 #include "math/math.hpp"
 
 
-template< typename scalar_name, unsigned width_number, unsigned height_number >
+template< typename scalar_name, math::type::size_t width_number, math::type::size_t height_number >
  void print ( ::math::linear::matrix::structure<scalar_name,width_number,height_number> const& m )
   {
-   for( unsigned j=0; j< width_number; j++ )
+   for( math::type::size_t j=0; j< width_number; j++ )
     {
      std::cout << std::endl;
-     for( unsigned i=0; i< height_number; i++ )
+     for( math::type::size_t i=0; i< height_number; i++ )
       {
        std::cout << std::setw(10) << std::fixed << m[j][i] << ", ";
       }

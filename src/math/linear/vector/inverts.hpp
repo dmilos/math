@@ -18,7 +18,7 @@
      namespace vector
       {
 
-       template< typename scalar_name, typename scalar2_name, unsigned dimension_number>
+       template< typename scalar_name, typename scalar2_name, ::math::type::size_type dimension_number>
         inline
         void
         invert
@@ -83,7 +83,7 @@
           result_param[3] = scalar_name( scalar_param ) / right_param[3];
          }
 
-       template< typename scalar_name, typename scalar2_name, unsigned dimension_number >
+       template< typename scalar_name, typename scalar2_name, ::math::type::size_type dimension_number >
         inline
         void
         invert

@@ -19,12 +19,12 @@
        template
         <
           typename scalar_name
-         ,unsigned dimension_number
+         ,::math::type::size_type dimension_number
         >
         class structure
          {
           public:
-            typedef std::size_t   size_type;
+            typedef ::math::type::size_type   size_type;
             typedef scalar_name scalar_type;
 
             typedef ::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number> matrix_type;

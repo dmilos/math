@@ -15,7 +15,7 @@
      namespace affine
       {
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         bool invert
          (
            ::math::linear::affine::structure<scalar_name,dimension_number>      & result
@@ -32,7 +32,7 @@
           return true;
          }
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         bool invert
          (
            ::math::linear::affine::structure<scalar_name,dimension_number>      & a

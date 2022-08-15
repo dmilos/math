@@ -19,7 +19,7 @@ namespace math
     namespace matrix
      {
 
-      template < typename scalar_name, unsigned dimension_number  >
+      template < typename scalar_name, ::math::type::size_type dimension_number  >
        bool retarget
         (
           ::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number>            & result //!<  operates on source give result on target

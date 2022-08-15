@@ -77,7 +77,7 @@
              );
          }
 
-       template< typename scalar_name, unsigned square_number >
+       template< typename scalar_name, ::math::type::size_type square_number >
         scalar_name
         determinant
          (
@@ -87,7 +87,7 @@
           ::math::linear::matrix::structure<scalar_name,square_number-1,square_number-1> sub;
           scalar_name sign = 1;
           scalar_name result = 0;
-          for( unsigned i = 0; i < square_number; ++i )
+          for( ::math::type::size_type i = 0; i < square_number; ++i )
            {
             ::math::linear::matrix::submatrix( sub, m, 0, i );
             result += sign * m[0][i] * ::math::linear::matrix::determinant( sub );

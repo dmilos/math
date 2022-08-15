@@ -48,7 +48,7 @@
           return ::math::geometry::tetrahedron::volume( t[0], t[1], t[2], t[3] );
          }
 
-       // TODO template<  typename scalar_name, unsigned dimension_number >
+       // TODO template<  typename scalar_name, ::math::type::size_type dimension_number >
        // TODO  scalar_name
        // TODO  volume
        // TODO   (

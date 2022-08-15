@@ -20,7 +20,7 @@ namespace math
     namespace homography
      {
 
-      template<  typename scalar_name, unsigned dimension_number >
+      template<  typename scalar_name, ::math::type::size_type dimension_number >
        void transform
         (
           ::math::linear::vector::structure<      scalar_name, dimension_number >         & result
@@ -30,15 +30,15 @@ namespace math
         {
          scalar_name divisor  =  display2space[dimension_number][dimension_number];
 
-         for( std::size_t i=0; i < dimension_number; ++i )
+         for( ::math::type::size_type i=0; i < dimension_number; ++i )
           {
            divisor += display2space[dimension_number][ i ] * point[ i ];
           }
 
-         for( std::size_t i=0; i< dimension_number; ++i )
+         for( ::math::type::size_type i=0; i< dimension_number; ++i )
           {
            result[i] = display2space[i][dimension_number];
-           for( std::size_t j=0; j < dimension_number; ++j )
+           for( ::math::type::size_type j=0; j < dimension_number; ++j )
             {
              result[i] += display2space[i][j] * point[j];
             }

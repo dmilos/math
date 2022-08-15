@@ -18,7 +18,7 @@ namespace math
     template
       <
         typename scalar_name      = long double
-       ,unsigned dimension_number = 1
+       ,::math::type::size_type dimension_number = 1
       >
       class minimum
       {

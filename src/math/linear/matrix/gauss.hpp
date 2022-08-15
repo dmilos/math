@@ -18,19 +18,19 @@
        template
         <
           typename scalar_name
-         ,unsigned width_number
-         ,unsigned height_number
+         ,::math::type::size_type width_number
+         ,::math::type::size_type height_number
         >
-        unsigned gauss
+        ::math::type::size_type gauss
          (
            ::math::linear::matrix::structure<scalar_name,width_number,height_number>      & input
           ,scalar_name const& epsilon  = 1e-6
          )
          {
-          typedef unsigned size_type;
+          typedef ::math::type::size_type size_type;
           typedef scalar_name scalar_type;
 
-          const unsigned square = ( width_number<height_number ? width_number : height_number );
+          const ::math::type::size_type square = ( width_number<height_number ? width_number : height_number );
           ::math::linear::vector::structure< bool,( width_number<height_number ? width_number : height_number ) > flag{false};
 
           size_type rank = 0;

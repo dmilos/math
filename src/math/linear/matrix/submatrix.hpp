@@ -13,13 +13,13 @@
      namespace matrix
       {
 
-       template< typename scalar_name, unsigned width_number, unsigned height_number >
+       template< typename scalar_name, ::math::type::size_type width_number, ::math::type::size_type height_number >
         void submatrix
          (
            ::math::linear::matrix::structure<scalar_name, width_number-1, height_number-1>         & result
           ,::math::linear::matrix::structure<scalar_name, width_number, height_number >       const& m
-          , std::size_t                                                                       const& column
-          , std::size_t                                                                       const& row
+          , ::math::type::size_type                                                           const& column
+          , ::math::type::size_type                                                           const& row
          )
          {
           for( std::size_t j=0; j < height_number-1; ++j )

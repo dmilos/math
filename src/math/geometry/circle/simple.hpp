@@ -14,13 +14,13 @@
      namespace circle
       {
 
-       template<typename scalar_name,unsigned dimension_number >
+       template<typename scalar_name, std::size_t dimension_number >
          class unit;
 
        template
         <
           typename scalar_name
-         ,unsigned dimension_number
+         ,std::size_t dimension_number
         >
         class simple
          {

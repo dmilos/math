@@ -25,7 +25,7 @@
        template
         <
           typename scalar_name
-         ,unsigned dimension_number
+         ,std::size_t dimension_number
         >
         struct U2P //!< Intersect unit circle and direction
          {
@@ -78,7 +78,7 @@
        template
         <
           typename scalar_name
-         ,unsigned dimension_number
+         ,std::size_t dimension_number
         >
         unsigned intersect
          (

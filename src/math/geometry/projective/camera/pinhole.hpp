@@ -30,7 +30,7 @@ namespace math
       namespace camera
        {
 
-        template< typename scalar_name/* unsigned dimension_number, unsigned orientation_number, unsigned permutation_number*/ >
+        template< typename scalar_name/* ::math::type::size_type dimension_number, unsigned orientation_number, unsigned permutation_number*/ >
          class pinhole // Project on to y=1 plane;
           {
            public:

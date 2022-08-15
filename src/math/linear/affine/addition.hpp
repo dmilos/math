@@ -15,7 +15,7 @@
      namespace affine
       {
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         void addition
          (
            ::math::linear::affine::structure<scalar_name,dimension_number>      & result
@@ -27,7 +27,7 @@
           ::math::linear::vector::addition( result.vector(), left.vector(), right.vector() );
          }
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         void addition
          (
            ::math::linear::affine::structure<scalar_name,dimension_number>      & result

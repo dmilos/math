@@ -18,21 +18,21 @@
        template
         <
           typename scalar_name
-         ,unsigned dimension_number
+         ,::math::type::size_type dimension_number
         >
          using structure = std::array< scalar_name, dimension_number >;
 
        template
         <
           typename scalar_name
-         ,unsigned dimension_number
+         ,::math::type::size_type dimension_number
         >
          using vector = ::math::linear::vector::structure< scalar_name, dimension_number >;
 
        template
         <
           typename scalar_name
-         ,unsigned dimension_number
+         ,::math::type::size_type dimension_number
         >
          using point = ::math::linear::vector::structure< scalar_name, dimension_number >;
 

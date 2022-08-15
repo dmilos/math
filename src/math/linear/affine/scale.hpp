@@ -15,7 +15,7 @@
      namespace affine
       {
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         void scale
          (
            ::math::linear::affine::structure<scalar_name,dimension_number> & result
@@ -26,7 +26,7 @@
           ::math::linear::vector::scale< scalar_name >( result.vector(), scalar );
          }
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         void scale
          (
            ::math::linear::affine::structure<scalar_name,dimension_number>      & result
@@ -38,7 +38,7 @@
           ::math::linear::vector::scale< scalar_name >( result.vector(), left.vector(), right );
          }
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         void scale
          (
            ::math::linear::affine::structure<scalar_name,dimension_number>      & result

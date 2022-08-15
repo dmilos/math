@@ -10,12 +10,12 @@
      namespace vector
       {
 
-       template< unsigned dimension_left_number, typename scalar_name, unsigned dimension_right_number  >
+       template< ::math::type::size_type dimension_left_number, typename scalar_name, ::math::type::size_type dimension_right_number  >
         ::math::linear::vector::structure<scalar_name,dimension_left_number>
         reduce( ::math::linear::vector::structure<scalar_name,dimension_right_number> const& right )
          {
           ::math::linear::vector::structure<scalar_name,dimension_left_number> result;
-          for( unsigned index = 0; index < std::min( dimension_left_number, dimension_right_number ); ++index )
+          for( ::math::type::size_type index = 0; index < std::min( dimension_left_number, dimension_right_number ); ++index )
            {
             result[ index ] = right[ index ];
            }
@@ -23,7 +23,7 @@
          }
 
 
-       template< unsigned dimension_left_number, typename scalar_name, unsigned dimension_right_number  >
+       template< ::math::type::size_type dimension_left_number, typename scalar_name, ::math::type::size_type dimension_right_number  >
         ::math::linear::vector::structure<scalar_name,dimension_left_number> &
         reduce
          (
@@ -31,7 +31,7 @@
           ,::math::linear::vector::structure<scalar_name,dimension_right_number> const& right
          )
          {
-          for( unsigned index = 0; index < std::min( dimension_left_number, dimension_right_number ); ++index )
+          for( ::math::type::size_type index = 0; index < std::min( dimension_left_number, dimension_right_number ); ++index )
            {
             result[ index ] = right[ index ];
            }

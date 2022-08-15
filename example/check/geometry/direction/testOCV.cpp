@@ -8,7 +8,7 @@
 
 
 
-typedef std::array<double,2> point2d_type;
+typedef std::array<double, 2> point2d_type;
 typedef std::array<double, 3> point3d_type;
 
 int g_X = 100;

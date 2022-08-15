@@ -20,7 +20,7 @@ namespace math
       template
        <
          typename scalar_name = double
-         ,unsigned dimension_number = 3
+         ,::math::type::size_type dimension_number = 3
        >
        ::math::geometry::plane::noNd<scalar_name,dimension_number>
        bisector

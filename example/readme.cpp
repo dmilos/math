@@ -29,6 +29,6 @@ int main( int argc, char *argv[] )
   ::math::geometry::ellipse::intersect( l0, l1, s, direction );
   ::math::geometry::ellipse::intersect( l0, l1, g, direction );
 
-  
+
   return EXIT_SUCCESS;
  }

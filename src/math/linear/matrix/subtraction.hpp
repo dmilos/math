@@ -16,7 +16,7 @@
      namespace matrix
       {
 
-       template< typename scalar_name, unsigned width_number, unsigned height_number >
+       template< typename scalar_name, ::math::type::size_type width_number, ::math::type::size_type height_number >
         void subtraction
          (
            ::math::linear::matrix::structure<scalar_name,width_number,height_number>      & result
@@ -24,22 +24,22 @@
           ,::math::linear::matrix::structure<scalar_name,width_number,height_number> const& right
          )
          {
-          for( unsigned i=0; i< height_number; i++ )
-           for( unsigned j=0; j< width_number; j++ )
+          for( ::math::type::size_type i=0; i< height_number; i++ )
+           for( ::math::type::size_type j=0; j< width_number; j++ )
             {
              result[i][j] = left[i][j] - right[i][j];
             }
          }
 
-       template< typename scalar_name, unsigned width_number, unsigned height_number >
+       template< typename scalar_name, ::math::type::size_type width_number, ::math::type::size_type height_number >
         void subtraction
          (
            ::math::linear::matrix::structure<scalar_name,width_number,height_number>      & result
           ,::math::linear::matrix::structure<scalar_name,width_number,height_number> const& right
          )
          {
-          for( unsigned i=0; i< height_number; i++ )
-           for( unsigned j=0; j< width_number; j++ )
+          for( ::math::type::size_type i=0; i< height_number; i++ )
+           for( ::math::type::size_type j=0; j< width_number; j++ )
             {
              result[i][j] -= right[i][j];
             }

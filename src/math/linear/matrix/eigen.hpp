@@ -31,13 +31,13 @@
        namespace eigen
         {
 
-         template< typename scalar_name, unsigned dimension_number >
+         template< typename scalar_name, ::math::type::size_type dimension_number >
           class data
            {
             public:
 
               typedef scalar_name scalar_type;
-              typedef std::size_t   size_type;
+              typedef ::math::type::size_type   size_type;
 
               typedef ::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number> matrix_type;
               typedef ::math::linear::vector::structure<scalar_name,dimension_number> vector_type;
@@ -60,7 +60,7 @@
               size_type   m_count;
            };
 
-         template< typename scalar_name, unsigned dimension_number >
+         template< typename scalar_name, ::math::type::size_type dimension_number >
           class algoritham
            : public ::math::linear::matrix::eigen::data< scalar_name, dimension_number >
            {
@@ -245,7 +245,7 @@
                   ,::math::linear::vector::length( v[2] )
                  };
 
-                unsigned index =0;
+                ::math::type::size_type index =0;
                 if( l[index] < l[1] ){ index = 1; }
                 if( l[index] < l[2] ){ index = 2; }
 

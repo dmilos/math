@@ -47,7 +47,7 @@
                   * fabs( box[0][3] - box[1][3] );
          }
 
-       template < typename scalar_name, unsigned dimension_number >
+       template < typename scalar_name, ::math::type::size_type dimension_number >
         scalar_name volume ( ::math::geometry::interval::structure<scalar_name,dimension_number> const& box )
          {
           scalar_name result = 1;

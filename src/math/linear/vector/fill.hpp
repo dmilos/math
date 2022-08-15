@@ -21,7 +21,7 @@
      namespace vector
       {
 
-       template< typename scalar_name, unsigned dimension_number, typename value_name >
+       template< typename scalar_name, ::math::type::size_type dimension_number, typename value_name >
         inline
         ::math::linear::vector::structure< scalar_name, dimension_number > &
         fill
@@ -41,7 +41,7 @@
          }
 
 
-       template< typename scalar_name, unsigned dimension_number, typename value_name >
+       template< typename scalar_name, ::math::type::size_type dimension_number, typename value_name >
         inline
         ::math::linear::vector::structure< scalar_name, dimension_number >
         fill
@@ -62,7 +62,7 @@
           return result;
          }
 
-       template< typename scalar_name, unsigned dimension_number, typename value_name >
+       template< typename scalar_name, ::math::type::size_type dimension_number, typename value_name >
         inline
         ::math::linear::vector::structure< scalar_name, dimension_number >
         fill

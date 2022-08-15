@@ -54,7 +54,7 @@ namespace math
 
       }
 
-    template < typename scalar_name, typename size_name=unsigned >
+    template < typename scalar_name, typename size_name = ::math::type::size_type >
      void lebesgue2D( std::array<scalar_name, 2 > & coord, scalar_name const& value, size_name iterations = 16 )
       {
        ::math::function::lebesgue2D( coord[0], coord[1], value, iterations );

@@ -12,7 +12,7 @@ namespace math
   namespace random
    {
 
-    template< typename scalar_name, typename size_name, unsigned dimension_number >
+    template< typename scalar_name, typename size_name, ::math::type::size_type dimension_number >
      class VaLND  // Combined VanDerCorput and Lebesgue
       {
        public:

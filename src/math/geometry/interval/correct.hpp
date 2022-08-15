@@ -16,7 +16,7 @@
      namespace interval
       {
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         void
         correct
@@ -42,7 +42,7 @@
            }
          }
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         void
         correct

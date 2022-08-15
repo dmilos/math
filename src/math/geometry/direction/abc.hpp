@@ -16,10 +16,10 @@ namespace math
     namespace direction
      {
 
-      template<typename scalar_name, unsigned dimesion_number >
+      template<typename scalar_name, std::size_t dimension_number >
         class two;
 
-      template<typename scalar_name, unsigned dimesion_number >
+      template<typename scalar_name, std::size_t dimension_number >
         class parametric;
 
       template<typename scalar_name>
@@ -33,7 +33,7 @@ namespace math
         {
          public:
 
-           typedef unsigned      size_type;
+           typedef std::size_t      size_type;
            typedef scalar_name scalar_type;
 
            typedef ::math::linear::vector::point<scalar_type,2> point2_type;

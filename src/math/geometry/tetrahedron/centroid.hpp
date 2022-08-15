@@ -13,7 +13,7 @@
      namespace tetrahedron
       {
 
-       template < typename scalar_name, unsigned dimension_number >
+       template < typename scalar_name, ::math::type::size_type dimension_number >
          bool centroid
           (
             ::math::linear::vector::point< scalar_name, dimension_number >                 & result

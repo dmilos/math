@@ -17,7 +17,7 @@
      namespace interval
       {
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         typename ::math::geometry::interval::structure< scalar_name, dimension_number >::point_type 
         center
@@ -31,7 +31,7 @@
           return result;
          }
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         void
         center
@@ -44,7 +44,7 @@
           ::math::linear::vector::scale( point, scalar_name(0.5) );
          }
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         void
         center

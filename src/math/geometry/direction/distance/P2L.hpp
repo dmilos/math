@@ -18,7 +18,7 @@ namespace math
     namespace direction
      {
 
-      template<  typename scalar_name, unsigned dimension_number >
+      template<  typename scalar_name, std::size_t dimension_number >
        struct P2L //!< distance from point to parametric line
         {
          public:
@@ -55,7 +55,7 @@ namespace math
 
         };
 
-      template<  typename scalar_name, unsigned dimension_number >
+      template<  typename scalar_name, std::size_t dimension_number >
        scalar_name distance
         (
           ::math::geometry::direction::parametric< scalar_name, dimension_number > const& parametric

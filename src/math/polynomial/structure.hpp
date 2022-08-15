@@ -23,7 +23,7 @@
        template
         <
           typename scalar_name
-         ,unsigned dimension_number
+         ,::math::type::size_type dimension_number
         >
         using fixed = std::array< scalar_name, dimension_number >;
 

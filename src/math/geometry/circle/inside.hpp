@@ -19,7 +19,7 @@
        template
         <
           typename scalar_name
-         ,unsigned dimension_number
+         ,std::size_t dimension_number
         >
         bool inside
          (
@@ -33,7 +33,7 @@
        template
         <
           typename scalar_name
-         ,unsigned dimension_number
+         ,std::size_t dimension_number
         >
         bool inside
          (

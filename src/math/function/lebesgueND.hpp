@@ -8,7 +8,7 @@ namespace math
   namespace function
    {
 
-    template < typename scalar_name, unsigned dimension_number, typename size_name = unsigned >
+    template < typename scalar_name, ::math::type::size_type dimension_number, typename size_name = unsigned >
      void lebesgueND( std::array<scalar_name,dimension_number> & coord, scalar_name value, size_name iteration=16 )
       {
        scalar_name add = scalar_name( 1 );

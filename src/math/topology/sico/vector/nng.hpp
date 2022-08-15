@@ -21,7 +21,7 @@ namespace math
      template
        <
          typename    scalar_name
-        ,unsigned  dimesion_number
+        ,::math::type::size_type  dimesion_number
         ,typename      data_name //!< Essentially whatever. Copyable
        >
        std::size_t NNG //!< Nearest neighbor graph
@@ -30,7 +30,7 @@ namespace math
        )
        {
         result.trim( 0 );
-        for( std::size_t index=0; index < result.size(0); ++index )
+        for( ::math::type::size_type index=0; index < result.size(0); ++index )
          {
           size_t neighbor = result.size(0);
           scalar_name nearest = std::numeric_limits<scalar_name>::max();

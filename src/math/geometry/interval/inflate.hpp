@@ -14,7 +14,7 @@
      namespace interval
       {
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         void
         inflate
@@ -34,7 +34,7 @@
            }
          }
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         void
         inflate
@@ -54,7 +54,7 @@
            }
          }
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         void
         inflate
@@ -69,7 +69,7 @@
           return ::math::geometry::interval::inflate<scalar_name,dimension_number>( result, pivot, scale, model );
          }
          
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         void
         inflate

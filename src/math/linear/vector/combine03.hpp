@@ -18,7 +18,7 @@
      namespace vector
       {
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         ::math::linear::vector::structure< scalar_name, dimension_number >      &
         combine

@@ -68,7 +68,7 @@
           return ::math::linear::vector::length( N )/ scalar_name(2);
          }
 
-       template<  typename scalar_name, unsigned dimension_number >
+       template<  typename scalar_name, ::math::type::size_type dimension_number >
         scalar_name
         area
          (

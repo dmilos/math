@@ -14,7 +14,7 @@
      namespace vector
       {
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         bool
         GramSchmidt
          (

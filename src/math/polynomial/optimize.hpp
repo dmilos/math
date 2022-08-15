@@ -53,7 +53,7 @@
          }
        }
 
-      template< typename scalar_name, unsigned size_number >
+      template< typename scalar_name, ::math::type::size_type size_number >
        inline
        void optimize( std::array< scalar_name, size_number> &coefficient, scalar_name const& epsilon = 1e-6 )
         {

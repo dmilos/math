@@ -51,7 +51,7 @@
          }
       */
 
-       template< typename scalar_name, unsigned width_number, unsigned height_number, unsigned common_number >
+       template< typename scalar_name, ::math::type::size_type width_number, ::math::type::size_type height_number, ::math::type::size_type common_number >
         void multiply
          (
            ::math::linear::matrix::structure<scalar_name,width_number,height_number>       & result
@@ -59,12 +59,12 @@
           ,::math::linear::matrix::structure<scalar_name,width_number,common_number>  const& right
          )
          {
-          for( unsigned i=0; i< height_number; i++ )
-           for( unsigned j=0; j< width_number; j++ )
+          for( ::math::type::size_type i=0; i< height_number; i++ )
+           for( ::math::type::size_type j=0; j< width_number; j++ )
             {
              result[i][j] = 0;
 
-             for( unsigned k=0; k < common_number; k++ )
+             for( ::math::type::size_type k=0; k < common_number; k++ )
               {
                result[i][j] += left[i][k] * right[k][j];
               }

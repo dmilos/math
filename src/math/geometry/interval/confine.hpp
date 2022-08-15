@@ -15,7 +15,7 @@
      namespace interval
       {
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         void
         confine
@@ -39,7 +39,7 @@
            }
          }
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         void
         confine
@@ -61,7 +61,7 @@
            }
          }
 
-       template < typename scalar_name, unsigned dimension_number >
+       template < typename scalar_name, ::math::type::size_type dimension_number >
         bool
         confine
          (
@@ -79,7 +79,7 @@
           return true;
          }
 
-       template < typename scalar_name, unsigned dimension_number >
+       template < typename scalar_name, ::math::type::size_type dimension_number >
         bool
         confine
          (

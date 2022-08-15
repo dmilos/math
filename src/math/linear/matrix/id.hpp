@@ -14,21 +14,21 @@
      namespace matrix
       {
 
-       template< typename scalar_name, unsigned width_number, unsigned height_number >
+       template< typename scalar_name, ::math::type::size_type width_number, ::math::type::size_type height_number >
         ::math::linear::matrix::structure<scalar_name,width_number,height_number> &
         id( ::math::linear::matrix::structure<scalar_name,width_number,height_number> & m )
          {
           return ::math::linear::matrix::one( m );
          }
 
-       template< typename scalar_name, unsigned width_number, unsigned height_number >
+       template< typename scalar_name, ::math::type::size_type width_number, ::math::type::size_type height_number >
         ::math::linear::matrix::structure<scalar_name,width_number,height_number> const&
         id()
          {
           return ::math::linear::matrix::one<scalar_name,width_number,height_number>();
          }
 
-       template< typename scalar_name, unsigned width_number, unsigned height_number >
+       template< typename scalar_name, ::math::type::size_type width_number, ::math::type::size_type height_number >
         ::math::linear::matrix::structure<scalar_name,width_number,height_number> const&
         id( ::math::linear::matrix::structure<scalar_name,width_number,height_number> const& dummmy )
          {

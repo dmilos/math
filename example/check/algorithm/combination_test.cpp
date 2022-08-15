@@ -40,7 +40,7 @@ int main( int argc, char *argv[] )
 
   cout << endl;
   cout << "comb1 " << comb1 << endl;
-  cout << "Time : " << (clock() - t)/(float)CLK_TCK << endl;
+  cout << "Time : " << (clock() - t)/(float)CLOCKS_PER_SEC << endl;
 
   
   return 0;

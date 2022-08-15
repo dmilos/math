@@ -10,17 +10,17 @@
      namespace vector
       {
 
-       template< unsigned dimension_left_number, typename scalar_name, unsigned dimension_right_number  >
+       template< ::math::type::size_type dimension_left_number, typename scalar_name, ::math::type::size_type dimension_right_number  >
         ::math::linear::vector::structure<scalar_name,dimension_left_number>
         extend( ::math::linear::vector::structure<scalar_name,dimension_right_number> const& right, scalar_name const& fill = scalar_name( 0 ) )
          {
           ::math::linear::vector::structure<scalar_name,dimension_left_number> result;
-          for( unsigned index = 0; index < std::min( dimension_left_number, dimension_right_number ); ++index )
+          for( ::math::type::size_type index = 0; index < std::min( dimension_left_number, dimension_right_number ); ++index )
            {
             result[ index ] = right[ index ];
            }
 
-          for( unsigned index = dimension_right_number; index < dimension_left_number; ++index )
+          for( ::math::type::size_type index = dimension_right_number; index < dimension_left_number; ++index )
            {
             result[ index ] = fill;
            }

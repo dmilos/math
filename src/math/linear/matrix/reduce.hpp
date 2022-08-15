@@ -14,15 +14,15 @@
      namespace matrix
       {
 
-       template< typename scalar_name, unsigned width_number, unsigned height_number >
-        unsigned
+       template< typename scalar_name, ::math::type::size_type width_number, ::math::type::size_type height_number >
+        ::math::type::size_type
         reduce
          (
           ::math::linear::matrix::structure<scalar_name,width_number,height_number> & m
           ,scalar_name const& epsilon = 1e-9
          )
          { // preserve row position( do not swap). do not rescale row.
-          typedef unsigned size_type;
+          typedef ::math::type::size_type size_type;
           typedef scalar_name scalar_type;
           size_type rank = 0;
           ::math::linear::vector::structure<bool,height_number> used{ false };

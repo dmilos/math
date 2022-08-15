@@ -25,7 +25,7 @@
        template
         <
           typename scalar_name
-         ,unsigned dimension_number
+         ,std::size_t dimension_number
         >
         struct S2P  // intersect simple circleND with direction
          {
@@ -81,18 +81,18 @@
        template
         <
           typename scalar_name
-         ,unsigned dimension_number
+         ,std::size_t dimension_number
         >
         unsigned intersect
          (
            scalar_name  & lambda0
           ,scalar_name  & lambda1
-          ,::math::geometry::circle::simple<scalar_name,dimension_number>      const & simple
+          ,::math::geometry::circle::simple<scalar_name,dimension_number>          const & simple
           ,::math::geometry::direction::parametric<scalar_name,dimension_number>   const & direction
           ,scalar_name      const & epsilon = 1e-6
          )
          {
-          return ::math::geometry::circle::S2P<scalar_name,dimension_number>::process( lambda0,lambda1,simple, direction, epsilon );
+          return ::math::geometry::circle::S2P<scalar_name,dimension_number>::process( lambda0, lambda1,simple, direction, epsilon );
          }
 
 

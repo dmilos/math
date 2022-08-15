@@ -20,7 +20,7 @@ namespace math
     namespace direction
      {
 
-      template<  typename scalar_name, unsigned dimension_number >
+      template<  typename scalar_name, std::size_t dimension_number >
        class L2L
         {
          public: // http://geomalgorithms.com/a07-_distance.html
@@ -99,7 +99,7 @@ namespace math
            mutable point_type  m_median;
         };
 
-      template<  typename scalar_name, unsigned dimension_number >
+      template<  typename scalar_name, std::size_t dimension_number >
        bool distance
         (
           scalar_name  & distance

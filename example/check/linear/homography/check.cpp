@@ -5,7 +5,7 @@
 
 #include "math/math.hpp"
 
-template< typename scalar_name, unsigned width_number, unsigned height_number >
+template< typename scalar_name, math::type::size_t width_number, math::type::size_t height_number >
  void monic( ::math::linear::matrix::structure<scalar_name,width_number,height_number> & m )
   {
    scalar_name maximal = fabs( m[0][0] );
@@ -27,7 +27,7 @@ template< typename scalar_name, unsigned width_number, unsigned height_number >
     }
   }
 
-template< typename scalar_name, unsigned width_number, unsigned height_number >
+template< typename scalar_name, math::type::size_t width_number, math::type::size_t height_number >
  void print ( ::math::linear::matrix::structure<scalar_name,width_number,height_number> const& m, std::string const& comment = "" )
   {
    std::cout << comment << "{" ;
@@ -43,7 +43,7 @@ template< typename scalar_name, unsigned width_number, unsigned height_number >
    std::cout << "}" << std::endl;
   }
 
-template< typename scalar_name, unsigned dimension_number >
+template< typename scalar_name, math::type::size_t dimension_number >
  void print ( ::math::linear::vector::structure<scalar_name,dimension_number> const& v )
   {
    std::cout << "{" ;
@@ -57,7 +57,7 @@ template< typename scalar_name, unsigned dimension_number >
   }
 
 
-template< typename scalar_name, unsigned dimesion_number>
+template< typename scalar_name, math::type::size_t dimesion_number>
  void apply
   (
     ::math::linear::homography::structure<scalar_name,dimesion_number> const& m

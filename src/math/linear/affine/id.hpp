@@ -14,21 +14,21 @@
      namespace affine
       {
 
-       template< typename scalar_name, unsigned dimension_number>
+       template< typename scalar_name, ::math::type::size_type dimension_number>
         ::math::linear::affine::structure<scalar_name,dimension_number> &
         id( ::math::linear::affine::structure<scalar_name,dimension_number> & a )
          {
           return ::math::linear::affine::one<scalar_name,dimension_number>( a );
          }
 
-       template< typename scalar_name, unsigned dimension_number>
+       template< typename scalar_name, ::math::type::size_type dimension_number>
         ::math::linear::affine::structure<scalar_name,dimension_number> const&
         id()
          {
           return ::math::linear::affine::one<scalar_name,dimension_number>();
          }
 
-       template< typename scalar_name, unsigned dimension_number>
+       template< typename scalar_name, ::math::type::size_type dimension_number>
         ::math::linear::affine::structure<scalar_name,dimension_number> const&
         id( ::math::linear::affine::structure<scalar_name,dimension_number> const& dummy )
          {

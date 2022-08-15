@@ -19,7 +19,7 @@
      namespace interval
       {
 
-       template < typename scalar_name, unsigned dimension_number >
+       template < typename scalar_name, ::math::type::size_type dimension_number >
         struct scissors
          {
           public:
@@ -84,7 +84,7 @@
               parametric_type    m_parametric;
          };
 
-       template < typename scalar_name, unsigned dimension_number >
+       template < typename scalar_name, ::math::type::size_type dimension_number >
         int
         clip
          (
@@ -97,7 +97,7 @@
           return scissors.process( two, interval );
          }
 
-       template < typename scalar_name, unsigned dimension_number >
+       template < typename scalar_name, ::math::type::size_type dimension_number >
         int
         clip
          (

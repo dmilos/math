@@ -16,7 +16,7 @@
      namespace interval
       {
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         void
         translate
@@ -30,7 +30,7 @@
           ::math::linear::vector::addition( result[1], left[1], point );
          }
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         void
         translate

@@ -17,7 +17,7 @@
      namespace matrix
       {
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         void QR
          (
            ::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number>      & Q // Gram-Schmidt
@@ -25,7 +25,7 @@
           ,::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number> const& A
          )
          {
-          typedef unsigned size_type;
+          typedef ::math::type::size_type size_type;
           typedef ::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number>  matrix_type;
           matrix_type      T;
 

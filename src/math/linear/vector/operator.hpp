@@ -19,7 +19,7 @@
      namespace vector
       {
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         ::math::linear::vector::structure< scalar_name,dimension_number >
         operator+
@@ -33,7 +33,7 @@
           return Ir_result;
          }
 
-        template< typename N_left, typename N_right, unsigned dimension_number >
+        template< typename N_left, typename N_right, ::math::type::size_type dimension_number >
         inline
         ::math::linear::vector::structure<N_left,dimension_number>&
         operator+=
@@ -46,7 +46,7 @@
           return left_param;
          }
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         ::math::linear::vector::structure< scalar_name, dimension_number >
         operator-
@@ -60,7 +60,7 @@
           return Ir_result;
          }
 
-        template< typename N_left, typename N_right, unsigned dimension_number >
+        template< typename N_left, typename N_right, ::math::type::size_type dimension_number >
         inline
         ::math::linear::vector::structure<N_left,dimension_number>&
         operator-=
@@ -73,7 +73,7 @@
           return left_param;
          }
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         ::math::linear::vector::structure< scalar_name, dimension_number >
         operator-
@@ -89,7 +89,7 @@
          }
 
        /*
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         ::math::linear::vector::structure< scalar_name, dimension_number >
         operator*
@@ -110,7 +110,7 @@
          }
        */
 
-       template< typename scalar_name, unsigned dimension_number, typename value_name >
+       template< typename scalar_name, ::math::type::size_type dimension_number, typename value_name >
         inline
         ::math::linear::vector::structure< scalar_name, dimension_number >
         operator *
@@ -124,7 +124,7 @@
           return Ir_result;
          }
 
-       template< typename scalar_name, unsigned dimension_number, typename value_name >
+       template< typename scalar_name, ::math::type::size_type dimension_number, typename value_name >
         inline
         ::math::linear::vector::structure< scalar_name, dimension_number >
         operator*
@@ -138,7 +138,7 @@
           return Ir_result;
          }
 
-       template< typename scalar_name, unsigned dimension_number, typename value_name >
+       template< typename scalar_name, ::math::type::size_type dimension_number, typename value_name >
         inline
         ::math::linear::vector::structure< scalar_name, dimension_number >&
         operator*=
@@ -152,7 +152,7 @@
          }
 
        /*
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         ::math::linear::vector::structure< scalar_name, dimension_number >
         operator/
@@ -177,7 +177,7 @@
          }
        */
 
-       template< typename scalar_name, unsigned dimension_number, typename value_name >
+       template< typename scalar_name, ::math::type::size_type dimension_number, typename value_name >
         inline
         ::math::linear::vector::structure< scalar_name, dimension_number >
         operator/
@@ -195,7 +195,7 @@
          }
 
        /*
-       template< typename scalar_name, unsigned dimension_number, typename scalar_name >
+       template< typename scalar_name, ::math::type::size_type dimension_number, typename scalar_name >
         inline
         ::math::linear::vector::structure< scalar_name, dimension_number >
         operator/
@@ -216,7 +216,7 @@
          }
        */
 
-       template< typename scalar_name, unsigned dimension_number, typename value_name >
+       template< typename scalar_name, ::math::type::size_type dimension_number, typename value_name >
         inline
         ::math::linear::vector::structure< scalar_name, dimension_number >&
         operator/=

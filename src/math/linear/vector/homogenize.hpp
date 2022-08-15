@@ -19,7 +19,7 @@
      namespace vector
       {
 
-       template< typename scalar_name, unsigned dimension_number>
+       template< typename scalar_name, ::math::type::size_type dimension_number>
         inline
         void
         homogenize
@@ -81,7 +81,7 @@
           result_param[3] = 1;
          }
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         void
         homogenize

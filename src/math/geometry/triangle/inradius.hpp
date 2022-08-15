@@ -33,7 +33,7 @@
           return scalar_name(0.5) * sqrt( ( fA * fB * fC ) / f0 );
          }
 
-       template<  typename scalar_name, unsigned dimension_number >
+       template<  typename scalar_name, ::math::type::size_type dimension_number >
         scalar_name
         inradius
          (

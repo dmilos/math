@@ -18,7 +18,7 @@
        template
         <
           typename scalar_name
-         ,unsigned dimension_number
+         ,::math::type::size_type dimension_number
         >
        void extend
         (
@@ -38,7 +38,7 @@
        template
         <
           typename scalar_name
-         ,unsigned dimension_number
+         ,::math::type::size_type dimension_number
         >
        void extend
         (
@@ -60,7 +60,7 @@
        template
         <
           typename scalar_name
-         ,unsigned dimension_number
+         ,::math::type::size_type dimension_number
         >
        void extend
         (
@@ -75,7 +75,7 @@
        template
         <
           typename scalar_name
-         ,unsigned dimension_number
+         ,::math::type::size_type dimension_number
         >
        void extend
         (

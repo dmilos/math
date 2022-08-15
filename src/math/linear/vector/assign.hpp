@@ -17,7 +17,7 @@
      namespace vector
       {
 
-       template< typename scalar_name, typename scalar2_name, unsigned dimension_number>
+       template< typename scalar_name, typename scalar2_name, ::math::type::size_type dimension_number>
         inline
         void
         assign
@@ -36,7 +36,7 @@
            }
          }
 
-       template< typename scalar_name, typename scalar2_name, unsigned dimension_number>
+       template< typename scalar_name, typename scalar2_name, ::math::type::size_type dimension_number>
         inline
         void
         assign
@@ -49,7 +49,7 @@
           result_param[1] = scalar_name( left_param[1] );
          }
 
-       template< typename scalar_name, typename scalar2_name, unsigned dimension_number>
+       template< typename scalar_name, typename scalar2_name, ::math::type::size_type dimension_number>
         inline
         void
         assign
@@ -63,7 +63,7 @@
           result_param[2] = scalar_name( left_param[2] );
          }
 
-       template< typename scalar_name, typename scalar2_name, unsigned dimension_number>
+       template< typename scalar_name, typename scalar2_name, ::math::type::size_type dimension_number>
         inline
         void
         assign

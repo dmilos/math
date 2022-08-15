@@ -16,7 +16,7 @@
      namespace matrix
       {
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         bool invert
          (
            ::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number>      & result
@@ -24,7 +24,7 @@
           ,scalar_name const& epsilon  = 1e-6
          )
          {
-          typedef unsigned size_type;
+          typedef ::math::type::size_type size_type;
           typedef scalar_name scalar_type;
           ::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number> tmp{ m };
           ::math::linear::vector::structure<bool,dimension_number> flag{false};

@@ -4,7 +4,7 @@
  // ::math::linear::matrix::structure<scalar_name,height_number,width_number>
 
 #include <array>
-
+#include "../../type/size.hpp"
 
 
 
@@ -19,8 +19,8 @@
        template
         <
           typename scalar_name
-         ,unsigned width_number
-         ,unsigned height_number
+         ,::math::type::size_type width_number
+         ,::math::type::size_type height_number
         > // AKA SOLID, Orientation: row by row
         using structure = std::array< std::array< scalar_name, width_number >, height_number >;
 

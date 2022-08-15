@@ -13,7 +13,7 @@
      namespace matrix
       {
 
-       template< typename scalar_name, unsigned width_number, unsigned height_number >
+       template< typename scalar_name, ::math::type::size_type width_number, ::math::type::size_type height_number >
         bool
         GramSchmidt
          (
@@ -44,7 +44,7 @@
           return true;
          }
 
-       template< typename scalar_name, unsigned dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number >
         bool
         GramSchmidt
          (
@@ -55,7 +55,7 @@
 
           ::math::linear::vector::length( system[0], scalar_name(1) );
 
-          for( size_type i=1; i < std::min<unsigned>( dimension_number, (unsigned)system.size() ); ++i )
+          for( size_type i=1; i < std::min<::math::type::size_type>( dimension_number, (::math::type::size_type)system.size() ); ++i )
            {
             ::math::linear::vector::structure< scalar_name, dimension_number> p;
             auto original = system[i];

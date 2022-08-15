@@ -20,7 +20,7 @@
      namespace vector
       {
 
-       template< typename scalar_name=double, typename number_name, unsigned dimension_number >
+       template< typename scalar_name=double, typename number_name, ::math::type::size_type dimension_number >
         inline
         scalar_name
         length
@@ -31,7 +31,7 @@
           return static_cast<scalar_name>( std::sqrt( ::math::linear::vector::dot( vector_param, vector_param ) ) );
          }
 
-       template< typename scalar_name, unsigned dimension_number/*, typename N_report */ >
+       template< typename scalar_name, ::math::type::size_type dimension_number/*, typename N_report */ >
         inline
         scalar_name //!<N_report
         length
@@ -52,7 +52,7 @@
           return old_length;
          }
 
-       template< typename scalar_name, unsigned dimension_number/*, typename N_report */ >
+       template< typename scalar_name, ::math::type::size_type dimension_number/*, typename N_report */ >
         inline
         scalar_name
         length

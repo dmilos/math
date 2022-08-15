@@ -21,7 +21,7 @@ template< typename scalar_name >
    std::cout << "}";
   }
 
-template< typename scalar_name, unsigned dimension_number >
+template< typename scalar_name, math::type::size_t dimension_number >
  void print( ::math::geometry::direction::parametric<scalar_name,dimension_number> const& P )
   {
    std::cout << "{ ";

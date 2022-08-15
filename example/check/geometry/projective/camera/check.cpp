@@ -3,8 +3,8 @@
 #include <iomanip>
 
 #include "math/math.hpp"
-#include "math\geometry\projective\camera\focus\orto2d.hpp"
-#include "math\geometry\projective\camera\focus\gmmb.hpp"
+#include "math/geometry/projective/camera/focus/orto2d.hpp"
+#include "math/geometry/projective/camera/focus/gmmb.hpp"
 
 
 void print( ::math::linear::vector::structure<double,2> const& v )

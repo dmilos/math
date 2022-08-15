@@ -16,7 +16,7 @@
      namespace affine
       {
 
-       template< typename scalar_name, unsigned dimension_number>
+       template< typename scalar_name, ::math::type::size_type dimension_number>
         ::math::linear::affine::structure<scalar_name,dimension_number> &
         one( ::math::linear::affine::structure<scalar_name,dimension_number> & a )
          {
@@ -25,7 +25,7 @@
           return a;
          }
 
-       template< typename scalar_name, unsigned dimension_number>
+       template< typename scalar_name, ::math::type::size_type dimension_number>
         ::math::linear::affine::structure<scalar_name,dimension_number> const&
         one()
          {
@@ -33,7 +33,7 @@
           return identical;
          }
 
-       template< typename scalar_name, unsigned dimension_number>
+       template< typename scalar_name, ::math::type::size_type dimension_number>
         ::math::linear::affine::structure<scalar_name,dimension_number> const &
         one( ::math::linear::affine::structure<scalar_name,dimension_number> const& dummy )
          {

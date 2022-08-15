@@ -22,7 +22,7 @@ namespace math
        <
          typename scalar_name         = long double
         ,typename size_name           = std::size_t
-        ,unsigned dimension_number    = 2
+        ,::math::type::size_type dimension_number    = 2
        >
        class vector
         {

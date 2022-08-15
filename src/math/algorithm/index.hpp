@@ -10,7 +10,7 @@
    namespace algorithm
     {
 
-     template< unsigned dimension_number >
+     template< ::math::type::size_type dimension_number >
       std::size_t index
        (
          std::array< std::size_t, dimension_number > const& size_param
