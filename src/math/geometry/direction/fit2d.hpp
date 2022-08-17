@@ -6,7 +6,7 @@
 
 #include <vector>
 #include "../../linear/vector/vector.hpp"
-#include "./ABC.hpp"
+#include "./abc.hpp"
 
 
 namespace math
