@@ -33,3 +33,6 @@ example/test/codeblocks/math.depend
 example/test/codeblocks/bin
 example/test/codeblocks/obj
 /example/test/msvc/2015/enc_temp_folder
+/example/_cmakeGcc
+/example/_cmake
+/example/_cmakeGcc

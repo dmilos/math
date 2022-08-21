@@ -1,0 +1,11 @@
+#cmake_minimum_required(VERSION 2.8)
+
+add_subdirectory( algorithm )
+add_subdirectory( complex )
+add_subdirectory( function )
+add_subdirectory( geometry )
+add_subdirectory( linear )
+add_subdirectory( polynomial )
+add_subdirectory( random )
+add_subdirectory( statistic )
+add_subdirectory( topology )

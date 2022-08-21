@@ -19,8 +19,8 @@ template< typename scalar_name, math::type::size_t width_number, math::type::siz
     }
   }
 
-template ::math::linear::matrix::eigen::algoritham<double,2>;
-template ::math::linear::matrix::eigen::algoritham<double,3>;
+//template ::math::linear::matrix::eigen::algoritham<double,2>;
+//template ::math::linear::matrix::eigen::algoritham<double,3>;
 
 typedef ::math::linear::matrix::eigen::algoritham<double,2> eu2_type;
 typedef ::math::linear::matrix::eigen::algoritham<double,3> eu3_type;

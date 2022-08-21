@@ -39,7 +39,7 @@ void invert5()
 
 }
 
-int main_invert( int argc, char*argv[] )
+int main( int argc, char*argv[] )
  {
   invert5();
 
