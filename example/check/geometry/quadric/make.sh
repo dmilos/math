@@ -1,4 +1,5 @@
 #!/bin/bash
 
-pwd
+echo [$(date)]$(pwd)
+ 
 

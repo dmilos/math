@@ -1,6 +1,7 @@
 #!/bin/bash
 
-pwd
+echo [$(date)]$(pwd)
+ 
 
 g++ -fexceptions -std=c++11 -g -I../../../src coord.cpp               -o  coord
 

@@ -7,7 +7,8 @@
 
 reset
 
-pwd
+echo [$(date)]$(pwd)
+ 
 
 g++ -fexceptions -std=c++11 -g -I../src readme.cpp               -o  readme
 

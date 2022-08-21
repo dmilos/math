@@ -4,6 +4,7 @@
 #include <cmath>
 #include <array>
 #include <utility>
+#include <cstdint>
 
 #include "./type/type.hpp"
 

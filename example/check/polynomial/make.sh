@@ -1,6 +1,7 @@
 #!/bin/bash
 
-pwd
+echo [$(date)]$(pwd)
+ 
 
 cd ./solve
 ./make.sh

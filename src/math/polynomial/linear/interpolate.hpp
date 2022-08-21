@@ -57,6 +57,7 @@
           return ::math::polynomial::linear::interpolate( coefficient, cloud[0][0], cloud[0][1],
                                                                      , cloud[1][0], cloud[1][1], epsilon );
          }
+*/
 /*
        template
         <

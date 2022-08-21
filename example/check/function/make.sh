@@ -1,6 +1,7 @@
 #!/bin/bash
 
-pwd
+echo [$(date)]$(pwd)
+ 
 
 g++ -fexceptions -std=c++11 -g -I../../../src clamper_test.cpp             -o clamper_test
 g++ -fexceptions -std=c++11 -g -I../../../src lebesgue_test.cpp            -o lebesgue_test

@@ -3,8 +3,6 @@
  
 // ::math::geometry::interval::volume( )
 
-#include <cmath>
-
 #include "./structure.hpp"
 
 
