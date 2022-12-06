@@ -38,6 +38,28 @@
           return true;
          }
 
+       template< typename scalar_name >
+        inline
+        bool
+        in
+         (
+           ::math::geometry::interval::structure< scalar_name, 1 >             const& instance
+          ,scalar_name const& point
+         )
+         {
+          if( point  < instance[ 0 ] )
+           {
+            return false;
+           }
+          if( instance[ 1 ] < point )
+           {
+            return false;
+           }
+
+          return true;
+         }
+
+
        template< typename scalar_name, ::math::type::size_type dimension_number >
         inline
         bool

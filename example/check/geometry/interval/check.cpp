@@ -11,6 +11,8 @@ int main( int argc, char *argv[] )
   cout << "Hello World" << endl;
 
   typedef ::math::geometry::interval::structure<float,10> interval_t;
+  typedef ::math::geometry::interval::structure<float,1> interval1_t;
+
   typedef ::math::geometry::interval::structure<float,10>::point_type point_t;
   typedef ::math::linear::affine::structure<float,10> affine10_t;
   typedef ::math::geometry::direction::parametric<float,10> parametric10_t;

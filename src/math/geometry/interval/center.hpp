@@ -1,7 +1,9 @@
 #ifndef math_geometry_interval_center_hpp_
  #define math_geometry_interval_center_hpp_
  
-// ::math::geometry::interval::center( )
+// ::math::geometry::interval::center( interval )
+// ::math::geometry::interval::center( point, interval)
+// ::math::geometry::interval::center( interval, point ) //!< this is re-centering
 
 #include "./structure.hpp"
 #include "./size.hpp"

@@ -8,7 +8,8 @@
 reset
 
 echo [$(date)]$(pwd)
- 
+g++ --version
+
 
 g++ -fexceptions -std=c++11 -g -I../src readme.cpp               -o  readme
 
