@@ -2,5 +2,6 @@
 @
 @echo %cd%
 @
-@cl /EHsc  -I../../src quaternion.cpp
+@cl /EHsc  -I../../../src quaternion.cpp
 @
+

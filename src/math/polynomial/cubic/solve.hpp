@@ -87,7 +87,7 @@
               result[0] = - a / scalar_name(3);
               result[1] = result[0];
               result[2] = result[0];
-              result[1] =result[2] = result[3] = NAN;
+              result[1] = result[2] = NAN;
               return 1;
              }
             else if( fabs( CR2 - CQ3 ) < epsilon )

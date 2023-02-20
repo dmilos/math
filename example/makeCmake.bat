@@ -1,5 +1,5 @@
 
-mkdir _cmakeVS2015
-cd _cmakeVS2015
+mkdir _cmakeVS
+cd _cmakeVS
 %prg_cmake% ..
 pause

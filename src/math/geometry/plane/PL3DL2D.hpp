@@ -35,7 +35,7 @@ namespace math
            typedef size_name size_type;
 
            typedef ::math::linear::vector::point<scalar_type,2>                uv_type;
-           typedef ::math::linear::vector::point<scalar_type,3>             point_type;
+           typedef ::math::linear::vector::point<scalar_type,3>             point_type, vector_type;
 
            typedef ::math::geometry::plane::no3d <scalar_type>              no3d_type;
            typedef ::math::geometry::plane::parametric3d<scalar_name>   parametric3d_type;
@@ -60,6 +60,31 @@ namespace math
 
              scalar_type dot_up = distance - line.origin()[ axis ];
 
+             lambda = dot_up / dot_down;
+             return true;
+            }
+
+           static bool process
+            (
+              scalar_type        & lambda
+             ,vector_type  const & plane_normal,   point_type    const & plane_origin
+             ,vector_type  const & line_direction, point_type    const & line_origin
+             ,scalar_type  const & epsilon = 1e-6
+            )
+            {
+             scalar_type dot_down = ::math::linear::vector::dot( line_direction, plane_normal );
+
+             if( fabs( dot_down ) < epsilon )
+              {
+               return false;
+              }
+
+             point_type heading;
+
+             ::math::linear::vector::subtraction( heading, plane_origin,line_origin );
+             scalar_type dot_up = ::math::linear::vector::dot( heading, plane_normal );
+
+             //point = line_origin + ( dot_up / dot_down ) * line_direction;
              lambda = dot_up / dot_down;
              return true;
             }

@@ -8,24 +8,3 @@ add_executable(  MathPlynomialFit                  fit.cpp )
 add_executable(  MathPlynomialNormalize      normalize.cpp )
 add_executable(  MathPlynomialOptimize        optimize.cpp )
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

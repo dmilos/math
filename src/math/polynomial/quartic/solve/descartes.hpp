@@ -22,7 +22,7 @@
           <
           typename scalar_name
           >   // Monic and depressed
-          unsigned descartes( scalar_name root[4], scalar_name const coefficient[5], scalar_name const& epsilon = 1e-12 )
+          unsigned descartes( scalar_name root[4], scalar_name const coefficient[5], scalar_name const& epsilon = 1e-12 ) //!< Monic and depressed
            {    // [0] + [1] * x + [2] * x ^2 + 0 * x^3 + 1 * x^4. Monic and depressed !!!
             root[3]=root[2]=root[1]=root[0]=NAN;
 

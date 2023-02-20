@@ -70,6 +70,20 @@
           return true;
          }
 
+       template < typename scalar_name >
+        bool
+        intersect_check
+         (
+           ::math::geometry::interval::structure<scalar_name,1> const& left
+          ,::math::geometry::interval::structure<scalar_name,1> const& right
+          )
+         {
+          if( left.m_corner[1]  < right.m_corner[0] ) return false;
+          if( right.m_corner[1] <  left.m_corner[0] ) return false;
+
+          return true;
+         }
+
        template < typename scalar_name,::math::type::size_type dimension_number >
         bool
         intersect_check
@@ -82,12 +96,14 @@
 
           while( index-- )
            {
-            if( left.m_corner[1][index] < right.m_corner[0][index] ) return false;
+            if( left.m_corner[1][index]  < right.m_corner[0][index] ) return false;
             if( right.m_corner[1][index] <  left.m_corner[0][index] ) return false;
            }
 
           return true;
          }
+
+
 
        template < typename scalar_name,::math::type::size_type dimension_number >
         void
@@ -133,7 +149,7 @@
           ,::math::geometry::direction::parametric<scalar_name, dimension_number> const& parametric
           ,scalar_name                                                            const& epsilon    = 1e-12
           )
-         { // TODO make structure 
+         { // TODO make structure
           typedef ::math::linear::vector::point<scalar_name, dimension_number> coord_type;
 
           //typedef std::tuple< unsigned, scalar_name, unsigned, scalar_name > result_type;
