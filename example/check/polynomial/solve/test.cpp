@@ -164,6 +164,12 @@ int main( int argc, char *argv[] )
   errorD = 0;
   // errorS = 0;
   quartic( { -117.1875, 125,-37.5,0.00000000000000000,1.0000000000000000 } );
+
+  quartic( { -0.999, -0.001, -0.993, 0, 1 } );
+  quartic( { -1, 0, -1, 0, 1 } );
+  quartic( { -0.988, -0.001, 0.994, 0, 1 } );
+  quartic( {  0, -0.001, -0.019, 0, 1 } );
+
   std::size_t counter = 0;
   std::array<double,5> coeffcient;
   coeffcient[4] = 1;
