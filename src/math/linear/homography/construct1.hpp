@@ -26,7 +26,7 @@ namespace math
           ::math::linear::homography::structure<scalar_name,1> & result
          ,scalar_name const& A
          ,scalar_name const& B
-        ) // B = homography( A )
+        ) // B = homography( A ); 0 = homography(0) ;  1 = homography(1);
         {
          result[0][0] = B-A*B;  result[0][1] =    0;
          result[1][0] = B-A;    result[1][1] =  A-A*B;

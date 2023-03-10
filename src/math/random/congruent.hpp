@@ -39,9 +39,9 @@
           void next( point_type & point )
            {
             math::linear::vector::addition( m_seed, m_move );
-            m_move[0] = fmod( m_move[0], scalar_type(1) );
-            m_move[1] = fmod( m_move[1], scalar_type(1) );
-            m_move[2] = fmod( m_move[2], scalar_type(1) );
+            m_seed[0] = fmod( m_seed[0], scalar_type(1) );
+            m_seed[1] = fmod( m_seed[1], scalar_type(1) );
+            m_seed[2] = fmod( m_seed[2], scalar_type(1) );
             point = m_seed;
            }
 
