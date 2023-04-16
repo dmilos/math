@@ -1,7 +1,7 @@
 #ifndef _DDMRM_math_random_congruent_HPP_
  #define _DDMRM_math_random_congruent_HPP_
 
-// ::math::random::congruent<dimension,scalar>
+// ::math::random::congruent<scalar,dimension>
 
 #include <cstddef>
 #include "../linear/vector/structure.hpp"
@@ -31,7 +31,7 @@
             m_move[2] = scalar_type(1)/ ( g*g*g );
            }
 
-          explicit congruent( point_type const& seed_param )
+          congruent( point_type const& seed_param, point_type const& move_param )
            {
             seed( seed_param );
            }
@@ -52,11 +52,15 @@
            {
             m_seed = seed_param;
            }
+          void move( scalar_type const& move_param )
+           {
+            m_move = move_param;
+           }
 
         private:
-         point_type m_seed;
-         point_type m_move;
-      };
+          point_type m_seed;
+          point_type m_move;
+       };
 
      template< typename scalar_name >
       class congruent<scalar_name,1>
@@ -73,9 +77,10 @@
             m_move = scalar_type(1)/scalar_type(phi);
            }
 
-          explicit congruent( scalar_name const& seed_param )
+          congruent( scalar_name const& seed_param, scalar_name const& move_param )
            {
             seed( seed_param );
+            move( move_param );
            }
 
           scalar_name next()
@@ -94,11 +99,15 @@
            {
             m_seed = seed_param;
            }
+          void move( scalar_type const& move_param )
+           {
+            m_move = move_param;
+           }
 
         private:
           scalar_name m_seed;
           scalar_name m_move;
-      };
+       };
 
      template< typename scalar_name >
       class congruent<scalar_name,2>
@@ -118,7 +127,7 @@
             m_move[1] = scalar_type(1) /( plastic * plastic);
            }
 
-          explicit congruent( point_type const& seed_param )
+          congruent( point_type const& seed_param, point_type const& move_param )
            {
             seed( seed_param );
            }
@@ -141,11 +150,15 @@
            {
             m_seed = seed_param;
            }
+          void move( scalar_type const& move_param )
+           {
+            m_move = move_param;
+           }
 
         private:
-         point_type m_seed;
-         point_type m_move;
-      };
+          point_type m_seed;
+          point_type m_move;
+       };
 
     }
   }

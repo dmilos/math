@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo [$(date)]$(pwd)
- 
+
 
 cd ./algorithm
 ./make.sh
