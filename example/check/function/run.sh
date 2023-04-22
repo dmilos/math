@@ -12,3 +12,4 @@ pwd
 ./power.exe
 ./val.exe
 ./vap.exe
+./gcd.exe

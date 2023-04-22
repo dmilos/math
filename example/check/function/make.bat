@@ -12,4 +12,5 @@
 @cl /EHsc  -I../../src vap.cpp
 @cl /EHsc  -I../../src power.cpp
 @cl /EHsc  -I../../src factorial.cpp
+@cl /EHsc  -I../../src gcd.cpp
 @

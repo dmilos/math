@@ -12,28 +12,5 @@ add_executable(   MathFunctionLebesgue_Test        lebesgue_test.cpp )
 add_executable(   MathFunctionPower                power.cpp )
 add_executable(   MathFunctionVal                  val.cpp )
 add_executable(   MathFunctionVap                  vap.cpp )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+add_executable(   MathFunctionVap                  gcd.cpp )
 

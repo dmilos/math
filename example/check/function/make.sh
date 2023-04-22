@@ -14,4 +14,5 @@ g++ -fexceptions -std=c++11 -g -I../../../src gain.cpp                     -o ga
 g++ -fexceptions -std=c++11 -g -I../../../src val.cpp                      -o val
 g++ -fexceptions -std=c++11 -g -I../../../src power.cpp                    -o power
 g++ -fexceptions -std=c++11 -g -I../../../src factorial.cpp                -o factorial
+g++ -fexceptions -std=c++11 -g -I../../../src gcd.cpp                      -o gcd
 

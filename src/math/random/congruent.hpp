@@ -48,11 +48,19 @@
           void operator()( point_type & point ){ return this->next( point ); }
 
         public:
+          point_type const& seed()const
+           {
+            return m_seed;
+           }
           void seed( point_type const& seed_param )
            {
             m_seed = seed_param;
            }
-          void move( scalar_type const& move_param )
+          point_type const& move()const
+           {
+            return m_move;
+           }
+          void move( point_type const& move_param )
            {
             m_move = move_param;
            }
@@ -95,9 +103,17 @@
           void operator()( scalar_name & point ){ return this->next(); }
 
         public:
+          scalar_type const& seed()const
+           {
+            return m_seed;
+           }
           void seed( scalar_type const& seed_param )
            {
             m_seed = seed_param;
+           }
+          scalar_type const& move()const
+           {
+            return m_move;
            }
           void move( scalar_type const& move_param )
            {
@@ -146,11 +162,19 @@
          void operator()( point_type & point ){ return this->next( point ); }
 
         public:
+          point_type const& seed()const
+           {
+            return m_seed;
+           }
           void seed( point_type const& seed_param )
            {
             m_seed = seed_param;
            }
-          void move( scalar_type const& move_param )
+          point_type const& move()const
+           {
+            return m_move;
+           }
+          void move( point_type const& move_param )
            {
             m_move = move_param;
            }
