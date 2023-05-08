@@ -35,7 +35,7 @@ namespace math
              typedef ::math::linear::affine::structure<  scalar_name, 3 > affine_type;
 
              typedef ::math::geometry::projective::camera::pinhole<scalar_name>                pinhole_type;
-             typedef ::math::geometry::projective::camera::optical< scalar_name, size_name >   optical_type;
+             typedef ::math::geometry::projective::camera::optical< scalar_name, size_name >   optical_type, digital_type;
              typedef ::math::geometry::projective::camera::mobile< scalar_name >               mobile_type;
 
              template< typename number_name >
@@ -47,8 +47,8 @@ namespace math
              template< typename number_name >
               bool processXY
                (
-                 optical_type const& camera_left,  vector_type< number_name > const& xy_left
-                ,optical_type const& camera_right, vector_type< number_name > const& xy_right
+                 digital_type const& camera_left,  vector_type< number_name > const& xy_left
+                ,digital_type const& camera_right, vector_type< number_name > const& xy_right
                 ,affine_type const& r2l
                )
                {

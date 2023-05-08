@@ -1,7 +1,7 @@
 #ifndef math_geometry_distance_P2ABC2D
 #define math_geometry_distance_P2ABC2D
 
- // ::math::geometry::distance::P2ABC2D<scalar>::process( point, ABC )
+ // ::math::geometry::distance::P2ABC2D<scalar>::process( ABC, point )
 
 #include "../../../linear/vector/structure.hpp"
 #include "../abc.hpp"

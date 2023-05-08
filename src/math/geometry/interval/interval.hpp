@@ -15,3 +15,6 @@
 #include "./confine.hpp"
 #include "./clip.hpp"
 #include "./size.hpp"
+#include "./reframe.hpp"
+#include "./remap.hpp"
+

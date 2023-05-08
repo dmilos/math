@@ -61,7 +61,7 @@
         scalar_name distance
          (
            ::math::geometry::ellipse::general2D<scalar_name>  const& ellipse
-          ,::math::linear::vector::point<scalar_name,2>            const& point
+          ,::math::linear::vector::point<scalar_name,2>       const& point
          )
          {
           ::math::linear::vector::point<scalar_name,2>           p;

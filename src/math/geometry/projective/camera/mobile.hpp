@@ -38,6 +38,7 @@ namespace math
             template< typename number_name >
              using vector2d_type = ::math::linear::vector::structure< number_name, 2 >;
 
+          public:
             mobile()
              {
               // purposly empty
@@ -49,30 +50,51 @@ namespace math
               this->to_world( ::math::linear::affine::id<scalar_type, 3>() );
              }
 
-            template< typename number_name > // Accept coordinates in pixels, return direction in world space
+          public:
+            point3d_type pointUV( uv_type const& uv )const 
+             { //!< Accept coordinates in UV, return point in world space
+              point3d_type result; ::math::linear::matrix::transform( result, m_2world.matrix(), pinhole_type::reproject( uv ) );
+              return result;
+             }
+
+            template< typename number_name > // Accept coordinates in pixel s, return point in world space
+            point3d_type pointXY( vector2d_type< number_name > const& xy )const 
+             { //!< Accept coordinates in XY image, return point in world space
+              point3d_type result; this->pointUV( m_digital.template uv<number_name>( xy ) );
+              return result;
+             }
+
+            template< typename number_name > 
              point3d_type rayXY( vector2d_type< number_name > const& xy )const
-              {
+              { // Accept coordinates in pixel s, return direction in world space
                return this->rayUV( m_digital.template uv<number_name>( xy ) );
               }
 
-            // Accept coordinates in uv, return direction in world space
-            point3d_type rayUV( uv_type const& uv )const
-             {
-              point3d_type local = pinhole_type::reproject( uv );
-              point3d_type result;
-              ::math::linear::matrix::transform( result, m_2world.matrix(), local );
+            point3d_type rayUV( uv_type const& uv )const 
+             { //!< Accept coordinates in UV, return direction of line in world space
+              point3d_type result = this->pointUV( uv );
               ::math::linear::vector::subtraction( result, this->to_world().vector() );
               return result;
              }
 
-            template< typename number_name >// accept point in world space return pixel coordinates
-              vector2d_type< number_name > project( point3d_type const& point3d )const
-               {
-                point3d_type local;
-                ::math::linear::affine::transform( local, m_2local, point3d );
-                auto uv = ::math::geometry::projective::camera::pinhole< scalar_type >::project( local );
-                return m_digital.template xy<number_name>( uv );
-               }
+            uv_type projectUV( point3d_type const& point3d )const
+             { // accept point in world space return UV coordinates
+              point3d_type local;
+              ::math::linear::affine::transform( local, m_2local, point3d );
+              return pinhole_type::project( local );
+             }
+
+            template< typename number_name > 
+             vector2d_type< number_name > projectXY( point3d_type const& point3d )const
+              { //! accept point in world space return pixel coordinates
+               return m_digital.template xy<number_name>( this->projectUV( point3d ) );
+              }
+
+            template< typename number_name > 
+             vector2d_type< number_name > project( point3d_type const& point3d )const //!< obsolete
+              { //! accept point in world space return pixel coordinates
+               return this->template projectXY<number_name>( point3d );
+              }
 
           public:
             digital_type const& optical()const{ return m_digital; }

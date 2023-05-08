@@ -1,8 +1,8 @@
 #ifndef math_algorithm_concentric_loop_HPP_
  #define math_algorithm_concentric_loop_HPP_
 
-// ::math::algorithm::next_variation( bein(), end(), max, start = 0, step =1 )
-// ::math::algorithm::prev_variation( bein(), end(), max, start = 0, step =1 )
+// ::math::algorithm::next_variation( std::begin(), std::end(), max, start = 0, step =1 )
+// ::math::algorithm::prev_variation( std::begin(), std::end(), max, start = 0, step =1 )
 
  namespace math
   {
@@ -52,7 +52,7 @@
            return true;
           }
 
-         *_Next = _Max;
+         *_Next = _Max-1;
          ++_Next;
        }
        return false;

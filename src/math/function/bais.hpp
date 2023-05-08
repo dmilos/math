@@ -2,7 +2,7 @@
 #define math_function_bais
 
 
- // ::math::function::bais
+ // ::math::function::bais( x, value ) //!< ( x = 0.5 == identical )
 
 namespace math
  {

@@ -19,11 +19,10 @@ template< typename scalar_name, math::type::size_t width_number, math::type::siz
   {
    for( math::type::size_t j=0; j< height_number; j++ )
     {
-     std::cout << std::endl;
      for( math::type::size_t i=0; i<width_number ; i++ )
       {
        std::cout << std::setw(10) << std::fixed << m[j][i] << ", ";
-      }
+      } std::cout << std::endl;
     }
   }
 
@@ -91,7 +90,6 @@ void GS2()
    std::cout << std::setw( 10 ) << ::math::linear::vector::dot( mResult[1], mResult[2] ) << " - "; print( mResult[2] ); std::cout << std::endl;
    std::cout << " --" << std::endl;
 
-
 }
 
 
@@ -131,19 +129,20 @@ void gauss()
   std::cout << __FUNCTION__ << ":" << __LINE__ << std::endl;
   ::math::linear::matrix::structure<double,3,3 >   A{ 1,0,0, 0,1,0 ,  0,0,1 };
 //::math::linear::matrix::structure<double,3,3 >   B;
-  ::math::linear::matrix::structure<double,3,6 >   E;
-  ::math::linear::matrix::structure<double,4,3 >   sle3;
+  ::math::linear::matrix::structure<double,3,6 >   E{123};
+  ::math::linear::matrix::structure<double,4,3 >   sle1;
   ::math::linear::matrix::structure<double,3,2 >   sle2;
+  ::math::linear::matrix::structure<double,4,3 >   sle3;
 
-   std::cout << " --A" << std::endl;
+   std::cout << " --I" << std::endl;
   ::math::linear::matrix::gauss( A ); print( A ); std::cout << std::endl;
 
    std::cout << " --E" << std::endl;
   ::math::linear::matrix::gauss( E ); print( E ); std::cout << std::endl;
 
-   std::cout << " -- sle3" << std::endl;
-   print( sle3 ={ 2,0,0, 5, 0,3,0,6 ,  0,0,4,7 } ); std::cout << std::endl;
-   ::math::linear::matrix::gauss( sle3 ); print( sle3 ); std::cout << std::endl;
+   std::cout << " -- sle1" << std::endl;
+   print( sle1 ={ 2,0,0, 5, 0,3,0,6 ,  0,0,4,7 } ); std::cout << std::endl;
+   ::math::linear::matrix::gauss( sle1 ); print( sle1 ); std::cout << std::endl;
 
    std::cout << " --B_3_10" << std::endl;
   ::math::linear::matrix::structure<double,3, 10 >   B_3_10;
@@ -151,19 +150,40 @@ void gauss()
    std::cout << " --B_10_3" << std::endl;
   ::math::linear::matrix::structure<double,10, 3 >   B_10_3;
 
-   std::cout << " --B_3_10" << std::endl;
+   std::cout << " --B_3_10" << std::endl; print( B_3_10 );
   ::math::linear::matrix::gauss( B_3_10 ); print( B_3_10 ); std::cout << std::endl;
 
    std::cout << " -- B_10_3" << std::endl;
   ::math::linear::matrix::gauss( B_10_3 ); print(B_10_3 ); std::cout << std::endl;
 
-   std::cout << " --sle2" << std::endl;
-   print( sle2={ 1,1,20, 1, -1, 10 } ); std::cout << std::endl;
-   ::math::linear::matrix::gauss( sle2 ); print(sle2 ); std::cout << std::endl;
+   std::cout << " -- B_6_3" << std::endl;
+/*
+ -0.750000,   0.500000,  -0.250000,
+  0.250000,   0.000000,   0.250000,
+  1.250000,  -0.500000,  -0.250000,
+*/
+  ::math::linear::matrix::structure<double, 6, 3 >   B_6_3= { +1,+2,1 ,   1,0,0,
+                                                              +3,+4,+1,   0,1,0,
+                                                              -1,+2,-1,   0,0,1    };
+    print(B_6_3 ); std::cout << std::endl;
+  ::math::linear::matrix::gauss( B_6_3 ); print(B_6_3 ); std::cout << std::endl;
 
-   std::cout << " --sle2" << std::endl;
+   std::cout << " -- B_5_4" << std::endl; // Solve system of linear equations
+  ::math::linear::matrix::structure<double, 5, 4 >   B_5_4= { -2,  0,  3,  0,  13, /*  53/29 */
+                                                               0,  1,  0, -3,   0, /*  72/29 */
+                                                               2, +3, -2,  0,   0, /* 161/29 */
+                                                               0,  0, -3,  2, -15  /*  24/29 */
+    };
+    print(B_5_4 ); std::cout << std::endl;
+  ::math::linear::matrix::gauss( B_5_4 ); print(B_5_4 ); std::cout << std::endl;
+
+   std::cout << " --sle2a" << std::endl;
+   print( sle2={ 1,1,20, 1, -1, 10 } ); std::cout << std::endl;
+   ::math::linear::matrix::gauss( sle2 ); print( sle2 ); std::cout << std::endl;
+
+   std::cout << " --sle2b" << std::endl;
    print( sle2={ 2, 3, 12, 1, 2, 7 } ); std::cout << std::endl;
-   ::math::linear::matrix::gauss( sle2 ); print(sle2 ); std::cout << std::endl;
+   ::math::linear::matrix::gauss( sle2 ); print( sle2 ); std::cout << std::endl;
 
    std::cout << " -- sle3" << std::endl;
    print( sle3={ 2, 1, 1, 2,   -1, 1, -1 ,3 ,   1, 2,  3, -10 } ); std::cout << std::endl;
@@ -177,15 +197,31 @@ void retarget( )
   ::math::linear::matrix::retarget( m33a, m33b, i0, i1 );
  }
 
+ void TaitGryan()
+ {
+  ::math::linear::vector::structure<double,3>       angle;
+  ::math::linear::matrix::structure<double,3,3>     to_world;
+
+ ::math::linear::matrix::TaitBryanXZY( angle, to_world );
+ ::math::linear::matrix::TaitBryanXYZ( angle, to_world );
+ ::math::linear::matrix::TaitBryanYXZ( angle, to_world );
+ ::math::linear::matrix::TaitBryanYZX( angle, to_world );
+ ::math::linear::matrix::TaitBryanZYX( angle, to_world );
+ ::math::linear::matrix::TaitBryanZXY( angle, to_world );
+ }
+
 int main( int argc, char*argv[] )
  {
   std::cout << __FUNCTION__ << ":" << __LINE__ << std::endl;
+  TaitGryan();
+
+  gauss();
+
   QR();
-   GS();
-   GS2();
-   submatrix();
-   gauss();
-   retarget();
+  GS();
+  GS2();
+  submatrix();
+  retarget();
   ::math::linear::matrix::structure<double,10,11> mAB;
 //::math::linear::matrix::structure<double,11,12> mBC;
   ::math::linear::matrix::structure<double,2,2>   m22;

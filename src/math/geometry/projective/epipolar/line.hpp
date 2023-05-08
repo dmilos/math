@@ -38,7 +38,7 @@ namespace math
 
              typedef ::math::geometry::projective::camera::pinhole<scalar_name>    pinhole_type;
              typedef ::math::geometry::projective::camera::mobile< scalar_name >   mobile_type;
-             typedef ::math::geometry::projective::camera::optical<scalar_name >   optical_type;
+           //typedef ::math::geometry::projective::camera::optical<scalar_name >   optical_type, digital_type;
 
              typedef ::math::geometry::plane::no3d<scalar_name> no3d_type;
              typedef ::math::geometry::plane::parametric3d<scalar_name> parametric3D_type;

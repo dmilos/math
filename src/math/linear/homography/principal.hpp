@@ -68,7 +68,7 @@ namespace math
              return  this_type::point( m_point, plane2display );
             }
 
-           static void horizon( ABC_type & result, homography_type const&  plane2display ) //!< just warapper for homography::horizon_invert 
+           static void horizon( ABC_type & result, homography_type const&  plane2display ) //!< just warapper for homography::horizon_invert
             { //! display = N(0,0,1) + O(0,0,0)
              ::math::linear::homography::horizon_invert<scalar_name>( result, plane2display );
             }
@@ -84,7 +84,7 @@ namespace math
              return m_horizon;
             }
          private:
-           ABC_type m_horizon;  //!< in screen coordinates
+           ABC_type m_horizon;  //!< in display coordinates
 
          public:
            ABC_type const& axis()const
@@ -92,7 +92,7 @@ namespace math
              return m_axis;
             }
          private:
-           ABC_type m_axis;     //!< in screen coordinates
+           ABC_type m_axis;     //!< in display coordinates
 
          public:
            point_type const& point()const

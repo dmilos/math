@@ -1,7 +1,7 @@
 #ifndef math_geometry_distance_L2L
 #define math_geometry_distance_L2L
 
-// ::math::geometry::direction::L2L< scalar, dimension>.process( parametric, parametric )
+// ::math::geometry::direction::L2L< scalar, dimension >.process( parametric, parametric )
 // ::math::geometry::direction::distance( median, parametric, parametric, epsilon )
 
 #include "../../../linear/vector/dot.hpp"

@@ -28,12 +28,11 @@ namespace math
               typedef ::math::linear::vector::structure< scalar_name, 3 >                 coord_type;
               typedef ::math::geometry::direction::ABC2D<scalar_name >                direction_type;
               typedef ::math::linear::affine::structure< scalar_name, 3 >                affine_type;
-              typedef ::math::linear::homography::structure< scalar_name, 2 >      homography_type;
+              typedef ::math::linear::homography::structure< scalar_name, 2 >        homography_type;
 
               typedef ::math::geometry::projective::camera::pinhole< scalar_name >      pinhole_type;
 
             public:
-
               static void process
                (
                  homography_type          & result

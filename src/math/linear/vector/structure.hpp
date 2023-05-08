@@ -20,21 +20,28 @@
           typename scalar_name
          ,::math::type::size_type dimension_number
         >
-         using structure = std::array< scalar_name, dimension_number >;
+        using structure = std::array< scalar_name, dimension_number >;
 
        template
         <
           typename scalar_name
          ,::math::type::size_type dimension_number
         >
-         using vector = ::math::linear::vector::structure< scalar_name, dimension_number >;
+        using vector = ::math::linear::vector::structure< scalar_name, dimension_number >;
 
        template
         <
           typename scalar_name
          ,::math::type::size_type dimension_number
         >
-         using point = ::math::linear::vector::structure< scalar_name, dimension_number >;
+        using point = ::math::linear::vector::structure< scalar_name, dimension_number >;
+
+       template
+        <
+          typename scalar_name
+         ,::math::type::size_type dimension_number
+        >
+        using dynamic = std::vector< scalar_name >;
 
       }
     }

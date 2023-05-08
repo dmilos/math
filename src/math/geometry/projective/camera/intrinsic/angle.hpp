@@ -27,11 +27,11 @@ namespace math
              ,::math::linear::vector::structure< scalar_name, 3 > & point   //!< point in space
             )
             {
-             ::math::linear::vector::structure< scalar_name, 3 > screen;
-             ::math::linear::matrix::transform( screen, matrix, point );
-             ::math::linear::vector::homogenize( screen );
-             // TODO result[0] = ::math::linear::vector::angle( {}, screen );
-             // TODO result[1] = ::math::linear::vector::angle( {}, screen );
+             ::math::linear::vector::structure< scalar_name, 3 > display;
+             ::math::linear::matrix::transform( display, matrix, point );
+             ::math::linear::vector::homogenize( display );
+             // TODO result[0] = ::math::linear::vector::angle( {}, display );
+             // TODO result[1] = ::math::linear::vector::angle( {}, display );
              return ;
             }
 

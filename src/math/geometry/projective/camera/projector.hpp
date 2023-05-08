@@ -29,7 +29,7 @@ namespace math
              typedef scalar_name     scalar_type;
              typedef size_name         size_type;
 
-             typedef ::math::geometry::projective::camera::optical< scalar_name, size_name >       optical_type;
+             typedef ::math::geometry::projective::camera::optical< scalar_name, size_name >       digital_type;
              typedef ::math::geometry::projective::camera::finite<  scalar_name, size_name >        finite_type;
 
              explicit projector( )

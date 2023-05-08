@@ -16,7 +16,7 @@ namespace math
     template
       <
         typename scalar_name        = long double
-       ,unsigned  dimension_number   = 1
+       ,unsigned  dimension_number  = 1
        ,typename size_name          = long unsigned
       >
       class average
@@ -34,7 +34,7 @@ namespace math
           {
           }
 
-         void reset(  )
+         void reset()
           {
            this->m_summae.reset( );
            this->m_count.reset( 0 );

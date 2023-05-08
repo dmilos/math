@@ -4,8 +4,6 @@
 #include <string>
 
 #include "math/math.hpp"
-#include "math/geometry/projective/epipolar/rectify2.hpp"
-#include "math/geometry/projective/epipolar/rectify3.hpp"
 
 using namespace std;
 
@@ -36,17 +34,17 @@ int main( int argc, char *argv[] )
   ::math::linear::affine::structure< double, 2 >       left2world;
   ::math::linear::affine::structure< double, 2 >       right2world;
 
-  ::math::geometry::projective::epipolar::rectify( left, right, { { 1, 0, 0, 1 }, {   1,   0 } } );
-  print( left, "left" ); print( right, "right" );
-
-  ::math::geometry::projective::epipolar::rectify( left, right, { { 1, 0, 0, 1 }, { 100,   1 } } );
-  print( left, "left" ); print( right, "right" );
-
-  ::math::geometry::projective::epipolar::rectify( left, right, { { 1, 0, 0, 1 }, {   0,   1 } } );
-  print( left, "left" ); print( right, "right" );
-
-  ::math::geometry::projective::epipolar::rectify( left, right, { { 1, 0, 0, 1 }, {   1,   1 } } );
-  print( left, "left" ); print( right, "right" );
+  //::math::geometry::projective::epipolar::rectify3::( left, right, { { 1, 0, 0, 1 }, {   1,   0 } } );
+  //print( left, "left" ); print( right, "right" );
+  //
+  //::math::geometry::projective::epipolar::rectify3( left, right, { { 1, 0, 0, 1 }, { 100,   1 } } );
+  //print( left, "left" ); print( right, "right" );
+  //
+  //::math::geometry::projective::epipolar::rectify3( left, right, { { 1, 0, 0, 1 }, {   0,   1 } } );
+  //print( left, "left" ); print( right, "right" );
+  //
+  //::math::geometry::projective::epipolar::rectify3( left, right, { { 1, 0, 0, 1 }, {   1,   1 } } );
+  //print( left, "left" ); print( right, "right" );
 
   return EXIT_SUCCESS;
  }

@@ -21,14 +21,14 @@
          (
            ::math::geometry::plane::no3d<scalar_name>            & result
           ,::math::linear::affine::structure<scalar_name,3> const& affine
-          ,::math::geometry::plane::no3d<scalar_name>       const& right
+          ,::math::geometry::plane::no3d<scalar_name>       const& no3d
          )
          {
-          ::math::linear::affine::transform( result.origin(),  affine, right.origin() );
+          ::math::linear::affine::transform( result.origin(), affine, no3d.origin() );
 
           ::math::linear::vector::structure<scalar_name,3> vertex;
 
-          ::math::linear::vector::addition( vertex, right.origin(), right.normal() );
+          ::math::linear::vector::addition( vertex, no3d.origin(), no3d.normal() );
           ::math::linear::affine::transform( vertex, affine );
           ::math::linear::vector::subtraction( result.normal(), vertex, result.origin() );
          }

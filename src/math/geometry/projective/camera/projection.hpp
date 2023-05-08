@@ -107,7 +107,8 @@ namespace math
                m[the_one][the_one]  = 1;
                m[the_one][12] = 1;
 
-               if( 12 != ::math::linear::matrix::gauss( m, epsilon ) )
+               auto rank = ::math::linear::matrix::gauss( m, epsilon );
+               if( 12 != rank )
                 {
                  return false;
                 }

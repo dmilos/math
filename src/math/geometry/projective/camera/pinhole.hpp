@@ -1,7 +1,7 @@
 #ifndef math_geometry_projective_camera_pinhole
 #define math_geometry_projective_camera_pinhole
 
-// ::math::geometry::projective::camera::pinhole< scalar >
+// ::math::geometry::projective::camera::pinhole< scalar_name >
 
 #include "../../../linear/vector/structure.hpp"
 #include "../../../linear/matrix/structure.hpp"

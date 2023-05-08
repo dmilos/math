@@ -566,8 +566,18 @@ void retarget()
   ::math::linear::homography::structure<double,2>  H     ;
   ::math::geometry::interval::structure<double,2>  target;
   ::math::geometry::interval::structure<double,2>  source;
+  ::math::geometry::interval::structure<double,2>  domain;
+  ::math::geometry::interval::structure<double,2>  codomain;
 
   ::math::linear::homography::retarget( result, H, target, source );
+  ::math::linear::homography::retarget( result, H, target, source );
+  ::math::linear::homography::retarget( result, H, target, domain, source );
+  ::math::linear::homography::retarget( result, H, target, codomain, domain, source );
+
+  ::math::linear::homography::recodomain( result, H, target );
+  ::math::linear::homography::recodomain( result, H, target, codomain );
+  ::math::linear::homography::redomain( result, H, source );
+  ::math::linear::homography::redomain( result, H, domain, source );
 
  }
 

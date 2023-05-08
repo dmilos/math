@@ -21,7 +21,7 @@
 #include "./reduce.hpp"
 
 #include "./QR.hpp"
-//#include "./RQ.hpp"
+//#include "./rq.hpp"
 
 #include "./column.hpp"
 #include "./row.hpp"
@@ -30,7 +30,12 @@
 
 #include "./eigen.hpp"
 
-#include "./GramSchmidt.hpp"
+#include "./gs.hpp"
 #include "./gauss.hpp"
 
 #include "./retarget.hpp"
+#include "./recodomain.hpp"
+#include "./redomain.hpp"
+#include "./check.hpp"
+#include "./tb.hpp"
+

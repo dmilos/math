@@ -32,6 +32,16 @@ namespace math
            return scalar_name(2) * atan( diagonal / scalar_name(2) );
           }
 
+        template < typename scalar_name >
+         scalar_name
+         hv2d
+          (
+            std::array<scalar_name,2 > const& angles
+          )
+          {
+           return ::math::geometry::projective::camera::hv2d( angles[0], angles[1] );
+          }
+
        }
      }
    }

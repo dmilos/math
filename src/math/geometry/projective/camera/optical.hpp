@@ -61,7 +61,7 @@ namespace math
                //this->window();
               }
 
-             optical( resolution_type const& resolution, scalar_type const& DFoV = 2*std::atan( std::sqrt(2) ) )
+             explicit optical( resolution_type const& resolution, scalar_type const& DFoV = 2*std::atan( std::sqrt(2) ) )
               :m_resolution{ resolution }
               {
                this->diagonalFV( DFoV );
@@ -70,9 +70,9 @@ namespace math
 
            public:
              //!!! Cube camera([-1,-1]x[1,1]) to display(pixel)
-             // (0,0) ->( -1, -1 ) ; (m_resolution[0],m_resolution[1]) ->( +1, +1 ) ;
+             // (0,0) <- ( -1, -1 ) ; (m_resolution[0],m_resolution[1]) <-( +1, +1 ) ;
              template< typename number_name >
-              vector_type< number_name > xy( uv_type const& uv )const
+              vector_type< number_name > xy( uv_type const& uv )const //!< convert display to pixel
                {
                 vector_type< number_name > result;
                 auto X = math::function::any_to_any<scalar_type>( uv[0], m_window[0][0], m_window[1][0], scalar_type(0), scalar_type( m_resolution[0] ) );
@@ -86,11 +86,11 @@ namespace math
               //!!! display(pixel) to cube camera([-1,-1]x[1,1])
               //! ( -1, -1 ) -> (0,0) ; ( +1, +1 ) -> (m_resolution[0],m_resolution[1]);
               template< typename number_name >
-               uv_type uv( vector_type< number_name > const& xy )const
+               uv_type uv( vector_type< number_name > const& xy )const  //!< convert pixel to display
                 {
                  uv_type result;
-                 auto U = math::function::any_to_any<scalar_type>( scalar_type(xy[0]), scalar_type(0), scalar_type( m_resolution[0] ), m_window[0][0], m_window[1][0] );
-                 auto V = math::function::any_to_any<scalar_type>( scalar_type(xy[1]), scalar_type( m_resolution[1] ), scalar_type(0), m_window[0][1], m_window[1][1] );
+                 auto U = math::function::any_to_any<scalar_type>( scalar_type( xy[0]), scalar_type(0), scalar_type( m_resolution[0] ), m_window[0][0], m_window[1][0] );
+                 auto V = math::function::any_to_any<scalar_type>( scalar_type( xy[1]), scalar_type( m_resolution[1] ), scalar_type(0), m_window[0][1], m_window[1][1] );
                  result[0] = U; 
                  result[1] = V;
                  return result;

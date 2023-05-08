@@ -22,7 +22,7 @@ namespace math
           (
             scalar_name const& vertical_alpha  //!< vertical angle of view
            ,scalar_name const& aspect          //!< Aspect ration width::height .e.g. 16:9
-          )
+          )//! Display [ -aspect/2, +aspect/2 ] x [ -1, +1 ]
           {
            scalar_name vertical_scale   = scalar_name(2) * tan( vertical_alpha / scalar_name(2) );
            scalar_name horizontal_scale = vertical_scale * aspect;

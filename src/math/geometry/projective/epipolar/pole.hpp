@@ -39,14 +39,14 @@ namespace math
              typedef ::math::geometry::projective::epipolar::pole<scalar_name,size_name> this_type;
 
            public:
-             static homogeneous_type & left( homogeneous_type & result, affine_type const& left_to_world, point_type const& right_eye/* in world coord */ )
+             static homogeneous_type & left( homogeneous_type & result, affine_type const& left_to_local, point_type const& right_eye/* in world coord */ )
               {
-               return ::math::linear::affine::transform( result, left_to_world, right_eye );
+               return ::math::linear::affine::transform( result, left_to_local, right_eye );
               }
 
-             static homogeneous_type & right( homogeneous_type & result, affine_type const& right_to_world, point_type const& left_eye /* in world coord */ )
+             static homogeneous_type & right( homogeneous_type & result, affine_type const& right_to_local, point_type const& left_eye /* in world coord */ )
               {
-               return ::math::linear::affine::transform( result, right_to_world, left_eye );
+               return ::math::linear::affine::transform( result, right_to_local, left_eye );
               }
 
              static homogeneous_type & left( homogeneous_type & result, mobile_type const& sinister/*left*/, mobile_type const& dexter/*right*/ )

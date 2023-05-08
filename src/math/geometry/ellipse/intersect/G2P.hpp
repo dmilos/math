@@ -1,7 +1,8 @@
 #ifndef Dh_math_geometry_ellipse_intersectG2P
  #define Dh_math_geometry_ellipse_intersectG2P
 
- // ::math::geometry::ellipse::intersectG2P<scalar_name>
+ // ::math::geometry::ellipse::G2P<scalar_name>
+ // ::math::geometry::ellipse::intersect<scalar_name>( l1, l2, ellipse, line );
 
 #include "../general2d.hpp"
 #include "../../circle/unit.hpp"
@@ -65,7 +66,7 @@
         unsigned intersect
          (
            scalar_name & l1
-          ,scalar_name &l2
+          ,scalar_name & l2
           ,::math::geometry::ellipse::general2D<scalar_name>      const& ellipse
           ,::math::geometry::direction::parametric<scalar_name,2> const& line
          )

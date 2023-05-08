@@ -19,12 +19,18 @@
          (
            ::math::linear::matrix::structure<scalar_name,width_number, height_number >      & result
           ,::math::linear::matrix::structure<scalar_name,width_number, height_number > const& system
-         )
-         { // WARNING: vectors are in rows
+          , scalar_name const epsilon = 1e-6
+         ) //!< WARNING: vectors are in rows
+         {
           typedef decltype(  system.size() ) size_type;
           if( width_number < height_number ) return false;
 
-          ::math::linear::vector::length( result[0], system[0] , scalar_name(1) );
+          auto length = ::math::linear::vector::length( result[0], system[0], scalar_name(1) );
+
+          if( length < epsilon )
+           {
+            return false;
+           }
 
           for( size_type i=1; i < system.size(); ++i )
            {
@@ -38,7 +44,11 @@
               ::math::linear::vector::subtraction( result[ i ], p );
              }
 
-            ::math::linear::vector::length( result[i], scalar_name(1) );
+            length = ::math::linear::vector::length( result[i], scalar_name(1) );
+            if( length < epsilon )
+             {
+              return false;
+             }
            }
 
           return true;
@@ -49,11 +59,16 @@
         GramSchmidt
          (
            std::vector< ::math::linear::vector::structure< scalar_name, dimension_number > > & system
+          ,scalar_name const epsilon = 1e-6
          )
          {
           typedef decltype( system.size() ) size_type;
 
-          ::math::linear::vector::length( system[0], scalar_name(1) );
+          auto length = ::math::linear::vector::length( system[0], scalar_name(1) );
+          if( length < epsilon )
+           {
+            return false;
+           }
 
           for( size_type i=1; i < std::min<::math::type::size_type>( dimension_number, (::math::type::size_type)system.size() ); ++i )
            {
@@ -67,7 +82,11 @@
               ::math::linear::vector::subtraction( system[ i ], p );
              }
 
-            ::math::linear::vector::length( system[i], scalar_name(1) );
+            length = ::math::linear::vector::length( system[i], scalar_name(1) );
+            if( length < epsilon )
+             {
+              return false;
+             }
            }
 
           return true;

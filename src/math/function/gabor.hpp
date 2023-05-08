@@ -24,7 +24,19 @@ namespace math
          typedef  std::array< scalar_name, 2 > point_type;
 
        public:
-         explicit gabor2D ( scalar_type const& angle = 0 ):m_angle(angle){}
+         explicit gabor2D
+           (
+             scalar_type const& angle              = 0
+            ,scalar_type const& standard_deviation = math::constants::PHI_invSQRT2
+            ,scalar_type const& frequency          = 0.5
+            ,scalar_type const& shift              = math::constants::PHI/2.0
+            )
+            : m_angle(angle)
+            , m_standard_deviation(standard_deviation)
+            , m_frequency(frequency)
+            , m_phase_shift(shift)
+            {
+            }
 
        public:
          scalar_type operator( ) ( point_type const& point_param )const
@@ -40,8 +52,22 @@ namespace math
           }
 
        public:
-         scalar_type real(      point_type const& point_param )const { return 0; }
-         scalar_type imaginary( point_type const& point_param )const { return 0; }
+         scalar_type real(      point_type const& point_param )const
+          {
+           return 0;
+          }
+         scalar_type imaginary( point_type const& point_param )const
+          {
+           return 0;
+          }
+
+       public:
+         scalar_type frequency()const             { return this->m_frequency;  }
+         void        frequency( scalar_type const & f )  { this->m_frequency = f; }
+
+       public:
+         scalar_type shift()const            { return this->m_phase_shift; }
+         void        shift( scalar_type const & s ) { this->m_phase_shift = s; }
 
        public:
          scalar_type m_angle               = 0;
@@ -68,7 +94,7 @@ namespace math
            scalar_type const & x = local[0];
            scalar_type const & y = local[1];
 
-           scalar_type vawe = cos( ( pi2 * frequency_param) * x  + phase_shift_param );
+           scalar_type vawe = cos( ( pi2 * frequency_param ) * x  + phase_shift_param );
 
            scalar_type e ; // = ::math::function::distribution::normal( sqrt(gx + gy), standard_deviation_param );;
            {
@@ -149,7 +175,7 @@ namespace math
          (
            scalar_type const& standard_deviation_param
           ,scalar_type const& frequency_param
-          ,scalar_type const& phase_shift_param 
+          ,scalar_type const& phase_shift_param
          )
          {
           this->m_standard_deviation = standard_deviation_param;

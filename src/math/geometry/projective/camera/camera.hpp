@@ -16,6 +16,11 @@
 #include "./ha2f.hpp"
 #include "./va2h.hpp"
 #include "./va2d.hpp"
+#include "./decompose.hpp"
+#include "./skew.hpp"
+
+
+#include "./opd/opd.hpp"
 
 #include "./focus/focus.hpp"
 

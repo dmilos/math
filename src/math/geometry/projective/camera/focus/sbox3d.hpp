@@ -39,7 +39,7 @@ namespace math
             (
               scalar_name const& base       //!< length of box base
              ,scalar_name const& depth      //!< depth of box
-             ,scalar_name const& p          //!< position on y=focus screen
+             ,scalar_name const& p          //!< position on y=focus display
             )
             { //! box =[ ( -base/2, -base/2, focus ), ( +base/2, +base/2, focus + depth  ) ]
              scalar_name focus = ::math::geometry::projective::camera::focus::unit3d( base * sqrt( 2 ), depth, p *  sqrt( 2 ) );

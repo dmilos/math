@@ -13,6 +13,11 @@
 #include "./NaN.hpp"
 #include "./system.hpp"
 #include "./construct.hpp"
+#include "./convert.hpp"
 
 #include "./rotate.hpp"
+
 #include "./retarget.hpp"
+#include "./recodomain.hpp"
+#include "./redomain.hpp"
+

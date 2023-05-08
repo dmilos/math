@@ -1,7 +1,7 @@
 #ifndef math_algorithm_combination_HPP_
  #define math_algorithm_combination_HPP_
 
-// math::algorithm::next_combination( begin(), end(), max, step )
+// math::algorithm::next_combination( std::begin( ), std::end( ), max, step ); //!< container is in in reverse order {5,4,3,2,1}
 
  namespace math
   {
@@ -13,7 +13,7 @@
        (
             _Titerator const& _First
           , _Titerator const& _Last
-          , _Tnumber const& _Max
+          , _Tnumber const& _Max //!< can not be reach .i.e. to be equal
           , _Tnumber const& _Step  = 1
        )
        {

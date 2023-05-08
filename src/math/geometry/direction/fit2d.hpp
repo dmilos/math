@@ -24,12 +24,20 @@ namespace math
         {
          public:
            typedef scalar_name scalar_type;
+           typedef std::size_t size_type;
            typedef ::math::linear::vector::point<scalar_name,2>       point_type;
            typedef ::math::geometry::direction::ABC2D<scalar_type>    line_type;
 
            typedef std::vector< point_type >   cloud_type;
            typedef std::vector< scalar_type > sample_type;
 
+
+         public:
+           fit2D()
+            {
+             reset();
+            }
+         public:
            static bool process( line_type & line, cloud_type const& cloud )
             {
              return process( line.A(), line.B(), line.C(), cloud );
@@ -107,6 +115,55 @@ namespace math
              return true;
             }
 
+           point_type reset()
+            {
+             m_count = 0;
+             m_X  = 0;
+             m_Y  = 0;
+             m_XY = 0;
+             m_X2 = 0;
+             m_Y2 = 0;
+            }
+           bool push( point_type const& sample )
+            {
+             ++m_count;
+             m_X  += sample[0];
+             m_Y  += sample[1];
+             m_XY += sample[0] * sample[1];
+             m_X2 += sample[0] * sample[0];
+             m_Y2 += sample[1] * sample[1];
+             return true;
+            }
+
+           line_type direction()const
+            {
+             scalar_type X  = m_X  / m_count;
+             scalar_type Y  = m_Y  / m_count;
+             scalar_type XY = m_XY / m_count;
+             scalar_type X2 = m_X2 / m_count;
+             scalar_type Y2 = m_Y2 / m_count;
+
+             scalar_type Bx = X2 - X * X;
+             scalar_type By = Y2 - Y * Y;
+
+             line_type result;
+             if( fabs( Bx ) < fabs( By ) )
+              {
+               result.A() = By;
+               result.B() = - ( XY - X * Y );
+              }
+             else
+              {
+               result.A() = - ( XY - X * Y );
+               result.B() = Bx;
+              }
+
+             result.C() = - ( result.A() * X + result.B() * Y );
+             return result;
+            }
+        private:
+          size_type m_count;
+          scalar_type  m_X, m_Y, m_XY,  m_X2,   m_Y2;
        };
 
       template

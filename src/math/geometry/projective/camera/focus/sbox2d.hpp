@@ -28,10 +28,11 @@ namespace math
                 h                  /     |
                 |                 /      |
             ----+-----------0-p--+-------+-----
-                             |  /
-                             | /
-                             f
-                             |
+                            |   /
+                            |  /
+                            | /
+                            f
+                            |
          **************/
           template < typename scalar_name >
            scalar_name
@@ -39,7 +40,7 @@ namespace math
             (
               scalar_name const& base        //!< length of box base
              ,scalar_name const& depth       //!< depth of box
-             ,scalar_name const& p           //!< position on y=focus screen
+             ,scalar_name const& p           //!< position on y=focus display
             )
             { //! box =[ ( -base/2, focus ), ( +base/2, focus + depth) ]
              scalar_name focus = p * depth / ( base/scalar_name(2) - p );

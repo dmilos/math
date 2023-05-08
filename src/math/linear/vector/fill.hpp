@@ -70,15 +70,15 @@
                             value_name                           const& value_param
          )
          {
-          ::math::linear::vector::structure< scalar_name, dimension_number >    result_param;
-          scalar_name      * I_result = result_param.data() + dimension_number;
+          ::math::linear::vector::structure< scalar_name, dimension_number >    result;
+          scalar_name      * I_result = result.data() + dimension_number;
 
-          while( I_result != result_param.data() )
+          while( I_result != result.data() )
            {
             --I_result;
              *I_result = scalar_name( value_param );
            }
-          return result_param;
+          return result;
          }
 
 

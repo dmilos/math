@@ -39,13 +39,13 @@
            ::math::linear::vector::structure< scalar_name, dimension_number >      & result_param
           ,::math::linear::vector::structure< scalar_name, dimension_number > const& model_param
           ,scalar_name                                                        const& length_param
-        //,scalar_name                                                        const& epsilon_param
+          ,scalar_name                                                        const& epsilon_param = 1e-8
          )
          {
           using namespace ::math::linear::vector;
 
           scalar_name old_length = ::math::linear::vector::length<scalar_name,scalar_name,dimension_number>( model_param );
-          if( 0 == old_length ) return old_length;
+          if( old_length < epsilon_param ) return old_length;
 
           ::math::linear::vector::scale( result_param, length_param / old_length, model_param );
 
@@ -59,11 +59,11 @@
          (
            ::math::linear::vector::structure< scalar_name, dimension_number >    & vector_param
           ,scalar_name                                                      const& length_param
-        //,scalar_name                                                      const& epsilon_param
+          ,scalar_name                                                      const& epsilon_param = 1e-8
          )
          {
           scalar_name old_length = ::math::linear::vector::length<scalar_name,scalar_name,dimension_number>( vector_param );
-          if( 0 == old_length ) return old_length;
+          if( old_length < epsilon_param ) return old_length;
           ::math::linear::vector::scale( vector_param, length_param / old_length );
           return old_length;
          }

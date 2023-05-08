@@ -73,11 +73,10 @@ namespace math
          ,::math::linear::homography::structure<  scalar_name, 2>      const& display2space
          )
         {
-         ::math::linear::vector::structure<      scalar_name, 2 >           tmp;
+         typedef ::math::linear::vector::structure<      scalar_name, 2 >  vector_type;
 
-         ::math::linear::homography::transform( tmp, display2space, result );
+         ::math::linear::homography::transform( result, display2space, vector_type( result ) );
 
-         result = tmp;
          return /*result*/;
         }
 
@@ -95,9 +94,9 @@ namespace math
                                +  display2space[3][2] * point[2]
                                +  display2space[3][3];
 
-         result[0] = ( display2space[0][0] * point[0] +  display2space[0][1] * point[1] + display2space[0][2] * point[2] + display2space[0][3] )/divisor;
-         result[1] = ( display2space[1][0] * point[0] +  display2space[1][1] * point[1] + display2space[1][2] * point[2] + display2space[1][3] )/divisor;
-         result[2] = ( display2space[2][0] * point[0] +  display2space[2][1] * point[1] + display2space[2][2] * point[2] + display2space[2][3] )/divisor;
+         result[0] = ( display2space[0][0] * point[0]  +  display2space[0][1] * point[1] + display2space[0][2] * point[2]  +  display2space[0][3] )/divisor;
+         result[1] = ( display2space[1][0] * point[0]  +  display2space[1][1] * point[1] + display2space[1][2] * point[2]  +  display2space[1][3] )/divisor;
+         result[2] = ( display2space[2][0] * point[0]  +  display2space[2][1] * point[1] + display2space[2][2] * point[2]  +  display2space[2][3] )/divisor;
 
          return /*result*/;
         }
@@ -109,11 +108,10 @@ namespace math
          ,::math::linear::homography::structure<  scalar_name, 3 >      const& display2space
          )
         {
-         ::math::linear::vector::structure<      scalar_name, 3 >           tmp;
+         typedef ::math::linear::vector::structure<      scalar_name, 3 >  vector_type;
 
-         ::math::linear::homography::transform( tmp, display2space, result );
+         ::math::linear::homography::transform( result, display2space, vector_type( result ) );
 
-         result = tmp;
          return /*result*/;
         }
 

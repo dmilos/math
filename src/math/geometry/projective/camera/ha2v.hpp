@@ -6,6 +6,7 @@
 
 
 
+
 namespace math
  {
   namespace geometry

@@ -4,7 +4,7 @@
  // ::math::linear::matrix::QR<scalar_name,width_number,height_number>( Q, R, A )
 
 #include "./structure.hpp"
-#include "./GramSchmidt.hpp"
+#include "./gs.hpp"
 
 
 
@@ -18,12 +18,12 @@
       {
 
        template< typename scalar_name, ::math::type::size_type dimension_number >
-        void QR
+        bool QR
          (
-           ::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number>      & Q // Gram-Schmidt
+           ::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number>      & Q // Gram-Schmidt, orthogonal
           ,::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number>      & R // Upper triangle
           ,::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number> const& A
-         )
+         ) //!< A = Q * R
          {
           typedef ::math::type::size_type size_type;
           typedef ::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number>  matrix_type;
@@ -31,7 +31,10 @@
 
           ::math::linear::matrix::transpose( T, A );
 
-          ::math::linear::matrix::GramSchmidt( Q, T );
+          if( false == ::math::linear::matrix::GramSchmidt( Q, T ) )
+           {
+            return false;
+           }
 
           ::math::linear::matrix::zero( R );
           for( size_type i=0; i < dimension_number; ++i )
@@ -41,6 +44,7 @@
             }
 
           ::math::linear::matrix::transpose( Q );
+          return true;
          }
 
       }

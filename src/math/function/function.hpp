@@ -15,5 +15,7 @@
 #include "./lcm.hpp"
 #include "./power.hpp"
 #include "./signum.hpp"
+#include "./ricker.hpp"
+#include "./combinations.hpp"
 
 #include "./distribution/distribution.hpp"

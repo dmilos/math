@@ -32,7 +32,7 @@
         void column
          (
            ::math::linear::matrix::structure<scalar_name, width_number, height_number >      & m
-          , ::math::type::size_type                                                                 const& index
+          , ::math::type::size_type                                                     const& index
           ,::math::linear::vector::structure<scalar_name, height_number>                const& c
          )
          {

@@ -1,8 +1,8 @@
 #ifndef math_geometry_distance_P2L
 #define math_geometry_distance_P2L
 
-// ::math::geometry::direction::P2L< scalar, dimension>::process( point, parametric )
-// ::math::geometry::direction::distance( point, parametric )
+// ::math::geometry::direction::P2L< scalar, dimension>::process( parametric, point )
+// ::math::geometry::direction::distance( parametric, point  )
 
 #include "../../../linear/vector/structure.hpp"
 #include "../../../linear/vector/subtraction.hpp"
@@ -42,7 +42,7 @@ namespace math
            static scalar_type process( parametric_type const& line, point_type const& point, point_type & projection )
             {
              point_type heading; ::math::linear::vector::subtraction( heading, point, line.origin() );
-           
+
              scalar_type lambda = ::math::linear::vector::dot<scalar_type>( heading, line.direction() );
              lambda /= ::math::linear::vector::dot<scalar_type>( line.direction(), line.direction() );
 
@@ -52,8 +52,8 @@ namespace math
 
              return result;
             }
-
         };
+
 
       template<  typename scalar_name, std::size_t dimension_number >
        scalar_name distance

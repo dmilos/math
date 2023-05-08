@@ -28,8 +28,9 @@ namespace math
          ,::math::linear::vector::structure<scalar_name,dimension_number>                               const& source
         )
         {
-         ::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number>  pre;  ::math::linear::matrix::zero( pre );
-         ::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number>  post; ::math::linear::matrix::zero( post );
+         typedef ::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number> matrix_type;
+         matrix_type  pre;  ::math::linear::matrix::zero( pre );
+         matrix_type  post; ::math::linear::matrix::zero( post );
 
          for( int index = 0; index < dimension_number; ++index )
           {
@@ -41,7 +42,7 @@ namespace math
            post[ index ][ index ] = A;
           }
 
-         ::math::linear::matrix::structure<scalar_name,dimension_number,dimension_number>  tmp;
+         matrix_type  tmp;
          ::math::linear::matrix::multiply( tmp, matrix,  pre );
          ::math::linear::matrix::multiply( result, post,  tmp );
 
