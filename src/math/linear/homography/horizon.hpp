@@ -1,8 +1,8 @@
 #ifndef Dh_math_linear_homography_horizon
 #define Dh_math_linear_homography_horizon
 
- // ::math::linear::homography::horizon<scalar_name>( result, display2plane )
- // ::math::linear::homography::horizon_invert<scalar_name>( result, plane2display )
+ // ::math::linear::homography::horizon_invert<scalar_name>( result, display2plane )
+ // ::math::linear::homography::horizon<scalar_name>( result, plane2display )
 
 #include "./structure.hpp"
 #include "../matrix/row.hpp"
@@ -20,7 +20,7 @@ namespace math
 
       template<  typename scalar_name >
        ::math::geometry::direction::ABC2D<scalar_name> &
-       horizon
+       horizon_invert
         (
           ::math::geometry::direction::ABC2D<>                             & result_in_display
          ,::math::linear::homography::structure<  scalar_name, 2 >    const& display2plane
@@ -32,7 +32,7 @@ namespace math
 
       template<  typename scalar_name >
         ::math::geometry::direction::ABC2D<scalar_name> &
-        horizon_invert
+        horizon
         (
           ::math::geometry::direction::ABC2D<>                             & result_in_display
          ,::math::linear::homography::structure<  scalar_name, 2 >    const& plane2display

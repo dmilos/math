@@ -112,6 +112,28 @@ namespace math
                 return m_L2L.process( m_rayLeft, m_rayRight );
                }
 
+              // Take two UVs. two cameras only translates along X axis by distance.
+              // first camera is in zero position, second is translated by distance along X axis
+              bool processUV
+               (
+                 uv_type  const& left, uv_type  const& right, scalar_type const& distance
+               )
+               {
+                ::math::linear::vector::fill( m_rayLeft.origin(), 0 );
+
+                m_rayLeft.direction() = pinhole_type::reproject( left );
+                ::math::linear::vector::length( m_rayLeft.direction(), scalar_type(1) );
+
+                ::math::linear::vector::fill( m_rayRight.origin(), 0 );
+                m_rayRight.origin()[0] = distance;
+
+                 m_rayRight.direction() = pinhole_type::reproject( right );
+                ::math::linear::vector::subtraction( m_rayRight.direction(), m_rayRight.origin() );
+                ::math::linear::vector::length( m_rayRight.direction(), scalar_type(1) );
+
+                return m_L2L.process( m_rayLeft, m_rayRight );
+               }
+
            public:
              point3d_type point()const
               {

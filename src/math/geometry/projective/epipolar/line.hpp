@@ -237,7 +237,7 @@ namespace math
 
         template < typename scalar_name >
          void
-         lineALL   //!< Compute line on both camera
+         lineALL   //!< Compute line on both camera.
           (
             ::math::geometry::direction::parametric<scalar_name, 2>               & epiL
            ,::math::geometry::direction::parametric<scalar_name, 2>               & epiR
@@ -251,7 +251,7 @@ namespace math
 
         template < typename scalar_name >
          void
-         lineALL   //!< Compute line on both camera
+         lineALL   //!< Compute line on both camera. General case
           (
             ::math::geometry::direction::parametric<scalar_name, 2>               & epiL
            ,::math::geometry::direction::parametric<scalar_name, 2>               & epiR

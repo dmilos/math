@@ -63,7 +63,7 @@ namespace math
               ::math::linear::vector::cross( m_rightNewUp, m_right, m_rightForward ); ::math::linear::vector::length<scalar_type>( m_rightNewUp, 1 );
 
               m_declination = ::math::linear::vector::angle( m_leftNewUp, m_rightNewUp );
-              m_orientation = ::math::linear::vector::orientation(  m_leftNewUp, m_rightNewUp, m_right );
+              m_orientation = ::math::linear::vector::orientation( m_leftNewUp, m_rightNewUp, m_right );
 
               return true;
              }
@@ -76,12 +76,12 @@ namespace math
               pole_type::left( right_pole, sinister, dexter );
 
               m_left_angle2torque   = + m_orientation * m_declination/2;
-              m_left_angle2horizon  = - atan2( right_pole[2], right_pole[0] );
               m_left_angle2infinity = + atan2( right_pole[1], sqrt( right_pole[0]*right_pole[0]+right_pole[2]*right_pole[2] ) );
+              m_left_angle2horizon  = - atan2( right_pole[2], right_pole[0] );
 
               ::math::linear::matrix::rotateX( m_left_torque,   m_left_angle2torque );
-              ::math::linear::matrix::rotateY( m_left_horizon,  m_left_angle2horizon );
               ::math::linear::matrix::rotateZ( m_left_infinity, m_left_angle2infinity );
+              ::math::linear::matrix::rotateY( m_left_horizon,  m_left_angle2horizon );
 
               ::math::linear::matrix::multiply( H, m_left_horizon, m_left_infinity, m_left_torque );
               this->base_type::convert( H );
@@ -90,19 +90,18 @@ namespace math
 
             bool right( homography_type & H, mobile_type const& sinister/*left*/, mobile_type const& dexter/*right*/ )
              {
-
               typedef ::math::geometry::projective::epipolar::pole<scalar_name > pole_type;
 
               vector_type left_pole;
               pole_type::right( left_pole, sinister, dexter );
 
               m_right_angle2torque = - m_orientation * m_declination/2;
-              m_right_angle2horizon = math::geometry::deg2rad( 180 ) - atan2( left_pole[2], left_pole[0] );
               m_right_angle2infinity = - atan2( left_pole[1], sqrt( left_pole[0]*left_pole[0]+left_pole[2]*left_pole[2] ) );
+              m_right_angle2horizon = math::geometry::deg2rad( 180 ) - atan2( left_pole[2], left_pole[0] );
 
               ::math::linear::matrix::rotateX( m_right_torque,   m_right_angle2torque );
-              ::math::linear::matrix::rotateY( m_right_horizon,  m_right_angle2horizon );
               ::math::linear::matrix::rotateZ( m_right_infinity, m_right_angle2infinity );
+              ::math::linear::matrix::rotateY( m_right_horizon,  m_right_angle2horizon );
 
               ::math::linear::matrix::multiply( H, m_right_horizon, m_right_infinity, m_right_torque );
               this->base_type::convert( H );

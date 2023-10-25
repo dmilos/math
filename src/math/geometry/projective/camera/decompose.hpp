@@ -16,6 +16,7 @@ namespace math
      {
       namespace camera
        {
+
         template < typename scalar_name >
         class decompose
          {   // p. 157,  Hartley & Zisserman,  Multiple View Geometry in Computer Vision SE
@@ -31,7 +32,7 @@ namespace math
               m_M[0][1] = P[0][1];  m_M[1][1] = P[1][1];  m_M[2][1] = P[2][1];
               m_M[0][2] = P[0][2];  m_M[1][2] = P[1][2];  m_M[2][2] = P[2][2];
               ::math::linear::matrix::row( m_m3, m_M, 2 );
-              ::math::linear::matrix::column( m_p4, P, 3 ); 
+              ::math::linear::matrix::column( m_p4, P, 3 );
              }
 
             matrix3x3_type const& M()const

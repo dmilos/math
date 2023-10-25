@@ -80,13 +80,6 @@ namespace math
               return true;
              }
 
-            bool transformation( homography_type & H, affine_type const& to_world )
-             { // TODO Comment this function
-              auto result = ::math::linear::matrix::construct( H, m_system.matrix(), to_world.matrix() );
-              base_type::convert( H );
-              return result;
-             }
-
             public:
               affine_type const& affine()const&{ return m_system; }
             private:

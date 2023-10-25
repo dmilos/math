@@ -25,7 +25,8 @@ namespace math
         (
           ::math::linear::affine::structure< scalar_name, 3 >         & plane2world   //< ! world is NOT display
          ,::math::linear::homography::structure<scalar_name,2>   const& plane2display
-        )
+        ) //! WARINING Plane is not unique. 
+          //! WARINING Normal is not unit.
         {
          ::math::linear::vector::structure< scalar_name, 3 > X; ::math::linear::matrix::column( X, plane2display, 0 );
          ::math::linear::vector::structure< scalar_name, 3 > Y; ::math::linear::matrix::column( Y, plane2display, 1 );
