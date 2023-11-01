@@ -3,3 +3,4 @@
 #include "./pole.hpp"
 #include "./recenter.hpp"
 #include "./retarget.hpp"
+#include "./processor.hpp"

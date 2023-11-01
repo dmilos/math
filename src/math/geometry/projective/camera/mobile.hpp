@@ -53,7 +53,7 @@ namespace math
           public:
             point3d_type pointUV( uv_type const& uv )const 
              { //!< Accept coordinates in UV, return point in world space
-              point3d_type result; ::math::linear::matrix::transform( result, m_2world.matrix(), pinhole_type::reproject( uv ) );
+              point3d_type result; ::math::linear::affine::transform( result, m_2world, pinhole_type::reproject( uv ) );
               return result;
              }
 
@@ -104,20 +104,28 @@ namespace math
 
           public:
             affine_type const& to_world()const{ return m_2world; }
-            void               to_world( affine_type const& w )
+            bool               to_world( affine_type const& w )
              {
               m_2world = w;
-              ::math::linear::affine::invert( m_2local, m_2world );
+              if( false == ::math::linear::affine::invert( m_2local, m_2world ) )
+               {
+                return false;
+               }
+              return true;
              }
           private:
             affine_type m_2world;
 
           public:
             affine_type const& to_local()const{ return m_2local; }
-            void               to_local( affine_type const& w )
+            bool               to_local( affine_type const& w )
              {
               m_2local = w;
-              ::math::linear::affine::invert( m_2world, m_2local );
+              if( false == ::math::linear::affine::invert( m_2world, m_2local ) )
+               {
+                return false;
+               }
+              return true;
              }
           private:
             affine_type m_2local;

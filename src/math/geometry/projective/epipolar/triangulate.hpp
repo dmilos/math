@@ -52,7 +52,7 @@ namespace math
                 ,affine_type const& r2l
                )
                {
-                uv_type uv_left = camera_left.uv( xy_left );
+                uv_type uv_left  = camera_left.uv( xy_left );
                 uv_type uv_right = camera_right.uv( xy_right );
 
                 return this->processUV( uv_left, uv_right, r2l );
@@ -78,15 +78,15 @@ namespace math
              // Take two cameras, two UVs from each of them, return point in 3D.
               bool processUV
                (
-                 mobile_type const& camera_left,  uv_type const& uv_left
-                ,mobile_type const& camera_right, uv_type const& uv_right
+                 mobile_type const& sinister,  uv_type const& uv_left
+                ,mobile_type const& dexter,    uv_type const& uv_right
                )
                {
-                m_rayLeft.origin() =  camera_left.to_world().vector();
-                m_rayLeft.direction() =  camera_left.rayUV( uv_left );
+                m_rayLeft.origin()    =  sinister.to_world().vector();
+                m_rayLeft.direction() =  sinister.rayUV( uv_left ); 
 
-                m_rayRight.origin() =  camera_right.to_world().vector();
-                m_rayRight.direction() =  camera_right.rayUV( uv_right );
+                m_rayRight.origin()    =  dexter.to_world().vector();
+                m_rayRight.direction() =  dexter.rayUV( uv_right );
 
                 return this->m_L2L.process( m_rayLeft, m_rayRight );
                }
@@ -116,7 +116,7 @@ namespace math
               // first camera is in zero position, second is translated by distance along X axis
               bool processUV
                (
-                 uv_type  const& left, uv_type  const& right, scalar_type const& distance
+                 uv_type const& left, uv_type  const& right, scalar_type const& distance
                )
                {
                 ::math::linear::vector::fill( m_rayLeft.origin(), 0 );

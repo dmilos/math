@@ -25,7 +25,7 @@ namespace math
           ::math::geometry::direction::ABC2D<>                             & result_in_display
          ,::math::linear::homography::structure<  scalar_name, 2 >    const& display2plane
         )
-        {  //! display = N(0,0,1) + O(0,0,0)
+        {  //! center=(0,0,0), display = N(0,0,1) + O(0,0,1)
          ::math::linear::matrix::row( result_in_display.array(), display2plane, 2 );
          return result_in_display;
         }
@@ -37,7 +37,7 @@ namespace math
           ::math::geometry::direction::ABC2D<>                             & result_in_display
          ,::math::linear::homography::structure<  scalar_name, 2 >    const& plane2display
         )
-        {   //! display = N(0,0,1) + O(0,0,0)
+        {   //! center=(0,0,0), display = N(0,0,1) + O(0,0,1)
          ::math::linear::vector::structure<  scalar_name, 3 > X; ::math::linear::matrix::column( X, plane2display, 0 );
          ::math::linear::vector::structure<  scalar_name, 3 > Y; ::math::linear::matrix::column( Y, plane2display, 1 );
          ::math::linear::vector::cross( result_in_display.array(), X, Y );

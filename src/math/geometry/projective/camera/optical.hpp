@@ -17,6 +17,9 @@
 #include "./hv2d.hpp"
 #include "./va2d.hpp"
 #include "./va2h.hpp"
+#include "./a2w.hpp"
+#include "./w2a.hpp"
+
 
 namespace math
  {
@@ -46,7 +49,7 @@ namespace math
              template< typename number_name >
               using vector_type = ::math::linear::vector::structure< number_name, 2 >;
 
-             explicit optical( scalar_type const& DFoV = 2*std::atan( std::sqrt(2) ) )
+             explicit optical( scalar_type const& DFoV = 2 * std::atan( std::sqrt(2) ) )
               :m_resolution{ 1, 1 }
               {
                this->diagonalFV( DFoV );
@@ -54,7 +57,7 @@ namespace math
               }
 
            public:
-             optical( size_type const& width, size_type const& height, scalar_type const& DFoV = 2*std::atan( std::sqrt(2) ) )
+             optical( size_type const& width, size_type const& height, scalar_type const& DFoV = 2 * std::atan( std::sqrt(2) ) )
               :m_resolution{ width, height }
               {
                this->diagonalFV( DFoV );
@@ -102,8 +105,8 @@ namespace math
                m_horizontalFV = horizontalFV;
                m_verticalFV   = verticalFV;
                m_diagonalFV   = ::math::geometry::projective::camera::hv2d( m_horizontalFV, m_verticalFV );
-               m_window[1][0] = tan( this->horizontalFV() / scalar_type(2) );  m_window[0][0] = -m_window[1][0];
-               m_window[1][1] = tan( this->verticalFV()   / scalar_type(2) );  m_window[0][1] = -m_window[1][1];
+               m_window[1][0] = ::math::geometry::projective::camera::a2w( this->horizontalFV()  );  m_window[0][0] = -m_window[1][0];
+               m_window[1][1] = ::math::geometry::projective::camera::a2w( this->verticalFV()    );  m_window[0][1] = -m_window[1][1];
                m_pixelAR      =  ( m_resolution[0] / ( m_window[1][0] - m_window[0][0] ) ) /( m_resolution[1] / ( m_window[1][1] - m_window[0][1] ) );
                return ;
               }
@@ -117,8 +120,8 @@ namespace math
               {
                m_diagonalFV = DFoV;
                std::tie( this->m_horizontalFV, this->m_verticalFV ) = ::math::geometry::projective::camera::d2hv<scalar_type>( m_diagonalFV, scalar_type( this->m_resolution[0] ), scalar_type( this->m_resolution[1] ) ) ;
-               m_window[1][0] = tan( this->horizontalFV() / scalar_type(2) );  m_window[0][0] = -m_window[1][0];
-               m_window[1][1] = tan( this->verticalFV()   / scalar_type(2) );  m_window[0][1] = -m_window[1][1];
+               m_window[1][0] = ::math::geometry::projective::camera::a2w( this->horizontalFV() );  m_window[0][0] = -m_window[1][0];
+               m_window[1][1] = ::math::geometry::projective::camera::a2w( this->verticalFV()   );  m_window[0][1] = -m_window[1][1];
                m_pixelAR      =  ( m_resolution[0] / ( m_window[1][0] - m_window[0][0] ) ) /( m_resolution[1] / ( m_window[1][1] - m_window[0][1] ) );
               }
            private:
@@ -135,8 +138,8 @@ namespace math
                m_horizontalFV = fv;
                m_verticalFV = ::math::geometry::projective::camera::ha2v<scalar_type>( m_horizontalFV, aspect );
                m_diagonalFV = ::math::geometry::projective::camera::ha2d<scalar_type>( m_horizontalFV, aspect );
-               m_window[1][0] = tan( this->horizontalFV() / scalar_type(2) );  m_window[0][0] = -m_window[1][0];
-               m_window[1][1] = tan( this->verticalFV()   / scalar_type(2) );  m_window[0][1] = -m_window[1][1];
+               m_window[1][0] = ::math::geometry::projective::camera::a2w( this->horizontalFV() );  m_window[0][0] = -m_window[1][0];
+               m_window[1][1] = ::math::geometry::projective::camera::a2w( this->verticalFV()   );  m_window[0][1] = -m_window[1][1];
                m_pixelAR      =  ( m_resolution[0] / ( m_window[1][0] - m_window[0][0] ) ) /( m_resolution[1] / ( m_window[1][1] - m_window[0][1] ) );
               }
            private:
@@ -150,8 +153,8 @@ namespace math
                m_verticalFV  = fv;
                m_horizontalFV = ::math::geometry::projective::camera::va2h<scalar_type>( m_verticalFV, aspect );
                m_diagonalFV   = ::math::geometry::projective::camera::va2d<scalar_type>( m_verticalFV, aspect );
-               m_window[1][0] = tan( this->horizontalFV() / scalar_type(2) );  m_window[0][0] = -m_window[1][0];
-               m_window[1][1] = tan( this->verticalFV()   / scalar_type(2) );  m_window[0][1] = -m_window[1][1];
+               m_window[1][0] = ::math::geometry::projective::camera::a2w( this->horizontalFV() );  m_window[0][0] = -m_window[1][0];
+               m_window[1][1] = ::math::geometry::projective::camera::a2w( this->verticalFV()   );  m_window[0][1] = -m_window[1][1];
                m_pixelAR      =  ( m_resolution[0] / ( m_window[1][0] - m_window[0][0] ) ) /(  m_resolution[1] / ( m_window[1][1] - m_window[0][1] ) );
               }
            private:
@@ -163,8 +166,8 @@ namespace math
                m_window[1][0] = new_window[0];  m_window[0][0] = -m_window[1][0];
                m_window[1][1] = new_window[1];  m_window[0][1] = -m_window[1][1];
 
-               m_horizontalFV = scalar_type(2) * atan( m_window[1][0] );
-               m_verticalFV   = scalar_type(2) * atan( m_window[1][1] );
+               m_horizontalFV = ::math::geometry::projective::camera::w2a( m_window[1][0] );
+               m_verticalFV   = ::math::geometry::projective::camera::w2a( m_window[1][1] );
                m_diagonalFV   = ::math::geometry::projective::camera::hv2d( m_horizontalFV, m_verticalFV );
                m_pixelAR      =  ( m_resolution[0] / ( m_window[1][0] - m_window[0][0] ) ) /(  m_resolution[1] / ( m_window[1][1] - m_window[0][1] ) );
               }

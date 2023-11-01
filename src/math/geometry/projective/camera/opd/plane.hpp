@@ -28,9 +28,9 @@ namespace math
              typedef ::math::linear::vector::vector<  scalar_name, 3 > vector_type;
              typedef ::math::linear::affine::structure< scalar_name, 3 > affine_type;
 
-             typedef ::math::geometry::plane::parametric3d<scalar_name> parametric_type;
-             
-             static void to_world( affine_type & result, parametric_type const& p )
+             typedef ::math::geometry::plane::parametric3d<scalar_name> plane_type;
+
+             static void to_local( affine_type & result, plane_type const& p )
               {
                vector_type normal;
 
@@ -43,22 +43,6 @@ namespace math
                   ,::math::linear::vector::unit( p.y()      )
                   ,::math::linear::vector::unit( normal     )
                  );
-              }
-
-             static void to_world( affine_type & result, point_type const& normal, parametric_type const& p )
-              {
-               ::math::linear::affine::system
-                 ( result,
-                                                 p.origin()
-                  ,::math::linear::vector::unit( p.x()      )
-                  ,::math::linear::vector::unit( p.y()      )
-                  ,::math::linear::vector::unit( normal     )
-                 );
-              }
-
-             static void to_local( affine_type & result, point_type const& normal, parametric_type const& p )
-              {
-               //TODO
               }
 
            };

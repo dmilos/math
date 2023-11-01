@@ -25,7 +25,7 @@ namespace math
         (
           ::math::linear::homography::structure< scalar_name, 2 >          & plane2display
          ,::math::geometry::plane::parametric3d< scalar_name  >       const& plane
-        ) // center=(0,0,0), display = N(0,0,1) + O(0,0,0)
+        ) // center=(0,0,0), display = N(0,0,1) + O(0,0,1)
         {
          ::math::linear::matrix::column( plane2display, 0, plane.x() );
          ::math::linear::matrix::column( plane2display, 1, plane.y() );
@@ -37,7 +37,7 @@ namespace math
         (
           ::math::linear::homography::structure< scalar_name, 2 >          & display2plane
          ,::math::geometry::plane::parametric3d< scalar_name  >       const& plane
-        ) // center=(0,0,0), display = N(0,0,1) + O(0,0,0)
+        ) // center=(0,0,0), display = N(0,0,1) + O(0,0,1)
         { // note from here it is easy to find horizon
          auto const & X = plane.x();
          auto const & Y = plane.y();

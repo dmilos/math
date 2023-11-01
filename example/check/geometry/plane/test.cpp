@@ -66,7 +66,7 @@ void X( ::math::linear::vector::structure<double,3> const& normal )
 
    plane.normal() = normal;
   std::cout << "plane: "; print( plane );  std::cout << std::endl;
-  ::math::geometry::plane::horizon<double>::processX( horizon, plane );
+  ::math::geometry::plane::horizon<double>::processX( horizon, plane.normal() );
   ::math::geometry::plane::intersect( intersect, plane, display );
    std::cout << "intersect: ";print( intersect ); std::cout << std::endl;
   ::math::linear::vector::load( intersectP.origin(),    -intersect.origin()[1],    intersect.origin()[2]    );
@@ -98,7 +98,7 @@ void Y( ::math::linear::vector::structure<double,3> const& normal )
 
    plane.normal() = normal;
   std::cout << "plane: "; print( plane );  std::cout << std::endl;
-  ::math::geometry::plane::horizon<double>::processY( horizon, plane );
+  ::math::geometry::plane::horizon<double>::processY( horizon, plane.normal() );
   ::math::geometry::plane::intersect( intersect, plane, display );
    std::cout << "intersect: ";print( intersect ); std::cout << std::endl;
   ::math::linear::vector::load( intersectP.origin(),     intersect.origin()[0],     intersect.origin()[2]    );
@@ -129,7 +129,7 @@ void Z( ::math::linear::vector::structure<double,3> const& normal )
 
    plane.normal() = normal;
   std::cout << "plane: "; print( plane );  std::cout << std::endl;
-  ::math::geometry::plane::horizon<double>::processZ( horizon, plane );
+  ::math::geometry::plane::horizon<double>::processZ( horizon, plane.normal() );
   ::math::geometry::plane::intersect( intersect, plane, display );
    std::cout << "intersect: ";print( intersect ); std::cout << std::endl;
   ::math::linear::vector::load( intersectP.origin(),     intersect.origin()[0],     intersect.origin()[1]    );

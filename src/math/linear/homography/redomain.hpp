@@ -25,8 +25,8 @@ namespace math
       template < typename scalar_name, ::math::type::size_type dimension_number  >
        bool redomain
         (
-          ::math::linear::homography::structure<scalar_name,dimension_number>        & result //!<  operates on source give result on target
-         ,::math::linear::homography::structure<scalar_name,dimension_number>   const& H      //!< operates on [-1,...,-1] x [ +1, ..., +1 ]
+          ::math::linear::homography::structure<scalar_name,dimension_number>        & result //!<  operates on source give result on whatever
+         ,::math::linear::homography::structure<scalar_name,dimension_number>   const& H      //!< operates on [-1,...,-1] x [ +1, ..., +1 ] give result on whatever
          ,::math::geometry::interval::structure<scalar_name,dimension_number>   const& source
         ) // result = H * source
         {
@@ -50,8 +50,8 @@ namespace math
       template < typename scalar_name, ::math::type::size_type dimension_number  >
        bool redomain
         (
-          ::math::linear::homography::structure<scalar_name,dimension_number>        & result //!< operates on source give result on target
-         ,::math::linear::homography::structure<scalar_name,dimension_number>   const& H      //!< operates on domain
+          ::math::linear::homography::structure<scalar_name,dimension_number>        & result //!< operates on source give result on whatever
+         ,::math::linear::homography::structure<scalar_name,dimension_number>   const& H      //!< operates on domain give result on whatever
          ,::math::geometry::interval::structure<scalar_name,dimension_number>   const& domain
          ,::math::geometry::interval::structure<scalar_name,dimension_number>   const& source
         ) // codomain = ( result(source) == H * source2domain ( source )

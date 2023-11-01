@@ -20,11 +20,9 @@ int main( int argc, char *argv[] )
   ::math::linear::vector::point<double,3>             h1, h2, o;
 
 
-  ::math::geometry::projective::plane( no3d, abc, abc, abc, abc );
-  ::math::geometry::projective::plane( no3d, point2, point2, point2, point2 );
-  ::math::geometry::projective::plane( no3d, h1, h2, o );
-  ::math::geometry::projective::plane( parametric3d, no3d, point2, point2 );
-
+  ::math::geometry::projective::plane( no3d.normal(), abc, abc, abc, abc );
+  ::math::geometry::projective::plane( no3d.normal(), point2, point2, point2, point2 );
+  ::math::geometry::projective::plane( no3d.normal(), h1, h2 );
 
   return EXIT_SUCCESS;
  }
