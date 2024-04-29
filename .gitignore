@@ -36,3 +36,5 @@ example/test/codeblocks/obj
 /example/_cmake
 /example/_cmakeGcc
 /example/_cmakeVS
+/example/test/msvc/2022/.vs
+/example/test/msvc/2022/x64

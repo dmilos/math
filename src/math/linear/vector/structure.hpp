@@ -5,7 +5,6 @@
  // ::math::linear::vector::vector<scalar_name,dimension_number>
  // ::math::linear::vector::point<scalar_name,dimension_number>
 
-#include <array>
 
 
  namespace math

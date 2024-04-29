@@ -1,7 +1,7 @@
 #ifndef math_type_scalar_math_hpp_VERSION_1_0_
  #define math_type_scalar_math_hpp_VERSION_1_0_
 
- // math::constants::PHI
+ // math::type::scalar_t
 
  namespace math
   {

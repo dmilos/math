@@ -10,3 +10,4 @@
 #include "./gaussV3.hpp"
 #include "./interval.hpp"
 #include "./skewness.hpp"
+#include "./histogram.hpp"

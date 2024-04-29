@@ -1,5 +1,5 @@
 #ifndef math_statistic_skewness
-#define math_statistic_average
+#define math_statistic_skewness
 
 // ::math::statistic::skewness<scalar_name,dimension_number,size_name>
 

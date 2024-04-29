@@ -39,6 +39,12 @@ namespace math
            m_value ++;
           }
 
+         template < typename sample_name >
+          void push( sample_name const& dummy )
+           {
+            m_value ++;
+           }
+
          value_type const& value()const
           {
            return m_value;

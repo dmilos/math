@@ -21,13 +21,33 @@ int main( int argc, char *argv[] )
   ::math::statistic::count<int>                  aa8; aa8.push(   );        aa8.value( );
   ::math::statistic::average<float,1,int>        aa9; aa9.push( 1 ); aa9.value( );
   ::math::statistic::minimum<float,1>            aaA; aaA.push( 1 ); aaA.value( );
-  
-  ::math::statistic::gauss::vector< double, unsigned, 3 > aaGV; aaGV.push( {1,2,3}  ); 
-  ::math::statistic::gauss::V1< double, unsigned  >     aaG1; aaG1.push( 123  ); 
-  ::math::statistic::gauss::V2< double, unsigned  >     aaG2; aaG2.push( 123  ); 
 
-   ::math::statistic::interval<double, 3 > aaI; aaI.push( {1,2,3}  ); 
+  ::math::statistic::gauss::vector< double, unsigned, 3 > aaGV; aaGV.push( {1,2,3}  );
+  ::math::statistic::gauss::V1< double, unsigned  >     aaG1; aaG1.push( 123  );
+  ::math::statistic::gauss::V2< double, unsigned  >     aaG2; aaG2.push( 123  );
 
+   ::math::statistic::interval<double, 3 > aaI; aaI.push( {1,2,3}  );
+
+  ::math::statistic::histogram< >     hist; hist.push( 123  );
+
+  ::math::statistic::histogram<>   hC;
+
+  hC.resize( 20 );
+  hC.size();
+
+  hC.push( 1.25 );
+  hC.push( 350 );
+  hC.push( - 50 );
+
+
+  ::math::statistic::histogram<::math::statistic::average<math::type::scalar_t>>   hA;
+
+  hA.resize(20);
+  hA.size();
+
+  hA.push(1.25);
+  hA.push(350);
+  hA.push(-50);
 
   return EXIT_SUCCESS;
  }

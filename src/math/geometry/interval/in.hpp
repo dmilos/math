@@ -77,7 +77,7 @@
              {
               return false;
              }
-            if( instance[ 1 ][index] < point[index])
+            if( instance[ 1 ][index] < point[index] )
              {
               return false;
              }

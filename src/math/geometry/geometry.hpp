@@ -9,7 +9,12 @@
 #include "./triangle/triangle.hpp"
 
 #include "./deg2rad.hpp"
+#include "./deg2gon.hpp"
+#include "./rad2gon.hpp"
 #include "./rad2deg.hpp"
+
+#include "./gon2deg.hpp"
+#include "./gon2rad.hpp"
 
 
 #include "./cartesian2cylindric.hpp"
