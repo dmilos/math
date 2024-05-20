@@ -230,6 +230,22 @@ namespace math
         return ::math::function::to_any( ::math::function::to_one<scalar_name>( value, leftA, rightA ), leftB, rightB );
        }
 
+     template< typename scalar_name >
+      inline
+      scalar_name
+      any_to_any_coefficient      //!< [leftA,rightA] -> [leftB,rightB]
+       (
+         scalar_name       & c0
+        ,scalar_name       & c1
+        ,scalar_name  const& leftA
+        ,scalar_name  const& rightA
+        ,scalar_name  const& leftB
+        ,scalar_name  const& rightB
+       )
+       {
+        c1 =  ( rightB - leftB )/( rightA - leftA );
+        c0 = - leftA * c1 + leftB;
+       }
 
    }
  }

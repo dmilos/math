@@ -21,3 +21,7 @@ cd ..
 cd ./test
 ./make.sh
 cd ..
+
+
+echo "Done"
+

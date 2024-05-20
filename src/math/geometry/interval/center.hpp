@@ -9,6 +9,7 @@
 #include "./size.hpp"
 #include "../../linear/vector/addition.hpp"
 #include "../../linear/vector/scale.hpp"
+#include "../../type/scalar.hpp"
 
 
 
@@ -19,7 +20,7 @@
      namespace interval
       {
 
-       template< typename scalar_name, ::math::type::size_type dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number, typename value_name = math::type::scalar_t >
         inline
         typename ::math::geometry::interval::structure< scalar_name, dimension_number >::point_type 
         center
@@ -29,11 +30,11 @@
          {
           typename ::math::geometry::interval::structure< scalar_name, dimension_number >::point_type     result;
           ::math::linear::vector::addition( result, instance[1], instance[0] );
-          ::math::linear::vector::scale( result, scalar_name(0.5) );
+          ::math::linear::vector::scale( result, value_name(0.5) );
           return result;
          }
 
-       template< typename scalar_name, ::math::type::size_type dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number, typename value_name = math::type::scalar_t >
         inline
         void
         center
@@ -43,10 +44,10 @@
          ) //!< parameter version of center
          {
           ::math::linear::vector::addition( point, instance[1], instance[0] );
-          ::math::linear::vector::scale( point, scalar_name(0.5) );
+          ::math::linear::vector::scale( point, value_name(0.5) );
          }
 
-       template< typename scalar_name, ::math::type::size_type dimension_number >
+       template< typename scalar_name, ::math::type::size_type dimension_number, typename value_name = math::type::scalar_t >
         inline
         void
         center
@@ -58,7 +59,7 @@
            typename ::math::geometry::interval::structure< scalar_name, dimension_number >::point_type size;
           ::math::geometry::interval::size( size, instance );
 
-          ::math::linear::vector::scale( size, scalar_name(0.5) );
+          ::math::linear::vector::scale( size, value_name(0.5) );
           ::math::linear::vector::addition(    instance[1], point, size );
           ::math::linear::vector::subtraction( instance[0], point, size );
          }

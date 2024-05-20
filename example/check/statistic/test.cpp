@@ -31,23 +31,46 @@ int main( int argc, char *argv[] )
   ::math::statistic::histogram< >     hist; hist.push( 123  );
 
   ::math::statistic::histogram<>   hC;
-
   hC.resize( 20 );
   hC.size();
-
   hC.push( 1.25 );
   hC.push( 350 );
   hC.push( - 50 );
-
 
   ::math::statistic::histogram<::math::statistic::average<math::type::scalar_t>>   hA;
 
   hA.resize(20);
   hA.size();
-
   hA.push(1.25);
   hA.push(350);
   hA.push(-50);
 
+  ::math::statistic::histogramNd< >   hX_1;
+  hX_1.resize( { 20 } );
+  hX_1.size();
+  hX_1.push({ 1.25} ); hX_1.push({ 5.25} );
+  hX_1.push({ 350 } );
+  hX_1.push({ -50 } );
+
+  ::math::statistic::histogramNd< 2 >   hX_2;
+  hX_2.resize( { 5, 5 } );
+  hX_2.size();
+  hX_2.push({   1.25,    1.25 } ); hX_2.push({   2.25,    2.25 } );
+  hX_2.push({ 350   ,  350    } );
+  hX_2.push({ -50   ,  -50    } );
+
+  ::math::statistic::histogramNd<2,::math::statistic::average<math::type::scalar_t,2> >   h1A;
+  h1A.resize( {20,20} );
+  h1A.size();
+  h1A.push({   1.25,    1.25 } ); h1A.push({   2.25,    2.25 } );
+  h1A.push({ 350 ,  350 } );
+  h1A.push({ -50 ,  -50 } );
+
+  ::math::statistic::histogramNd<5,::math::statistic::average<math::type::scalar_t, 5> >   h2A;
+  h2A.resize( {20,20,20,20,20} );
+  h2A.size();
+  h2A.push({ 1.25, 1.25,  1.25,  1.25,  1.25} );
+  h2A.push({ 350 , 350 ,  350 ,  350 ,  350 } );
+  h2A.push({ -50 , -50 ,  -50 ,  -50 ,  -50 } );
   return EXIT_SUCCESS;
  }
