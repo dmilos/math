@@ -1,7 +1,7 @@
 #ifndef math_geometry_projective_camera_focus_gmmb
 #define math_geometry_projective_camera_focus_gmmb
 
-// ::math::geometry::projective::camera::focus::gmmb( result, base, depth )
+// ::math::geometry::projective::camera::focus::gmmb().process( F, a00, aX, aY, a11 )
 
 #include "../../../../linear/vector/structure.hpp"
 #include "../../../../linear/vector/dot.hpp"
@@ -28,17 +28,16 @@ namespace math
            Display: (-whatever, +whatever )x(-1,1);
            Optical center: (0,0);
            */
-
           template < typename scalar_name >
            class gmmb
             {// E. Guillou, D. Meneveaux, E. Maisel, K. Bouatouch
              public:
-
                typedef scalar_name   scalar_type;
 
                typedef ::math::linear::vector::structure<scalar_name,2>         uv_type;
                typedef ::math::geometry::direction::horizon<scalar_name>   horizon_type;
                typedef ::math::geometry::direction::ABC2D<scalar_name>       ABC2D_type;
+             public:
                gmmb()
                 : m_center{0,0}
                 {
@@ -48,7 +47,7 @@ namespace math
              // four points on some quad
                bool process( scalar_type & focus, uv_type const& O, uv_type const& X, uv_type const& Y, uv_type const& z, scalar_type const& epsilon = 1e-4  )
                 {
-                 m_horizon.process( O, X, z, Y );
+                 m_horizon.process( O, X, z, Y );  //!< always exists
 
                  if( true == ::math::geometry::interval::in( m_horizon.first()[2],  -epsilon, +epsilon ) )
                   {

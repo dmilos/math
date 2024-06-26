@@ -71,6 +71,14 @@ namespace math
               return m_x0;
              }
 
+            static vector3_type x0( matrix3x3_type const & K )//!< principal point
+             {
+              vector3_type result;
+              ::math::linear::vector::load( result, K[0][2], K[1][2], K[2][2] );
+              ::math::linear::vector::homogenize( result );
+              return result;
+             }
+
             bool process()
              {
               auto a = m_M[2][2];

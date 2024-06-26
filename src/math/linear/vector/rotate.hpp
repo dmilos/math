@@ -35,7 +35,7 @@
           ,       value_name                                    const& angle_param
           ,::math::linear::vector::structure< scalar_name, 2 >  const& point_param
          )
-         {
+         { // result_param != point_param
           result_param[0] = point_param[0] * cos( angle_param ) - point_param[1] * sin( angle_param );
           result_param[1] = point_param[0] * sin( angle_param ) + point_param[1] * cos( angle_param );
          }
@@ -50,7 +50,7 @@
           ,::math::linear::vector::structure< scalar_name, 2 >  const& point_param
           ,::math::linear::vector::structure< scalar_name, 2 >  const& pivot_param
          )
-         {
+         { // result_param != point_param
           result_param[0] = (point_param[0] - pivot_param[0]) * cos( angle_param ) - ( point_param[1] - pivot_param[1] ) * sin( angle_param ) + pivot_param[0];
           result_param[1] = (point_param[0] - pivot_param[0]) * sin( angle_param ) + ( point_param[1] - pivot_param[1] ) * cos( angle_param ) + pivot_param[1];
          }
@@ -97,7 +97,7 @@
           ,       value_name                                      const&  angle_param
           ,::math::linear::vector::structure< scalar_name, 3 >    const&  point_param
          )
-        {
+        {  // result_param != point_param
          result_param[0] = 1 * point_param[0] +                 0 * point_param[1] +                  0 * point_param[2];
          result_param[1] = 0 * point_param[0] + cos( angle_param )* point_param[1] - sin( angle_param ) * point_param[2];
          result_param[2] = 0 * point_param[0] + sin( angle_param )* point_param[1] + cos( angle_param ) * point_param[2];
@@ -145,7 +145,7 @@
           ,       value_name                                      const&  angle_param
           ,::math::linear::vector::structure< scalar_name, 3 >    const&  point_param
          )
-        {
+        {  // result_param != point_param
          result_param[0] =  cos( angle_param ) * point_param[0] + 0 * point_param[1] + sin( angle_param )* point_param[2];
          result_param[1] = 0                   * point_param[0] + 1 * point_param[1] +                 0 * point_param[2];
          result_param[2] = -sin( angle_param ) * point_param[0] + 0 * point_param[1] + cos( angle_param )* point_param[2];
@@ -192,7 +192,7 @@
           ,       value_name                                      const&  angle_param,
            ::math::linear::vector::structure< scalar_name, 3 >    const&  point_param
          )
-        {
+        {  // result_param != point_param
          result_param[0] = cos( angle_param ) * point_param[0] - sin( angle_param ) * point_param[1] + 0 * point_param[2];
          result_param[1] = sin( angle_param ) * point_param[0] + cos( angle_param ) * point_param[1] + 0 * point_param[2];
          result_param[2] =                  0 * point_param[0] +                  0 * point_param[1] + 1 * point_param[2];
@@ -222,7 +222,7 @@
           ,::math::linear::vector::structure< scalar_name, 3 >    const& axis_param   //!< expect unit vector
           ,scalar_name                                            const& alpha_param
          )
-         {
+         {  // result_param != point_param
           scalar_name cosA = cos( alpha_param );
           scalar_name sinA = sin( alpha_param );
 

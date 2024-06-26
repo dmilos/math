@@ -24,6 +24,7 @@ namespace math
           )//! Display1D [ -1, +1 ] //!< 1D display viewed under horizontal angle
           { //!< convert focus to angle
            return scalar_name(2) * atan( scalar_name(1) / focus );
+         //return scalar_name(2) * scalar_name(1) * acos( focus / sqrt( focus*focus + scalar_name(1*1) ) );
           }
 
        }

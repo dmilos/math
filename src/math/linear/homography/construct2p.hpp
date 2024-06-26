@@ -3,6 +3,8 @@
 
  // ::math::linear::homography::construct( plane2display, plane );
  // ::math::linear::homography::construct_invert( display2plane, plane );
+ // ::math::linear::homography::construct( result, target, source );
+ // ::math::linear::homography::construct( result, center, target, source );
 
 #include "../vector/vector.hpp"
 #include "../homography/structure.hpp"
@@ -45,21 +47,58 @@ namespace math
 
          ::math::linear::vector::cross( display2plane[0], O, Y );
          ::math::linear::vector::cross( display2plane[1], X, O );
-         ::math::linear::vector::cross( display2plane[2], Y, X ); //!< it is horizon 
+         ::math::linear::vector::cross( display2plane[2], Y, X ); //!< it is horizon
         }
 
+      template<  typename scalar_name >
+       bool construct
+        (
+          ::math::linear::homography::structure< scalar_name, 2 >          & result
+         ,::math::geometry::plane::parametric3d< scalar_name  >       const& target
+         ,::math::geometry::plane::parametric3d< scalar_name  >       const& source
+        )
+        {
+         ::math::linear::homography::structure< scalar_name, 2 > toOne, toWorld;
 
-      //template<  typename scalar_name >
-      // bool construct
-      //  (
-      //    ::math::linear::homography::structure< scalar_name, 2 >          & result
-      //   ,::math::linear::vector::structure< scalar_name  >           const& center
-      //   ,::math::geometry::plane::parametric3d< scalar_name  >       const& target
-      //   ,::math::geometry::plane::parametric3d< scalar_name  >       const& source
-      //  )
-      //  {
-      //   return false;
-      //  }
+         ::math::linear::matrix::column( toWorld, 0, target.x() );
+         ::math::linear::matrix::column( toWorld, 1, target.y() );
+         ::math::linear::matrix::column( toWorld, 2, target.origin() );
+
+         if( false == ::math::linear::matrix::invert( toOne, toWorld ) )
+          {
+           return false;
+          }
+
+         ::math::linear::matrix::column( toWorld, 0, source.x() );
+         ::math::linear::matrix::column( toWorld, 1, source.y() );
+         ::math::linear::matrix::column( toWorld, 2, source.origin() );
+
+         ::math::linear::matrix::multiply( result, toOne, toWorld );
+
+         return true;
+        }
+
+      template<  typename scalar_name >
+       bool construct
+        (
+          ::math::linear::homography::structure< scalar_name, 2 >          & result
+         ,::math::linear::vector::structure< scalar_name, 3 >         const& center
+         ,::math::geometry::plane::parametric3d< scalar_name  >       const& target
+         ,::math::geometry::plane::parametric3d< scalar_name  >       const& source
+        )
+        {
+         typedef ::math::linear::vector::structure< scalar_name, 3 >         point_type;
+         typedef ::math::geometry::plane::parametric3d< scalar_name  >   direction_type;
+         typedef ::math::linear::homography::structure< scalar_name, 2 > structure_type;
+
+         direction_type  T = target;
+         ::math::linear::vector::subtraction( T.origin(), center );
+
+         direction_type  S = source;
+         ::math::linear::vector::subtraction( S.origin(), center );
+
+         return ::math::linear::homography::construct( result, T, S );
+        }
 
      }
    }

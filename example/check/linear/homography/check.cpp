@@ -89,6 +89,25 @@ void hg1()
   ::math::linear::homography::construct<double>( h1, 0.6, 1.0 );
   print( h1 );
  }
+ 
+void hg1_definition()
+ {
+  std::cout << " --- 2D ---   By definition ----- "   << std::endl;
+  typedef ::math::linear::homography::structure<double,1>  homography2_type;
+  typedef ::math::geometry::direction::parametric<double, 2>  direction_type;
+  typedef ::math::linear::vector::structure< double, 2 >  point_type;
+
+
+  homography2_type result;
+  point_type center{0,0};
+  direction_type target( { 0,1 }, {1,0} );
+  direction_type source( { 0,1 }, {1,0} );
+
+  ::math::linear::homography::construct( result, source );
+  ::math::linear::homography::construct_invert( result, source );
+  ::math::linear::homography::construct( result, target, source );
+  ::math::linear::homography::construct( result, center, target, source );
+ }
 
 void hg2_single_specific()
  { // DONE
@@ -351,7 +370,26 @@ void hg2_complete()
   ::math::linear::homography::construct<double>( h2, {0,0}, {0,0}, {1,0}, {1,0}, {0,1}, {0,1}, {1,1}, {2,2} );
   print( h2, " ... , (2,2) " );
   std::cout << "    "; apply<double,2>( h2, {1,1} ); std::cout << std::endl;std::cout << std::endl;
+ }
 
+void hg2_definition()
+ {
+  std::cout << " --- 2D ---   By definition ----- "   << std::endl;
+  typedef ::math::linear::homography::structure<double,2>  homography2_type;
+  typedef ::math::geometry::plane::parametric3d< double >  plane_type;
+  typedef ::math::linear::vector::structure< double, 3 >  point_type;
+
+
+  homography2_type result;
+  point_type center{ 0,0,0 };
+  plane_type plane{ {0,0,1},{1,0,0}, {0,1,0} };
+  plane_type source{ {0,0,1},{1,0,0}, {0,1,0} };
+  plane_type target{ {0,0,1},{1,0,0}, {0,1,0} };
+
+  ::math::linear::homography::construct( result, plane );
+  ::math::linear::homography::construct_invert( result, plane );
+  ::math::linear::homography::construct( result, target, source );
+  ::math::linear::homography::construct( result, center, target, source );
  }
 
 void hg3_single_direct_brute()
@@ -583,6 +621,8 @@ void retarget()
 
 int main( int argc, char*argv[] )
  {
+  hg1_definition();
+  hg2_definition();
   std::cout << " ------------- 1 -----------" << std::endl; hg1();
   std::cout << " ------------- 2 -----------" << std::endl; hg2_single_specific(); hg2_simple(); hg2_complete(); hg2_single_direct_brute(); hg2_single_invert_brute();
   std::cout << " ------------- 3 -----------" << std::endl; hg3_single();          hg3_simple(); hg3_complete(); hg3_single_direct_brute(); hg3_single_invert_brute();
@@ -591,7 +631,6 @@ int main( int argc, char*argv[] )
   // ::math::linear::homography::structure<double,15>   m15;
   // ::math::linear::homography::zero<double,15>( m15 );
   //}
-
 
   //std::cin.get();
   return 0;

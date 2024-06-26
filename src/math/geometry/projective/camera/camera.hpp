@@ -29,3 +29,6 @@
 #include "./focus/focus.hpp"
 
 #include "./projection.hpp"
+
+#include "./d2i.hpp"
+#include "./i2d.hpp"

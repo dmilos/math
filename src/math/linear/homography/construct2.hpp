@@ -1,7 +1,9 @@
 #ifndef Dh_math_linear_homography_construct2
 #define Dh_math_linear_homography_construct2
 
- // ::math::linear::homography::construct2( )
+ // ::math::linear::homography::construct( result, T )
+ // ::math::linear::homography::construct_invert( result, S )
+ // ::math::linear::homography::construct( result, T, S )
 
 #include "../vector/vector.hpp"
 #include "../matrix/invert.hpp"
@@ -19,18 +21,18 @@ namespace math
    {
     namespace homography
      {
-         
+
       template<  typename scalar_name >
        void construct //!< This is always true :D
         (
           ::math::linear::homography::structure< scalar_name, 2 >        & result
-         ,::math::linear::vector::structure< scalar_name, 2 >       const& T 
+         ,::math::linear::vector::structure< scalar_name, 2 >       const& T
         ) //!< ( 1, 1 ) -> T
         {
          static scalar_name one = 1;
          static scalar_name zero = 0;
-         scalar_name X = T[0];
-         scalar_name Y = T[1];
+         auto const&  X = T[0];
+         auto const&  Y = T[1];
 
          result[0][0] =       X;  result[0][1] =    zero;  result[0][2] = zero;
          result[1][0] =    zero;  result[1][1] =       Y;  result[1][2] = zero;
@@ -41,19 +43,35 @@ namespace math
        void construct_invert //!< This is always true :D
         (
           ::math::linear::homography::structure< scalar_name, 2 >        & result
-         ,::math::linear::vector::structure< scalar_name, 2 >       const& T 
-        )//!<  T -> ( 1, 1 )
+         ,::math::linear::vector::structure< scalar_name, 2 >       const& S
+        )//!<  S -> ( 1, 1 )
         {
          static scalar_name one = 1;
          static scalar_name zero = 0;
-         scalar_name X = T[0];
-         scalar_name Y = T[1];
+         auto const& X = S[0];
+         auto const& Y = S[1];
          scalar_name A = X + Y - one;
 
          result[0][0] =       Y * A;  result[0][1] =        zero;  result[0][2] = zero;
          result[1][0] =        zero;  result[1][1] =       X * A;  result[1][2] = zero;
          result[2][0] = Y*(Y - one);  result[2][1] = X*(X - one);  result[2][2] = X*Y;
         }
+
+      template<  typename scalar_name >
+       void construct //!< This is always true :D
+        (
+          ::math::linear::homography::structure< scalar_name, 2 >        & result
+         ,::math::linear::vector::structure< scalar_name, 2 >       const& T
+         ,::math::linear::vector::structure< scalar_name, 2 >       const& S
+        ) //!< S -> T
+        {
+         ::math::linear::homography::structure< scalar_name, 2 >  toOne, fromOne;
+         ::math::linear::homography::construct( toOne, fromOne );
+         ::math::linear::homography::construct_invert( fromOne, T );
+
+         ::math::linear::matrix::multiply( result, fromOne, toOne );
+        }
+
 
       template<  typename scalar_name >
        bool construct

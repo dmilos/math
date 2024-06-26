@@ -7,9 +7,10 @@
  // ::math::function::sinkhole
  // ::math::function::to_one
  // ::math::function::to_any
- // ::math::function::any_to_any
  // ::math::function::relu
  // ::math::function::stairs
+ // ::math::function::any_to_any
+ // ::math::function::any_to_any_coefficient
 
 namespace math
  {
@@ -232,7 +233,7 @@ namespace math
 
      template< typename scalar_name >
       inline
-      scalar_name
+      void
       any_to_any_coefficient      //!< [leftA,rightA] -> [leftB,rightB]
        (
          scalar_name       & c0

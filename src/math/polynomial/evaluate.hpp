@@ -2,6 +2,10 @@
  #define Dh_DDMRM_math_polynomial_evaluate_HPP_
 
 // math::polynomial::evaluate
+// math_polynomial_evaluate_linear
+// math_polynomial_evaluate_quadric
+// math_polynomial_evaluate_cubic
+// math_polynomial_evaluate_quartic
 
  #include <array>
  #include <vector>
