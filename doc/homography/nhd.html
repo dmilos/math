@@ -1,10 +1,45 @@
 <!doctype html>
 <html>
  <head>
-  <title>Naive Homography Construction</title>
+  <title>Natural Construction of Homography Transformation</title>
+
+<style>
+.matrix {
+    position: relative;
+}
+.matrix:before, .matrix:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    border: 1px solid #000;
+    width: 6px;
+    height: 100%;
+}
+.matrix:before {
+    left: -6px;
+    border-right: 0px;
+}
+.matrix:after {
+    right: -6px;
+    border-left: 0px;
+}
+.matrix td {
+    padding: 5px;
+    text-align: center;
+    color:red;
+}
+
+.left_fence
+ {
+    border-left: 1px solid #000;
+ }
+
+</style>
  </head>
  <body>
-  <h1 align="center">Naive Homography Construction</h1>
+  <h1 align="center">Natural Construction of Homography Transformation</h1>
+  <h2 align="center">Dejan Milosavljevic</h2>
+  <h3 align="center">dmilos@gmail.com</h3>
 
  <dl>
 
@@ -12,26 +47,32 @@
  <dd>
   <ul>
       <li>Description</li>
-      <li>Links</li>
       <li>Nomenclature</li>
       <li>Bricks
         <ul>
-            <li>Identical transformation</li>
-            <li>Translation</li>
-            <li>Rotation</li>
-            <li>Scale</li>
-            <li>Skew</li>
-            <li>Projective</li>
+            <li>Translate</li>
+            <li>Linear</li>
+            <li>Simple Homography</li>
         </ul>
-      <li>Building </li>
-      <li>Assembling all transformation in one.</li>
+      <li>Building
+        <ul>
+            <li>Ingredients</li>
+            <li>Goal</li>
+            <li>Elements</li>
+            <li>Assembling</li>
+        </ul>
+
+
+      </li>
+      <li>Assembling</li>
+      <li>Miscellaneous</li>
   </ul>
 
  </dd>
 
 
   <dt><h3>Description</h3></dt>
-   <dd> Computing the plane to plane homography without fancy thing such as inversion of big matrix or eugen vectors values.
+   <dd> Computing the plane to plane homography without fancy thing such as inversion of big matrix or eugen vectors values.<br>
    In here it will be present method in step-by-step manner where every step has some meaning.
 
    </dd>
@@ -40,27 +81,29 @@
      <dl>
         <dt><h4>2D Euclid vector</h4></dt>
         <dd>
-         Uredjeni par od dva realna broja.<br>
-        <b>p</b> = ( x, y ) = [x,y] <sup>T</sup></dd>
+           Ordered pair of two real numbers.<br>
+          <b>p</b> = ( x, y ) = [x,y] <sup>T</sup>; x,y &isin; &reals;
+        </dd>
         <dt><h4>2D Homography vector</h4></dt>
         <dd>
-                 Uredjeni par od tri realna broja.<br>
-        <b>p</b> = ( x, y, z ) = [x,y, z] <sup>T</sup></dd>
+                 Ordered triplet of three real numbers.<br>
+        <b>p</b> = ( x, y, z ) = [x,y,z] <sup>T</sup>  x, y, z &isin; &reals;
+
         </dd>
         <dt><h4>2D Euclid matrix</h4></dt>
-        <dd> 2x2 table of real number
-            <table>
-              <tr> <td rowspan=2 > [ </td> <td> a <sub>00</sub> </td> <td> a <sub>01</sub> </td> <td rowspan=2 > ] </td> <td> </tr>
-              <tr>                         <td> a <sub>11</sub> </td> <td> a <sub>11</sub> </td>  </tr>
+        <dd> 2 by 2 table of real number
+            <table class="matrix" >
+              <tr>   <td> a<sub>00</sub> </td> <td> a<sub>01</sub> </td>  </tr>
+              <tr>   <td> a<sub>11</sub> </td> <td> a<sub>11</sub> </td>  </tr>
             </table>
-             Note: Indexing start from zero.
         </dd>
         <dt><h4>2D Homography matrix</h4></dt>
         <dd>
-            <table>
-              <tr> <td rowspan=3 > [ </td> <td> a <sub>00</sub> </td> <td> a <sub>01</sub> </td> <td> a <sub>02</sub> </td> <td rowspan=3 >  ] </td> <td> </tr>
-              <tr>                         <td> a <sub>10</sub> </td> <td> a <sub>11</sub> </td> <td> a <sub>12</sub> </td> </tr>
-              <tr>                         <td> a <sub>20</sub> </td> <td> a <sub>21</sub> </td> <td> a <sub>22</sub> </td> </tr>
+            <table class="matrix" cellpadding="0" border=0 >
+              <tr> <td> a<sub>00</sub> </td> <td> a<sub>01</sub> </td> <td class ="left_fence"> a<sub>02</sub> </td> </tr>
+              <tr> <td> a<sub>10</sub> </td> <td> a<sub>11</sub> </td> <td class ="left_fence"> a<sub>12</sub> </td> </tr>
+              <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+              <tr> <td> a<sub>20</sub> </td> <td> a<sub>21</sub> </td> <td  class ="left_fence"> a<sub>22</sub> </td> </tr>
             </table>
         </dd>
      </dl>
@@ -70,96 +113,188 @@
   <dt><h3>Bricks</h3></dt>
    <dd>
      ... or what we need to assemble  to get our matrix.
-
      <dl>
-       <dt><h4>Identical transformation</h4></dt>
-       <dd>
-        Nothing happens.
-       </dd>
        <dt><h4>Translation</h4></dt>
        <dd>
         Move for some vector.
-       </dd>
-       <dt><h4>Rotation</h4></dt>
-       <dd>
-         Mathematically, a rotation is a rigid body movement which, unlike a translation, keeps a point fixed. This definition applies to rotations within both two and three dimensions (in a plane and in space, respectively.)<br>
 
-         Wikipedia link: https://en.wikipedia.org/wiki/Rotation <br>
-
-        2D rotation: <br>
-
-        :<math>A = <br>
-        \begin{bmatrix} <br>
-          \cos \theta & -\sin \theta\\ <br>
-          \sin \theta &  \cos \theta <br>
-        \end{bmatrix} <br>
-        </math>         <br>
-
-
+            <table class="matrix" cellpadding="0" border=0 >
+              <tr> <td> 1</td> <td> 0 </td> <td class ="left_fence"> X  </td> </tr>
+              <tr> <td> 0 </td> <td> 1 </td> <td class ="left_fence">Y  </td> </tr>
+              <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+              <tr> <td> 0 </td> <td> 0</td> <td  class ="left_fence"> 1 </td> </tr>
+            </table>
        </dd>
 
-       <dt><h4>Scale</h4></dt>
+       <dt><h4>Linear</h4></dt>
        <dd>
-
-            <table>
-              <tr> <td rowspan=3 > [ </td> <td> X </td> <td> 0 </td> <td rowspan=3 >  ] </td> <td> </tr>
-              <tr>                         <td> 0 </td> <td> Y </td> </tr>
+          If <b>M</b> is linear function then: <br>
+           <b>M</b>( &alpha; <b>x</b> + &beta; <b>y</b> ) = &alpha; <b>M</b>( <b>x</b> )  + &beta; * <b>M</b>( <b>y</b> ) <br> <br>
+            Represented using homography matrix:
+            <table class="matrix" cellpadding="0" border=0 >
+              <tr> <td> a<sub>00</sub> </td> <td> a<sub>01</sub> </td> <td class ="left_fence"> 0 </td> </tr>
+              <tr> <td> a<sub>10</sub> </td> <td> a<sub>11</sub> </td> <td class ="left_fence"> 0 </td> </tr>
+              <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+              <tr> <td> 0 </td> <td> 0 </td> <td  class ="left_fence"> 1 </td> </tr>
             </table>
 
-            Where X, Y &in;  &real;
 
        </dd>
-       <dt><h4>Skew/Shear</h4></dt>
+       <dt><h4>Simple Homography</h4></dt>
        <dd>
+        <div>
+         <p>
+         (0,0) -> (0,0);<br>
+         (1,0) -> (1,0);<br>
+         (0,1) -> (0,1);<br>
+         (1,1) -> (X,Y);<br>
+         </p>
 
-            <table>
-              <tr> <td rowspan=3 > [ </td> <td> 1 </td> <td> ctg( &alpha; ) </td> <td rowspan=3 >  ] </td> <td> </tr>
-              <tr>                         <td> 0 </td> <td> 1 </td> </tr>
-            </table>
-
-            <table>
-              <tr> <td rowspan=3 > [ </td> <td> 1 </td> <td> 0 </td> <td rowspan=3 >  ] </td> <td> </tr>
-              <tr>                         <td> ctg( &alpha; ) </td> <td> 1 </td> </tr>
-            </table>
-
-            Where &alpha; &in;  &real;
-
-       </dd>
-       <dt><h4>Perspective</h4></dt>
-       <dd>
+         This can be represented by homography matrix:
+          <table class="matrix">
+              <tr>  <td> X </td> <td> 0 </td> <td class ="left_fence"> 0 </td>   </tr>
+              <tr> <td> 0 </td> <td> Y </td> <td class ="left_fence"> 0 </td> </tr>
+              <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+              <tr> <td> 1-Y </td> <td> 1-X </td> <td class ="left_fence"> X+Y-1 </td> </tr>
+          </table>
+          <table>
+           <tr>  <td> 0 &ne; (1-Y)<sup>2</sup> + ( 1-X )<sup>2</sup> + ( X+Y-1 )<sup>2</sup> <br>
+              Always &ne; 0. <br> Always exists.
+           </td> <td> <img src="t21.png"/>  </td> </tr>
+          </table>
+        </div>
+        <div>
+        <br>... and vice versa
+        <p>
         (0,0) -> (0,0);<br>
         (1,0) -> (1,0);<br>
         (0,1) -> (0,1);<br>
-        (1,1) -> (T,T);<br>
+        (X,Y) -> (1,1);<br>
+        </p>
+         Homography matrix:
+          <table class="matrix" >
+              <tr> <td> Y * (X + Y - 1)</td> <td> 0 </td> <td  class ="left_fence"> 0 </td>  </tr>
+              <tr> <td> 0 </td> <td> X * (X + Y - 1) </td> <td class ="left_fence"> 0 </td> </tr>
+              <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+              <tr> <td> Y*(Y - 1) </td> <td> X*(X - 1) </td> <td class ="left_fence"> X*Y </td> </tr>
+          </table>
+          <table>
 
+            <tr>  <td>  0 &ne; (Y*(Y - 1))<sup>2</sup> + (X*(X - 1))<sup>2</sup> + (X*Y)<sup>2</sup> <br>
+             (X,Y) &ne; (0,0)<br>
+             (X,Y) &ne; (0,1)<br>
+             (X,Y) &ne; (0,0)<br>
+            </td>
+
+            <td> <img src="12s.png"/>   </td> </tr>
+          </table>
+
+        </div>
        </dd>
-
      </dl>
-
-
    </dd>
 
   <dt><h3>Building</h3></dt>
+  <dd>
+    <dl>
+
+     <dt>
+       <h4>Ingredients</h4>
+     </dt>
    <dd>
-     ... or what we need to assemble  to get our matrix.
+    <ul>
+      <li>  s<sub>0</sub>, s<sub>x</sub>, s<sub>y</sub>, s<sub>z</sub> &isin; &reals;<sup>2</sup> </li>
+      <li>  t<sub>0</sub>, t<sub>x</sub>, t<sub>y</sub>, t<sub>z</sub> &isin; &reals;<sup>2</sup> </li>
+      <li> <i>o</i>=(0,0)</li>
+      <li> det( s<sub>i</sub>, s<sub>j</sub>, s<sub>k</sub>  ) &ne; 0; i &ne; j &ne; k; i,j, k &isin; { 0, x, y, z }, this condition can be relaxed to only det( s<sub>0</sub>, s<sub>x</sub>, s<sub>y</sub>  ) &ne; 0; </li>
+      <li> det( t<sub>i</sub>, t<sub>j</sub>, t<sub>k</sub>  ) &ne; 0; i &ne; j &ne; k; i,j, k &isin; { 0, x, y, z }</li>
+
+      <li> Nice to have: <br>
+        | det( t<sub>i</sub>, t<sub>j</sub>, t<sub>k</sub>  ) | &le; det( t<sub>0</sub>, t<sub>x</sub>, t<sub>y</sub>  )<br>
+        | det( s<sub>i</sub>, s<sub>j</sub>, s<sub>k</sub>  ) | &le; det( s<sub>0</sub>, s<sub>x</sub>, s<sub>y</sub>  )<br>
+
+        </li>
+    </ul>
    </dd>
 
    <dt>
+     <h4>Goal</h4>
+   </dt>
+   <dd>
     <ul>
-      <li> Translate </li>
-      <li>  </li>
-      <li> </li>
-      <li> </li>
-      <li> </li>
-      <li> </li>
+      <li> t<sub>i</sub> = <b>H</b> ( s<sub>i</sub> ); i &isin; { 0, x, y, z } </li>
     </ul>
-   
-   <h3></h3></dt>
-    <dd>
+   </dd>
 
-      Here is c++ code ready for use e.g. copy/paste.<br>
-      Note: <br> - This is not speed champion.<br> - Can be compete for accuracy, but this is still under investigation.<br>
+   <dt>
+     <h4>Elements</h4>
+   </dt>
+   <dd>
+    <ul>
+      <li> <b>T<sub>s</sub></b>: translation matrix, translate from s<sub>0</sub> to <i>o</i> </li>
+      <li> <b>M<sub>s</sub></b>:
+        <blockquote>
+       ( 1, 0 ) = <b>M<sub>s</sub></b>( <b>T<sub>s</sub></b> ( s<sub>x</sub> ) ) ,<br>
+       ( 0, 1 ) = <b>M<sub>s</sub></b>( <b>T<sub>s</sub></b> ( s<sub>y</sub> ) )
+        </blockquote>
+       </li>
+      <li> <b>P<sub>s</sub></b>:
+        <blockquote>
+        (0,0) = <b>P<sub>s</sub></b>( (0,0) ), <br>
+        (1,0) = <b>P<sub>s</sub></b>( (1,0) ), <br>
+        (0,1) = <b>P<sub>s</sub></b>( (0,1) ), <br>
+        (1,1) = <b>P<sub>s</sub></b>(<b>M<sub>s</sub></b> <b>T<sub>s</sub></b>( s<sub>z</sub> ) ) </li>
+        </blockquote>
+      <li> <b>T<sub>t</sub></b>: translation matrix, translate from t<sub>0</sub> to <i>o</i> </li>
+      <li> <b>M<sub>t</sub></b>:
+        <blockquote>
+          ( 1, 0 ) = <b>M<sub>t</sub></b> ( <b>T<sub>t</sub></b> ( t<sub>x</sub> ) )  , <br>
+          ( 0, 1 ) = <b>M<sub>t</sub></b>( <b>T<sub>t</sub></b> ( t<sub>y</sub> ) )
+        </blockquote>
+       </li>
+      <li> <b>P<sub>t</sub></b>:
+        <blockquote>
+        (0,0) = <b>P<sub>t</sub></b>( (0,0) ),<br>
+        (1,0) = <b>P<sub>t</sub></b>( (1,0) ),<br>
+        (0,1) = <b>P<sub>t</sub></b>( (0,1) ), <br>
+        (1,1) = <b>P<sub>t</sub></b>( <b>M<sub>t</sub></b> <b>T<sub>t</sub></b>( t<sub>z</sub> ) ) <br>
+         &nbsp; &nbsp; &nbsp; <b>M<sub>t</sub></b> <b>T<sub>t</sub></b>( t<sub>z</sub> ) &notin;{ (0,0), (1,0), (0,1) }
+        </blockquote>
+        </li>
+    </ul>
+   </dd>
 
+   <dt>
+     <h4>Assembling</h4>
+   </dt>
+   <dd>
+    <b>H</b>
+     = (<b>P<sub>t</sub></b>    <b>M<sub>t</sub></b> <b>T<sub>t</sub></b>   )<sup>-1</sup>   <b>P<sub>s</sub></b>  <b>M<sub>s</sub></b>   <b>T<sub>s</sub></b>
+     = <b>T<sub>t</sub><sup>-1</sup></b>   <b>M<sub>t</sub><sup>-1</sup></b>   <b>P<sub>t</sub><sup>-1</sup></b>   <b>P<sub>s</sub></b>  <b>M<sub>s</sub></b>   <b>T<sub>s</sub></b>
+   </dd>
+
+   </dl>
+
+  </dd>
+
+    <dt>
+     Miscellaneous
+   </dt>
+   <dd>
+    <dl>
+
+      <dt><h4>Source code</h4><dt>
+      <dd>
+       github.com/dmilos/math/linar/homography/construct2.hpp<br>
+      </dd>
+
+      <dt><h4>Comment</h4><dt>
+      <dd>
+       <ul>
+        <li> This can be easily extend to higher dimensions</li>
+       <ul>
+      </dd>
+    <dl>
 
     </dd>
 
