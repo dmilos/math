@@ -22,7 +22,11 @@ namespace math
            bool
            ellipse
             (
-             scalar_name & focus, ::math::linear::vector::structure<scalar_name,2>  const& center, scalar_name const &minor, scalar_name const &mayor
+               scalar_name & focus
+             , ::math::linear::vector::structure<scalar_name,2>  const& center
+             , scalar_name const &minor
+             , scalar_name const &mayor
+             // , scalar_name const &epsilon = 1e-6
             )
             {
              auto const& m =  minor;
@@ -38,7 +42,14 @@ namespace math
              //focus = m * m * ( m*m- M*M  + scalar_name(4)*(x*x+y*y) ) /( M*M-m*m );
              //focus = scalar_name(0.5) * sqrt( fabs( focus ) );
 
-             focus = (x*x+y*y) /( M*M-m*m ) - scalar_name(0.25);
+             auto foci2 = M*M-m*m;
+
+             //if( fabs( foci2 ) < epsilon )
+             // {
+             //  return false;
+             // }
+
+             focus = (x*x+y*y) / foci2 - scalar_name(0.25);
              focus = m * sqrt( fabs( focus ) );
 
              return true;

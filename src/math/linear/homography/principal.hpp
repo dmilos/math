@@ -1,7 +1,7 @@
 #ifndef Dh_math_linear_homography_principal
 #define Dh_math_linear_homography_principal
 
-// ::math::geometry::homography::principal<double>
+// ::math::linear::homography::principal<double>
 
 #include "../vector/structure.hpp"
 #include "../vector/combine03.hpp"
@@ -68,7 +68,7 @@ namespace math
              return  this_type::point( m_point, plane2display );
             }
 
-           static void horizon( ABC_type & result, homography_type const&  plane2display ) //!< just warapper for homography::horizon
+           static void horizon( ABC_type & result, homography_type const&  plane2display ) //!< just wrapper for homography::horizon
             { //! display = N(0,0,1) + O(0,0,0)
              ::math::linear::homography::horizon<scalar_name>( result, plane2display );
             }

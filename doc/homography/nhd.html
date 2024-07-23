@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
  <head>
-  <title>Natural Construction of Homography Transformation</title>
+  <title>Construction of Homography Transformation in six simple steps</title>
 
 <style>
 .matrix {
@@ -61,8 +61,6 @@
             <li>Elements</li>
             <li>Assembling</li>
         </ul>
-
-
       </li>
       <li>Assembling</li>
       <li>Miscellaneous</li>
@@ -116,8 +114,9 @@
      <dl>
        <dt><h4>Translation</h4></dt>
        <dd>
-        Move for some vector.
-
+        Move for some vector.<br> <br>
+        (x+X,y+Y)=<b>P</b>(x,y)<br> <br>
+        Homography matrix:
             <table class="matrix" cellpadding="0" border=0 >
               <tr> <td> 1</td> <td> 0 </td> <td class ="left_fence"> X  </td> </tr>
               <tr> <td> 0 </td> <td> 1 </td> <td class ="left_fence">Y  </td> </tr>
@@ -144,10 +143,10 @@
        <dd>
         <div>
          <p>
-         (0,0) -> (0,0);<br>
-         (1,0) -> (1,0);<br>
-         (0,1) -> (0,1);<br>
-         (1,1) -> (X,Y);<br>
+         (0,0) = <b>P</b>(0,0);<br>
+         (1,0) = <b>P</b>(1,0);<br>
+         (0,1) = <b>P</b>(0,1);<br>
+         (X,Y) = <b>P</b>(1,1);<br>
          </p>
 
          This can be represented by homography matrix:
@@ -166,10 +165,10 @@
         <div>
         <br>... and vice versa
         <p>
-        (0,0) -> (0,0);<br>
-        (1,0) -> (1,0);<br>
-        (0,1) -> (0,1);<br>
-        (X,Y) -> (1,1);<br>
+         (0,0) = <b>P</b>(0,0);<br>
+         (1,0) = <b>P</b>(1,0);<br>
+         (0,1) = <b>P</b>(0,1);<br>
+         (1,1) = <b>P</b>(X,Y);<br>
         </p>
          Homography matrix:
           <table class="matrix" >
@@ -178,14 +177,13 @@
               <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
               <tr> <td> Y*(Y - 1) </td> <td> X*(X - 1) </td> <td class ="left_fence"> X*Y </td> </tr>
           </table>
-          <table>
 
+          <table>
             <tr>  <td>  0 &ne; (Y*(Y - 1))<sup>2</sup> + (X*(X - 1))<sup>2</sup> + (X*Y)<sup>2</sup> <br>
              (X,Y) &ne; (0,0)<br>
              (X,Y) &ne; (0,1)<br>
              (X,Y) &ne; (0,0)<br>
             </td>
-
             <td> <img src="12s.png"/>   </td> </tr>
           </table>
 

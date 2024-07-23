@@ -30,11 +30,13 @@ namespace math
             ,scalar_type const& standard_deviation = math::constants::PHI_invSQRT2
             ,scalar_type const& frequency          = 0.5
             ,scalar_type const& shift              = math::constants::PHI/2.0
+            ,point_type  const& gamma              = {1,1}
             )
             : m_angle(angle)
             , m_standard_deviation(standard_deviation)
             , m_frequency(frequency)
             , m_phase_shift(shift)
+            , m_gamma(gamma)
             {
             }
 

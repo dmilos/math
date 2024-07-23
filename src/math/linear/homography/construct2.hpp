@@ -5,6 +5,11 @@
  // ::math::linear::homography::construct_invert( result, S )
  // ::math::linear::homography::construct( result, T, S )
 
+ // ::math::linear::homography::construct( result, b0, b1, b2, b3 )
+ // ::math::linear::homography::constructA( result, O, X, Y, T )
+
+
+
 #include "../vector/vector.hpp"
 #include "../matrix/invert.hpp"
 #include "../matrix/transform.hpp"

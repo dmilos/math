@@ -22,7 +22,7 @@ namespace math
        ::math::geometry::direction::ABC2D<scalar_name> &
        horizon_invert
         (
-          ::math::geometry::direction::ABC2D<>                             & result_in_display
+          ::math::geometry::direction::ABC2D<scalar_name>                  & result_in_display
          ,::math::linear::homography::structure<  scalar_name, 2 >    const& display2plane
         )
         {  //! center=(0,0,0), display = N(0,0,1) + O(0,0,1)
@@ -34,7 +34,7 @@ namespace math
         ::math::geometry::direction::ABC2D<scalar_name> &
         horizon
         (
-          ::math::geometry::direction::ABC2D<>                             & result_in_display
+          ::math::geometry::direction::ABC2D<scalar_name>                  & result_in_display
          ,::math::linear::homography::structure<  scalar_name, 2 >    const& plane2display
         )
         {   //! center=(0,0,0), display = N(0,0,1) + O(0,0,1)
