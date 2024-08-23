@@ -21,7 +21,7 @@ namespace math
          w2a
           (
             scalar_name const& window  //!< window of view
-          )
+          ) //!< angle of view of interval [1,1]x[ -window, +window ]
           {  //!< convert window to angle
            return scalar_name(2) * atan( window );
           }

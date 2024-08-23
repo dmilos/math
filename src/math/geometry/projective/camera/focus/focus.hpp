@@ -8,3 +8,4 @@
 #include "./semi.hpp"
 #include "./ellipse.hpp"
 #include "./intrinsic.hpp"
+#include "./osgo.hpp"

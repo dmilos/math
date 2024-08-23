@@ -39,3 +39,5 @@
 #include "./check.hpp"
 #include "./tb.hpp"
 
+#include "./quadratic.hpp"
+

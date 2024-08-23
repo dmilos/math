@@ -14,8 +14,6 @@
 #include "../homography/structure.hpp"
 
 #include "../../geometry/direction/abc.hpp"
-#include "../../geometry/direction/distance/distance.hpp"
-#include "../../geometry/plane/distance.hpp"
 
 
 

@@ -56,11 +56,25 @@ namespace math
        public:
          scalar_type real(      point_type const& point_param )const
           {
-           return 0;
+           return this->calc(
+             point_param
+             ,this->m_angle
+             ,this->m_standard_deviation
+             ,this->m_frequency
+             ,0
+             ,this->m_gamma
+           );
           }
          scalar_type imaginary( point_type const& point_param )const
           {
-           return 0;
+           return this->calc(
+             point_param
+             ,this->m_angle
+             ,this->m_standard_deviation
+             ,this->m_frequency
+             ,math::constants::PHI_half
+             ,this->m_gamma
+           );
           }
 
        public:
@@ -98,17 +112,16 @@ namespace math
 
            scalar_type vawe = cos( ( pi2 * frequency_param ) * x  + phase_shift_param );
 
-           scalar_type e ; // = ::math::function::distribution::normal( sqrt(gx + gy), standard_deviation_param );;
+           scalar_type exponent ; // = ::math::function::distribution::normal( sqrt( (gx *x)^2 + ( gy*y ) ^2) , standard_deviation_param );
            {
             scalar_name const & inv2sqrtPHI = math::constants::PHI_invSQRT2;
             scalar_type gx = x * gamma_param[0]; gx *= gx;
             scalar_type gy = y * gamma_param[1]; gy *= gy;
             scalar_type v = (gx + gy)/( 2 * standard_deviation_param * standard_deviation_param );
-            e = exp( - v );
-            e *= inv2sqrtPHI/standard_deviation_param;
+            exponent = exp( - v ) * ( inv2sqrtPHI / standard_deviation_param );
            }
 
-           scalar_type result = e * vawe;
+           scalar_type result = exponent * vawe;
            return result;
           }
       };
@@ -139,7 +152,7 @@ namespace math
              vawe = cos( ( pi2 * frequency_param) * x  + phase_shift_param );
             }
 
-            scalar_type gauss; // = ::math::function::distribution::normal( sqrt(gx + gy), standard_deviation_param );;
+            scalar_type exponent; // = ::math::function::distribution::normal( sqrt(gx + gy), standard_deviation_param );;
             {
              scalar_name const & inv2sqrtPHI = math::constants::PHI_invSQRT2;
 
@@ -148,11 +161,11 @@ namespace math
              scalar_type length2 = ::math::linear::vector::dot( local, local );
 
              scalar_type power = scalar_type( -0.5 ) * length2/( standard_deviation_param * standard_deviation_param );
-             scalar_name coefficient = standard_deviation_param * inv2sqrtPHI;
-             gauss = exp( power ) / coefficient;
+
+             exponent = exp( power ) * ( inv2sqrtPHI / standard_deviation_param );
             }
 
-            scalar_type result = gauss * vawe;
+            scalar_type result = exponent * vawe;
             return result;
            }
 

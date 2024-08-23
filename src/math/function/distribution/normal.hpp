@@ -26,11 +26,11 @@ namespace math
           scalar_name const& x
          ,scalar_name const& standard_deviation_param
          ,scalar_name const& mean_param
-         )
+        )
         {
          scalar_name const & sqrt2PHI = math::constants::PHI_SQRT2;
 
-         scalar_name power  =  (x - mean_param) / standard_deviation_param;
+         scalar_name power  = ( x - mean_param) / standard_deviation_param;
                      power *= power;
                      power *= scalar_name(-0.5);
 
@@ -46,11 +46,11 @@ namespace math
         (
           scalar_name const& x
          ,scalar_name const& standard_deviation_param
-         )
+        )
         {
          scalar_name const & sqrt2PHI = math::constants::PHI_SQRT2;
 
-         scalar_name power  =  x / standard_deviation_param;
+         scalar_name power  = x / standard_deviation_param;
                      power *= power;
                      power *= scalar_name(-0.5);
 
@@ -65,7 +65,7 @@ namespace math
        inline scalar_name normal
         (
           scalar_name const& x
-         )
+        )
         {
          scalar_name const & sqrt2PHI = math::constants::PHI_SQRT2;
 

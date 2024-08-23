@@ -28,6 +28,9 @@
          {
           public:
             typedef scalar_name scalar_type;
+            typedef ::math::linear::vector::point<scalar_name,2>   point_type, point2d_type;
+            typedef ::math::linear::vector::point<scalar_name,3>   point3d_type;
+
             typedef ::math::linear::vector::point<scalar_type,6> coefficient_type;
             typedef ::math::linear::matrix::structure<scalar_type,3,3> matrix_type;
 
@@ -40,10 +43,22 @@
 
             typedef ::math::geometry::quadric::structure2d<scalar_type> this_type;
 
+          public:
             structure2d()
-            {
-            }
+             {
+             }
 
+            explicit structure2d( matrix_type const& M )
+             {
+              auto & A = m_coefficient[0]; A = M[0][0];
+              auto & B = m_coefficient[1]; B = ( M[0][1] + M[0][1] ) /2;
+              auto & C = m_coefficient[2]; C = M[1][1];
+              auto & D = m_coefficient[3]; D = ( M[0][2] + M[0][2] ) /2;
+              auto & E = m_coefficient[4]; E = ( M[1][2] + M[2][1] ) /2;
+              auto & F = m_coefficient[5]; F = M[2][2];
+             }
+
+          public:
             explicit structure2d( circle_unit2D_type const& that )
              {
               auto const & a = 1; auto const a2 = a * a;
@@ -74,7 +89,6 @@
               auto const & D = m_coefficient[3] =  - 2 * A * x -      B * y;
               auto const & E = m_coefficient[4] =      - B * x -  2 * C * y;
               auto const & F = m_coefficient[5] = A * this_type::sqr( x ) + B*x*y+ C*this_type::sqr( y ) - a2 * b2;
-
              }
 
             explicit structure2d( ellipse_simple2D_type  const& that )
@@ -108,6 +122,32 @@
               m[0][0] = this_type::A();   m[0][1] = this_type::B()/2; m[0][2] = this_type::D()/2;
               m[1][0] = this_type::B()/2; m[1][1] = this_type::C();   m[1][2] = this_type::E()/2;
               m[2][0] = this_type::D()/2; m[2][1] = this_type::E()/2; m[2][2] = this_type::F();
+             }
+
+          public:
+            scalar_type calc( point2d_type const& point )
+             {
+              auto const& P = point;
+              auto & A = m_coefficient[0];
+              auto & B = m_coefficient[1];
+              auto & C = m_coefficient[2];
+              auto & D = m_coefficient[3];
+              auto & E = m_coefficient[4];
+              auto & F = m_coefficient[5];
+
+              auto const & x = P[0];
+              auto const & y = P[1];
+
+              scalar_type result = 0;
+              result  =   A * x * x
+                        + B * x * y
+                        + C * y * y
+                        + D * x
+                        + E * y
+                        + F
+              ;
+
+              return result;
              }
 
           public: // A X^2 + B X Y + C Y^2 + D X + E Y + F = 0

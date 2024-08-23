@@ -19,7 +19,7 @@ namespace math
 
         template < typename scalar_name >
          struct projection
-          { // calculate projection matrix from 6 given pairs.
+          { //! calculate projection matrix from 6 given pairs.
            public:
              typedef std::size_t size_type;
              typedef scalar_name scalar_type;

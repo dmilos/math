@@ -40,7 +40,7 @@ namespace math
              ,scalar_name const& radius  //!< radus of circle
              ,scalar_name const& A       //!< left point  on display
              ,scalar_name const& B       //!< right point on display
-            )
+            ) // 1D display
             {
              scalar_name a = sqrt( A*A + focus*focus ) - A;
              scalar_name b = sqrt( B*B + focus*focus ) - B;

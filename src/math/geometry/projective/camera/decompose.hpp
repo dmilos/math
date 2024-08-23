@@ -60,7 +60,7 @@ namespace math
               return m_v;
              }
 
-            vector3_type const& x0()const
+            vector3_type const& x0()const //!< principal point
              {
               return m_x0;
              }

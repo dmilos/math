@@ -7,9 +7,8 @@
 #include "../../../../linear/vector/dot.hpp"
 #include "../../../../geometry/direction/horizon.hpp"
 #include "../../../../geometry/direction/abc.hpp"
-#include "../../../../geometry/direction/rotate.hpp"
-#include "../../../../geometry/direction/intersect.hpp"
 #include "../../../../geometry/interval/in.hpp"
+#include "../../../../geometry/direction/project.hpp"
 
 
 
@@ -61,12 +60,7 @@ namespace math
                  auto F = m_horizon.first();  F[0] /= F[2]; F[1] /= F[2]; F[2] /= F[2];
                  auto S = m_horizon.second(); S[0] /= S[2]; S[1] /= S[2]; S[2] /= S[2];
 
-                 ABC2D_type horizon{ m_horizon.line() }; 
-                 horizon.normalize();
-                 math::geometry::direction::rotate<scalar_type,scalar_type>( m_axis, ::math::geometry::deg2rad<scalar_type>( 90 ), horizon );
-                 this->m_axis[2] = 0;
-
-                 math::geometry::direction::intersect( m_sunset, horizon, this->m_axis );
+                 m_sunset = ::math::geometry::direction::project<scalar_type>().process( ABC2D_type( m_horizon.line() ).normalize() );
 
                  auto value2 =   ::math::linear::vector::distance( { F[0], F[1] }, m_sunset )
                                * ::math::linear::vector::distance( { S[0], S[1] }, m_sunset );
@@ -87,14 +81,6 @@ namespace math
                 };
              private:
               uv_type m_sunset;
-
-             public:
-               ABC2D_type const& axis()const //!< principal axis
-                {
-                 return m_axis;
-                };
-             private:
-              ABC2D_type m_axis;
 
              public:
                horizon_type const& horizon()const

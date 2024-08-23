@@ -29,8 +29,8 @@ namespace math
            scalar_name height = resolution[1];
            scalar_name aspect = width/height;
 
-           point[0] = aspect * ( scalar_name(2) * pixel[0]/ width - scalar_name(1) ) ;
-           point[1] = ( scalar_name(1) - scalar_name(2)*pixel[1]/ height) ;
+           point[0] = aspect * ( scalar_name(-1)  + ( scalar_name(1) / width  + pixel[0] * ( scalar_name(2) / width ) ) ) ;
+           point[1] =    1   * ( scalar_name(+1)  - ( scalar_name(1) / height + pixel[1] * ( scalar_name(2) / height) ) ) ;
 
            return point;
           }

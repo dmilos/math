@@ -21,7 +21,7 @@ namespace math
          a2w
           (
             scalar_name const& angle  //!< angle of view
-          )
+          ) //!< angle of view of interval [1,1]x[ -window, +window ]
           {  //!< convert angle to window
            return tan( angle / scalar_name(2) );
           }

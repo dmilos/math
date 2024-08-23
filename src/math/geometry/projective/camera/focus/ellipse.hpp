@@ -27,8 +27,8 @@ namespace math
              , scalar_name const &minor
              , scalar_name const &mayor
              // , scalar_name const &epsilon = 1e-6
-            )
-            {
+            ) //!< given ellipse as projection of sphere, return focus
+            {  // Guruprasad Shivaram and Seetharaman
              auto const& m =  minor;
              auto const& M =  mayor;
              auto const& x =  center[0];

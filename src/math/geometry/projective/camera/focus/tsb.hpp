@@ -56,7 +56,7 @@ namespace math
                  auto F = m_horizon.first();  F[0] /= F[2]; F[1] /= F[2]; F[2] /= F[2];
                  auto S = m_horizon.second(); S[0] /= S[2]; S[1] /= S[2]; S[2] /= S[2];
 
-                 focus =  fabs ( F[0] * F[1] + S[0] * S[1] );
+                 focus =  fabs( F[0] * F[1] + S[0] * S[1] );
                  if( focus < 0 )
                   {
                    return false;

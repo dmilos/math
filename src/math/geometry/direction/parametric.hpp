@@ -63,25 +63,29 @@ namespace math
          public:
            void point( point_type  & p, scalar_type const& parameter )const
             {
-             using namespace ::math::linear::vector;
-             p = this->origin() + parameter * this->direction();
+             ::math::linear::vector::scale( p, parameter, this->direction() );
+             ::math::linear::vector::addition( p, this->origin() );
             }
 
-           point_type const& point( scalar_type const& parameter )const
+           point_type  point( scalar_type const& parameter )const
             {
-             using namespace ::math::linear::vector;
-             return this->origin() + parameter * this->direction();
+             point_type result;
+             ::math::linear::vector::scale( result, parameter, this->direction() );
+             ::math::linear::vector::addition( result, this->origin() );
             }
 
-           static point_type point( point_type const& origin, scalar_type const& parameter, point_type const&direction )
+           static point_type point( point_type const& origin, scalar_type const& parameter, point_type const& direction )
             {
-             using namespace ::math::linear::vector;
-             return origin + parameter * direction;
+             point_type result;
+             ::math::linear::vector::scale( result, parameter, direction.direction() );
+             ::math::linear::vector::addition( result, direction.origin() );
             }
+
            static void point( point_type  & p, point_type const& origin, scalar_type const& parameter, point_type const&direction )
             {
-             using namespace ::math::linear::vector;
-             p = origin + parameter * direction;
+             point_type result;
+             ::math::linear::vector::scale( result, parameter, direction );
+             ::math::linear::vector::addition( result, origin );
             }
          public:
            point_type const& origin()const
