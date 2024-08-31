@@ -25,6 +25,9 @@ namespace math
       template<typename scalar_name, std::size_t dimesion_number >
        class parametric;
 
+      template<typename scalar_name, std::size_t dimension_number>
+        class normal;
+
       template< typename scalar_name>
        class polar //!< defined with one point and angle against X-axis
         {
@@ -37,6 +40,7 @@ namespace math
            typedef ::math::geometry::direction::ABC2D<scalar_name>              ABC2D_type;
            typedef ::math::geometry::direction::parametric<scalar_name, 2> parametric_type;
            typedef ::math::geometry::direction::polar<scalar_name>               this_type;
+           typedef ::math::geometry::direction::normal<scalar_name, 2>         normal_type;
 
          public:
            polar()
@@ -66,6 +70,12 @@ namespace math
            explicit polar( parametric_type const& parametric )
             {
              *this = parametric;
+            }
+
+         public:
+           explicit polar( normal_type const& normal )
+            {
+             *this = normal;
             }
 
          public:
@@ -102,6 +112,16 @@ namespace math
 
              return *this;
             }
+
+           this_type & operator=( normal_type const& normal )
+            {
+             this->origin()[0] = normal.radius() * cos( normal.angle() + math::constants::PHI_div_2 );
+             this->origin()[1] = normal.radius() * sin( normal.angle() + math::constants::PHI_div_2 );
+
+             this->angle() = this->angle;
+             return *this;
+            }
+
 
          public:
            point_type point( scalar_type const& parameter )const

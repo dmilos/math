@@ -23,13 +23,13 @@ namespace math
            focus
             (
               ::math::linear::homography::structure< scalar_name, 1 > & result
-             ,scalar_name const& focus
+             ,scalar_name const& value
             )
             {
-             result[0][0] = focus; result[0][1] = 0;
+             result[0][0] = value; result[0][1] = 0;
              result[1][0] = 0;     result[1][1] = 1;
 
-             return focus;
+             return value;
             }
 
           template < typename scalar_name >
@@ -37,14 +37,14 @@ namespace math
            focus
             (
               ::math::linear::homography::structure< scalar_name, 2 > & result
-             ,scalar_name const& focus
+             ,scalar_name const& value
             )
             {
-             result[0][0] = focus; result[0][1] = 0;     result[0][2] = 0;
-             result[1][0] = 0;     result[1][1] = focus; result[1][2] = 0;
+             result[0][0] = value; result[0][1] = 0;     result[0][2] = 0;
+             result[1][0] = 0;     result[1][1] = value; result[1][2] = 0;
              result[2][0] = 0;     result[2][1] = 0;     result[2][2] = 1;
 
-             return focus;
+             return value;
             }
 
           template < typename scalar_name >
@@ -52,14 +52,14 @@ namespace math
            focus
             (
               ::math::linear::homography::structure< scalar_name, 2 >     & result
-              ::math::linear::vector::structure< scalar_name, 2 >    const& focus
+             ,::math::linear::vector::structure< scalar_name, 2 >    const& value
             )
             {
-             result[0][0] = focus[0]; result[0][1] = 0;        result[0][2] = 0;
-             result[1][0] = 0;        result[1][1] = focus[1]; result[1][2] = 0;
+             result[0][0] = value[0]; result[0][1] = 0;        result[0][2] = 0;
+             result[1][0] = 0;        result[1][1] = value[1]; result[1][2] = 0;
              result[2][0] = 0;        result[2][1] = 0;        result[2][2] = 1;
 
-             return focus;
+             return value;
             }
 
          }

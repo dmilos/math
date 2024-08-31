@@ -27,6 +27,7 @@
 #include "./opd/opd.hpp"
 
 #include "./focus/focus.hpp"
+#include "./intrinsic/intrinsic.hpp"
 
 #include "./projection.hpp"
 

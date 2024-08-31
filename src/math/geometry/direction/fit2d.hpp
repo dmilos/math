@@ -115,7 +115,7 @@ namespace math
              return true;
             }
 
-           point_type reset()
+           void reset()
             {
              m_count = 0;
              m_X  = 0;

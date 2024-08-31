@@ -60,7 +60,7 @@ namespace math
                  auto F = m_horizon.first();  F[0] /= F[2]; F[1] /= F[2]; F[2] /= F[2];
                  auto S = m_horizon.second(); S[0] /= S[2]; S[1] /= S[2]; S[2] /= S[2];
 
-                 m_sunset = ::math::geometry::direction::project<scalar_type>().process( ABC2D_type( m_horizon.line() ).normalize() );
+                 m_sunset = ::math::geometry::direction::project<scalar_type>().process( m_center, ABC2D_type( m_horizon.line() ).normalize() );
 
                  auto value2 =   ::math::linear::vector::distance( { F[0], F[1] }, m_sunset )
                                * ::math::linear::vector::distance( { S[0], S[1] }, m_sunset );

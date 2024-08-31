@@ -14,6 +14,8 @@
 
 #include "../plane/no3d.hpp"
 #include "../plane/parametric3d.hpp"
+#include "../plane/horizon.hpp"
+
 #include "../projective/camera/pinhole.hpp"
 
 

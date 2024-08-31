@@ -2,6 +2,7 @@
 #include "./two.hpp"
 #include "./parametric.hpp"
 #include "./polar.hpp"
+#include "./normal.hpp"
 
 #include "./redirect.hpp"
 #include "./rotate.hpp"

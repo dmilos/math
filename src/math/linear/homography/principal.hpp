@@ -37,52 +37,27 @@ namespace math
            typedef ::math::linear::homography::principal<scalar_type> this_type;
 
          public:
-           static void process( ABC_type & axis, point_type & point, ABC_type & horizon, homography_type const& plane2display )
-            { //!< exists always  // display = N(0,0,1) + O(0,0,0)
-             this_type::horizon( horizon, plane2display );
-             this_type::point(     point, plane2display );
+           static void axis( ABC_type & direction, homography_type const& plane2display )
+            { //!< exists always  // display = irrelevant
+             auto const& H = plane2display;   
+       
+             auto const& h1 = H[0][0]; auto const& h2 = H[0][1]; auto const& h3 = H[0][2]; 
+             auto const& h4 = H[1][0]; auto const& h5 = H[1][1]; auto const& h6 = H[1][2]; 
+             auto const& h7 = H[2][0]; auto const& h8 = H[2][1]; auto const& h9 = H[2][2]; 
+             auto denominator = h7 *h7 + h8*h8;
 
-             axis.A() = +horizon.B() * point[2];
-             axis.B() = -horizon.A() * point[2];
-             axis.C()= -( axis.A() * point[0] + axis.B() * point[1] );
+             direction.A() = -h1 * h8 + h2*h7; direction.A() *= denominator;
+             direction.B() = -h4 * h8 + h5*h7; direction.B() *= denominator;
+
+             direction.C()  = ( h2*h2 + h5*h5 - h1*h1 - h4*h4 ) * h7 * h8;
+             direction.C() += ( h1*h2 + h4*h5 ) * ( h7*h7 - h8*h8 );
+             direction.C()  = -direction.C();
             }
 
            void process( homography_type const& plane2display )
             { // display = N(0,0,1) + O(0,0,0)
-             this_type::process( m_axis, m_point, m_horizon, plane2display );
+             this_type::process( m_axis, plane2display );
             }
-
-           static void point( point_type & result, homography_type const&  plane2display )
-            { //! display = N(0,0,1) + O(0,0,0)
-             point_type X, Y;
-             ::math::linear::matrix::column( X, plane2display, 0 );
-             ::math::linear::matrix::column( Y, plane2display, 1 );
-
-             ::math::linear::vector::cross( result, X, Y );
-            }
-
-           void point( homography_type const&  plane2display )
-            { // display = N(0,0,1) + O(0,0,0)
-             return  this_type::point( m_point, plane2display );
-            }
-
-           static void horizon( ABC_type & result, homography_type const&  plane2display ) //!< just wrapper for homography::horizon
-            { //! display = N(0,0,1) + O(0,0,0)
-             ::math::linear::homography::horizon<scalar_name>( result, plane2display );
-            }
-
-           void horizon( homography_type const&  plane2display )
-            { // display = N(0,0,1) + O(0,0,0)
-             return  this_type::horizon( m_horizon, plane2display );
-            }
-
-         public:
-           ABC_type const& horizon()const
-            {
-             return m_horizon;
-            }
-         private:
-           ABC_type m_horizon;  //!< in display coordinates
 
          public:
            ABC_type const& axis()const
@@ -91,14 +66,6 @@ namespace math
             }
          private:
            ABC_type m_axis;     //!< in display coordinates
-
-         public:
-           point_type const& point()const
-            {
-             return m_point;
-            }
-         private:
-           point_type m_point;     //!< in homography coordinates
         };
 
      }

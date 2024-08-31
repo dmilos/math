@@ -1,5 +1,3 @@
-#include "./gmmb.hpp"
-#include "./tsb.hpp"
 #include "./orto2d.hpp"
 #include "./sbox2d.hpp"
 #include "./sbox3d.hpp"
@@ -8,4 +6,7 @@
 #include "./semi.hpp"
 #include "./ellipse.hpp"
 #include "./intrinsic.hpp"
-#include "./osgo.hpp"
+
+#include "./gmmb.hpp"
+#include "./chuchc.hpp"
+

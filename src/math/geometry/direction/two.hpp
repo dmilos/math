@@ -6,7 +6,7 @@
 
 #include "../../linear/vector/structure.hpp"
 #include "../../linear/vector/addition.hpp"
-
+#include "../../constants.hpp"
 
 
 namespace math
@@ -18,6 +18,9 @@ namespace math
 
       template<typename scalar_name, std::size_t dimension_number >
        class parametric;
+
+      template<typename scalar_name, std::size_t dimension_number>
+        class normal;
 
       template
        <
@@ -101,6 +104,7 @@ namespace math
            typedef ::math::geometry::direction::ABC2D<scalar_name>              ABC2D_type;
            typedef ::math::geometry::direction::parametric<scalar_name, 2> paramatric_type;
            typedef ::math::geometry::direction::polar<scalar_name>              polar_type;
+           typedef ::math::geometry::direction::normal<scalar_name, 2>         normal_type;
 
          public:
            two()
@@ -123,6 +127,11 @@ namespace math
              *this = paramatric;
             }
 
+           explicit two( normal_type const& normal )
+            {
+             *this = normal;
+            }
+
          public:
            two & operator=( ABC2D_type const& abc )
             {
@@ -137,7 +146,7 @@ namespace math
              return *this;
             }
 
-           two & operator=( paramatric_type const& parametric )
+           this_type & operator=( paramatric_type const& parametric )
             {
              this->m_first = parametric.origin();
              ::math::linear::vector::addition( this->m_second, parametric.origin(), parametric.direction() );
@@ -145,11 +154,22 @@ namespace math
              return *this;
             }
 
-           two & operator=( polar_type const& polar )
+           this_type & operator=( polar_type const& polar )
             {
              this->m_first     = polar.origin();
              this->m_second[0] = polar.origin()[0] + cos( polar.angle() );
              this->m_second[1] = polar.origin()[1] + sin( polar.angle() );
+             return *this;
+            }
+
+           this_type & operator=( normal_type const& normal )
+            {
+             this->first()[0] = normal.radius() * cos( normal.angle() + ::math::constants::PHI_div_2 );
+             this->first()[1] = normal.radius() * sin( normal.angle() + ::math::constants::PHI_div_2 );
+
+             this->second()[0] = this->first()[0] + cos( normal.angle() );
+             this->second()[1] = this->first()[1] + sin( normal.angle() );
+
              return *this;
             }
 

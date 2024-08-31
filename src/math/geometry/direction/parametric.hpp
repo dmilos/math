@@ -7,6 +7,7 @@
 #include "../../linear/vector/subtraction.hpp"
 #include "../../linear/vector/length.hpp"
 
+#include "../../constants.hpp"
 
 
 namespace math
@@ -18,6 +19,9 @@ namespace math
 
       template<typename scalar_name, std::size_t dimesion_number >
        class two;
+
+      template<typename scalar_name, std::size_t dimension_number>
+        class normal;
 
       template
        <
@@ -129,8 +133,9 @@ namespace math
 
            typedef ::math::geometry::direction::two<scalar_name, 2>               two_type;
            typedef ::math::geometry::direction::ABC2D<scalar_name>              ABC2D_type;
-           typedef ::math::geometry::direction::parametric<scalar_name, 2>       this_type;
+           typedef ::math::geometry::direction::parametric<scalar_name, 2> parametric_type, this_type;
            typedef ::math::geometry::direction::polar<scalar_name>              polar_type;
+           typedef ::math::geometry::direction::normal<scalar_name, 2>         normal_type;
 
          public:
            parametric()
@@ -156,13 +161,18 @@ namespace math
              *this = abc;
             }
          public:
-           explicit parametric( polar_type const& abc )
+           explicit parametric( polar_type const& polar )
             {
-             *this = abc;
+             *this = polar;
+            }
+
+           explicit parametric( normal_type const& normal )
+            {
+             *this = normal;
             }
 
          public:
-           parametric & operator=( two_type const& two )
+           this_type & operator=( two_type const& two )
             {
              m_origin = two.first();
              ::math::linear::vector::subtraction( this->m_direction, two.second(), two.first() );
@@ -170,7 +180,7 @@ namespace math
              return *this;
             }
 
-           parametric & operator=( ABC2D_type const& abc )
+           this_type & operator=( ABC2D_type const& abc )
             {
              // original this->m_direction[0] = - abc.B();
              // original this->m_direction[1] = + abc.A();
@@ -185,13 +195,22 @@ namespace math
              return *this;
             }
 
-           parametric & operator=( polar_type const& polar )
+           this_type & operator=( polar_type const& polar )
             {
              this->m_direction[0] = cos( polar.angle() ) ;
              this->m_direction[1] = sin( polar.angle() ) ;
 
              this->m_origin = polar.origin();
 
+             return *this;
+            }
+
+           this_type & operator=( normal_type const& normal )
+            {
+             this->origin()[0] = normal.radius() * cos( normal.angle() + ::math::constants::PHI_div_2 );
+             this->origin()[1] = normal.radius() * sin( normal.angle() + ::math::constants::PHI_div_2 );
+             this->direction()[0] = cos( normal.angle() );
+             this->direction()[1] = sin( normal.angle() );
              return *this;
             }
 

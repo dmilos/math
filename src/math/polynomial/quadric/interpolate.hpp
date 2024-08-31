@@ -16,7 +16,7 @@
         <
           typename scalar_name
         >
-        inline unsigned interpolate
+        inline bool interpolate
          (
            scalar_name coefficient[3]
           ,scalar_name const& x0, scalar_name const& y0
@@ -51,7 +51,12 @@
         <
           typename scalar_name
         >
-        inline unsigned interpolate( scalar_name coefficient[3], std::array< std::array< scalar_name, 2> , 3 > const& cloud, scalar_name const& epsilon = 1e-12 )
+        inline unsigned interpolate
+         (
+            scalar_name                                          coefficient[3]
+          , std::array< std::array< scalar_name, 2> , 3 > const& cloud
+          , scalar_name                                   const& epsilon = 1e-12
+         )
          {
           return ::math::polynomial::quadric::interpolate( coefficient, cloud[0][0], cloud[0][1]
                                                                      , cloud[1][0], cloud[1][1]

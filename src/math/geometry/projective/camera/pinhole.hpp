@@ -31,7 +31,7 @@ namespace math
        {
 
         template< typename scalar_name/* ::math::type::size_type dimension_number, unsigned orientation_number, unsigned permutation_number*/ >
-         class pinhole // Project on to y=1 plane;
+         class pinhole //! default Project on to y=1 plane;
           {
            public:
              typedef scalar_name  scalar_type;
@@ -39,7 +39,7 @@ namespace math
            public:
              enum direction_enum
               { // common for all dimensions
-                forward_index = 0
+                forward_index  = 0
                ,backward_index = 1
               };
              enum axis_enum

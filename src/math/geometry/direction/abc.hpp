@@ -25,6 +25,9 @@ namespace math
       template<typename scalar_name>
         class polar;
 
+      template<typename scalar_name, std::size_t dimension_number>
+        class normal;
+
       template
        <
          typename scalar_name = double
@@ -43,6 +46,7 @@ namespace math
            typedef ::math::geometry::direction::ABC2D<scalar_name>               this_type;
            typedef ::math::geometry::direction::parametric<scalar_name, 2> parametric_type;
            typedef ::math::geometry::direction::polar<scalar_name>              polar_type;
+           typedef ::math::geometry::direction::normal<scalar_name, 2>         normal_type;
 
          public:
            explicit ABC2D( scalar_type const& A=0, scalar_type const& B=0, scalar_type const& C=0 )
@@ -70,6 +74,11 @@ namespace math
              *this = polar;
             }
 
+           explicit ABC2D( normal_type const& normal )
+            {
+             *this = normal;
+            }
+
          public:
            this_type & operator=( parametric_type const& parametric )
             {
@@ -95,6 +104,14 @@ namespace math
              this->A() = +(two.second()[1] - two.first()[1] );
              this->B() = -(two.second()[0] - two.first()[0] );
              this->C() = - this->A()*two.first()[0] - this->B() * two.first()[1];
+             return *this;
+            }
+
+           this_type & operator=( normal_type const& normal )
+            {
+             this->A() = cos( normal.angle() );
+             this->B() = sin( normal.angle() );
+             this->C() = -this->radius();
              return *this;
             }
 

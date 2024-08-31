@@ -5,22 +5,18 @@
 #include "./construct3.hpp"
 
 #include "./transform.hpp"
-#include "./opd.hpp"
 #include "./structure.hpp"
 #include "./convert.hpp"
 #include "./compose.hpp"
-#include "./horizon.hpp"
-//#include "./sunset.hpp"
 
-#include "./principal.hpp"
-#include "./normalize.hpp"
+#include "./horizon.hpp"     //!< move in camera
+#include "./principal.hpp"   //!< move in camera
+#include "./normalize.hpp"   //!< move in camera
 
 #include "./invert.hpp"
 
 //#include "./zero.hpp"
-#include "./retarget.hpp"
 
+#include "./retarget.hpp"
 #include "./recodomain.hpp"
 #include "./redomain.hpp"
-
-
