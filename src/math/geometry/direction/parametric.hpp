@@ -81,11 +81,12 @@ namespace math
            static point_type point( point_type const& origin, scalar_type const& parameter, point_type const& direction )
             {
              point_type result;
-             ::math::linear::vector::scale( result, parameter, direction.direction() );
-             ::math::linear::vector::addition( result, direction.origin() );
+             ::math::linear::vector::scale( result, parameter, direction );
+             ::math::linear::vector::addition( result, origin );
+             return result;
             }
 
-           static void point( point_type  & p, point_type const& origin, scalar_type const& parameter, point_type const&direction )
+           static void point( point_type  & p, point_type const& origin, scalar_type const& parameter, point_type const& direction )
             {
              point_type result;
              ::math::linear::vector::scale( result, parameter, direction );

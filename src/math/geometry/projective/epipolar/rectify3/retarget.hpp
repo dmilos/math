@@ -35,6 +35,7 @@ namespace math
                typedef ::math::geometry::interval::structure<scalar_type,2>   interval_type;
 
                typedef ::math::linear::homography::structure< scalar_name, 2 >             homography_type;
+               typedef ::math::geometry::projective::camera::optical<scalar_name >            digital_type;
 
              public:
                bool process( homography_type & H, interval_type const& window, resolution_type const& resolution )
@@ -49,10 +50,21 @@ namespace math
                  return ::math::linear::homography::retarget( H, homography_type( H ), m_target, codomain, domain, m_source );
                 }
 
+
+             bool process( homography_type & H, digital_type const& camera )
+              { // retarget exiting homografy to be applied on image
+               m_target = interval_type{ display_type{ 0, (double)camera.resolution()[1] }, display_type{ (double)camera.resolution()[0], 0 } };
+               interval_type  codomain{ camera.window() };
+               interval_type  domain{ camera.window() };
+               m_source   = interval_type { display_type{ 0, (double)camera.resolution()[1] }, display_type{ (double)camera.resolution()[0], 0 } };
+
+               return ::math::linear::homography::retarget( H, homography_type( H ), m_target, codomain, domain, m_source );
+              }
+
              public:
               interval_type m_window;
-              interval_type m_target;
               interval_type m_source;
+              interval_type m_target;
             };
 
          }

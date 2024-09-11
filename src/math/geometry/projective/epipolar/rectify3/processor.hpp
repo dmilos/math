@@ -34,6 +34,7 @@ namespace math
               typedef ::math::linear::homography::structure<scalar_type, 2>     homography_type;
               typedef ::math::geometry::projective::camera::mobile<scalar_type >            camera_type;
 
+              //!< top of all functions.
               bool process( camera_type const& sinister, camera_type const& dexter )
                {
                 m_rectificator.process( sinister.to_world(), dexter.to_world() );

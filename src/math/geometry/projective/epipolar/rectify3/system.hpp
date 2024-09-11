@@ -1,3 +1,6 @@
+/* 
+ // prosperously commented  to avoid any unintentional use
+
 #ifndef math_geometry_projective_epipolar_rectify3_system
 #define math_geometry_projective_epipolar_rectify3_system
 
@@ -108,3 +111,4 @@ namespace math
  }
 
 #endif
+*/

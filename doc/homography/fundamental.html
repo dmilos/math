@@ -5,6 +5,38 @@
 
 <head>
     <title>Derive fundamental matrix from Rotation</title>
+<style>
+.matrix {
+    position: relative;
+}
+.matrix:before, .matrix:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    border: 1px solid #000;
+    width: 6px;
+    height: 100%;
+}
+.matrix:before {
+    left: -6px;
+    border-right: 0px;
+}
+.matrix:after {
+    right: -6px;
+    border-left: 0px;
+}
+.matrix td {
+    padding: 5px;
+    text-align: center;
+}
+
+.left_fence
+ {
+    border-left: 1px solid #000;
+ }
+
+</style>
+
 </head>
 <body>
     <h1>Derive fundamental matrix from Rotation</h1>
@@ -31,8 +63,8 @@
                     Used small bold, italic Latin letters. <i><b>a</b></i>,<i><b>b</b></i>, <i><b>c</b></i>, <i><b>d</b></i>, ... <br/>
                  </dd>
                 <dt><i>matrix</i></dt><dd>
-                    <table>
-                        <tr><td> <b>M</b> =<font size="42">[</font></td>
+                    <table >
+                        <tr><b>M</b> =<font size="42">[</font></td>
                         <td> a<sub>11</sub>  a<sub>12</sub> ... a<sub>1n</sub> <br/>
                             a<sub>21</sub>  a<sub>22</sub> ... a<sub>2n</sub> <br/>
                             ... ... ... <br/>
@@ -241,12 +273,12 @@
             </blockquote>
 
     <table>
-     <tr><td>F = <font size="42">[</font></td>
+     <tr><td>F =  </td>
 
      <td>
-      <table cellspacing=5>
+      <table class="matrix" >
       <tr> <td>0</td><td>-t<sub>z</sub></td><td>t<sub>y</sub></td>    </tr>
-      <tr> <td>t<sub>z</sub></td> <td>0</td><td>-t<sub>y</sub></td>    </tr>
+      <tr> <td>t<sub>z</sub></td> <td>0</td><td>-t<sub>x</sub></td>    </tr>
       <tr> <td>-t<sub>y</sub></td><td>t<sub>x</sub></td> <td>0</td>    </tr>
 
       </table>
@@ -254,7 +286,7 @@
      </td>
 
 
-     <td><font size="42">]</font> R </td>
+     <td>  R </td>
     </table>
 
         </dd>

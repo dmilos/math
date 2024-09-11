@@ -13,7 +13,6 @@
 #include "../../../../linear/matrix/matrix.hpp"
 #include "../../../../linear/homography/structure.hpp"
 #include "../../../../linear/homography/transform.hpp"
-#include "../../../../linear/homography/retarget.hpp"
 #include "./base.hpp"
 
 namespace math
@@ -28,7 +27,7 @@ namespace math
          {
 
         template < typename scalar_name >
-         class pole
+         class pole //!< this class implement core of rectification. not enough for practical use. use processor
           : public ::math::geometry::projective::epipolar::rectify3::base<scalar_name>
           {
            public:
@@ -49,8 +48,9 @@ namespace math
 
             typedef ::math::geometry::projective::epipolar::rectify3::base<scalar_name>   base_type;
 
-
-            bool process( affine_type const& left2world, affine_type const& right2world ) //!< call this function before left and right
+             //!< Core function
+             //!< call this function before left and right
+            bool process( affine_type const& left2world, affine_type const& right2world )
              {
               ::math::linear::vector::subtraction( m_right, right2world.vector(), left2world.vector() );
 

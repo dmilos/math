@@ -28,14 +28,14 @@ namespace math
               typedef ::math::linear::vector::structure< scalar_name, 3 >                 coord_type;
               typedef ::math::geometry::direction::ABC2D<scalar_name >                direction_type;
               typedef ::math::linear::affine::structure< scalar_name, 3 >                affine_type;
-              typedef ::math::linear::homography::structure< scalar_name, 2 >        homography_type;
+              typedef ::math::linear::matrix::structure< scalar_name, 3, 3 >             matrix_type;
 
               typedef ::math::geometry::projective::camera::pinhole< scalar_name >      pinhole_type;
 
             public:
               static void process
                (
-                 homography_type          & left2right
+                 matrix_type              & left2right
                 ,affine_type         const& world_to_right
                )    //it is assume that  left_to_world is ID
                {
@@ -58,15 +58,14 @@ namespace math
 
                 ::math::linear::matrix::load( left2right, A0, A1, A2 );
 
-                //homography_type          left2right;
-                //homography_type          cross;
-                //::math::linear::matrix::multiply( left2right, ::math::linear::matrix::cross( cross,  right_to_world.vector() ), right_to_world.matrix() );
-                //left2right = result2;
+                //matrix_type          left2right;
+                //matrix_type          cross; ::math::linear::matrix::cross( cross,  right_to_world.vector() )
+                //::math::linear::matrix::multiply( left2right, cross, right_to_world.matrix() );
                }
 
               static void process
                (
-                 homography_type      & result
+                 matrix_type      & result
                 ,affine_type     const& world_to_right
                 ,affine_type     const& left_to_world
                )
@@ -78,12 +77,12 @@ namespace math
                 return ::math::geometry::projective::epipolar::fundamental<scalar_type>::process( result, span );
                }
 
-              static bool process
+              static bool apply
                (
                  direction_type               & right_direction
-                ,homography_type         const& left2right
+                ,matrix_type             const& left2right
                 ,uv_type                 const& left_point
-               )
+               ) //!< for right to left just use right2left = transpose( left2right )
                {
                 coord_type reprojection = pinhole_type::reproject( left_point );
                 ::math::linear::matrix::transform( right_direction.array(), left2right, reprojection );
@@ -91,30 +90,53 @@ namespace math
                 return true;
                }
 
-              static coord_type          pole( homography_type  const& left2right )
+              static coord_type          poleL( matrix_type  const& left2right )
                {
+                static scalar_type epsilon = 1e-6;
+                coord_type A;  ::math::linear::matrix::row( A, left2right, 0 );
+                coord_type B;  ::math::linear::matrix::row( B, left2right, 1 );
+                coord_type C;  ::math::linear::matrix::row( C, left2right, 2 );
+
+                scalar_type Al = ::math::linear::vector::length<scalar_type>( A ); if( epsilon < Al ) { ::math::linear::vector::scale<scalar_type>( A, 1/Al ); Al = 1; } 
+                scalar_type Bl = ::math::linear::vector::length<scalar_type>( B ); if( epsilon < Bl ) { ::math::linear::vector::scale<scalar_type>( B, 1/Bl ); Bl = 1; } 
+                scalar_type Cl = ::math::linear::vector::length<scalar_type>( C ); if( epsilon < Cl ) { ::math::linear::vector::scale<scalar_type>( C, 1/Cl ); Cl = 1; } 
+
+                scalar_type ab = fabs( ::math::linear::vector::dot( A, B ) );
+                scalar_type ac = fabs( ::math::linear::vector::dot( A, C ) );
+                scalar_type bc = fabs( ::math::linear::vector::dot( B, C ) );
+
+                int type = 0;
+
                 coord_type result;
-                direction_type a; process( a, left2right, { 0, 0 } );
-                direction_type b; process( b, left2right, { 1, 0 } );
-                direction_type c; ::math::linear::vector::cross( result, a.array(), b.array() );
-                ::math::linear::vector::length<double>( result, 1 );
+                if( ( ( ab < ac ) && ( ab < bc ) ) || ( Cl < 0.5 ) )   { ::math::linear::vector::cross( result, A, B ); return result; }
+                if( ( ( ac < ab ) && ( ac < bc ) ) || ( Bl < 0.5 ) )   { ::math::linear::vector::cross( result, A, C ); return result; }
+              /*if( ( ( bc < ab ) && ( bc < ac ) ) || ( Al < 0.5 ) )*/ { ::math::linear::vector::cross( result, B, C ); return result; }
 
-                process( a, left2right, { -1, 0 } );
-                process( b, left2right, {  0, 1 } );
-                ::math::linear::vector::cross( c.array(), a.array(), b.array() );
-                ::math::linear::vector::length<double>( result, 1 );
                 return result;
                }
 
-              static direction_type   horizon( homography_type  const& left2right )
+              static coord_type          poleR( matrix_type  const& left2right )
                {
-                direction_type result;
-                return result;
-               }
+                static scalar_type epsilon = 1e-6;
+                coord_type A;  ::math::linear::matrix::column( A, left2right, 0 );
+                coord_type B;  ::math::linear::matrix::column( B, left2right, 1 );
+                coord_type C;  ::math::linear::matrix::column( C, left2right, 2 );
 
-              static direction_type principal( homography_type  const& left2right )
-               {
-                direction_type result;
+                scalar_type Al = ::math::linear::vector::length<scalar_type>( A ); if( epsilon < Al ) { ::math::linear::vector::scale<scalar_type>( A, 1/Al ); Al = 1; } 
+                scalar_type Bl = ::math::linear::vector::length<scalar_type>( B ); if( epsilon < Bl ) { ::math::linear::vector::scale<scalar_type>( B, 1/Bl ); Bl = 1; } 
+                scalar_type Cl = ::math::linear::vector::length<scalar_type>( C ); if( epsilon < Cl ) { ::math::linear::vector::scale<scalar_type>( C, 1/Cl ); Cl = 1; } 
+
+                scalar_type ab = fabs( ::math::linear::vector::dot( A, B ) );
+                scalar_type ac = fabs( ::math::linear::vector::dot( A, C ) );
+                scalar_type bc = fabs( ::math::linear::vector::dot( B, C ) );
+
+                int type = 0;
+
+                coord_type result;
+                if( ( ( ab < ac ) && ( ab < bc ) ) || ( Cl < 0.5 ) )   { ::math::linear::vector::cross( result, A, B ); return result; }
+                if( ( ( ac < ab ) && ( ac < bc ) ) || ( Bl < 0.5 ) )   { ::math::linear::vector::cross( result, A, C ); return result; }
+              /*if( ( ( bc < ab ) && ( bc < ac ) ) || ( Al < 0.5 ) )*/ { ::math::linear::vector::cross( result, B, C ); return result; }
+
                 return result;
                }
 

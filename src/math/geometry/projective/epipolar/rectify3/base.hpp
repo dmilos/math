@@ -52,16 +52,6 @@ namespace math
                return true;
               }
 
-             static bool retarget( homography_type & H, digital_type const& camera )
-              { // retarget exiting homografy to be applied on image
-               interval_type  target{ display_type{ 0, (double)camera.resolution()[1] }, display_type{ (double)camera.resolution()[0], 0 } };
-               interval_type  codomain{ camera.window() };
-               interval_type  domain{ camera.window() };
-               interval_type  source = { display_type{ 0, (double)camera.resolution()[1] }, display_type{ (double)camera.resolution()[0], 0 } };
-
-               return ::math::linear::homography::retarget( H, homography_type( H ), target, codomain, domain, source );
-              }
-
              //void project( display_type & system_point, mobile_type const & camera, display_type const & display_point )
              //  {
              //   auto display3d_point =  camera.pointUV( display_point );

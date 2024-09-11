@@ -10,8 +10,7 @@
 #include "../../../../linear/vector/vector.hpp"
 #include "../../../../linear/matrix/matrix.hpp"
 #include "../../../../linear/homography/structure.hpp"
-#include "../../../../linear/homography/transform.hpp"
-#include "../../../../linear/homography/retarget.hpp"
+#include "../../../../linear/matrix/transform.hpp"
 
 namespace math
  {
