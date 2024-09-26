@@ -127,7 +127,7 @@
           auto const& r31 = to_world[2][0]; auto const& r32 = to_world[2][2]; auto const& r33 = to_world[2][2];
 
           angle[0] = atan2( - r21, r22 );
-          angle[1] = asin(  + r32 );
+          if( 1 <  r32 ){ angle[1] = asin(1); } else{ if( r32 < -1 ) angle[1] = asin(-1); else angle[1] = asin(  + r32 ); }
           angle[2] = atan2( - r31, r33 );
          }
 

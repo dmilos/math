@@ -145,7 +145,7 @@ namespace math
 
              ::math::linear::matrix::column( M, 0, plane.x()        );
              ::math::linear::matrix::column( M, 1, plane.y()        );
-             ::math::linear::matrix::column( M, 2, line.direction() );
+             ::math::linear::matrix::column( M, 2, line.direction() ); 
 
              if( false == ::math::linear::matrix::invert( I, M ) )
               {
@@ -160,7 +160,7 @@ namespace math
 
              uv[0]  = result[0];
              uv[1]  = result[1];
-             lambda = result[2];
+             lambda = - result[2];
              return true;
             }
 

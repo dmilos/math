@@ -38,6 +38,7 @@
 #include "./redomain.hpp"
 #include "./check.hpp"
 #include "./tb.hpp"
+#include "./euler.hpp"
 
 #include "./quadratic.hpp"
 

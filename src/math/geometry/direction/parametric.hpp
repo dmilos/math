@@ -76,6 +76,7 @@ namespace math
              point_type result;
              ::math::linear::vector::scale( result, parameter, this->direction() );
              ::math::linear::vector::addition( result, this->origin() );
+             return result;
             }
 
            static point_type point( point_type const& origin, scalar_type const& parameter, point_type const& direction )
