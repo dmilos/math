@@ -38,18 +38,17 @@ namespace math
              typedef ::math::linear::matrix::structure< scalar_name, 3, 3 >                  matrix_type;
 
              typedef ::math::geometry::plane::parametric3d<scalar_name>                    plane_type;
+
+           public:
              pbase()
               {
               }
+
+           public:
              virtual bool process( affine_type const& left2world, affine_type const& right2world ) =0;
 
+           public:
              plane_type const& plane()const
-              {
-               return m_plane;
-              }
-
-           protected:
-             plane_type & plane()
               {
                return m_plane;
               }
