@@ -9,6 +9,8 @@
 
 
 
+
+
 namespace math
  {
   namespace statistic
@@ -21,7 +23,7 @@ namespace math
          typename scalar_name         = long double
         ,typename size_name           = long unsigned
        >
-       class V3 //!< by the book calcuation
+       class V3 //!< by the book calculation
        {
         public:
           typedef scalar_name scalar_type;
@@ -29,9 +31,12 @@ namespace math
 
           typedef ::math::statistic::average< scalar_name, 1, size_name > average_type;
 
+
+
           typedef typename average_type::sample_type  sample_type;
           typedef std::vector< sample_type >  vector_type;
 
+        public:
           V3()
            {
            }

@@ -35,11 +35,13 @@ namespace math
 
           typedef typename average_type::sample_type  sample_type;
 
+        public:
           V2()
            {
             reset();
            }
 
+        public:
           void reset()
            {
             m_count.reset( 0 );

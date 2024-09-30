@@ -33,8 +33,8 @@ namespace math
              typedef  ::math::linear::vector::structure<scalar_name,3>        vector3_type;
 
            public:
-             homography( scalar_name const& width, scalar_name const& height )
-              : m_width( width ), m_height( height )
+             homography( scalar_name const& width/*, scalar_name const& height = width */)
+              : m_width( width )/*, m_height( height )*/
               {
               }
 
@@ -55,14 +55,14 @@ namespace math
                ::math::linear::matrix::column( m_y, m_hClean, 1 );
                ::math::linear::matrix::column( m_t, m_hClean, 2 );
 
-               m_l1 = ::math::linear::vector::length( X() )/m_width;
-               m_l2 = ::math::linear::vector::length( Y() )/m_height;
+               m_l1 = m_width  / ::math::linear::vector::length( X() );
+               m_l2 = m_width  / ::math::linear::vector::length( Y() );
                auto scale = ( m_l1 + m_l2 )/2;
 
                ::math::linear::vector::scale( m_x, scale );
                ::math::linear::vector::scale( m_y, scale );
                ::math::linear::vector::cross( m_z, X(), Y() );
-               ::math::linear::vector::scale( m_t, scale );
+               ::math::linear::vector::scale( m_t, scale/m_width );
                return true;
               }
 
@@ -96,7 +96,7 @@ namespace math
 
             private:
              scalar_type m_width ;
-             scalar_type m_height;
+             //scalar_type m_height;
 
              vector3_type m_x, m_y, m_z, m_t;
              scalar_type m_l1, m_l2;
