@@ -51,37 +51,43 @@
       <li>Problem</li>
       <li>Existing Solutions
         <ul>
-            <li>TODO</li>
-            <li>TODO</li>
+            <li>||h||=1</li>
             <li>h<sub>33</sub> = 1 </li>
         </ul>
       </li>
 
-      <li>Bricks
+      <li>Elements
         <ul>
-            <li>Translate</li>
+            <li>Translation</li>
             <li>Linear</li>
-            <li>Affine</li>
             <li>Simple Homography</li>
         </ul>
       </li>
 
       <li>Building
         <ul>
-            <li>Ingredients</li>
-            <li>Goal</li>
             <li>Elements</li>
             <li>Assembling</li>
         </ul>
       </li>
       <li>Assembling</li>
-      <li>Miscellaneous</li>
+      <li>Miscellaneous
+
+        <ul>
+            <li>Source code</li>
+            <li>Remarks</li>
+            <li>Off topic</li>
+            <li>Links</li>
+        </ul>
+
+
+      </li>
   </ul>
 
  </dd>
 
 
-  <dt><h3>Description</h3></dt>
+  <dt><div style="break-before:page"></div><h3>Description</h3></dt>
    <dd> Computing the plane to plane homography without fancy thing such as inversion of big matrix or eugen vectors values.<br>
    In here it will be present method in step-by-step manner where every step has some geometric  meaning.
 
@@ -94,72 +100,158 @@
            Ordered pair of two real numbers.<br>
           <b>p</b> = ( x, y ) = [x,y] <sup>T</sup>; x,y &isin; &reals;
         </dd>
-        <dt><h4>2D Homography vector</h4></dt>
+        <dt><h4>2D Homography point</h4></dt>
         <dd>
                  Ordered triplet of three real numbers.<br>
-        <b>p</b> = ( x, y, z ) = [x,y,z] <sup>T</sup>  x, y, z &isin; &reals;
+        <b>p</b> = ( x, y, z ) = [x,y,z] <sup>T</sup>; x, y, z &isin; &reals;
 
         </dd>
-        <dt><h4>2D Euclid matrix</h4></dt>
-        <dd> 2 by 2 table of real number
-            <table class="matrix" >
-              <tr>   <td> m<sub>11</sub> </td> <td> m<sub>12</sub> </td>  </tr>
-              <tr>   <td> m<sub>21</sub> </td> <td> m<sub>22</sub> </td>  </tr>
-            </table>
-        </dd>
-        <dt><h4>2D Homography matrix</h4></dt>
+        <dt><h4>Homography</h4></dt>
         <dd>
-            <table class="matrix" cellpadding="0" border=0 >
-              <tr> <td> h<sub>11</sub> </td> <td> h<sub>12</sub> </td> <td class ="left_fence"> h<sub>13</sub> </td> </tr>
-              <tr> <td> h<sub>21</sub> </td> <td> h<sub>22</sub> </td> <td class ="left_fence"> h<sub>22</sub> </td> </tr>
-              <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
-              <tr> <td> h<sub>23</sub> </td> <td> h<sub>32</sub> </td> <td  class ="left_fence"> h<sub>33</sub> </td> </tr>
+          Definition: project (first) plane to (second) plane.
+
+           <table>
+            <tr>  <td> Matrix form</td>
+              <td> </td>
+               <td> Algebraic form</td>
+            </tr>
+            <tr>
+
+              <td>
+               <table class="matrix" cellpadding="0" border=0 >
+                 <tr> <td> h<sub>11</sub> </td> <td> h<sub>12</sub> </td> <td class ="left_fence"> h<sub>13</sub> </td> </tr>
+                 <tr> <td> h<sub>21</sub> </td> <td> h<sub>22</sub> </td> <td class ="left_fence"> h<sub>22</sub> </td> </tr>
+                 <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                 <tr> <td> h<sub>31</sub> </td> <td> h<sub>32</sub> </td> <td  class ="left_fence"> h<sub>33</sub> </td> </tr>
+               </table>
+
+              </td>
+              <td>
+               &nbsp; &nbsp; &nbsp;
+              </td>
+              <td>
+
+            <table  cellpadding="0" border=0 >
+               <tr> <td rowspan="4"> x' = </td>   </tr>
+               <tr> <td></td>     <td> x&middot;h<sub>11</sub> + x&middot;h<sub>12</sub>  +  h<sub>13</sub>   </td>  </tr>
+               <tr> <td></td>     <td> <hr>  </td>   </tr>
+               <tr> <td></td>     <td> x&middot;h<sub>31</sub> + x&middot;h<sub>32</sub>  +  h<sub>33</sub>  </td> </tr>
             </table>
+             <br>
+            <table  cellpadding="0" border=0 >
+               <tr> <td rowspan="4"> y' = </td>   </tr>
+               <tr> <td></td>     <td> x&middot;h<sub>21</sub> + x&middot;h<sub>22</sub>  +  h<sub>23</sub>   </td>  </tr>
+               <tr> <td></td>     <td> <hr>  </td>   </tr>
+               <tr> <td></td>     <td> x&middot;h<sub>31</sub> + x&middot;h<sub>32</sub>  +  h<sub>33</sub>  </td> </tr>
+            </table>
+
+              </td>
+            </tr>
+
+           </table>
+
+
         </dd>
      </dl>
 
 
    </dd>
 
-   <dt><h3>Problem</h3></dt>
+   <dt><div style="break-before:page"/><h3>Problem</h3></dt>
    <dd>
      <dl>
-         <dt>What we have</dt>
+         <dt><h4>What we have:</h4></dt>
          <dd>
 
           <ul>
             <li>  s<sub>0</sub>, s<sub>x</sub>, s<sub>y</sub>, s<sub>z</sub> &isin; &reals;<sup>2</sup> </li>
             <li>  t<sub>0</sub>, t<sub>x</sub>, t<sub>y</sub>, t<sub>z</sub> &isin; &reals;<sup>2</sup> </li>
             <li> <i>o</i>=(0,0)</li>
-            <li> det( s<sub>i</sub>, s<sub>j</sub>, s<sub>k</sub>  ) &ne; 0; i &ne; j &ne; k; i,j, k &isin; { 0, x, y, z }, this condition can be relaxed to only det( s<sub>0</sub>, s<sub>x</sub>, s<sub>y</sub>  ) &ne; 0; </li>
-            <li> det( t<sub>i</sub>, t<sub>j</sub>, t<sub>k</sub>  ) &ne; 0; i &ne; j &ne; k; i,j, k &isin; { 0, x, y, z }</li>
+            <li> <i>area</i>( s<sub>i</sub>, s<sub>j</sub>, s<sub>k</sub>  ) &ne; 0; i &ne; j &ne; k; i, j, k &isin; { 0, x, y, z }, this condition can be relaxed to only <i>area</i>( s<sub>0</sub>, s<sub>x</sub>, s<sub>y</sub>  ) &ne; 0; </li>
+            <li> <i>area</i>( t<sub>i</sub>, t<sub>j</sub>, t<sub>k</sub>  ) &ne; 0; i &ne; j &ne; k; i, j, k &isin; { 0, x, y, z }</li>
 
             <li> Nice to have: <br>
-              | det( t<sub>i</sub>, t<sub>j</sub>, t<sub>k</sub>  ) | &le; det( t<sub>0</sub>, t<sub>x</sub>, t<sub>y</sub>  )<br>
-              | det( s<sub>i</sub>, s<sub>j</sub>, s<sub>k</sub>  ) | &le; det( s<sub>0</sub>, s<sub>x</sub>, s<sub>y</sub>  )<br>
+              | <i>area</i>( t<sub>i</sub>, t<sub>j</sub>, t<sub>k</sub>  ) | &le; <i>area</i>( t<sub>0</sub>, t<sub>x</sub>, t<sub>y</sub> ); i, j, k &isin; { 0, x, y, z }<br>
+              | <i>area</i>( s<sub>i</sub>, s<sub>j</sub>, s<sub>k</sub>  ) | &le; <i>area</i>( s<sub>0</sub>, s<sub>x</sub>, s<sub>y</sub> ); i, j, k &isin; { 0, x, y, z } <br>
               </li>
           </ul>
 
          </dd>
-         <dt>What we want</dt>
+         <dt><h4>What we want:</h4></dt>
          <dd>
            <ul>
-            <li> <b>H</b> is homography matrix. </li>
+            <li> <b>H</b> is homography. </li>
             <li> t<sub>i</sub> = <b>H</b> ( s<sub>i</sub> ); i &isin; { 0, x, y, z }<br> </li>
-           </ul>
+           </ul><br>
+          <img src="h.png"/>
          </dd>
 
      </dl>
    </dd>
 
-   <dt><h3>Existing Solution</h3></dt>
+   <dt><div style="break-before:page"/></div><h3>Existing Solutions</h3></dt>
    <dd>
      <dl>
-         <dt>TODO</dt>
-         <dd> TODO  </dd>
-         <dt>TODO</dt>
-         <dd> TODO  </dd>
-         <dt>h<sub>33</sub> = 1 </dt>
+         <dt><b>||h||=1</b></dt>
+         <dd>
+           For simplicity in here
+           x<sub>1</sub> = s<sub>0<sub>x</sub></sub>,
+           y<sub>1</sub> = s<sub>0<sub>y</sub></sub>,
+           ...,
+           x'<sub>1</sub> = t<sub>0<sub>x</sub></sub>,
+           y'<sub>1</sub> = t<sub>0<sub>y</sub></sub>,
+           ...
+          <br>
+
+         <table cellpadding="10" border=0>
+          <tr>
+           <td>
+            <table class="matrix" cellpadding="0" border=0 >
+              <tr> <td> x<sub>1</sub> </td> <td> y<sub>1</sub> </td> <td> 1 </td> <td>             0 </td> <td>             0 </td><td> 0 </td> <td> -x<sub>1</sub> x'<sub>1</sub> </td> <td> -y<sub>1</sub> x'<sub>1</sub> </td> <td> -x'<sub>1</sub> </td> </tr>
+              <tr> <td>             0 </td> <td>             0 </td> <td> 0 </td> <td> x<sub>1</sub> </td> <td> y<sub>1</sub> </td><td> 1 </td> <td> -x<sub>1</sub> y'<sub>1</sub> </td> <td> -y<sub>1</sub> y'<sub>1</sub> </td> <td> -y'<sub>1</sub> </td> </tr>
+              <tr> <td> x<sub>2</sub> </td> <td> y<sub>2</sub> </td> <td> 1 </td> <td>             0 </td> <td>             0 </td><td> 0 </td> <td> -x<sub>2</sub> x'<sub>2</sub> </td> <td> -y<sub>2</sub> x'<sub>2</sub> </td> <td> -x'<sub>2</sub> </td> </tr>
+              <tr> <td>             0 </td> <td>             0 </td> <td> 0 </td> <td> x<sub>2</sub> </td> <td> y<sub>2</sub> </td><td> 1 </td> <td> -x<sub>2</sub> y'<sub>2</sub> </td> <td> -y<sub>2</sub> y'<sub>2</sub> </td> <td> -y'<sub>2</sub> </td> </tr>
+              <tr> <td> x<sub>3</sub> </td> <td> y<sub>3</sub> </td> <td> 1 </td> <td>             0 </td> <td>             0 </td><td> 0 </td> <td> -x<sub>3</sub> x'<sub>3</sub> </td> <td> -y<sub>3</sub> x'<sub>3</sub> </td> <td> -x'<sub>3</sub> </td> </tr>
+              <tr> <td>             0 </td> <td>             0 </td> <td> 0 </td> <td> x<sub>3</sub> </td> <td> y<sub>3</sub> </td><td> 1 </td> <td> -x<sub>3</sub> y'<sub>3</sub> </td> <td> -y<sub>3</sub> y'<sub>3</sub> </td> <td> -y'<sub>3</sub> </td> </tr>
+              <tr> <td> x<sub>4</sub> </td> <td> y<sub>4</sub> </td> <td> 1 </td> <td>             0 </td> <td>             0 </td><td> 0 </td> <td> -x<sub>4</sub> x'<sub>4</sub> </td> <td> -y<sub>4</sub> x'<sub>4</sub> </td> <td> -x'<sub>4</sub> </td> </tr>
+              <tr> <td>             0 </td> <td>             0 </td> <td> 0 </td> <td> x<sub>4</sub> </td> <td> y<sub>4</sub> </td><td> 1 </td> <td> -x<sub>4</sub> y'<sub>4</sub> </td> <td> -y<sub>4</sub> y'<sub>4</sub> </td> <td> -y'<sub>4</sub> </td> </tr>
+             </table>
+           </td>
+            <td>
+              <table class="matrix" cellpadding="0" border=0 >
+               <tr> <td> h<sub>11</sub> </td> </tr>
+               <tr> <td> h<sub>12</sub> </td> </tr>
+               <tr> <td> h<sub>13</sub> </td> </tr>
+               <tr> <td> h<sub>21</sub> </td> </tr>
+               <tr> <td> h<sub>22</sub> </td> </tr>
+               <tr> <td> h<sub>23</sub> </td> </tr>
+               <tr> <td> h<sub>31</sub> </td> </tr>
+               <tr> <td> h<sub>32</sub> </td> </tr>
+               <tr> <td> h<sub>33</sub> </td> </tr>
+              </table>
+           </td>
+           <td>&nbsp; = &nbsp;</td>
+           <td>
+             <table class="matrix" cellpadding="0" border=0 >
+              <tr> <td> 0 </td> </tr>
+              <tr> <td> 0 </td> </tr>
+              <tr> <td> 0 </td> </tr>
+              <tr> <td> 0 </td> </tr>
+              <tr> <td> 0 </td> </tr>
+              <tr> <td> 0 </td> </tr>
+              <tr> <td> 0 </td> </tr>
+              <tr> <td> 0 </td> </tr>
+             </table>
+           </td>
+           </tr>
+          </table>
+
+            Ah=0 and  ||h||= h<sub>11</sub><sup>2</sup> + h<sub>12</sub><sup>2</sup> + ... + h<sub>33</sub><sup>2</sup> =1 <br>
+            ...<br>
+            A<sup>T</sup>A h = &lambda; h <br>
+            Eigenvector h with smallest eigenvalue &lambda; of matrix A<sup>T</sup>A.
+         </dd>
+         <dt><b>h<sub>33</sub> = 1 </b> </dt>
          <dd>
            For simplicity in here
            x<sub>1</sub> = s<sub>0<sub>x</sub></sub>,
@@ -170,7 +262,7 @@
            ...
           <br>
           And we have to solve :
-         <table>
+         <table cellpadding="10" border=0>
           <tr>
            <td>
              <table class="matrix" cellpadding="0" border=0 >
@@ -216,9 +308,9 @@
      </dl>
    </dd>
 
-  <dt><h3>Bricks</h3></dt>
+  <dt><div style="break-before:page"/><h3>Elements</h3></dt>
    <dd>
-     ... or what we need to assemble  to get our matrix.
+     ... or what we need to make matrix.
      <dl>
        <dt><h4>Translation</h4></dt>
        <dd>
@@ -235,8 +327,8 @@
 
        <dt><h4>Linear</h4></dt>
        <dd>
-          If <b>M</b> is linear function then: <br>
-           <b>M</b>( &alpha; <b>x</b> + &beta; <b>y</b> ) = &alpha; <b>M</b>( <b>x</b> )  + &beta; * <b>M</b>( <b>y</b> ) <br> <br>
+          If <b>L</b> is linear function then: <br>
+           <b>L</b>( &alpha; &middot; <b>x</b> + &beta; &middot; <b>y</b> ) = &alpha; &middot; <b>L</b>( <b>x</b> )  + &beta; &middot; <b>L</b>( <b>y</b> ) <br> <br>
             Represented using homography matrix:
             <table class="matrix" cellpadding="0" border=0 >
               <tr> <td> a<sub>11</sub> </td> <td> a<sub>12</sub> </td> <td class ="left_fence"> 0 </td> </tr>
@@ -244,31 +336,6 @@
               <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
               <tr> <td> 0 </td> <td> 0 </td> <td  class ="left_fence"> 1 </td> </tr>
             </table>
-       </dd>
-
-       <dt><h4>Affine</h4></dt>
-       <dd>
-            Represented using homography matrix:
-            <table class="matrix" cellpadding="0" border=0 >
-              <tr> <td> a<sub>11</sub> </td> <td> a<sub>12</sub> </td> <td class ="left_fence"> a<sub>13</sub> </td> </tr>
-              <tr> <td> a<sub>21</sub> </td> <td> a<sub>22</sub> </td> <td class ="left_fence"> a<sub>23</sub> </td> </tr>
-              <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
-              <tr> <td> 0 </td> <td> 0 </td> <td  class ="left_fence"> 1 </td> </tr>
-            </table>
-
-            <table>
-             <tr> <td> Where: &nbsp; </td>
-               <td>
-            <table class="matrix" >
-              <tr>   <td> a<sub>11</sub> </td> <td> a<sub>12</sub> </td>  </tr>
-              <tr>   <td> a<sub>21</sub> </td> <td> a<sub>22</sub> </td>  </tr>
-            </table>
-               </td>
-               <td> &nbsp; is linear part. </td>
-               </tr>
-            </table>
-            [ a<sub>13</sub>, a<sub>23</sub>]<sup>T</sup> is translation part.
-
        </dd>
 
        <dt><h4>Simple Homography</h4></dt>
@@ -304,17 +371,17 @@
         </p>
          Homography matrix:
           <table class="matrix" >
-              <tr> <td> Y * (X + Y - 1)</td> <td> 0 </td> <td  class ="left_fence"> 0 </td>  </tr>
-              <tr> <td> 0 </td> <td> X * (X + Y - 1) </td> <td class ="left_fence"> 0 </td> </tr>
+              <tr> <td> Y &middot; (X + Y - 1)</td> <td> 0 </td> <td  class ="left_fence"> 0 </td>  </tr>
+              <tr> <td> 0 </td> <td> X &middot; (X + Y - 1) </td> <td class ="left_fence"> 0 </td> </tr>
               <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
-              <tr> <td> Y*(Y - 1) </td> <td> X*(X - 1) </td> <td class ="left_fence"> X*Y </td> </tr>
+              <tr> <td> Y&middot;(Y - 1) </td> <td> X&middot;(X - 1) </td> <td class ="left_fence"> X&middot;Y </td> </tr>
           </table>
 
           <table>
-            <tr>  <td>  0 &ne; (Y*(Y - 1))<sup>2</sup> + (X*(X - 1))<sup>2</sup> + (X*Y)<sup>2</sup> <br>
+            <tr>  <td>  0 &ne; (Y&middot;(Y - 1))<sup>2</sup> + (X&middot;(X - 1))<sup>2</sup> + (X&middot;Y)<sup>2</sup> <br>
              (X,Y) &ne; (0,0)<br>
+             (X,Y) &ne; (1,0)<br>
              (X,Y) &ne; (0,1)<br>
-             (X,Y) &ne; (0,0)<br>
             </td>
             <td> <img src="12s.png"/>   </td> </tr>
           </table>
@@ -324,7 +391,7 @@
      </dl>
    </dd>
 
-  <dt><h3>Building</h3></dt>
+  <dt><div style="break-before:page"/><h3>Building</h3></dt>
   <dd>
     <dl>
 
@@ -332,34 +399,26 @@
      <h4>Elements</h4>
    </dt>
    <dd>
-    <ul>
-      <li>
-
-        <table width="100%">
+        <table width="80%">
           <tr>
            <td align="top" ><b>T<sub>s</sub></b>: translation matrix, translate from s<sub>0</sub> to <i>o=(0,0)</i></td>
            <td><img src="s-t.png" align="right"/></td>
           </tr>
         </table>
-
-       </li>
-      <li>
-        <table width="100%">
+        <table width="80%">
           <tr>
            <td align="top">
-              <b>M<sub>s</sub></b>:
+              <b>L<sub>s</sub></b>:
               <blockquote>
-             ( 1, 0 ) = <b>M<sub>s</sub></b>( <b>T<sub>s</sub></b> ( s<sub>x</sub> ) ) ,<br>
-             ( 0, 1 ) = <b>M<sub>s</sub></b>( <b>T<sub>s</sub></b> ( s<sub>y</sub> ) )
+             ( 1, 0 ) = <b>L<sub>s</sub></b>( <b>T<sub>s</sub></b> ( s<sub>x</sub> ) ) ,<br>
+             ( 0, 1 ) = <b>L<sub>s</sub></b>( <b>T<sub>s</sub></b> ( s<sub>y</sub> ) )
               </blockquote>
            </td>
            <td><img src="s-m.png" align="right"/></td>
           </tr>
         </table>
 
-       </li>
-      <li>
-        <table width="100%">
+        <table width="80%">
           <tr>
            <td align="top" >
              <b>P<sub>s</sub></b>:
@@ -367,18 +426,14 @@
                (0,0) = <b>P<sub>s</sub></b>( (0,0) ), <br>
                (1,0) = <b>P<sub>s</sub></b>( (1,0) ), <br>
                (0,1) = <b>P<sub>s</sub></b>( (0,1) ), <br>
-               (1,1) = <b>P<sub>s</sub></b>(<b>M<sub>s</sub></b> <b>T<sub>s</sub></b>( s<sub>z</sub> ) )
+               (1,1) = <b>P<sub>s</sub></b>(<b>L<sub>s</sub></b> <b>T<sub>s</sub></b>( s<sub>z</sub> ) )
                </blockquote>
            </td>
            <td><img src="s-p.png" align="right"/></td>
           </tr>
         </table>
-
-        </li>
-      <li>
-
-
-        <table width="100%">
+        <div style="break-before:page"/>
+        <table width="80%">
           <tr>
            <td align="top" >
             <b>T<sub>t</sub></b>: translation matrix, translate from t<sub>0</sub> to <i>o</i>
@@ -387,24 +442,20 @@
           </tr>
         </table>
 
-
-       </li>
-      <li>
-        <table width="100%">
+        <table width="80%">
           <tr>
            <td align="top" >
-             <b>M<sub>t</sub></b>:
+             <b>L<sub>t</sub></b>:
              <blockquote>
-               ( 1, 0 ) = <b>M<sub>t</sub></b>( <b>T<sub>t</sub></b> ( t<sub>x</sub> ) ), <br>
-               ( 0, 1 ) = <b>M<sub>t</sub></b>( <b>T<sub>t</sub></b> ( t<sub>y</sub> ) )
+               ( 1, 0 ) = <b>L<sub>t</sub></b>( <b>T<sub>t</sub></b> ( t<sub>x</sub> ) ), <br>
+               ( 0, 1 ) = <b>L<sub>t</sub></b>( <b>T<sub>t</sub></b> ( t<sub>y</sub> ) )
              </blockquote>
            </td>
            <td><img src="t-m.png" align="right"/></td>
           </tr>
         </table>
-       </li>
-      <li>
-        <table width="100%">
+
+        <table width="80%">
           <tr>
            <td align="top" >
             <b>P<sub>t</sub></b>:
@@ -412,24 +463,22 @@
             (0,0) = <b>P<sub>t</sub></b>( (0,0) ),<br>
             (1,0) = <b>P<sub>t</sub></b>( (1,0) ),<br>
             (0,1) = <b>P<sub>t</sub></b>( (0,1) ), <br>
-            (1,1) = <b>P<sub>t</sub></b>( <b>M<sub>t</sub></b> <b>T<sub>t</sub></b>( t<sub>z</sub> ) ) <br>
-             &nbsp; &nbsp; &nbsp; <b>M<sub>t</sub></b> <b>T<sub>t</sub></b>( t<sub>z</sub> ) &notin;{ (0,0), (1,0), (0,1) }
+            (1,1) = <b>P<sub>t</sub></b>( <b>L<sub>t</sub></b> <b>T<sub>t</sub></b>( t<sub>z</sub> ) ) <br>
+             &nbsp; &nbsp; &nbsp; <b>L<sub>t</sub></b> <b>T<sub>t</sub></b>( t<sub>z</sub> ) &notin;{ (0,0), (1,0), (0,1) }
             </blockquote>
            </td>
            <td><img src="t-p.png" align="right"/></td>
           </tr>
         </table>
-       </li>
-    </ul>
-   </dd>
+    </dd>
 
    <dt>
-     <h4>Assembling</h4>
+     <h4>Homographies, Assemble</h4>
    </dt>
    <dd>
     <b>H</b>
-     = (<b>P<sub>t</sub></b>    <b>M<sub>t</sub></b> <b>T<sub>t</sub></b>   )<sup>-1</sup>   <b>P<sub>s</sub></b>  <b>M<sub>s</sub></b>   <b>T<sub>s</sub></b>
-     = <b>T<sub>t</sub><sup>-1</sup></b>   <b>M<sub>t</sub><sup>-1</sup></b>   <b>P<sub>t</sub><sup>-1</sup></b>   <b>P<sub>s</sub></b>  <b>M<sub>s</sub></b>   <b>T<sub>s</sub></b>
+     = (<b>P<sub>t</sub></b>    <b>L<sub>t</sub></b> <b>T<sub>t</sub></b>   )<sup>-1</sup>   <b>P<sub>s</sub></b>  <b>L<sub>s</sub></b>   <b>T<sub>s</sub></b>
+     = <b>T<sub>t</sub><sup>-1</sup></b>   <b>L<sub>t</sub><sup>-1</sup></b>   <b>P<sub>t</sub><sup>-1</sup></b>   <b>P<sub>s</sub></b>  <b>L<sub>s</sub></b>   <b>T<sub>s</sub></b>
    </dd>
 
    </dl>
@@ -437,29 +486,59 @@
   </dd>
 
     <dt>
-     Miscellaneous
+     <h3><div style="break-before:page"/>Miscellaneous</h3>
    </dt>
    <dd>
     <dl>
-
       <dt><h4>Source code</h4><dt>
       <dd>
        github.com/dmilos/math/linar/homography/construct2.hpp<br>
       </dd>
 
-      <dt><h4>Comment</h4><dt>
+      <dt><h4>Remarks</h4><dt>
       <dd>
        <ul>
         <li> This can be easily extend to higher dimensions</li>
-        <li> With appropriate effort it can be make in close forme.</li>
+        <li> With appropriate effort it can be make in close form.</li>
        <ul>
       </dd>
+
+      <dt><h4>Off topic</h4><dt>
+      <dd>
+        Homography matrix can be multiplied by some non zero factor for better utilization.<br>
+        Here are several proposed values to do that:
+        <dl>
+         <dt><b>&lambda; = 1/h<sub>33</sub></b></dt>
+          <dd>This is one of the most common way to do.</dd>
+         <dt><b>&lambda;= <i>s</i>/||h<sub>*1</sub>||, <i>s</i> &isin; &reals; <i>s</i> &ne; 0;</b> </dt>
+          <dd>
+            Observe first column as 3D vector. <i>s</i> i usually equal to 1.
+            First column can be seen as first basis vector of first plane.
+           </dd>
+
+         <dt><b>&lambda;= 1/||h<sub>*1</sub> &Cross; h<sub>*2</sub>||</b></dt>
+           <dd>
+            h<sub>*1</sub> &Cross; h<sub>*2</sub> is normal of source plane.
+
+           </dd>
+         <dt><b> v = h<sub>*1</sub> &Cross; h<sub>*2</sub>;<br> &lambda; = 1/|| v<sub>x</sub>&middot;v<sub>x</sub> + v<sub>y</sub>&middot;v<sub>y</sub>||</b></dt>
+          <dd>
+            This cross product also give equation of horizon or vanish line on target plane( <i>z</i>=1 ).<br>
+            First and second coordinate will present direction of line in form:
+             x&middot;cos( &alpha; ) + y&middot;sin( &alpha; ) - r = 0
+          </dd>
+
+        <dl>
+      </dd>
+      <dt><h4>Links</h4><dt>
+      <dd>
+       <ul>
+        <li> https://en.wikipedia.org/wiki/Homography </li>
+       </ul>
+      </dd>
     <dl>
-
     </dd>
-
  </dl>
-
 
  </body>
 </html>
