@@ -1,0 +1,56 @@
+detout:true$
+simp:true$
+
+S0: matrix( [S0_x], [S0_y], [1] );
+Sx: matrix( [Sx_x], [Sx_y], [1] );
+Sy: matrix( [Sy_x], [Sy_y], [1] );
+Sz: matrix( [Sz_x], [Sz_y], [1] );
+
+Ax: matrix( [Sx_x - S0_x], [Sx_y - S0_y], [1] );
+Ay: matrix( [Sy_x - S0_x], [Sy_y - S0_y], [1] );
+
+
+T_s: matrix( [1,0,-S0_x], [0,1,-S0_y], [0,0,1] );
+
+Li_s: matrix( [ Ax[1,1], Ay[1,1], 0 ],
+              [ Ax[2,1], Ay[2,1], 0 ],
+              [ 0, 0, 1 ]
+             );
+
+L_s: ratsimp( invert( Li_s ) );
+
+L_sf: matrix( [  Ay[2,1] ,  - Ay[1,1] ,  0 ],
+              [ -Ax[2,1] ,    Ax[1,1] ,  0 ],
+              [ 0, 0, determinant( Li_s ) ]
+             );
+
+
+
+ratsimp( L_s - L_sf / determinant( Li_s ) );
+
+T_s . S0;
+
+Li_s . matrix( [0], [0], [1] );
+Li_s . matrix( [1], [0], [1] );
+Li_s . matrix( [0], [1], [1] );
+
+ratsimp( L_s  . T_s );
+ratsimp( ( L_s  . T_s ) * determinant( Li_s ) );
+ratsimp( L_sf .  T_s );
+
+ratsimp( T_s . S0 );
+ratsimp( T_s . Sx );
+ratsimp( T_s . Sy );
+
+
+ratsimp( ( L_s ) . Ax );
+ratsimp( ( L_s ) . Ay );
+
+ratsimp( ( L_sf ) . Ax );
+ratsimp( ( L_sf ) . Ay );
+
+ratsimp( ( L_s .  T_s ) . Sx );
+ratsimp( ( L_s .  T_s ) . Sy );
+
+ratsimp( ( L_sf .  T_s ) . Sx )/ determinant( Li_s );
+ratsimp( ( L_sf .  T_s ) . Sy )/ determinant( Li_s );

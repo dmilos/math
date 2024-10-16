@@ -34,6 +34,20 @@
     border-left: 1px solid #000;
  }
 
+table.table_cost td
+ {
+    border: 1px solid black;
+    padding: 6px;
+ }
+
+table.table_cost
+ {
+    border: 0px solid black;
+    border-collapse: collapse;
+ }
+
+
+
 </style>
  </head>
  <body>
@@ -249,7 +263,7 @@
             Ah=0 and  ||h||= h<sub>11</sub><sup>2</sup> + h<sub>12</sub><sup>2</sup> + ... + h<sub>33</sub><sup>2</sup> =1 <br>
             ...<br>
             A<sup>T</sup>A h = &lambda; h <br>
-            Eigenvector h with smallest eigenvalue &lambda; of matrix A<sup>T</sup>A.
+            Eigenvector h with smallest eigenvalue &lambda; of matrix A<sup>T</sup>A.<br><br>
          </dd>
          <dt><b>h<sub>33</sub> = 1 </b> </dt>
          <dd>
@@ -329,46 +343,87 @@
        <dd>
           If <b>L</b> is linear function then: <br>
            <b>L</b>( &alpha; &middot; <b>x</b> + &beta; &middot; <b>y</b> ) = &alpha; &middot; <b>L</b>( <b>x</b> )  + &beta; &middot; <b>L</b>( <b>y</b> ) <br> <br>
-            Represented using homography matrix:
-            <table class="matrix" cellpadding="0" border=0 >
-              <tr> <td> a<sub>11</sub> </td> <td> a<sub>12</sub> </td> <td class ="left_fence"> 0 </td> </tr>
-              <tr> <td> a<sub>12</sub> </td> <td> a<sub>22</sub> </td> <td class ="left_fence"> 0 </td> </tr>
-              <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
-              <tr> <td> 0 </td> <td> 0 </td> <td  class ="left_fence"> 1 </td> </tr>
-            </table>
+            Represented using homography matrix ( with one of many possible decompositions ):
+            <table>
+              <tr>
+               <td>
+                <table class="matrix" cellpadding="0" border=0 >
+                  <tr> <td> a<sub>11</sub> </td> <td> a<sub>12</sub> </td> <td class ="left_fence"> 0 </td> </tr>
+                  <tr> <td> a<sub>12</sub> </td> <td> a<sub>22</sub> </td> <td class ="left_fence"> 0 </td> </tr>
+                  <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                  <tr> <td> 0 </td> <td> 0 </td> <td  class ="left_fence"> 1 </td> </tr>
+                </table>
+                </td>
+                 <td>&nbsp; = &nbsp;  </td>
+                <td>
+                <table class="matrix" cellpadding="0" border=0 >
+                  <tr> <td> cos( &alpha; ) </td> <td> -sin( &alpha; ) </td> <td class ="left_fence"> 0 </td> </tr>
+                  <tr> <td> sin( &alpha; ) </td> <td>  cos( &alpha; ) </td> <td class ="left_fence"> 0 </td> </tr>
+                  <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                  <tr> <td> 0 </td> <td> 0 </td> <td  class ="left_fence"> 1 </td> </tr>
+                </table>
+                </td>
+                 <td>&nbsp;   &nbsp;  </td>
+                 <td>
+                <table class="matrix" cellpadding="0" border=0 >
+                  <tr> <td> s<sub>x</sub> </td> <td> 0  </td> <td class ="left_fence"> 0 </td> </tr>
+                  <tr> <td> 0</td> <td>  s<sub>y</sub> </td> <td class ="left_fence"> 0 </td> </tr>
+                  <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                  <tr> <td> 0 </td> <td> 0 </td> <td  class ="left_fence"> 1 </td> </tr>
+                </table>
+                 </td>
+                  <td>&nbsp;   &nbsp;  </td>
+               <td>
+                <table class="matrix" cellpadding="0" border=0 >
+                  <tr> <td> 1 </td> <td> tan( &beta; ) </td> <td class ="left_fence"> 0 </td> </tr>
+                  <tr> <td> 0</td> <td>  1 </td> <td class ="left_fence"> 0 </td> </tr>
+                  <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                  <tr> <td> 0 </td> <td> 0 </td> <td  class ="left_fence"> 1 </td> </tr>
+                </table>
+                </td>
+             <tr>
+            <table>
+            
+            &alpha;, s<sub>x</sub>,  s<sub>y</sub>, &beta; &isin; &reals;
        </dd>
 
        <dt><h4>Simple Homography</h4></dt>
        <dd>
-        <div>
-         <p>
-         (0,0) = <b>P</b>(0,0);<br>
-         (1,0) = <b>P</b>(1,0);<br>
-         (0,1) = <b>P</b>(0,1);<br>
-         (X,Y) = <b>P</b>(1,1);<br>
-         </p>
+         <table width ="90%">
+           <tr> <td>
+             (0,0) = <b>P</b>(0,0);<br>
+             (1,0) = <b>P</b>(1,0);<br>
+             (0,1) = <b>P</b>(0,1);<br>
+             (X,Y) = <b>P</b>(1,1);<br>
 
-         This can be represented by homography matrix:
+           </td> <td rowspan=3 align="right"> <img src="t21.png"/> </td> </tr>
+           <tr> <td>
+
+         Homography matrix:
           <table class="matrix">
               <tr>  <td> X </td> <td> 0 </td> <td class ="left_fence"> 0 </td>   </tr>
               <tr> <td> 0 </td> <td> Y </td> <td class ="left_fence"> 0 </td> </tr>
               <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
               <tr> <td> 1-Y </td> <td> 1-X </td> <td class ="left_fence"> X+Y-1 </td> </tr>
           </table>
-          <table>
-           <tr>  <td> 0 &ne; (1-Y)<sup>2</sup> + ( 1-X )<sup>2</sup> + ( X+Y-1 )<sup>2</sup> <br>
-              Always &ne; 0. <br> Always exists.
-           </td> <td> <img src="t21.png"/>  </td> </tr>
-          </table>
-        </div>
-        <div>
-        <br>... and vice versa
-        <p>
+
+            </td> </tr>
+           <tr> <td> 0 &ne; (1-Y)<sup>2</sup> + ( 1-X )<sup>2</sup> + ( X+Y-1 )<sup>2</sup> <br>
+              Always &ne; 0. <br> Always exists. </td> </tr>
+         </table>
+
+        <br>... and vice versa <br><br>
+
+         <table width ="90%">
+           <tr> <td>
          (0,0) = <b>P</b>(0,0);<br>
          (1,0) = <b>P</b>(1,0);<br>
          (0,1) = <b>P</b>(0,1);<br>
          (1,1) = <b>P</b>(X,Y);<br>
-        </p>
+
+           </td> <td rowspan=3 align="right"> <img src="12s.png"/> </td> </tr>
+           <tr> <td>
+
          Homography matrix:
           <table class="matrix" >
               <tr> <td> Y &middot; (X + Y - 1)</td> <td> 0 </td> <td  class ="left_fence"> 0 </td>  </tr>
@@ -377,16 +432,17 @@
               <tr> <td> Y&middot;(Y - 1) </td> <td> X&middot;(X - 1) </td> <td class ="left_fence"> X&middot;Y </td> </tr>
           </table>
 
-          <table>
-            <tr>  <td>  0 &ne; (Y&middot;(Y - 1))<sup>2</sup> + (X&middot;(X - 1))<sup>2</sup> + (X&middot;Y)<sup>2</sup> <br>
+            </td> </tr>
+           <tr> <td>
+           0 &ne; (Y&middot;(Y - 1))<sup>2</sup> + (X&middot;(X - 1))<sup>2</sup> + (X&middot;Y)<sup>2</sup> <br>
              (X,Y) &ne; (0,0)<br>
              (X,Y) &ne; (1,0)<br>
              (X,Y) &ne; (0,1)<br>
-            </td>
-            <td> <img src="12s.png"/>   </td> </tr>
-          </table>
 
-        </div>
+           </td> </tr>
+         </table>
+
+
        </dd>
      </dl>
    </dd>
@@ -399,26 +455,86 @@
      <h4>Elements</h4>
    </dt>
    <dd>
-        <table width="80%">
+        <table width="90%">
           <tr>
            <td align="top" ><b>T<sub>s</sub></b>: translation matrix, translate from s<sub>0</sub> to <i>o=(0,0)</i></td>
-           <td><img src="s-t.png" align="right"/></td>
+           <td rowspan=3><img src="s-t.png" align="right"/></td>
           </tr>
+          <tr>
+            <td align="center">
+              <table  align="center" style="white-space:nowrap" >
+                <tr>
+                  <td align="center" > <b>T<sub>s</sub></b> = &nbsp; </td>
+                   <td>
+                     <table class="matrix" cellpadding="0" border=0 >
+                       <tr> <td> 1</td> <td> 0 </td> <td class ="left_fence">  - s<sub>0<sub>x</sub</sub>  </td> </tr>
+                       <tr> <td> 0 </td> <td> 1 </td> <td class ="left_fence"> - s<sub>0<sub>y</sub</sub>  </td> </tr>
+                       <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                       <tr> <td> 0 </td> <td> 0</td> <td  class ="left_fence"> 1 </td> </tr>
+                     </table>
+                   </td>
+                  </tr>
+                </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+               <table class ="table_cost" style="white-space:nowrap" align="center">
+                <tr align="center"><td>-()</td><td>+</td><td>-</td><td>&middot;</td></tr>
+                <tr align="center" ><td>2</td><td>0</td><td>0</td><td>0</td></tr>
+               </table>
+            </td>
+          </tr>
+
         </table>
-        <table width="80%">
+        <table width="90%">
           <tr>
            <td align="top">
               <b>L<sub>s</sub></b>:
               <blockquote>
+             ( 0, 0 ) = <b>L<sub>s</sub></b>( ( 0, 0 ) ) ,<br>
              ( 1, 0 ) = <b>L<sub>s</sub></b>( <b>T<sub>s</sub></b> ( s<sub>x</sub> ) ) ,<br>
              ( 0, 1 ) = <b>L<sub>s</sub></b>( <b>T<sub>s</sub></b> ( s<sub>y</sub> ) )
               </blockquote>
            </td>
-           <td><img src="s-m.png" align="right"/></td>
+           <td rowspan=3 ><img src="s-m.png" align="right"/></td>
           </tr>
+          <tr> <td >  <blockquote>
+            a<sub>x</sub> = <b>T<sub>s</sub></b> ( s<sub>x</sub> )<br>
+            a<sub>y</sub> = <b>T<sub>s</sub></b> ( s<sub>y</sub> )<br>
+              <table  align="center" style="white-space:nowrap" >
+                <tr>
+                  <td align="center" > <b>L<sub>s</sub></b> = &nbsp; </td>
+                   <td>
+
+                     <table class="matrix" cellpadding="0" border=0 align="center" >
+                       <tr> <td> a<sub>y<sub>y</sub></sub> </td> <td> - a<sub>y<sub>x</sub></sub> </td> <td class ="left_fence">  0  </td> </tr>
+                       <tr> <td>-a<sub>x<sub>y</sub></sub> </td> <td> a<sub>x<sub>x</sub></sub> </td> <td class ="left_fence"> 0  </td> </tr>
+                       <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                       <tr> <td> 0 </td> <td> 0</td> <td  class ="left_fence">
+                         a<sub>x<sub>x</sub></sub> &middot; a<sub>y<sub>y</sub></sub> - a<sub>x<sub>y</sub></sub> &middot;a<sub>y<sub>x</sub></sub> </td> </tr>
+                     </table>
+
+                   </td>
+                  </tr>
+                </table>
+
+            </blockquote>
+
+          </td>
+          </tr>
+          <tr>
+            <td>
+               <table  class ="table_cost" style="white-space:nowrap" align="center">
+                <tr align="center"><td>-()</td><td>+</td><td>-</td><td>&middot;</td></tr>
+                <tr align="center" ><td>0+2</td><td>0+0</td><td>4+1</td><td>0+2</td></tr>
+               </table>
+            </td>
+          </tr>
+
         </table>
 
-        <table width="80%">
+        <table width="90%" style="white-space:nowrap" >
           <tr>
            <td align="top" >
              <b>P<sub>s</sub></b>:
@@ -429,33 +545,165 @@
                (1,1) = <b>P<sub>s</sub></b>(<b>L<sub>s</sub></b> <b>T<sub>s</sub></b>( s<sub>z</sub> ) )
                </blockquote>
            </td>
-           <td><img src="s-p.png" align="right"/></td>
+           <td rowspan=3><img src="s-p.png" align="right"/></td>
           </tr>
+          <tr>
+           <td>
+            <blockquote>
+             b<sub>z</sub> =<b>L<sub>s</sub></b> <b>T<sub>s</sub></b>( s<sub>z</sub> )<br>
+            <table>
+             <tr><td>P<sub>s</sub></b> =</td>
+              <td>&nbsp</td>
+              <td>
+               <table class="matrix" style="white-space:nowrap">
+                   <tr>  <td> b<sub>z <sub>x</sub></sub> </td> <td> 0 </td> <td class ="left_fence"> 0 </td>   </tr>
+                   <tr> <td> 0 </td> <td> b<sub>z <sub>y</sub></sub> </td> <td class ="left_fence"> 0 </td> </tr>
+                   <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                   <tr> <td> 1-b<sub>z <sub>y</sub></sub> </td> <td> 1-b<sub>z <sub>x</sub></sub> </td> <td class ="left_fence"> b<sub>z <sub>x</sub></sub>+b<sub>z <sub>y</sub></sub>-1 </td> </tr>
+               </table>
+             </td>
+           </tr>
+          </table>
+
+           <blockquote>
+           </td>
+          </tr>
+
+          <tr>
+            <td>
+               <table  class ="table_cost" style="white-space:nowrap" align="center">
+                <tr align="center"><td>-()</td><td>+</td><td>-</td><td>&middot;</td></tr>
+                <tr align="center" ><td>0+0+0</td><td>0+2+1</td><td>2+0+3</td><td>0+4+0</td></tr>
+               </table>
+            </td>
+          </tr>
+
         </table>
         <div style="break-before:page"/>
-        <table width="80%">
+        <table width="90%" style="white-space:nowrap" >
           <tr>
            <td align="top" >
             <b>T<sub>t</sub></b>: translation matrix, translate from t<sub>0</sub> to <i>o</i>
            </td>
-           <td><img src="t-t.png" align="right"/></td>
+           <td rowspan=3 ><img src="t-t.png" align="right"/></td>
           </tr>
+
+          <tr>
+            <td>
+              <table   align="center" >
+                <tr>
+                  <td align="center" > <b>T<sub>t</sub></b> = &nbsp; </td>
+                  <td align="center">
+                    <table class="matrix" cellpadding="0" border=0 >
+                      <tr> <td> 1</td> <td> 0 </td> <td class ="left_fence">  - t<sub>0<sub>x</sub</sub>  </td> </tr>
+                      <tr> <td> 0 </td> <td> 1 </td> <td class ="left_fence"> - t<sub>0<sub>y</sub</sub>  </td> </tr>
+                      <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                      <tr> <td> 0 </td> <td> 0</td> <td  class ="left_fence"> 1 </td> </tr>
+                    </table>
+                  </td>
+                  <td align="center"> &nbsp; &nbsp; &nbsp; </td>
+                  <td align="center"> <b>T<sub>t</sub><sup>-1</sup></b> = &nbsp; </td>
+                  <td align="center" >
+                    <table class="matrix" cellpadding="0" border=0 >
+                      <tr> <td> 1</td> <td> 0 </td> <td class ="left_fence">  + t<sub>0<sub>x</sub</sub>  </td> </tr>
+                      <tr> <td> 0 </td> <td> 1 </td> <td class ="left_fence"> + t<sub>0<sub>y</sub</sub>  </td> </tr>
+                      <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                      <tr> <td> 0 </td> <td> 0</td> <td  class ="left_fence"> 1 </td> </tr>
+                    </table>
+                  </td>
+                </tr>
+
+              </table>
+            </td >
+          </tr>
+          <tr>
+            <td align="center">
+
+              <table>
+               <tr>
+                <td>
+                 <b>T<sub>t</sub><sup>-1</sup></b> : </td>
+                <td>
+                    <table  class ="table_cost" style="white-space:nowrap" align="center">
+                     <tr align="center"><td>-()</td><td>+</td><td>-</td><td>&middot;</td></tr>
+                     <tr align="center" ><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                    </table>
+                </td>
+               </tr>
+              </table>
+
+            </td>
+          </tr>
+
         </table>
 
-        <table width="80%">
+        <table width="90%" >
           <tr>
            <td align="top" >
              <b>L<sub>t</sub></b>:
              <blockquote>
+               ( 0, 0 ) = <b>L<sub>t</sub></b>( ( 0, 0 ) ), <br>
                ( 1, 0 ) = <b>L<sub>t</sub></b>( <b>T<sub>t</sub></b> ( t<sub>x</sub> ) ), <br>
                ( 0, 1 ) = <b>L<sub>t</sub></b>( <b>T<sub>t</sub></b> ( t<sub>y</sub> ) )
              </blockquote>
            </td>
-           <td><img src="t-m.png" align="right"/></td>
+           <td rowspan=3 ><img src="t-m.png" align="right"/></td>
           </tr>
+          <tr>
+            <td>
+            <blockquote>
+            b<sub>x</sub> = <b>T<sub>t</sub></b> ( t<sub>x</sub> )<br>
+            b<sub>y</sub> = <b>T<sub>t</sub></b> ( t<sub>y</sub> )<br>
+
+              <table align="center" style="white-space:nowrap" >
+                <tr>
+                  <td align="center" > <b>L<sub>t</sub></b> = &nbsp; </td>
+                  <td align="center">
+                    <table class="matrix" cellpadding="0" border=0 align="center" style="white-space:nowrap" >
+                      <tr> <td> b<sub>y<sub>y</sub></sub> </td> <td> - b<sub>y<sub>x</sub></sub> </td> <td class ="left_fence">  0  </td> </tr>
+                      <tr> <td>-b<sub>x<sub>y</sub></sub> </td> <td> b<sub>x<sub>x</sub></sub> </td> <td class ="left_fence"> 0  </td> </tr>
+                      <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                      <tr> <td> 0 </td> <td> 0</td> <td  class ="left_fence">
+                        b<sub>x<sub>x</sub></sub> &middot; b<sub>y<sub>y</sub></sub> - b<sub>x<sub>y</sub></sub> &middot;b<sub>y<sub>x</sub></sub> </td> </tr>
+                    </table>
+                  </td>
+                  <td> &nbsp; &nbsp; </td>
+                  <td align="center"> <b>L<sub>t</sub><sup>-1</sup></b> = &nbsp; </td>
+                  <td align="center" >
+                    <table class="matrix" cellpadding="0" border=0 style="white-space:nowrap">
+                      <tr> <td> b<sub>x<sub>x</sub></sub> </td> <td> b<sub>y<sub>x</sub></sub> </td> <td class ="left_fence">  0 </td> </tr>
+                      <tr> <td> b<sub>x<sub>y</sub></sub> </td> <td> b<sub>y<sub>y</sub></sub> </td> <td class ="left_fence"> 0  </td> </tr>
+                      <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                      <tr> <td> 0 </td> <td> 0</td> <td  class ="left_fence"> 1 </td> </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              </blockquote>
+            </td >
+          </tr>
+          <tr>
+            <td align="center">
+
+               <table>
+                <tr>
+                 <td>
+                  <b>L<sub>t</sub><sup>-1</sup></b> : </td>
+                 <td>
+                  <table class ="table_cost" style="white-space:nowrap" align="center">
+                   <tr align="center"><td>-()</td><td>+</td><td>-</td><td>&middot;</td></tr>
+                   <tr align="center" ><td>0+0</td><td>0+0</td><td>4+0</td><td>0</td></tr>
+                  </table>
+                 </td>
+                </tr>
+               </table>
+
+            </td>
+          </tr>
+
         </table>
 
-        <table width="80%">
+        <table width="90%">
           <tr>
            <td align="top" >
             <b>P<sub>t</sub></b>:
@@ -463,23 +711,94 @@
             (0,0) = <b>P<sub>t</sub></b>( (0,0) ),<br>
             (1,0) = <b>P<sub>t</sub></b>( (1,0) ),<br>
             (0,1) = <b>P<sub>t</sub></b>( (0,1) ), <br>
-            (1,1) = <b>P<sub>t</sub></b>( <b>L<sub>t</sub></b> <b>T<sub>t</sub></b>( t<sub>z</sub> ) ) <br>
-             &nbsp; &nbsp; &nbsp; <b>L<sub>t</sub></b> <b>T<sub>t</sub></b>( t<sub>z</sub> ) &notin;{ (0,0), (1,0), (0,1) }
+            (1,1) = <b>P<sub>t</sub></b>( <b>L<sub>t</sub></b> <b>T<sub>t</sub></b>( t<sub>z</sub> ) )
             </blockquote>
            </td>
-           <td><img src="t-p.png" align="right"/></td>
+           <td rowspan=3 ><img src="t-p.png" align="right"/></td>
           </tr>
+
+          <tr>
+            <td>
+            <blockquote>
+            d<sub>z</sub> = <b>L<sub>t</sub></b> <b>T<sub>t</sub></b> ( t<sub>z</sub> )<br>
+            X = d<sub>z<sub>x</sub></sub><br>
+            Y = d<sub>z<sub>y</sub></sub><br>
+
+              <table  align="center" style="white-space:nowrap" >
+                <tr>
+                  <td align="center" > <b>P<sub>t</sub></b> = &nbsp; </td>
+                  <td align="center">
+
+                    <table class="matrix">
+                        <tr>  <td> X </td> <td> 0 </td> <td class ="left_fence"> 0 </td>   </tr>
+                        <tr> <td> 0 </td> <td> Y </td> <td class ="left_fence"> 0 </td> </tr>
+                        <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                        <tr> <td> 1-Y </td> <td> 1-X </td> <td class ="left_fence"> X+Y-1 </td> </tr>
+                    </table>
+
+                  </td>
+                  <td> &nbsp; &nbsp; </td>
+                  <td align="center"> <b>P<sub>t</sub><sup>-1</sup></b> = &nbsp; </td>
+                  <td align="center" >
+
+                   <table class="matrix" >
+                       <tr> <td> Y &middot; (X + Y - 1)</td> <td> 0 </td> <td  class ="left_fence"> 0 </td>  </tr>
+                       <tr> <td> 0 </td> <td> X &middot; (X + Y - 1) </td> <td class ="left_fence"> 0 </td> </tr>
+                       <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                       <tr> <td> Y&middot;(Y - 1) </td> <td> X&middot;(X - 1) </td> <td class ="left_fence"> X&middot;Y </td> </tr>
+                   </table>
+
+                  </td>
+                </tr>
+              </table>
+              </blockquote>
+            </td>
+          </tr>
+
+
+          <tr>
+            <td align="center">
+               <table>
+                <tr>
+                 <td>
+                  <b>P<sub>t</sub><sup>-1</sup></b> : </td>
+                 <td>
+                  <table  class ="table_cost" style="white-space:nowrap" align="center">
+                   <tr align="center"><td>-()</td><td>+</td><td>-</td><td>&middot;</td></tr>
+                   <tr align="center" ><td>0+0+0</td><td>0+2+2</td><td>2+0+4</td><td>0+4+5</td></tr>
+                  </table>
+                 </td>
+                </tr>
+               </table>
+            </td>
+          </tr>
+
         </table>
     </dd>
 
    <dt>
-     <h4>Homographies, Assemble</h4>
+     <h4><div style="break-before:page"/>Homographies, Assemble</h4>
    </dt>
    <dd>
     <b>H</b>
      = (<b>P<sub>t</sub></b>    <b>L<sub>t</sub></b> <b>T<sub>t</sub></b>   )<sup>-1</sup>   <b>P<sub>s</sub></b>  <b>L<sub>s</sub></b>   <b>T<sub>s</sub></b>
      = <b>T<sub>t</sub><sup>-1</sup></b>   <b>L<sub>t</sub><sup>-1</sup></b>   <b>P<sub>t</sub><sup>-1</sup></b>   <b>P<sub>s</sub></b>  <b>L<sub>s</sub></b>   <b>T<sub>s</sub></b>
    </dd>
+
+   <blockquote>
+    <table  class ="table_cost" style="white-space:nowrap" >
+      <tr align="center"> <td>ƒ</td> <td>-()</td><td>+</td><td>-</td><td>&middot;</td></tr>
+      <tr align="center" ><td> <b>T<sub>s</sub></b>              </td> <td>2    </td>   <td>0    </td>   <td>0    </td>   <td>0</td></tr>
+      <tr align="center" ><td> <b>L<sub>s</sub></b>              </td> <td>0+2  </td>   <td>0+0  </td>   <td>4+1  </td>   <td>0+2  </td></tr>
+      <tr align="center" ><td> <b>P<sub>s</sub></b>              </td> <td>0+0+0</td>   <td>0+2+1</td>   <td>2+0+3</td>   <td>0+4+0</td></tr>
+      <tr align="center" ><td> <b>T<sub>t</sub><sup>-1</sup></b> </td> <td>0+0+0</td>   <td>0+0+0</td>   <td>0+0+0</td>   <td>0+0+0</td></tr>
+      <tr align="center" ><td> <b>L<sub>t</sub><sup>-1</sup></b> </td> <td>0+0+0</td>   <td>0+0+0</td>   <td>0+4+0</td>   <td>0+0+0</td></tr>
+      <tr align="center" ><td> <b>P<sub>t</sub><sup>-1</sup></b> </td> <td>0+0+0</td>   <td>0+2+2</td>   <td>2+0+4</td>   <td>0+4+5</td></tr>
+
+      <tr align="center" ><td><b>H</b></td> <td>5 &middot; 0</td><td>5 &middot; 4</td><td>5 &middot; 0</td><td>5 &middot; (4 &middot; 2)</td></tr>
+      <tr align="center" ><td>&sum;</td> <td>4</td><td>27</td><td>20</td><td>55</td></tr>
+    </table>
+   </blockquote>
 
    </dl>
 

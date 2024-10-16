@@ -1,50 +1,63 @@
-#include <cstdlib>
-#include <iostream>
-#include <iomanip>
-#include <string>
-
 #include "math/math.hpp"
 
-using namespace std;
 
-template< typename scalar_name, math::type::size_t width_number, math::type::size_t height_number >
- void print ( ::math::linear::matrix::structure<scalar_name,width_number,height_number> const& m, std::string const& comment = "" )
-  {
-   std::cout << comment << "{" ;
-   for( math::type::size_t j=0; j< width_number; j++ )
-    {
-     std::cout << std::endl << "    ";
-     for( math::type::size_t i=0; i< height_number; i++ )
-      {
-       std::cout << "" << std::setw(10) << std::fixed << m[j][i] << ", ";
-      }
-    }
-   std::cout << std::endl;
-   std::cout << "}" << std::endl;
-  }
+typedef  ::math::geometry::projective::camera::mobile<double> camera_type;
 
-int main( int argc, char *argv[] )
+
+void rectify_sbs( camera_type const& snister, camera_type const& dexter )
  {
-  cout << "Hello World" << endl;
+  ::math::geometry::projective::epipolar::rectify3::psbs<double>      planer_psbs; //!< we want real rectification
+  ::math::geometry::projective::epipolar::rectify3::processor<double> rectificator;
+  rectificator.process( snister, dexter, planer_psbs );
+ }
 
-  ::math::linear::homography::structure< double, 1 >   left;
-  ::math::linear::homography::structure< double, 1 >   right;
+void rectify_forward(  camera_type const& snister, camera_type const& dexter )
+ {
+  ::math::geometry::projective::epipolar::rectify3::pforward<double>  planer_pforward;
+  ::math::geometry::projective::epipolar::rectify3::processor<double> rectificator;
+  rectificator.process( snister, dexter, planer_pforward );
+ }
 
-  ::math::linear::affine::structure< double, 2 >       right2left{  { 1,0,0,1}, {0,1} };
-  ::math::linear::affine::structure< double, 2 >       left2world;
-  ::math::linear::affine::structure< double, 2 >       right2world;
+void rectify_md(  camera_type const& snister, camera_type const& dexter )
+ {
+  ::math::geometry::projective::epipolar::rectify3::pmd<double>  planer_pmd;
+  ::math::geometry::projective::epipolar::rectify3::processor<double> rectificator;
+  rectificator.process( snister, dexter, planer_pmd );
+ }
 
-  //::math::geometry::projective::epipolar::rectify3::( left, right, { { 1, 0, 0, 1 }, {   1,   0 } } );
-  //print( left, "left" ); print( right, "right" );
-  //
-  //::math::geometry::projective::epipolar::rectify3( left, right, { { 1, 0, 0, 1 }, { 100,   1 } } );
-  //print( left, "left" ); print( right, "right" );
-  //
-  //::math::geometry::projective::epipolar::rectify3( left, right, { { 1, 0, 0, 1 }, {   0,   1 } } );
-  //print( left, "left" ); print( right, "right" );
-  //
-  //::math::geometry::projective::epipolar::rectify3( left, right, { { 1, 0, 0, 1 }, {   1,   1 } } );
-  //print( left, "left" ); print( right, "right" );
+void rectify_2left(  camera_type const& snister, camera_type const& dexter )
+ {
+  ::math::geometry::projective::epipolar::rectify3::p2l<double>  planer_2l;
+  ::math::geometry::projective::epipolar::rectify3::processor<double> rectificator;
+  rectificator.process( snister, dexter, planer_2l );
+ }
 
-  return EXIT_SUCCESS;
+void rectify_2right(  camera_type const& snister, camera_type const& dexter )
+ {
+  ::math::geometry::projective::epipolar::rectify3::p2r<double>  planer_2r;
+  ::math::geometry::projective::epipolar::rectify3::processor<double> rectificator;
+  rectificator.process( snister, dexter, planer_2r );
+ }
+
+
+int main( )
+ {
+  camera_type snister, dexter;
+  ::math::linear::affine::structure< double, 3> A;
+
+  snister.optical().horizontalFV( ::math::geometry::deg2rad( 67 ) );
+  ::math::linear::matrix::id( A.matrix() );
+  ::math::linear::vector::load( A.vector(), 0.0, 0.0, 0.0 );
+  snister.to_world( A );
+
+  dexter.optical().horizontalFV( ::math::geometry::deg2rad( 95 ) );
+  ::math::linear::matrix::id( A.matrix() );
+  ::math::linear::vector::load( A.vector(), 0.5, 0.0, 0.01 );
+  dexter.to_world( A );
+  rectify_sbs( snister, dexter );
+  rectify_forward( snister, dexter );
+  rectify_md( snister, dexter );
+  rectify_2left( snister, dexter );
+  rectify_2right( snister, dexter );
+  return 0;
  }

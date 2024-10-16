@@ -39,7 +39,7 @@ namespace math
 
              public:
                bool process( homography_type & H, interval_type const& window, resolution_type const& resolution )
-                { //! re-target exiting homografy to be applied on image
+                { //! re-target exiting homography to be applied on image
                  m_window = window;
 
                  m_target = interval_type{ display_type{ 0, (double)resolution[1] }, display_type{ (double)resolution[0], 0 } };
@@ -50,15 +50,16 @@ namespace math
                  return ::math::linear::homography::retarget( H, homography_type( H ), m_target, codomain, domain, m_source );
                 }
 
-
              bool process( homography_type & H, digital_type const& camera )
-              { // re-target exiting homografy to be applied on image
+              { // re-target exiting homography to be applied on image
                m_target = interval_type{ display_type{ 0, (double)camera.resolution()[1] }, display_type{ (double)camera.resolution()[0], 0 } };
                interval_type  codomain{ camera.window() };
                interval_type  domain{ camera.window() };
-               m_source   = interval_type { display_type{ 0, (double)camera.resolution()[1] }, display_type{ (double)camera.resolution()[0], 0 } };
+               m_source = interval_type{ display_type{ 0, (double)camera.resolution()[1] }, display_type{ (double)camera.resolution()[0], 0 } };
 
                return ::math::linear::homography::retarget( H, homography_type( H ), m_target, codomain, domain, m_source );
+               
+               // TODO process( H, camera.window(), camera.resolution() );
               }
 
              public:

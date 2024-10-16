@@ -126,8 +126,8 @@ namespace math
                 {
                  scalar_type result;
 
-                 scalar_name min = std::min( { O[0]/O[2], X[0]/X[2], Y[0]/Y[2], V[0]/V[2] } );
-                 scalar_name max = std::max( { O[0]/O[2], X[0]/X[2], Y[0]/Y[2], V[0]/V[2] } );
+                 scalar_name min = std::min( std::min( O[0]/O[2], X[0]/X[2] ), std::min( Y[0]/Y[2], V[0]/V[2] ) );
+                 scalar_name max = std::max( std::max( O[0]/O[2], X[0]/X[2] ), std::max( Y[0]/Y[2], V[0]/V[2] ) );
                  result = ( max + min ) / scalar_name(2);
 
                  return result;

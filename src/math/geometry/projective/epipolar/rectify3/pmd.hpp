@@ -26,7 +26,7 @@ namespace math
          {
 
         template < typename scalar_name >
-         class pmd    //!<  calculaet Minimal common Plane that give us minimal distortion. NOTE: quasi-rectification
+         class pmd    //!<  calculate Minimal common Plane that give us minimal distortion. NOTE: quasi-rectification
           : public ::math::geometry::projective::epipolar::rectify3::pbase<scalar_name>
           {
            public:
