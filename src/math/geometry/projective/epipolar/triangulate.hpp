@@ -32,7 +32,7 @@ namespace math
            public:
              typedef ::math::linear::vector::point<  scalar_name, 2 > uv_type;
              typedef ::math::linear::vector::point<  scalar_name, 3 > point3d_type;
-             typedef ::math::linear::affine::structure<  scalar_name, 3 > affine_type;
+             typedef ::math::linear::affine::structure< scalar_name, 3 > affine_type;
 
              typedef ::math::geometry::projective::camera::pinhole<scalar_name>                pinhole_type;
              typedef ::math::geometry::projective::camera::optical< scalar_name, size_name >   optical_type, digital_type;

@@ -44,7 +44,7 @@ namespace math
           void reset()
            {
             m_count.reset( 0 );
-            m_summae.reset( sample_type{ scalar_type() } );
+            m_summae.reset( );
 
             m_sqSumma.reset( ::math::linear::vector::fill<scalar_name, dimension_number >( 0 ) );
            }

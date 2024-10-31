@@ -52,14 +52,7 @@ namespace math
 
              bool process( homography_type & H, digital_type const& camera )
               { // re-target exiting homography to be applied on image
-               m_target = interval_type{ display_type{ 0, (double)camera.resolution()[1] }, display_type{ (double)camera.resolution()[0], 0 } };
-               interval_type  codomain{ camera.window() };
-               interval_type  domain{ camera.window() };
-               m_source = interval_type{ display_type{ 0, (double)camera.resolution()[1] }, display_type{ (double)camera.resolution()[0], 0 } };
-
-               return ::math::linear::homography::retarget( H, homography_type( H ), m_target, codomain, domain, m_source );
-               
-               // TODO process( H, camera.window(), camera.resolution() );
+               return process( H, camera.window(), camera.resolution() );
               }
 
              public:

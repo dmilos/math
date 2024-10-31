@@ -387,7 +387,7 @@ table.table_cost
                 </td>
              <tr>
             <table>
-            
+
             &alpha;, s<sub>x</sub>,  s<sub>y</sub>, &beta; &isin; &reals;
        </dd>
 
@@ -554,20 +554,27 @@ table.table_cost
           <tr>
            <td>
             <blockquote>
-             b<sub>z</sub> =<b>L<sub>s</sub></b> <b>T<sub>s</sub></b>( s<sub>z</sub> )<br>
-            <table>
-             <tr><td>P<sub>s</sub></b> =</td>
-              <td>&nbsp</td>
-              <td>
-               <table class="matrix" style="white-space:nowrap">
-                   <tr>  <td> b<sub>z <sub>x</sub></sub> </td> <td> 0 </td> <td class ="left_fence"> 0 </td>   </tr>
-                   <tr> <td> 0 </td> <td> b<sub>z <sub>y</sub></sub> </td> <td class ="left_fence"> 0 </td> </tr>
-                   <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
-                   <tr> <td> 1-b<sub>z <sub>y</sub></sub> </td> <td> 1-b<sub>z <sub>x</sub></sub> </td> <td class ="left_fence"> b<sub>z <sub>x</sub></sub>+b<sub>z <sub>y</sub></sub>-1 </td> </tr>
-               </table>
-             </td>
-           </tr>
-          </table>
+             a<sub>z</sub> =<b>L<sub>s</sub></b> <b>T<sub>s</sub></b>( s<sub>z</sub> )<br>
+            X = a<sub>z <sub>x</sub></sub> <br>
+            Y = a<sub>z <sub>y</sub></sub> <br>
+
+
+              <table  align="center" style="white-space:nowrap" >
+                <tr>
+                  <td> &nbsp; &nbsp; </td>
+                  <td align="center"> <b>P<sub>s</sub></b> = &nbsp; </td>
+                  <td align="center" >
+
+                   <table class="matrix" >
+                       <tr> <td> Y &middot; (X + Y - 1)</td> <td> 0 </td> <td  class ="left_fence"> 0 </td>  </tr>
+                       <tr> <td> 0 </td> <td> X &middot; (X + Y - 1) </td> <td class ="left_fence"> 0 </td> </tr>
+                       <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                       <tr> <td> Y&middot;(Y - 1) </td> <td> X&middot;(X - 1) </td> <td class ="left_fence"> X&middot;Y </td> </tr>
+                   </table>
+
+                  </td>
+                </tr>
+              </table>
 
            <blockquote>
            </td>
@@ -577,7 +584,7 @@ table.table_cost
             <td>
                <table  class ="table_cost" style="white-space:nowrap" align="center">
                 <tr align="center"><td>-()</td><td>+</td><td>-</td><td>&middot;</td></tr>
-                <tr align="center" ><td>0+0+0</td><td>0+2+1</td><td>2+0+3</td><td>0+4+0</td></tr>
+                <tr align="center" ><td>0+0+0</td><td>0+2+2</td><td>2+0+4</td><td>0+4+4</td></tr>
                </table>
             </td>
           </tr>
@@ -701,10 +708,8 @@ table.table_cost
                  </td>
                 </tr>
                </table>
-
             </td>
           </tr>
-
         </table>
 
         <table width="90%">
@@ -724,13 +729,13 @@ table.table_cost
           <tr>
             <td>
             <blockquote>
-            d<sub>z</sub> = <b>L<sub>t</sub></b> <b>T<sub>t</sub></b> ( t<sub>z</sub> )<br>
-            X = d<sub>z<sub>x</sub></sub><br>
-            Y = d<sub>z<sub>y</sub></sub><br>
+            b<sub>z</sub> = <b>L<sub>t</sub></b> <b>T<sub>t</sub></b> ( t<sub>z</sub> )<br>
+            X = b<sub>z<sub>x</sub></sub><br>
+            Y = b<sub>z<sub>y</sub></sub><br>
 
               <table  align="center" style="white-space:nowrap" >
                 <tr>
-                  <td align="center" > <b>P<sub>t</sub></b> = &nbsp; </td>
+                  <td align="center" > <b>P<sub>t</sub><sup>-1</sup></b> = &nbsp; </td>
                   <td align="center">
 
                     <table class="matrix">
@@ -742,7 +747,7 @@ table.table_cost
 
                   </td>
                   <td> &nbsp; &nbsp; </td>
-                  <td align="center"> <b>P<sub>t</sub><sup>-1</sup></b> = &nbsp; </td>
+                  <td align="center"> <b>P<sub>t</sub></b> = &nbsp; </td>
                   <td align="center" >
 
                    <table class="matrix" >
@@ -755,6 +760,7 @@ table.table_cost
                   </td>
                 </tr>
               </table>
+
               </blockquote>
             </td>
           </tr>
@@ -769,7 +775,7 @@ table.table_cost
                  <td>
                   <table  class ="table_cost" style="white-space:nowrap" align="center">
                    <tr align="center"><td>-()</td><td>+</td><td>-</td><td>&middot;</td></tr>
-                   <tr align="center" ><td>0+0+0</td><td>0+2+2</td><td>2+0+4</td><td>0+4+5</td></tr>
+                   <tr align="center" ><td>0+0+3</td><td>0+2+1</td><td>2+0+3</td><td>0+4+0</td></tr>
                   </table>
                  </td>
                 </tr>
@@ -794,13 +800,12 @@ table.table_cost
       <tr align="center"> <td>ƒ</td> <td>-()</td><td>+</td><td>-</td><td>&middot;</td></tr>
       <tr align="center" ><td> <b>T<sub>s</sub></b>              </td> <td>2    </td>   <td>0    </td>   <td>0    </td>   <td>0</td></tr>
       <tr align="center" ><td> <b>L<sub>s</sub></b>              </td> <td>0+2  </td>   <td>0+0  </td>   <td>4+1  </td>   <td>0+2  </td></tr>
-      <tr align="center" ><td> <b>P<sub>s</sub></b>              </td> <td>0+0+0</td>   <td>0+2+1</td>   <td>2+0+3</td>   <td>0+4+0</td></tr>
+      <tr align="center" ><td> <b>P<sub>s</sub></b>              </td> <td>0+0+0</td>   <td>0+2+2</td>   <td>2+0+4</td>   <td>0+4+4</td></tr>
       <tr align="center" ><td> <b>T<sub>t</sub><sup>-1</sup></b> </td> <td>0+0+0</td>   <td>0+0+0</td>   <td>0+0+0</td>   <td>0+0+0</td></tr>
       <tr align="center" ><td> <b>L<sub>t</sub><sup>-1</sup></b> </td> <td>0+0+0</td>   <td>0+0+0</td>   <td>0+4+0</td>   <td>0+0+0</td></tr>
-      <tr align="center" ><td> <b>P<sub>t</sub><sup>-1</sup></b> </td> <td>0+0+0</td>   <td>0+2+2</td>   <td>2+0+4</td>   <td>0+4+5</td></tr>
-
+      <tr align="center" ><td> <b>P<sub>t</sub><sup>-1</sup></b> </td> <td>0+0+3</td>   <td>0+2+1</td>   <td>2+0+3</td>   <td>0+4+0</td></tr>
       <tr align="center" ><td><b>H</b></td> <td>5 &middot; 0</td><td>5 &middot; 4</td><td>5 &middot; 0</td><td>5 &middot; (4 &middot; 2)</td></tr>
-      <tr align="center" ><td>&sum;</td> <td>4</td><td>27</td><td>20</td><td>55</td></tr>
+      <tr align="center" ><td>&sum;</td> <td>7</td><td>27</td><td>20</td><td>54</td></tr>
     </table>
    </blockquote>
 
@@ -857,9 +862,12 @@ table.table_cost
       <dd>
        <ul>
         <li> https://en.wikipedia.org/wiki/Homography </li>
-        
-        <li> 
+
+        <li>
              Projective Mappings for Image Warping, Paul Heckbert, 15-869, Image-Based Modeling and Rendering, 13 Sept 1999.
+        </li>
+        <li>
+             Fundamentals of Texture Mapping and Image Warping, Paul S. Heckbert, 17 June 1989.
         </li>
        </ul>
       </dd>

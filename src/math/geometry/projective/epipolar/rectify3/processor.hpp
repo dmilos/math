@@ -37,7 +37,10 @@ namespace math
               typedef ::math::geometry::projective::epipolar::rectify3::projector<scalar_type>   projector_type, rectificator_type;
               typedef ::math::geometry::projective::epipolar::rectify3::pbase<scalar_type>       pbase_type;
 
-
+              processor()
+               {
+                m_shift = true;
+               }
               //!< top of all functions.
               bool process( camera_type const& sinister, camera_type const& dexter, pbase_type & pbase )
                {
@@ -47,41 +50,42 @@ namespace math
                  }
 
                 m_rectificator.left(  m_L );
-                m_retargetL.process( m_L, sinister.optical().window(), sinister.optical().resolution() );
-                m_recenterL.process( m_L, sinister.optical().resolution(), 2 );
+                m_retargetL.process( m_L, sinister.optical() );
+                if( true == m_shift ) m_recenterL.process( m_L, sinister.optical().resolution(), 2 );
+
                 interval_type  displayL{ { 0, (scalar_type)sinister.optical().resolution()[1] }, { (scalar_type)sinister.optical().resolution()[0], 0 } };
                 ::math::linear::homography::redomain( m_tmp, m_L, displayL, sinister.optical().window() );
-                ::math::linear::matrix::invert( m_L_s2i, m_tmp );
+                ::math::linear::matrix::invert( m_L_d2s, m_tmp );
 
                 m_rectificator.right( m_R );
-                m_retargetR.process( m_R, dexter.optical().window(), dexter.optical().resolution() );
-                m_recenterR.process( m_R, dexter.optical().resolution(), 2  );
+                m_retargetR.process( m_R, dexter.optical() );
+                if( true == m_shift )m_recenterR.process( m_R, dexter.optical().resolution(), 2  );
+
                 interval_type  displayR{ { 0, (scalar_type)dexter.optical().resolution()[1] }, { (scalar_type)dexter.optical().resolution()[0], 0 } };
                 ::math::linear::homography::redomain( m_tmp, m_R, displayR, dexter.optical().window() );
-                ::math::linear::matrix::invert( m_R_s2i, m_tmp );
+                ::math::linear::matrix::invert( m_R_d2s, m_tmp );
                 return true;
                }
 
-              homography_type const& left() const
+              homography_type const& left() const  //!< rectify from left image space to left disparity image space
                {
                 return m_L;
                }
-              homography_type const& right() const
+              homography_type const& right() const  //!< rectify from left image space to right disparity image space
                {
                 return m_R;
                }
 
-              point_type  left_image2screen( point_type const& image ) const
-               {
+              point_type  left_disparity2screen( point_type const& disparity ) const
+               { //!< move point from left disparity image space to left camera screen space 
                 point_type result;
-                ::math::linear::homography::transform( result, m_L_s2i, image );
+                ::math::linear::homography::transform( result, m_L_d2s, disparity );
                 return result;
                }
-
-              point_type  right_image2screen( point_type const& image ) const
-               {
+              point_type  right_disparity2screen( point_type const& disparity ) const
+               { //!< move point from right disparity image space to right camera screen space 
                 point_type result;
-                ::math::linear::homography::transform( result, m_R_s2i, image );
+                ::math::linear::homography::transform( result, m_R_d2s, disparity );
                 return result;
                }
 
@@ -90,6 +94,8 @@ namespace math
               {
                return m_rectificator;
               }
+           public:
+             bool m_shift;
            private:
               typedef ::math::geometry::interval::structure<scalar_type, 2>           interval_type;
 
@@ -101,7 +107,7 @@ namespace math
             recenter_type m_recenterL, m_recenterR;
 
             homography_type     m_L,     m_R;
-            homography_type     m_L_s2i, m_R_s2i;
+            homography_type     m_L_d2s, m_R_d2s;
             homography_type m_tmp;
           };
 

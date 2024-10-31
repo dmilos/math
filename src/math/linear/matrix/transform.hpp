@@ -34,6 +34,46 @@
            }
          }
 
+       template< typename scalar_name >
+        void transform
+         (
+           ::math::linear::vector::structure<scalar_name,4>        & result
+          ,::math::linear::matrix::structure<scalar_name,4,3> const& left
+          ,::math::linear::vector::structure<scalar_name,4>   const& right
+         )
+         {
+          result[0] = left[0][0] * right[0]  +  left[0][1] * right[1]  +  left[0][2] * right[2]  +  left[0][3] * right[3]; 
+          result[1] = left[1][0] * right[0]  +  left[1][1] * right[1]  +  left[1][2] * right[2]  +  left[1][3] * right[3];
+          result[2] = left[2][0] * right[0]  +  left[2][1] * right[1]  +  left[2][2] * right[2]  +  left[2][3] * right[3];
+          result[3] = left[3][0] * right[0]  +  left[3][1] * right[1]  +  left[3][2] * right[2]  +  left[3][3] * right[3];
+         }
+
+       template< typename scalar_name >
+        void transform
+         (
+           ::math::linear::vector::structure<scalar_name,3>        & result
+          ,::math::linear::matrix::structure<scalar_name,3,3> const& left
+          ,::math::linear::vector::structure<scalar_name,3>   const& right
+         )
+         {
+          result[0] = left[0][0] * right[0] + left[0][1] * right[1] + left[0][2] * right[2]; 
+          result[1] = left[1][0] * right[0] + left[1][1] * right[1] + left[1][2] * right[2];
+          result[2] = left[2][0] * right[0] + left[2][1] * right[1] + left[2][2] * right[2];
+         }
+
+       template< typename scalar_name >
+        void transform
+         (
+           ::math::linear::vector::structure<scalar_name,2>        & result
+          ,::math::linear::matrix::structure<scalar_name,2,2> const& left
+          ,::math::linear::vector::structure<scalar_name,3>   const& right
+         )
+         {
+          result[0] = left[0][0] * right[0] + left[0][1] * right[1]; 
+          result[1] = left[1][0] * right[0] + left[1][1] * right[1];
+         }
+
+
        template< typename scalar_name, ::math::type::size_type width_number, ::math::type::size_type height_number >
         void transform
          (

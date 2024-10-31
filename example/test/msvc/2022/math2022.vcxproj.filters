@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\check\linear\homography\check.cpp">
+    <ClCompile Include="..\..\..\check\linear\homography\conf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

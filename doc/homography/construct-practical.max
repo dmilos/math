@@ -6,6 +6,12 @@ Sx: matrix( [Sx_x], [Sx_y], [1] );
 Sy: matrix( [Sy_x], [Sy_y], [1] );
 Sz: matrix( [Sz_x], [Sz_y], [1] );
 
+T0: matrix( [T0_x], [T0_y], [1] );
+Tx: matrix( [Tx_x], [Tx_y], [1] );
+Ty: matrix( [Ty_x], [Ty_y], [1] );
+Tz: matrix( [Tz_x], [Tz_y], [1] );
+
+
 Ax: matrix( [Sx_x - S0_x], [Sx_y - S0_y], [1] );
 Ay: matrix( [Sy_x - S0_x], [Sy_y - S0_y], [1] );
 
@@ -25,6 +31,46 @@ L_sf: matrix( [  Ay[2,1] ,  - Ay[1,1] ,  0 ],
              );
 
 
+T_t: matrix( [1,0,-T0_x], [0,1,-T0_y], [0,0,1] );
+
+/*
+Cx: T_t . Tx;
+Cy: T_t . Ty;
+Cz: T_t . Tz;
+*/
+
+Cx: matrix( [Cx_x], [Cx_y], [1] );
+Cy: matrix( [Cy_x], [Cy_y], [1] );
+Cz: matrix( [Cz_x], [Cz_y], [1] );
+
+Ti_t: matrix( [1,0,+T0_x], [0,1,+T0_y], [0,0,1] );
+
+Li_t: matrix( [ Cx[1,1], Cy[1,1], 0 ],
+              [ Cx[2,1], Cy[2,1], 0 ],
+              [ 0, 0, 1 ]
+             );
+
+L_t: matrix(  [ +Cy[2,1], -Cy[1,1], 0 ],
+              [ -Cx[2,1], +Cx[1,1], 0 ],
+              [ 0, 0, determinant( Li_t ) ]
+             );
+
+ratsimp( Li_t . L_t / determinant( Li_t ) );
+
+Dz: Li_t .Ti_t. Cz;
+
+X: Dz[1,1];
+Y: Dz[2,1];
+
+Pi_t: matrix( [ Y * (X + Y - 1)	, 0, 0 ],
+              [ 0, X * (X + Y - 1), 0 ],
+              [ Y*(Y - 1),X*(X - 1), X·Y ]
+             );
+
+ratsimp( Ti_t . Li_t . Pi_t );
+
+AAA: ratsimp( Ti_t . Li_t . Pi_t )[1,3];
+BBB: ratsimp( Ti_t . Li_t . Pi_t )[2,3];
 
 ratsimp( L_s - L_sf / determinant( Li_s ) );
 
