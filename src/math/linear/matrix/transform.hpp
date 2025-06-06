@@ -1,7 +1,8 @@
 #ifndef Dh_math_linear_matrix_transform
  #define Dh_math_linear_matrix_transform
 
-// ::math::linear::matrix::transform<scalar_name,width_number,height_number>
+// ::math::linear::matrix::transform<scalar_name,width_number,height_number>( v, m, v )
+// ::math::linear::matrix::transform<scalar_name,width_number,height_number>( v, v, m )
 
 #include "./structure.hpp"
 #include "../vector/vector.hpp"

@@ -86,7 +86,7 @@ namespace math
 
               locator_type locator;
 
-              return locator.process( point, window,depth, zero  );
+              return locator.process( point, window, depth, zero  );
              }
 
          }

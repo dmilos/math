@@ -32,7 +32,7 @@ namespace math
        <
          typename scalar_name = double
        >
-       class ABCD3D
+       class ABCD3D // A * x  +  B * y+  C * y  +  D = 0
         {
          public:
 
@@ -184,7 +184,7 @@ namespace math
           scalar_type const& D()const{ return m_D; }
         private:
            // A * x  +  B * y+  C * y  +  D = 0
-           scalar_type m_A, m_B, m_C, m_D;
+           scalar_type m_A, m_B, m_C, m_D; //!< convert to array_type
         };
 
      }

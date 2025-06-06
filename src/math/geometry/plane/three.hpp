@@ -32,7 +32,7 @@ namespace math
        <
          typename scalar_name = double
        >
-       class three
+       class three //!< defined by tree points
         {
          public:
 

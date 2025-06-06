@@ -109,6 +109,11 @@ namespace math
            {
             return m_origin;
            }
+          void origin( point_type const& O )
+           {
+            m_origin = O;
+           }
+
         private:
           point_type m_origin;
 
@@ -120,6 +125,10 @@ namespace math
           point_type & normal()
            {
             return m_normal;
+           }
+          void normal( point_type const& N )
+           {
+            m_normal = N;
            }
         private:
           point_type m_normal;

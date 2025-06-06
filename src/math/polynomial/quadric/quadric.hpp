@@ -3,3 +3,4 @@
 #include "./interpolate.hpp"
 #include "./evaluate.hpp"
 #include "./fit.hpp"
+#include "./extrem.hpp"

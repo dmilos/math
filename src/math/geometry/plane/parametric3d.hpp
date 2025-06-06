@@ -114,6 +114,7 @@ namespace math
              return *this;
             }
 
+         public:
            void normalize()
             {
              point_type normal;
@@ -121,7 +122,7 @@ namespace math
              *this = parametric3d( no3d_type( this->m_origin, normal ) );
             }
 
-
+         public:
            point_type  point( uv_type const& uv )const
             {
              point_type result;
@@ -129,7 +130,7 @@ namespace math
              return result;
             }
 
-           point_type  point( scalar_type const&u, scalar_type const& v )const
+           point_type  point( scalar_type const& u, scalar_type const& v )const
             {
              point_type result;
              ::math::linear::vector::combine( result, this->origin(),     u, this->x(),     v, this->y() );
@@ -145,6 +146,11 @@ namespace math
             {
              return m_origin;
             }
+           void origin( point_type const& O )
+            {
+             m_origin = O;
+            }
+
          private:
            point_type m_origin;
 
@@ -157,6 +163,11 @@ namespace math
             {
              return m_X;
             }
+           void x( point_type const& X )
+            {
+             m_X = X;
+            }
+
          private:
            point_type m_X;
 
@@ -169,6 +180,11 @@ namespace math
             {
              return m_Y;
             }
+           void y( point_type const& Y )
+            {
+             m_Y = Y;
+            }
+
          private:
            point_type m_Y;
 

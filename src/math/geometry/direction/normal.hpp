@@ -96,7 +96,7 @@ namespace math
        <
          typename scalar_name
        >
-       class normal<scalar_name,2> // cos( alpha ) * x  +  sin( alpha ) * y - R = 0
+       class normal<scalar_name,2> // cos( alpha ) * x  +  sin( alpha ) * y = R
         {
          public:
 
@@ -133,29 +133,45 @@ namespace math
          public:
            this_type & operator=( ABC2D_type const& abc )
             {
-             // TODO
+             scalar_type cos_angle = abc.A();
+             scalar_type sin_angle = abc.B();
+             scalar_type one = sqrt( cos_angle*cos_angle + sin_angle*sin_angle );
+
+             if( one < 0.00000001 )
+              {
+               this->m_angle = 0;
+               this->m_radius = 0;
+               return *this;
+              }
+              cos_angle /= one;
+              sin_angle /= one;
+
+             this->m_angle = atan2( sin_angle, cos_angle );
+             this->m_radius = -abc.C()/ one;
              return *this;
             }
 
            this_type & operator=( parametric_type const& parametric )
             {
-
+             ABC2D_type abc;
+             abc = parametric;
+             *this = abc;
              return *this;
             }
 
            this_type & operator=( polar_type const& polar )
             {
+             ABC2D_type abc;
+             abc = polar;
+             *this = abc;
              return *this;
             }
 
            this_type & operator=( two_type const& two )
             {
-             // TODO two.first()[0] = this->radius() * cos( this->angle() + math::constants::PHI_div_2 );
-             // TODO two.first()[1] = this->radius() * sin( this->angle() + math::constants::PHI_div_2 );
-             // TODO
-             // TODO two.second()[0] = two.first()[0] + cos( this->angle() );
-             // TODO two.second()[1] = two.first()[1] + sin( this->angle() );
-
+             ABC2D_type abc;
+             abc = two;
+             *this = abc;
              return *this;
             }
 
@@ -166,14 +182,14 @@ namespace math
             }
 
          public:
-           scalar_type const& angle()const { return m_angle; }
-           scalar_type      & angle()      { return m_angle; }
+           scalar_type const& angle()const { return m_angle;  }
+           scalar_type      & angle()      { return m_angle;  }
            scalar_type const& radius()const{ return m_radius; }
            scalar_type      & radius()     { return m_radius; }
 
          private:
-           scalar_type m_angle;
-           scalar_type m_radius;
+           scalar_type m_angle;  //!< always in radians
+           scalar_type m_radius; //!< keep it positive
         };
 
      }

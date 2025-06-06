@@ -24,7 +24,7 @@ namespace math
          {
 
           /*
-           Display: (-whatever, +whatever )x(-1,1);
+           Display: (-whatever, +whatever )x( -1, +1 );
            Optical center: (0,0);
            */
           template < typename scalar_name >
