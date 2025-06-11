@@ -25,7 +25,7 @@ namespace math
       template
        <
          typename         scalar_name
-        ,std::size_t dimension_number
+        ,std::size_t dimension_number = 2
        >
        class normal
         {
@@ -40,7 +40,7 @@ namespace math
            typedef ::math::geometry::direction::normal<scalar_name, dimension_number >               normal_type,this_type;
 
          public:
-           explicit normal(  )
+           normal()
             {
             }
            explicit normal( angle_type const& angle, scalar_type const& rotation=0, scalar_type const& radius=0 )
@@ -73,8 +73,8 @@ namespace math
             }
 
          public:
-           angle_type const& angle()const { return m_angle; }
-           angle_type      & angle()      { return m_angle; }
+           angle_type  const& angle()const { return m_angle; }
+           angle_type       & angle()      { return m_angle; }
            scalar_type const& rotation()const{ return m_rotation; }
            scalar_type      & rotation()     { return m_rotation; }
            scalar_type const& radius()const{ return m_radius; }
@@ -133,45 +133,47 @@ namespace math
          public:
            this_type & operator=( ABC2D_type const& abc )
             {
-             scalar_type cos_angle = abc.A();
-             scalar_type sin_angle = abc.B();
+             scalar_type sin_angle = -abc.A();
+             scalar_type cos_angle = +abc.B();
              scalar_type one = sqrt( cos_angle*cos_angle + sin_angle*sin_angle );
 
-             if( one < 0.00000001 )
-              {
-               this->m_angle = 0;
-               this->m_radius = 0;
-               return *this;
-              }
-              cos_angle /= one;
-              sin_angle /= one;
-
              this->m_angle = atan2( sin_angle, cos_angle );
-             this->m_radius = -abc.C()/ one;
+             this->m_radius = abc.C() / one;
              return *this;
             }
 
            this_type & operator=( parametric_type const& parametric )
             {
-             ABC2D_type abc;
-             abc = parametric;
-             *this = abc;
+             scalar_type X = parametric.direction()[0];
+             scalar_type Y = parametric.direction()[1];
+             scalar_type C = Y * parametric.origin()[0] - X * parametric.origin()[1];
+
+             this->m_angle = atan2( Y, X );
+             this->m_radius =  C / sqrt( X*X + Y*Y );
+
              return *this;
             }
 
            this_type & operator=( polar_type const& polar )
             {
-             ABC2D_type abc;
-             abc = polar;
-             *this = abc;
+             scalar_type A = -sin( polar.angle() );
+             scalar_type B = +cos( polar.angle() );
+             scalar_type C = - A * polar.origin()[0] - B * polar.origin()[1];
+
+             this->m_angle = polar.angle();
+             this->m_radius = C / sqrt(A * A + B * B); 
              return *this;
             }
 
            this_type & operator=( two_type const& two )
             {
-             ABC2D_type abc;
-             abc = two;
-             *this = abc;
+             scalar_type X = two.second()[0] - two.first()[0];
+             scalar_type Y = two.second()[1] - two.first()[1];
+             scalar_type C = Y * two.first()[0] - X * two.first()[1];
+
+             this->m_angle = atan2( Y, X );
+             this->m_radius = C / sqrt( X*X + Y*Y );
+
              return *this;
             }
 

@@ -14,7 +14,7 @@ int main( int argc, char *argv[] )
   typedef ::math::geometry::interval::structure<float,10>::point_type point_t;
 
   interval_t  i1, i2, i3;
-  point_t  p1, p2, p3;
+  point_t  p1/*, p2, p3*/;
 
   ::math::geometry::interval::center( p1, i1 );
 

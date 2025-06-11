@@ -93,8 +93,8 @@ int main( int argc, char *argv[] )
       std::array<double,2> point;
       ::math::function::hilbertND<double>( point, t, iteration );
 
-      int xr = ( point[0]*width  );
-      int yr = ( point[1]*height );
+      int xr = int( point[0]*width  );
+      int yr = int( point[1]*height );
       std::size_t  index = channel * std::size_t( width*int( height - int(yr) - 1)+int( xr ) );
 
       if( image.size() <= index ) continue;

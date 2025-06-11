@@ -1,7 +1,8 @@
 #ifndef math_geometry_distance_P2ABC2D
 #define math_geometry_distance_P2ABC2D
 
- // ::math::geometry::distance::P2ABC2D<scalar>::process( ABC, point )
+// ::math::geometry::direction::P2ABC2D<scalar>::process( ABC, point )
+// ::math::geometry::direction::distance ( ABC, point )
 
 #include "../../../linear/vector/structure.hpp"
 #include "../abc.hpp"
@@ -29,7 +30,9 @@ namespace math
              ,point_type  const& point
             )
             {
-             return  fabs( line.A() * point[0] + line.B() * point[1] + line.C() ) / sqrt( line.A() * line.A() + line.B() * line.B() );
+             scalar_type numerator = line.A() * point[0] + line.B() * point[1] + line.C();
+             scalar_type denumerator = line.A() * line.A() + line.B() * line.B();
+             return  fabs( numerator ) / sqrt( denumerator );
             }
 
         };

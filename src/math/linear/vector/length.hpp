@@ -20,15 +20,15 @@
      namespace vector
       {
 
-       template< typename scalar_name=double, typename number_name, ::math::type::size_type dimension_number >
+       template< typename result_name=double, typename scalar_name, ::math::type::size_type dimension_number >
         inline
-        scalar_name
+        result_name
         length
          (
-          ::math::linear::vector::structure< number_name, dimension_number > const& vector_param
+          ::math::linear::vector::structure< scalar_name, dimension_number > const& vector_param
          )
          {
-          return static_cast<scalar_name>( std::sqrt( ::math::linear::vector::dot( vector_param, vector_param ) ) );
+          return static_cast<result_name>( std::sqrt( ::math::linear::vector::dot( vector_param, vector_param ) ) );
          }
 
        template< typename scalar_name, ::math::type::size_type dimension_number/*, typename N_report */ >

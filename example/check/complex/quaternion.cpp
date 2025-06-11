@@ -8,7 +8,7 @@ int main( int argc, char *argv[] )
  {
   std::cout << "Hello World" << std::endl;
 
-::math::complex::quaternion::structure<double> a,b,c,d;
+::math::complex::quaternion::structure<double> a,b,c;
 
 
   ::math::complex::quaternion::addition( a, b );

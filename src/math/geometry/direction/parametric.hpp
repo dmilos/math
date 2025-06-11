@@ -209,8 +209,8 @@ namespace math
 
            this_type & operator=( normal_type const& normal )
             {
-             this->origin()[0] = normal.radius() * cos( normal.angle() + ::math::constants::PHI_div_2 );
-             this->origin()[1] = normal.radius() * sin( normal.angle() + ::math::constants::PHI_div_2 );
+             this->origin()[0] = normal.radius() * cos( normal.angle() - ::math::constants::PHI_div_2 );
+             this->origin()[1] = normal.radius() * sin( normal.angle() - ::math::constants::PHI_div_2 );
              this->direction()[0] = cos( normal.angle() );
              this->direction()[1] = sin( normal.angle() );
              return *this;

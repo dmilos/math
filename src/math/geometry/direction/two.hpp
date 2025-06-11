@@ -140,8 +140,8 @@ namespace math
              this->m_first[0] = - abc.C() * ( abc.A() / D );
              this->m_first[1] = - abc.C() * ( abc.B() / D );
 
-             this->m_second[0] = (-abc.B()) + this->m_first[0];
-             this->m_second[1] = (+abc.A()) + this->m_first[1];
+             this->m_second[0] = (+abc.A()) + this->m_first[1];
+             this->m_second[1] = (-abc.B()) + this->m_first[0];
 
              return *this;
             }
@@ -164,8 +164,8 @@ namespace math
 
            this_type & operator=( normal_type const& normal )
             {
-             this->first()[0] = normal.radius() * cos( normal.angle() + ::math::constants::PHI_div_2 );
-             this->first()[1] = normal.radius() * sin( normal.angle() + ::math::constants::PHI_div_2 );
+             this->first()[0] = normal.radius() * cos( normal.angle() - ::math::constants::PHI_div_2 );
+             this->first()[1] = normal.radius() * sin( normal.angle() - ::math::constants::PHI_div_2 );
 
              this->second()[0] = this->first()[0] + cos( normal.angle() );
              this->second()[1] = this->first()[1] + sin( normal.angle() );

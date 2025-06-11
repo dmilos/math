@@ -82,36 +82,34 @@ namespace math
          public:
            this_type & operator=( parametric_type const& parametric )
             {
-             this->A() = +parametric.direction()[1];
-             this->B() = -parametric.direction()[0];
+             this->A() = -parametric.direction()[1];
+             this->B() = +parametric.direction()[0];
              this->C() = - this->A()*parametric.origin()[0] - this->B()*parametric.origin()[1];
              return *this;
             }
 
            this_type & operator=( polar_type const& polar )
             {
-             this->A() = +sin( polar.angle() );
-             this->B() = -cos( polar.angle() );
+             this->A() = -sin( polar.angle() );
+             this->B() = +cos( polar.angle() );
              this->C() = - this->A() * polar.origin()[0] - this->B() * polar.origin()[1];
-
-             //this->C() = - sin( polar.angle() )*polar.origin()[0] + cos( polar.angle()  )*polar.origin()[1] ;
 
              return *this;
             }
 
            this_type & operator=( two_type const& two )
             {
-             this->A() = +(two.second()[1] - two.first()[1] );
-             this->B() = -(two.second()[0] - two.first()[0] );
+             this->A() = -(two.second()[1] - two.first()[1] );
+             this->B() = +(two.second()[0] - two.first()[0] );
              this->C() = - this->A()*two.first()[0] - this->B() * two.first()[1];
              return *this;
             }
 
            this_type & operator=( normal_type const& normal )
             {
-             this->A() = cos( normal.angle() );
-             this->B() = sin( normal.angle() );
-             this->C() = -this->radius();
+             this->A() = -sin( normal.angle() );
+             this->B() = +cos( normal.angle() );
+             this->C() =  normal.radius();
              return *this;
             }
 
