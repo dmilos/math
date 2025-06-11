@@ -10,8 +10,8 @@ int main( int argc, char *argv[] )
  {
   cout << "Hello World" << endl;
 
- ::math::linear::vector::point<double,3> a3,b3,c3;
- ::math::linear::vector::point<double,2> a2,b2,c2;
+ ::math::linear::vector::point<double,3> a3,b3;
+ ::math::linear::vector::point<double,2> a2,b2;
 
   b3 = ::math::geometry::cartesian2cylindric( a3 );
   b3 = ::math::geometry::spherical2cartesian( a3 );

@@ -58,7 +58,7 @@
          )
          { // create sphere from 4 given points
           ::math::linear::matrix::structure<scalar_name,4,4> matrix;
-          static scalar_name epsilon = 1e-8;
+          static scalar_name epsilon = static_cast<scalar_name>( 1e-8 );
 
            matrix[0][0] = p0[0];  matrix[0][1] = p0[1]; matrix[0][2] = p0[2];  matrix[0][3] = scalar_name(1);
            matrix[1][0] = p1[0];  matrix[1][1] = p1[1]; matrix[1][2] = p1[2];  matrix[1][3] = scalar_name(1);

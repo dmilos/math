@@ -79,14 +79,6 @@ namespace math
              no3d = abcd;
              *this = no3d;
 
-             point_type normal;
-             point_type origin;
-             if(false){
-             ::math::linear::vector::load( normal, abcd.A(), abcd.B(), abcd.C() );
-             scalar_type dot= ::math::linear::vector::dot( normal, normal ) ;
-             scalar_type lambda = -abcd.D()/ dot;
-             ::math::linear::vector::scale( this->m_origin, lambda, normal );
-             }
              return *this;
             }
 

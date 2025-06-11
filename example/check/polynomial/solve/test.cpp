@@ -86,7 +86,7 @@ static double errorD = 0;
 
 void quartic2( std::array<double,5> const& coefficients )
 {
-  std::array<double,4>   rF4,rS4,rD4;
+  std::array<double,4>   rF4,rD4;
 
   std::array<double,5> depressed;
   double shift = ::math::polynomial::quartic::depressing( depressed.data(), coefficients.data() );
