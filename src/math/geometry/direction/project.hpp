@@ -93,7 +93,6 @@
               math::geometry::direction::parametric<scalar_name, dimension_number>  const& direction
             )
             {
-             auto const& P = point;
              auto const& D = direction.direction();
              auto const& O = direction.origin();
 

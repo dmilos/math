@@ -15,7 +15,7 @@
         <
           typename scalar_name
         >  //! [0] + [1] *x + [2] * x^2 = 0, minimum or maximum depend of sign of A = a[2]
-        scalar_name extrem( std::array<scalar_name,3> & result, std::array<scalar_name,3> const coefficient, scalar_name const& epsilon = 1e-6 )
+        scalar_name extrem( std::array<scalar_name,3> const coefficient, scalar_name const& epsilon = 1e-6 )
          {
           scalar_name const& a = coefficient[2];
           scalar_name const& b = coefficient[1];

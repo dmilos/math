@@ -8,6 +8,7 @@
 
 
 #include "../../linear/vector/vector.hpp"
+#include "../../linear/matrix/system.hpp"
 #include "../direction/parametric.hpp"
 
 

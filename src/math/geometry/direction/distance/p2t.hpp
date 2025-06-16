@@ -6,6 +6,7 @@
 
 #include "../../../linear/vector/distance.hpp"
 #include "../../../geometry/triangle/area.hpp"
+#include "../../../geometry/triangle/valid.hpp"
 #include "../two.hpp"
 
 
