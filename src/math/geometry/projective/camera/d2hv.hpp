@@ -24,7 +24,7 @@ namespace math
            ,scalar_name const& horizontal_scale  //!< 16
            ,scalar_name const& vertical_scale    //!<  9
           )
-          { //! See also http://therandomlab.blogspot.com/2013/03/logitech-c920-and-c910-fields-of-view.html
+          { //! See also http://therandomlab.blogspot.com/2013/03/logitech-c920-and-c910-fields-of-view.html ( Not available ;( )
            scalar_name diagonal = sqrt( horizontal_scale* horizontal_scale + vertical_scale * vertical_scale );
            scalar_name focus = (diagonal/scalar_name(2)) / tan( diagonal_alpha / scalar_name(2) ) ;
 

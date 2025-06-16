@@ -93,14 +93,11 @@ namespace math
 
            polar & operator=( ABC2D_type const& abc )
             {
-             scalar_type D;
-             D = abc.A() * abc.A()  +  abc.B() * abc.B() ;
+             scalar_type D = abc.A() * abc.A()  +  abc.B() * abc.B() ;
              this->m_origin[0] = - abc.C() * ( abc.A() / D );
              this->m_origin[1] = - abc.C() * ( abc.B() / D );
 
-             D = sqrt( D );
-
-             this->m_angle = atan2( abc.A() / D, -abc.B() / D );
+             this->m_angle = atan2( -abc.A(), +abc.B() );
 
              return *this;
             }
@@ -115,10 +112,10 @@ namespace math
 
            this_type & operator=( normal_type const& normal )
             {
-             this->origin()[0] = normal.radius() * cos( normal.angle() + math::constants::PHI_div_2 );
-             this->origin()[1] = normal.radius() * sin( normal.angle() + math::constants::PHI_div_2 );
+             this->origin()[0] = normal.radius() * cos( normal.angle() - math::constants::PHI_div_2 );
+             this->origin()[1] = normal.radius() * sin( normal.angle() - math::constants::PHI_div_2 );
 
-             this->angle() = this->angle;
+             this->angle() = normal.angle();
              return *this;
             }
 

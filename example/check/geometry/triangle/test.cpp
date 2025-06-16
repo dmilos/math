@@ -10,7 +10,6 @@ int main( int argc, char *argv[] )
  {
   cout << "Hello World" << endl;
 
-  ::math::geometry::triangle::structure<double, 10>   a10;
   ::math::geometry::triangle::structure<double, 3>   a3;
   ::math::geometry::triangle::structure<double, 2>   a2;
 

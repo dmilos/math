@@ -26,7 +26,7 @@ namespace math
              ,scalar_name                                             & angle  //!< horizontal angle matrix
             )
             {
-             auto focus = ::math::geometry::projective::camera::h2f( angle );
+             auto focus = ::math::geometry::projective::camera::a2f( angle );
              ::math::geometry::projective::camera::intrinsic::K<double>()( result, focus );
             }
 

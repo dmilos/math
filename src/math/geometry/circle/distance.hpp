@@ -27,7 +27,7 @@
           ,::math::linear::vector::point<scalar_name,dimension_number>   const& point_param
          )
          { // positive for out, negative for in
-          return ::math::linear::vector::length( point_param ) - scalar_name( 1 );
+          return ::math::linear::vector::length<scalar_name>( point_param ) - scalar_name( 1 );
          }
 
        template
@@ -44,7 +44,7 @@
           ::math::linear::vector::point<scalar_name,dimension_number>          point_local;
 
           ::math::linear::vector::subtraction( point_local, point_param, circle.center() );
-          return ::math::linear::vector::length( point_local ) - circle.radius();
+          return ::math::linear::vector::length<scalar_name>( point_local ) - circle.radius();
          }
 
       }

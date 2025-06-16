@@ -25,20 +25,20 @@ namespace math
      {
 
       template< typename scalar_name >
-       class principal //!< calculate principal axis and point.
+       class principal //!< calculate principal axis.
         {
          public:
            typedef scalar_name scalar_type;
-           typedef ::math::linear::homography::structure<scalar_type,2> homography_type;
            typedef ::math::linear::vector::structure<scalar_type,3> point_type;
            typedef ::math::linear::matrix::structure<double,3,3> matrix_type;
+           typedef ::math::linear::homography::structure<scalar_type,2> homography_type;
            typedef ::math::geometry::direction::ABC2D<scalar_type> ABC_type;
 
            typedef ::math::linear::homography::principal<scalar_type> this_type;
 
          public:
            static void axis( ABC_type & direction, homography_type const& plane2display )
-            { //!< exists always  // display = irrelevant
+            { //!< exists always  // display = irrelevant, can be image pixels
              auto const& H = plane2display;   
        
              auto const& h1 = H[0][0]; auto const& h2 = H[0][1]; auto const& h3 = H[0][2]; 

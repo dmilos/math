@@ -1,13 +1,13 @@
 #ifndef Dh_math_linear_matrix_system
 #define Dh_math_linear_matrix_system
 
- // ::math::linear::matrix::system(m,x,y)
- // ::math::linear::matrix::system(m,x,y,z)
- // ::math::linear::matrix::system(m,x,y,z,t)
+ // ::math::linear::matrix::system( m, x, y)
+ // ::math::linear::matrix::system( m, x, y, z)
+ // ::math::linear::matrix::system( m, x, y, z, t )
 
- // ::math::linear::matrix::system(x,y, m )
- // ::math::linear::matrix::system(x,y,z, m)
- // ::math::linear::matrix::system(x,y,z,t, m )
+ // ::math::linear::matrix::system( x, y, m )
+ // ::math::linear::matrix::system( x, y, z, m )
+ // ::math::linear::matrix::system( x, y, z, t, m )
 
 #include "../vector/vector.hpp"
 #include "./structure.hpp"

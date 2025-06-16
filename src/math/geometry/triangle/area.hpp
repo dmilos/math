@@ -28,7 +28,7 @@
           ,scalar_name const& c
           )
          {
-          scalar_name s = ( a+b+c)/ scalar_name(2);
+          scalar_name s = ( a + b + c )/ scalar_name(2);
           return sqrt( s*(s-a)*(s-b)*(s-c) );
          }
 

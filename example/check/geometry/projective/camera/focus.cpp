@@ -152,16 +152,16 @@ int main( int argc, char *argv[] )
   double focus;
 
  ::math::geometry::projective::camera::focus::wand2d<double>( focus, -212/640.0, 608/640.0, 237, 257, 200 );
-  std::cout << "Fh: " << focus << " ~ " << ::math::geometry::rad2deg( ::math::geometry::projective::camera::f2h( focus ) ) << std::endl;
+  std::cout << "Fh: " << focus << " ~ " << ::math::geometry::rad2deg( ::math::geometry::projective::camera::f2a( focus ) ) << std::endl;
 
  ::math::geometry::projective::camera::focus::wand2d<double>( focus, -52/360.0, 199/360.0, 210, 275, 87 );
-  std::cout << "Fv: " << focus << " ~ " << ::math::geometry::rad2deg( ::math::geometry::projective::camera::f2h( focus ) ) << std::endl;
+  std::cout << "Fv: " << focus << " ~ " << ::math::geometry::rad2deg( ::math::geometry::projective::camera::f2a( focus ) ) << std::endl;
 
  ::math::geometry::projective::camera::focus::wand2d<double>( focus, -380/640.0, 380/640.0, 268, 268, 200 );
-  std::cout << "Fh: " << focus << " ~ " << ::math::geometry::rad2deg( ::math::geometry::projective::camera::f2h( focus ) ) << std::endl;
+  std::cout << "Fh: " << focus << " ~ " << ::math::geometry::rad2deg( ::math::geometry::projective::camera::f2a( focus ) ) << std::endl;
 
  ::math::geometry::projective::camera::focus::wand2d<double>( focus, -1, 1, 225, 180, 229 );
-  std::cout << "Fh: " << focus << " ~ " << ::math::geometry::rad2deg( ::math::geometry::projective::camera::f2h( focus ) ) << std::endl;
+  std::cout << "Fh: " << focus << " ~ " << ::math::geometry::rad2deg( ::math::geometry::projective::camera::f2a( focus ) ) << std::endl;
 
   std::cout << " --- " << std::endl;
 

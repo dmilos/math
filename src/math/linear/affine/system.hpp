@@ -1,7 +1,7 @@
 #ifndef Dh_math_linear_affine_system
- #define Dh_math_linear_affine_system
+#define Dh_math_linear_affine_system
 
-// ::math::linear::affine::system<scalar_name,width_number,height_number>
+// ::math::linear::affine::system<scalar_name,width_number,height_number>( result, O, X, Y, Z, T )
 
 // Extract base vectors from affine transformation
 

@@ -26,7 +26,19 @@ namespace math
            typedef ::math::linear::vector::point< scalar_type, dimension_number > point_type;
            typedef ::math::geometry::direction::parametric< scalar_type, dimension_number > parametric_type;
 
-           static scalar_type process( parametric_type const& line, point_type const& point )
+           scalar_type process( parametric_type const& line )
+            { //! point is origin
+             scalar_type l = ::math::linear::vector::dot<scalar_type>( line.direction(), line.direction() );
+             scalar_type t = - ::math::linear::vector::dot<scalar_type>( line.origin(), line.direction() );
+             scalar_type s = ::math::linear::vector::dot<scalar_type>( line.origin(), line.origin() );
+
+             m_lambda = t/l;
+
+             scalar_type result = s - t*t/l;
+             return sqrt( result < 0 ? 0 : result );
+            }
+
+           scalar_type process( parametric_type const& line, point_type const& point )
             {
              point_type heading; ::math::linear::vector::subtraction( heading, point, line.origin() );
 
@@ -34,24 +46,43 @@ namespace math
              scalar_type t = ::math::linear::vector::dot<scalar_type>( heading, line.direction() );
              scalar_type s = ::math::linear::vector::dot<scalar_type>( heading, heading );
 
-             auto p = s - t*t/l;
+             m_lambda = t/l;
+             auto result = s - t*t/l;
 
-             return sqrt( p < 0 ? 0 : p );
+             return sqrt( result < 0 ? 0 : result );
             }
 
-           static scalar_type process( parametric_type const& line, point_type const& point, point_type & projection )
-            {
-             point_type heading; ::math::linear::vector::subtraction( heading, point, line.origin() );
+           scalar_type process( point_type & projection, parametric_type const& line )
+            { // point is origin
+             m_lambda = -::math::linear::vector::dot<scalar_type>( line.origin(), line.direction() );
+             m_lambda /= ::math::linear::vector::dot<scalar_type>( line.direction(), line.direction() );
 
-             scalar_type lambda = ::math::linear::vector::dot<scalar_type>( heading, line.direction() );
-             lambda /= ::math::linear::vector::dot<scalar_type>( line.direction(), line.direction() );
+             ::math::linear::vector::scale<scalar_type>( projection, -m_lambda, line.direction() );
 
-             ::math::linear::vector::scale<scalar_type>( projection, lambda, line.direction() );
-
-             scalar_type result = ::math::linear::vector::distance<scalar_type>( heading, projection );
+             scalar_type result = ::math::linear::vector::distance<scalar_type>( line.origin(), projection );
+             ::math::linear::vector::addition<scalar_type>( projection, line.origin() );
 
              return result;
             }
+
+           scalar_type process( point_type & projection, parametric_type const& line, point_type const& point )
+            {
+             point_type heading; ::math::linear::vector::subtraction( heading, point, line.origin() );
+
+             m_lambda = ::math::linear::vector::dot<scalar_type>( heading, line.direction() );
+             m_lambda /= ::math::linear::vector::dot<scalar_type>( line.direction(), line.direction() );
+
+             ::math::linear::vector::scale<scalar_type>( projection, m_lambda, line.direction() );
+
+             scalar_type result = ::math::linear::vector::distance<scalar_type>( heading, projection );
+             ::math::linear::vector::addition<scalar_type>( projection, line.origin() );
+
+             return result;
+            }
+
+           scalar_type const& lambda(){ return m_lambda; }
+         private:
+           scalar_type m_lambda;
         };
 
 
@@ -62,7 +93,7 @@ namespace math
          ,::math::linear::vector::point< scalar_name, dimension_number >           const& point
         )
         {
-         return ::math::geometry::direction::P2L<scalar_name,dimension_number>::process( parametric, point );
+         return ::math::geometry::direction::P2L<scalar_name,dimension_number>().process( parametric, point );
         }
 
      }

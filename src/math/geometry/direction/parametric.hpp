@@ -191,7 +191,6 @@ namespace math
              this->m_direction[1] = - abc.A();
 
              scalar_type D = abc.A() * abc.A()  +  abc.B() * abc.B();
-
              this->m_origin[0] = - abc.C() * ( abc.A() / D );
              this->m_origin[1] = - abc.C() * ( abc.B() / D );
              return *this;
@@ -209,8 +208,8 @@ namespace math
 
            this_type & operator=( normal_type const& normal )
             {
-             this->origin()[0] = normal.radius() * cos( normal.angle() + ::math::constants::PHI_div_2 );
-             this->origin()[1] = normal.radius() * sin( normal.angle() + ::math::constants::PHI_div_2 );
+             this->origin()[0] = normal.radius() * cos( normal.angle() - ::math::constants::PHI_div_2 );
+             this->origin()[1] = normal.radius() * sin( normal.angle() - ::math::constants::PHI_div_2 );
              this->direction()[0] = cos( normal.angle() );
              this->direction()[1] = sin( normal.angle() );
              return *this;

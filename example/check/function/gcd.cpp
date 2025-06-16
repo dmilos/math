@@ -34,7 +34,7 @@ int main( int argc, char *argv[] )
    {
     for( std::size_t y=1; y < resolution; ++y )
      {
-      int gcd = ::math::function::gcd( x, y );
+      auto gcd = ::math::function::gcd( x, y );
       double c = gcd/  (double)std::max( x,y );
 
       putPixel( image, {resolution,resolution}, {x,y}, std::uint8_t ( 255 * c  ) );

@@ -46,7 +46,7 @@
             return result;
            }
 
-          point2D_type process( ABC2D_type const& direction )  // This will project origin to direction
+          point2D_type process( ABC2D_type const& direction )  //!< This will project origin to direction
            {
             point2D_type result;
             auto const& A = direction.A();
@@ -59,17 +59,18 @@
             result[1] = + B * c;
             return result;
            }
+
           template< ::math::type::size_type dimension_number >
-           ::math::linear::vector::point< scalar_type, dimension_number > 
+           ::math::linear::vector::point< scalar_type, dimension_number >
            process
             (
               ::math::linear::vector::point< scalar_type, dimension_number >          const& point
              ,::math::geometry::direction::parametric<scalar_name, dimension_number>  const& direction
             )
             {
-             auto const& P = point; 
-             auto const& D = direction.direction(); 
-             auto const& O = direction.origin(); 
+             auto const& P = point;
+             auto const& D = direction.direction();
+             auto const& O = direction.origin();
 
              ::math::linear::vector::point< scalar_type, dimension_number > pivot;
              ::math::linear::vector::subtraction( pivot, P, O );
@@ -77,7 +78,7 @@
              scalar_type pivot_dot_direction = ::math::linear::vector::dot( pivot, D );
              scalar_type d_dot_d = ::math::linear::vector::dot( D, D );
 
-             scalar_type coefficient = pivot_dot_direction / d_dot_d; 
+             scalar_type coefficient = pivot_dot_direction / d_dot_d;
 
              ::math::linear::vector::point< scalar_type, dimension_number > result;
 
@@ -85,6 +86,28 @@
 
              return result;
             }
+          template< ::math::type::size_type dimension_number >
+           ::math::linear::vector::point< scalar_type, dimension_number >
+           process
+            (
+              math::geometry::direction::parametric<scalar_name, dimension_number>  const& direction
+            )
+            {
+             auto const& D = direction.direction();
+             auto const& O = direction.origin();
+
+             scalar_type pivot_dot_direction = - ::math::linear::vector::dot( O, D );
+             scalar_type d_dot_d = ::math::linear::vector::dot( D, D );
+
+             scalar_type coefficient = pivot_dot_direction / d_dot_d;
+
+             ::math::linear::vector::point< scalar_type, dimension_number > result;
+
+             direction.point( result, coefficient );
+
+             return result;
+            }
+
         };
 
       }
