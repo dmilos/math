@@ -110,10 +110,6 @@ int main( int argc, char *argv[] )
       * Gaussian, average, count.
 
 ### Tested against:
-  - GCC 7.3.0
-  - GCC 7.4.0
-  - GCC 9.3.0
-  - MSVC 2015 Update 3
-  - MSVC 2017 (15.9.14)
-  - MSVC 2019 (16.2.3)
+  - GCC 12.4.0
+  - MSVC 2022 (17.4.4)
 

@@ -10,12 +10,19 @@
 
 #include "./deg2rad.hpp"
 #include "./deg2gon.hpp"
+#include "./deg2slope.hpp"
+
 #include "./rad2gon.hpp"
 #include "./rad2deg.hpp"
+#include "./rad2slope.hpp"
 
 #include "./gon2deg.hpp"
 #include "./gon2rad.hpp"
+#include "./gon2slope.hpp"
 
+#include "./slope2deg.hpp"
+#include "./slope2rad.hpp"
+#include "./slope2gon.hpp"
 
 #include "./cartesian2cylindric.hpp"
 #include "./cartesian2polar.hpp"

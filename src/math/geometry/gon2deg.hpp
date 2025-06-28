@@ -9,15 +9,15 @@ namespace math
    {
 
     template< typename scalar_name, typename scalar_output_name = double >
-     scalar_output_name gon2deg( scalar_name const& gonian )
+     scalar_output_name gon2deg( scalar_name const& gradian  )
       {
-       return scalar_output_name(200) * ( scalar_output_name(gonian) / math::constants::PHI );
+       return scalar_output_name(200) * ( scalar_output_name( gradian  ) / math::constants::PHI );
       }
 
     template< typename scalar_name, typename scalar_output_name = double >
-     constexpr scalar_output_name gon2deg( scalar_name const&& gonian )
+     constexpr scalar_output_name gon2deg( scalar_name const&& gradian  )
       {
-       return scalar_output_name(200) * ( scalar_output_name(gonian) / math::constants::PHI );
+       return scalar_output_name(200) * ( scalar_output_name( gradian  ) / math::constants::PHI );
       }
 
    }
