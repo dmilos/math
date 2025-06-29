@@ -9,15 +9,15 @@ namespace math
    {
 
     template< typename scalar_name, typename scalar_output_name = double >
-     scalar_output_name rad2gon( scalar_name const& radian )
+     scalar_output_name rad2gon( scalar_name const& radians )
       {
-       return scalar_output_name(180) * ( scalar_output_name(radian) / math::constants::PHI );
+       return ( scalar_output_name( radians ) / math::constants::PHI )* scalar_output_name(200);
       }
 
     template< typename scalar_name, typename scalar_output_name = double >
-     constexpr scalar_output_name rad2gon( scalar_name const&& radian )
+     constexpr scalar_output_name rad2gon( scalar_name const&& radians )
       {
-       return scalar_output_name(180) * ( scalar_output_name(radian) / math::constants::PHI );
+       return ( scalar_output_name( radians ) / math::constants::PHI ) * scalar_output_name(200);
       }
 
    }

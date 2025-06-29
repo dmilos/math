@@ -1,7 +1,7 @@
 #ifndef math_geometry_deg2rad
 #define math_geometry_deg2rad
 
- // ::math::geometry::deg2rad( )
+ // ::math::geometry::deg2rad( ) 
 
 namespace math
  {
