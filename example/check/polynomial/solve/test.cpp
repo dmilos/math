@@ -8,40 +8,7 @@
 
 using namespace std;
 
-void quadric( std::array<double,3> const& coefficients )
-{
-  std::cout << "------------" << __FUNCTION__ << endl;
-  std::cout << "C: { " << coefficients[0] << ", " << coefficients[1] << ", " << coefficients[2] << "}; " <<  std::endl;
-  std::array<double,2>   root;
 
-  std::cout << "# Solutions: " << ::math::polynomial::quadric::solve::general<double>(  root, coefficients ) << std::endl;
-
-  std::cout << "Check 1: P( " << root[0] << ") = " << ::math::polynomial::evaluate( root[0], coefficients ) << std::endl;
-  std::cout << "Check 2: P( " << root[1] << ") = " << ::math::polynomial::evaluate( root[1], coefficients ) << std::endl;
-
-  std::array<double,3> d;
-  std::cout << "Shift: " <<::math::polynomial::quadric::depressing( d, coefficients ) << std::endl;
-
-  std::cout << "Depressed:" << d[0] << ", " << d[1] << ", " << d[2] << "; " <<  std::endl;
-}
-
-void cubic( std::array<double,4> const& coefficients )
-{
-  std::cout << "------------" << __FUNCTION__ << endl;
-  std::cout << "C: { " << coefficients[0] << ", " << coefficients[1] << ", " << coefficients[2] << ", " << coefficients[3] << "}; " <<  std::endl;
-  std::array<double,3>   root;
-
-  std::cout << "# Solutions: " << ::math::polynomial::cubic::solve::general<double>(  root, coefficients ) << std::endl;
-
-  std::cout << "Check 1: P( " << root[0] << ") = " << ::math::polynomial::evaluate( root[0], coefficients ) << std::endl;
-  std::cout << "Check 2: P( " << root[1] << ") = " << ::math::polynomial::evaluate( root[1], coefficients ) << std::endl;
-  std::cout << "Check 3: P( " << root[2] << ") = " << ::math::polynomial::evaluate( root[2], coefficients ) << std::endl;
-
-  std::array<double,4> d;
-  std::cout << "Shift: " <<::math::polynomial::cubic::depressing( d, coefficients ) << std::endl;
-
-  std::cout << "Depressed:" << d[0] << ", " << d[1] << ", " << d[2] << ", " << d[3] << "; " <<  std::endl;
-}
 
 void quartic( std::array<double,5> const& coefficients )
 {
@@ -193,20 +160,8 @@ int main( int argc, char *argv[] )
 
 
 
-  quadric({0,0,1});
-  quadric({1,0,1});
-  quadric({0,1,1});
-
-  quadric( { 1, 2,1 } );
-  quadric( { 1,-2,1 } );
-
-  cubic({-350,162,-30,2});
-  cubic({1,2,3,4});
-  cubic({0,0,0,1});
-
   quartic( {-1, -0.05, -0.8, 0.1, 0.8});
   quartic( { 0.9, 3.19189e-16, 3.19189e-16, -0.05, -1});
-
 
   quartic( { 0.13184331895789603, -1.0798101783837666e-05, -0.33551814137939084, 0,1 } );
   quartic( { 0.71597682739321855, 6.7936244862454309e-06, -1.8718255810654663, 0, 1 } );
@@ -238,14 +193,11 @@ int main( int argc, char *argv[] )
 
 //std::array<float,10>   r;
   std::array<float,1>   r1;
-  std::array<float,2>   r2;
-  std::array<float,3>   r3;
   std::array<float,4>   r4;
 
 //std::array<float,10>   c;
   std::array<float,2>   c2{1,2};
   std::array<float,3>   c3{1,2,3};
-  std::array<float,4>   c4{1,2,3,4};
   std::array<float,5>   c5{1,2,3,4,5}, c5b;
 
   // TODO math_polynomial_solve_quadric
@@ -254,19 +206,10 @@ int main( int argc, char *argv[] )
   ::math::polynomial::solve::linear<float>( r1, c2 );
   ::math::polynomial::solve::linear<float>( r1.data(), c2.data() );
 
-  ::math::polynomial::quadric::solve::general<float>( r2, c3 );
-  ::math::polynomial::cubic::solve::general<float>( r3, c4 );
-  ::math::polynomial::cubic::depressing<float>( c4, c4 );
 
   ::math::polynomial::quartic::solve::bi<float>(        r4.data(), c5.data() );
   ::math::polynomial::quartic::depressing<float>( c5b.data(), c5.data() );
   ::math::polynomial::quartic::solve::general<float>(      r4.data(), c5.data() );
-
-   ::math::polynomial::quadric::solve::depressed<float>( r2.data(), 1, 2  );
-   ::math::polynomial::quadric::solve::trivial<float>( r2.data(), 1 );
-
-    ::math::polynomial::quadric::solve::monic<float>( r2.data(), c2.data() );
-    ::math::polynomial::quadric::solve::monic<float>( r2.data(), 123, 234  ) ;
 
   std::cin.get();
   return EXIT_SUCCESS;

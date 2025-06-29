@@ -3,6 +3,10 @@
 
 // ::math::topology::sico::property::color<data_name>
 
+#ifdef color_a9f1aad2_e23c_4f7e_9dce_0f1c116f4968
+#else
+#include <cstdint>
+#endif
 
 #include "../simplex/loaded.hpp"
 

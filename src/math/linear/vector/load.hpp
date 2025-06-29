@@ -28,8 +28,8 @@
           ,            value_name                  const& y_param
          )
          {
-          result_param[0] = x_param;
-          result_param[1] = y_param;
+          result_param[0] = static_cast<scalar_name>( x_param );
+          result_param[1] = static_cast<scalar_name>( y_param );
           return result_param;
          }
 
@@ -44,8 +44,8 @@
          )
          {
           ::math::linear::vector::structure< scalar_name, 2 > result;
-          result[0] = x_param;
-          result[1] = y_param;
+          result[0] = static_cast<scalar_name>( x_param ); 
+          result[1] = static_cast<scalar_name>( y_param );
           return result;
          }
 
@@ -61,9 +61,9 @@
           ,            value_name                  const& z_param
          )
          {
-          result_param[0] = x_param;
-          result_param[1] = y_param;
-          result_param[2] = z_param;
+          result_param[0] = static_cast<scalar_name>( x_param );
+          result_param[1] = static_cast<scalar_name>( y_param );
+          result_param[2] = static_cast<scalar_name>( z_param );
           return result_param;
          }
 
@@ -79,9 +79,9 @@
          )
          {
           ::math::linear::vector::structure< scalar_name, 3 > result;
-          result[0] = scalar_name( x_param );
-          result[1] = scalar_name( y_param );
-          result[2] = scalar_name( z_param );
+          result[0] = static_cast<scalar_name>( x_param );
+          result[1] = static_cast<scalar_name>( y_param );
+          result[2] = static_cast<scalar_name>( z_param );
           return result;
          }
 
@@ -97,10 +97,10 @@
           ,            value_name                  const& t_param
          )
          {
-          result_param[0] = scalar_name( x_param );
-          result_param[1] = scalar_name( y_param );
-          result_param[2] = scalar_name( z_param );
-          result_param[3] = scalar_name( t_param );
+          result_param[0] = static_cast<scalar_name>( x_param );
+          result_param[1] = static_cast<scalar_name>( y_param );
+          result_param[2] = static_cast<scalar_name>( z_param );
+          result_param[3] = static_cast<scalar_name>( t_param );
           return result_param;
          }
 
@@ -117,10 +117,10 @@
          )
          {
           ::math::linear::vector::structure< scalar_name, 3 > result;
-          result[0] = x_param;
-          result[1] = y_param;
-          result[2] = z_param;
-          result[3] = t_param;
+          result[0] = static_cast<scalar_name>( x_param );
+          result[1] = static_cast<scalar_name>( y_param );
+          result[2] = static_cast<scalar_name>( z_param );
+          result[3] = static_cast<scalar_name>( t_param );
           return result;
          }
 

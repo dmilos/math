@@ -4,6 +4,14 @@
 
 #include "math/math.hpp"
 
+template< typename scalar_name, math::type::size_t size_number >
+ void print ( ::math::linear::vector::structure<scalar_name, size_number> const& v )
+  {
+   for( math::type::size_t i=0; i< size_number; i++ )
+    {
+     std::cout << std::setw(10) << std::fixed << v[i] << ", ";
+    }
+  }
 
 
 template< typename scalar_name, math::type::size_t width_number, math::type::size_t height_number >
@@ -22,6 +30,17 @@ template< typename scalar_name, math::type::size_t width_number, math::type::siz
 //template ::math::linear::matrix::eigen::algoritham<double,2>;
 //template ::math::linear::matrix::eigen::algoritham<double,3>;
 
+template< typename scalar_name, math::type::size_t size_number >
+ void print (::math::linear::matrix::eigen::algoritham<scalar_name, size_number > const& ea )
+  {
+   std::cout << " --- ";
+   std::cout << ea.count() << std::endl;
+   print( ea.value() );
+   print( ea.vector() );
+   std::cout << " --- " << std::endl;
+  }
+
+
 typedef ::math::linear::matrix::eigen::algoritham<double,2> eu2_type;
 typedef ::math::linear::matrix::eigen::algoritham<double,3> eu3_type;
 
@@ -33,28 +52,28 @@ void eu2_test()
   // -0.3722813232690143:     (-0.8245648401323937, 0.5657674649689923)
   //5.372281323269014:        (0.41597355791928425, 0.9093767091321241)
   m={1,2,3,4}; aa.process( m );
-
+  print( aa );
 
  //-1.4494897427831778: (-0.6324555320336759, 0.7745966692414833)
  //3.449489742783178:   (0.6324555320336759, 0.7745966692414833)
-  m={1,2,3,1}; aa.process( m );
+  m={1,2,3,1}; aa.process( m ); print(aa);
 
  //0:    (-1, 1)
  //2:    (1, 1)
 
-  m={1,1,1,1}; aa.process( m );
+  m={1,1,1,1}; aa.process( m );  print(aa);
 
-  m={2,2,2,3}; aa.process( m );
+  m={2,2,2,3}; aa.process( m );  print(aa);
 
-  m={3,2,4,5}; aa.process( m );
+  m={3,2,4,5}; aa.process( m ); print(aa);
 
   // -15: (-0.554700196225229, 0.8320502943378437)
   // 0:   ( 0.7071067811865475, 0.7071067811865475)
 
-  m={-6, 6, 9,  -9}; aa.process( m );
+  m={-6, 6, 9,  -9}; aa.process( m );  print(aa);
 
   // 1: (0.7071067811865475, 0.7071067811865475)
-  m={ -7,  8,  -8,   9 }; aa.process( m );
+  m={ -7,  8,  -8,   9 }; aa.process( m );  print(aa);
  }
 
 void eu3_test()
@@ -62,23 +81,23 @@ void eu3_test()
   eu3_type::matrix_type m;
   eu3_type  aa;
 
-  m={ 1, 0, 0,  0, 1, 0, 0, 0, 1 }; aa.process( m );
-  m={ 1, 0, 0,  0, 1, 0, 0, 0, -1 }; aa.process( m );
+  m={ 1, 0, 0,  0, 1, 0, 0, 0, 1 }; aa.process( m );   print(aa);
+  m={ 1, 0, 0,  0, 1, 0, 0, 0, -1 }; aa.process( m );  print(aa);
 
-  //m={ 1, 2, 3, 3, 4, 5, 6, 7, 8 }; aa.process( m );
-// m={ 1, 2, 3, 4, 5, 6, 7, 8, 9 }; aa.process( m );
-// m={ 3, 2, 6, 2, 2, 5, -2, -1, -4 }; aa.process( m );
+  //m={ 1, 2, 3, 3, 4, 5, 6, 7, 8 }; aa.process( m );   print(aa);
+// m={ 1, 2, 3, 4, 5, 6, 7, 8, 9 }; aa.process( m );    print(aa);
+// m={ 3, 2, 6, 2, 2, 5, -2, -1, -4 }; aa.process( m ); print(aa);
 
   //// one real solution
-  // m={  4,   2,   7,  -6,  -6,   8,   0,  -8,  -6 }; aa.process( m );
+  // m={  4,   2,   7,  -6,  -6,   8,   0,  -8,  -6 }; aa.process( m ); print(aa);
 
    // one real solution
-   //m={  -8,   3,  -1, -6,  -7,  -4, 2,  -6,  -1 }; aa.process( m );
+   //m={  -8,   3,  -1, -6,  -7,  -4, 2,  -6,  -1 }; aa.process( m ); print(aa);
 
    //// two real solution
-   //m={  8,   1,  -2, 2,   7,  -6, -1,  -2,  -5 }; aa.process( m );
+   //m={  8,   1,  -2, 2,   7,  -6, -1,  -2,  -5 }; aa.process( m ); print(aa);
    //// tree real solution, all integers
-   m={6,   0,  -6,   2,  -2,  -1,   4,   5,   -8 }; aa.process( m );
+   m={6,   0,  -6,   2,  -2,  -1,   4,   5,   -8 }; aa.process( m ); print(aa);
 
  }
 
@@ -87,6 +106,5 @@ int main( int argc, char*argv[] )
      eu2_test();
      eu3_test();
 
-  
   return 0;
  }

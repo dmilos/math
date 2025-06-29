@@ -78,3 +78,17 @@ example/test/codeblocks/obj
 /example/check/topology/test
 /example/readme
 /example/_build
+
+/example/_buildGC-11
+/example/_buildGC-14
+/example/_buildGC-17
+/example/_buildGC-20
+/example/_build-msvc_11
+/example/_build-msvc_14
+/example/_build-msvc_17
+/example/_build-msvc_20
+/example/_build-msvc_Clang_11
+/example/_build-msvc_Clang_14
+/example/_build-msvc_Clang_17
+/example/_build-msvc_Clang_20
+/example/_cmakeVS

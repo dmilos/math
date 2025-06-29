@@ -10,7 +10,7 @@ add_subdirectory( quadric )
 add_subdirectory( tetrahedron )
 add_subdirectory( triangle )
 
-add_executable(   MathGeometryCoord              coord.cpp )
+add_executable(   Math_Geometry_Coord              coord.cpp )
 
 
 

@@ -44,6 +44,19 @@
           return coefficient_0 + t * ( coefficient_1 + t*( coefficient_2 + t*( coefficient_3 + t*coefficient_4 ) ) );
          }
 
+       template
+        <
+          typename parameter_name
+         ,typename scalar_name
+        >
+        inline scalar_name evaluate
+         (
+           parameter_name const& t, std::array< scalar_name, 5 >  const& coefficient
+         )
+         {
+          return ::math::polynomial::quartic::evaluate<scalar_name>( t, coefficient.data() );
+         }
+
       }
     }
   }

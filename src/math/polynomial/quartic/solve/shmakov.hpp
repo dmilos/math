@@ -23,7 +23,7 @@
             typename scalar_name
           > // expect monic polynomial
           unsigned shmakov( scalar_name root[4], scalar_name const coefficient[5], scalar_name const& epsilon = 1e-12 )
-           {
+           {   // TODO have some bug
             root[0] = root[1] = root[2] = root[3] = NAN;
             scalar_name const& A = coefficient[3];
             scalar_name const& B = coefficient[2];

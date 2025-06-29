@@ -17,7 +17,7 @@
        template
         <
           typename scalar_name
-         ,std::size_t dimension_number
+         ,::math::type::size_type dimension_number
         >
         class unit
          {

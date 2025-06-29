@@ -48,7 +48,7 @@ namespace math
       template
        <
          typename scalar_name
-        ,std::size_t dimesion_number
+        ,::math::type::size_type dimesion_number
        >
        void
        redirect( ::math::geometry::direction::parametric< scalar_name, dimesion_number > & direction )
@@ -59,7 +59,7 @@ namespace math
       template
        <
          typename scalar_name
-        ,std::size_t dimesion_number
+        ,::math::type::size_type dimesion_number
        >
        void
        redirect( ::math::geometry::direction::two< scalar_name, dimesion_number > & direction )

@@ -6,6 +6,7 @@
 #include <cmath>
 #include "../quadric/solve.hpp"
 #include "../../geometry/deg2rad.hpp"
+#include "../../function/signum.hpp"
 
 
 
@@ -82,7 +83,7 @@
             scalar_name CR2 = 729 * r * r;
             scalar_name CQ3 = 2916 * q * q * q;
 
-            if (R == 0 && Q == 0)
+            if( ::math::geometry::interval::in( R, -epsilon, epsilon)  && ::math::geometry::interval::in( Q, -epsilon, +epsilon ) )
              {
               result[0] = - a / scalar_name(3);
               result[1] = result[0];
@@ -197,6 +198,31 @@
       //     }
       //
       //
+          template
+          <
+            typename scalar_name
+          > // C + 0 *x^1+ 0 * x^2 + 1 * x^3 = 0
+          int trivial( scalar_name root[2], scalar_name const &C, scalar_name const& epsilon = 1e-6 )
+           {
+            root[0] = ::math::function::signum( C ) * pow( fabs( C ), scalar_name(1)/scalar_name(3) );
+            root[1] = NAN;
+            root[2] = NAN;
+            return 1;
+           }
+
+          template
+          <
+            typename scalar_name
+          > // C + 0 *x^1 + 0 * x^2 + c[3] * x^3 = 0
+          int trivial( scalar_name root[2], scalar_name coefficient[4], scalar_name const& epsilon = 1e-6 )
+           {
+            scalar_name value = - coefficient[ 0 ] / coefficient[ 3 ]; 
+            root[0] = ::math::function::signum( value ) * pow( fabs( value ), scalar_name(1)/scalar_name(3) );
+            root[1] = NAN;
+            root[2] = NAN;
+            return 1;
+           }
+      
         }
       }
     }

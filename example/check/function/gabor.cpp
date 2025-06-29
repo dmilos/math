@@ -66,6 +66,5 @@ int main( int argc, char *argv[] )
 #if defined(Portable_Anymap_Format_E84FDB3F_0BF3_447F_821D_B9480766CC13)
   { std::ofstream( "gabor.pgm" ) << PNM::save( image, width, height, PNM::P2 ); }
 #endif
-  //
   return EXIT_SUCCESS;
  }

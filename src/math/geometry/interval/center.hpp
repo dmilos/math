@@ -57,6 +57,12 @@
          ) //!< keep size just recenter;
          { // TODO not optimal
            typename ::math::geometry::interval::structure< scalar_name, dimension_number >::point_type size;
+           /*
+          ::math::geometry::interval::center( center, instance );
+          ::math::linear::vector::subtraction( center, point );
+          ::math::linear::vector::addition( instance[0], center );
+          ::math::linear::vector::addition( instance[1], center );
+           */
           ::math::geometry::interval::size( size, instance );
 
           ::math::linear::vector::scale( size, value_name(0.5) );

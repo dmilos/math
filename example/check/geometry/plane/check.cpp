@@ -144,24 +144,14 @@ int main( int argc, char *argv[] )
   ::math::geometry::plane::noNd<double, 5>           c5;
   ::math::geometry::plane::three<double>             d;
 
-  a=b;   a = d;
-  b=a;   b = d;
-
-  d=a; d=b;
-
-  double l;
+   double l;
   ::math::linear::vector::point<double,3>             point3;
   ::math::linear::vector::point<double,2>             point2{0};   point2 = point2;
 
   ::math::geometry::direction::ABC2D<double>           abc;
   ::math::geometry::plane::ABCD3D<double>             abcd;
   ::math::geometry::plane::three<double>             tttt;
-
-  abcd    =  no3d; abcd    = param3d; abcd    = tttt;
-  no3d    =  abcd; no3d    = param3d; no3d    = tttt;
-  param3d =  abcd; param3d = abcd;    param3d = tttt;
-  tttt = abcd;     tttt    = no3d;    tttt    = param3d;
-
+ 
   ::math::geometry::direction::parametric<double, 3 > parametric;
 
   ::math::geometry::plane::intersect( point3, no3d, parametric );

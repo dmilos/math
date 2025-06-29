@@ -24,7 +24,7 @@ namespace math
         {
          public:
            typedef scalar_name scalar_type;
-           typedef std::size_t size_type;
+           typedef ::math::type::size_type size_type;
            typedef ::math::linear::vector::point<scalar_name,2>       point_type;
            typedef ::math::geometry::direction::ABC2D<scalar_type>    line_type;
 

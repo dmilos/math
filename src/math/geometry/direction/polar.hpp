@@ -16,16 +16,16 @@ namespace math
     namespace direction
      {
 
-      template<typename scalar_name, std::size_t dimesion_number >
+      template<typename scalar_name, ::math::type::size_type dimesion_number >
        class two;
 
       template<typename scalar_name >
        class ABC2D;
 
-      template<typename scalar_name, std::size_t dimesion_number >
+      template<typename scalar_name, ::math::type::size_type dimesion_number >
        class parametric;
 
-      template<typename scalar_name, std::size_t dimension_number>
+      template<typename scalar_name, ::math::type::size_type dimension_number>
         class normal;
 
       template< typename scalar_name>

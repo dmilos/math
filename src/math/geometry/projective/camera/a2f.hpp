@@ -41,7 +41,7 @@ namespace math
          scalar_name
          a2f //!< former h2f
           (
-            scalar_name const& angle  //!< horizontal angle of view
+            scalar_name const& angle   //!< horizontal angle of view
            ,scalar_name const& window  //!< horizontal angle of view
           )//! Display1D [focus,focus]x[ -window/2, +window/2 ] //!< 1D display viewed under horizontal angle
           {  //!< convert angle&window to focus

@@ -31,8 +31,8 @@ namespace math
          scalar_name
          f2w
           (
-            scalar_name const& focus   
-           ,scalar_name const& angle    
+            scalar_name const& focus
+           ,scalar_name const& angle
           ) //!< angle of view of interval [focus,focus] x [ -window/2, +window/2 ]
           {  //!< convert focus&angle to window
            return scalar_name( 2 ) * focus * tan( angle / scalar_name( 2 ) );

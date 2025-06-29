@@ -92,7 +92,7 @@
 
             this_type & operator=( implicit2D_type const& implicit )
              {
-              scalar_type epsilon = 1e-5;
+              scalar_type epsilon = 1e-5; //!< TODO epsilon, static?, member? ?parameter?
               auto A = implicit.A();
               auto B = implicit.B();
               auto C = implicit.C();
@@ -112,7 +112,7 @@
               B += 0;
               A += 0;
 
-              if( fabs( F ) < epsilon ) //!< TODO epsilon
+              if( fabs( F ) < epsilon ) 
                {
                 this->m_rotation = 0;
                 this ->m_size[1]  = 0;

@@ -13,6 +13,7 @@
   - Function:
     - vector, matrix, affine operation
     - distances, intersections between primitives
+  - No external dependence, out of the box ready.
   - etc.
 
 ### Code sample

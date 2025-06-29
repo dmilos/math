@@ -22,10 +22,6 @@ int main( int argc, char *argv[] )
   ::math::statistic::average<float,1,int>        aa9; aa9.push( 1 ); aa9.value( );
   ::math::statistic::minimum<float,1>            aaA; aaA.push( 1 ); aaA.value( );
 
-  ::math::statistic::gauss::vector< double, unsigned, 3 > aaGV; aaGV.push( {1,2,3}  );
-  ::math::statistic::gauss::V1< double, unsigned  >     aaG1; aaG1.push( 123  );
-  ::math::statistic::gauss::V2< double, unsigned  >     aaG2; aaG2.push( 123  );
-
    ::math::statistic::interval<double, 3 > aaI; aaI.push( {1,2,3}  );
 
   ::math::statistic::histogram< >     hist; hist.push( 123  );

@@ -25,13 +25,13 @@
           ,scalar_name const& epsilon = 1e-12
          )
          {
-           if( fabs( x0 - x1 ) < epsilon) return false;
-           if( fabs( x0 - x2 ) < epsilon) return false;
-           if( fabs( x1 - x2 ) < epsilon) return false;
+          if( fabs( x0 - x1 ) < epsilon) return false;
+          if( fabs( x0 - x2 ) < epsilon) return false;
+          if( fabs( x1 - x2 ) < epsilon) return false;
 
-          scalar_name f0 = y0 /( x0 - x1 ) /( x0 - x2 );
-          scalar_name f1 = y1 /( x1 - x0 ) /( x1 - x2 );
-          scalar_name f2 = y2 /( x2 - x0 ) /( x2 - x1 );
+          scalar_name f0 = y0 /( x0 - x1 ) /( x0 - x2 ); //!< TODO move this UP
+          scalar_name f1 = y1 /( x1 - x0 ) /( x1 - x2 ); //!< TODO move this UP
+          scalar_name f2 = y2 /( x2 - x0 ) /( x2 - x1 ); //!< TODO move this UP
 
           scalar_name a0 = f0;
           scalar_name b0 = f0*( -( x1 + x2 ) );

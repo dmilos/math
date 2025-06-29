@@ -22,21 +22,22 @@
          {
           scalar_name shift = NAN;
 
-          auto &A  = coefficient[3];
-          auto &B  = coefficient[2];
-          auto &C  = coefficient[1];
-          auto &D  = coefficient[0];
+          auto A  = coefficient[3];
+          auto B  = coefficient[2];
+          auto C  = coefficient[1];
+          auto D  = coefficient[0];
+
+          shift =   -B/( 3 * A );
 
           if( ( -epsilon < shift ) && ( shift < epsilon ) ) return shift;
 
-          shift =   -B/( 3 * A );
                      result[3] = coefficient[3];
                      result[2] = 0;
           auto &p  = result[1];
           auto &q  = result[0];
 
           p = C + B * shift ;
-          q = D + (scalar_name(2)/scalar_name(3))* B*shift*shift   + C * shift ;
+          q = D + (scalar_name(2)/scalar_name(3))* B * shift*shift   + C * shift ;
 
           return -shift;
          }

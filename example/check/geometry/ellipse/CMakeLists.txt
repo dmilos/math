@@ -1,8 +1,8 @@
 #cmake_minimum_required(VERSION 2.8)
 
 
-add_executable(   MathGeometryEllipse__check             check.cpp )
-add_executable(   MathGeometryEllipse__test             test.cpp )
+add_executable(   Math_Geometry_Ellipse__check             check.cpp )
+add_executable(   Math_Geometry_Ellipse__test             test.cpp )
 
 
 

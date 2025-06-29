@@ -15,6 +15,11 @@ int main( int argc, char *argv[] )
 
   ::math::polynomial::solve::linear<float>(r1, c2);
 
+
+  ::math::polynomial::solve::linear<float>(r1, c2);
+  ::math::polynomial::solve::linear<float>(r1.data(), c2.data());
+
+
   return EXIT_SUCCESS;
  }
 

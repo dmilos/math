@@ -17,7 +17,7 @@ namespace math
     namespace direction
      {
 
-      template<typename scalar_name, std::size_t dimension_number >
+      template<typename scalar_name, ::math::type::size_type dimension_number >
        struct P2T
         {
          public:
@@ -44,7 +44,7 @@ namespace math
 
         };
 
-      template<typename scalar_name, std::size_t dimension_number >
+      template<typename scalar_name, ::math::type::size_type dimension_number >
        scalar_name distance
         (
           ::math::geometry::direction::two < scalar_name, dimension_number >  const& t

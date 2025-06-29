@@ -3,6 +3,7 @@
 
  // ::math::polynomial::cubic::evaluate<scalar_name>( t, coefficient )
  // ::math::polynomial::cubic::evaluate<scalar_name>( t, 0, 1, 2, 3 )
+ // ::math::polynomial::cubic::evaluate<scalar_name>( t, array )
 
 
  namespace math
@@ -41,6 +42,19 @@
          )
          {
           return coefficient_0 + t*( coefficient_1 + t*( coefficient_2 + t*coefficient_3 ) );
+         }
+         
+       template
+        <
+          typename parameter_name
+         ,typename scalar_name
+        >
+        inline scalar_name evaluate
+         (
+           parameter_name const& t, std::array< scalar_name, 4 >  const& coefficient
+         )
+         {
+          return ::math::polynomial::cubic::evaluate<scalar_name>( t, coefficient.data() );
          }
 
       }

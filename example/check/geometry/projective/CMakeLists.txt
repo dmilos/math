@@ -2,5 +2,5 @@
 
 add_subdirectory( camera )
 
-add_executable(   MathGeometryProjective__check             check.cpp )
-add_executable(   MathGeometryProjective__test             test.cpp )
+add_executable(   Math_Geometry_Projective__check             check.cpp )
+add_executable(   Math_Geometry_Projective__test             test.cpp )

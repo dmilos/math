@@ -20,8 +20,7 @@ int main( int argc, char *argv[] )
   std::array<float,2>   c2;
   std::array<float,3>   c3;
   std::array<float,4>   c4{1,2,3,4};
-  std::array<float,5>   c5;
-
+  std::array<float,5>   c5{ 1,2,3,4,5};
 
 
   ::math::polynomial::solve::linear<float>( r1, c2 );
@@ -31,7 +30,10 @@ int main( int argc, char *argv[] )
   ::math::polynomial::cubic::solve::general<float>( r3, c4 );
 
   ::math::polynomial::quartic::solve::bi<float>(        r4.data(), c5.data() );
-  ::math::polynomial::quartic::solve::general<float>(      r4.data(), c5.data() );
+  ::math::polynomial::quartic::solve::general<float>(r4.data(), c5.data());
+
+  ::math::polynomial::quartic::shift<float>( c5, +1.12346, c5 );
+  ::math::polynomial::quartic::shift<float>( c5, -1.12346, c5 );
 
 
   

@@ -78,10 +78,10 @@
         inline unsigned interpolate( scalar_name coefficient[5], std::array< std::array< scalar_name, 2> , 5 > const& cloud, scalar_name const& epsilon = 1e-12 )
          {
           return ::math::polynomial::quartic::interpolate( coefficient, cloud[0][0], cloud[0][1]
-                                                                     , cloud[1][0], cloud[1][1]
-                                                                     , cloud[2][0], cloud[2][1]
-                                                                     , cloud[3][0], cloud[3][1]
-                                                                     , cloud[4][0], cloud[4][1], epsilon );
+                                                                      , cloud[1][0], cloud[1][1]
+                                                                      , cloud[2][0], cloud[2][1]
+                                                                      , cloud[3][0], cloud[3][1]
+                                                                      , cloud[4][0], cloud[4][1], epsilon );
          }
 
       }

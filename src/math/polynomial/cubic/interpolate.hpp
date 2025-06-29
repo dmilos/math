@@ -1,7 +1,8 @@
 #ifndef math_polynomial_interpolate_cubic_HPP_
  #define math_polynomial_interpolate_cubic_HPP_
 
- // ::math::polynomial::solve::cubic<scalar_name>( coefficient, x, y )
+ // ::math::polynomial::solve::cubic<scalar_name>( coefficient, x0, y0, x1, y1, x2, y2, x3, y3 )
+ // ::math::polynomial::solve::cubic<scalar_name>( coefficient, std::array<array<scalar,2>,4> )
 
 
 
@@ -26,10 +27,17 @@
           ,scalar_name const& epsilon = 1e-12
          )
          {
-          scalar_name f0 = y0 /( x0 - x1 ) /( x0 - x2 )/(x0- x3 );
-          scalar_name f1 = y1 /( x1 - x0 ) /( x1 - x2 )/(x1- x3 );
-          scalar_name f2 = y2 /( x2 - x0 ) /( x2 - x1 )/(x2- x3 );
-          scalar_name f3 = y3 /( x3 - x0 ) /( x3 - x1 )/(x3- x2 );
+          if( fabs( x0 - x1 ) < epsilon) return false;
+          if( fabs( x0 - x2 ) < epsilon) return false;
+          if( fabs( x0 - x3 ) < epsilon) return false;
+          if( fabs( x1 - x2 ) < epsilon) return false;
+          if( fabs( x1 - x3 ) < epsilon) return false;
+          if( fabs( x2 - x3 ) < epsilon) return false;
+
+          scalar_name f0 = y0 /( x0 - x1 ) /( x0 - x2 )/( x0- x3 );
+          scalar_name f1 = y1 /( x1 - x0 ) /( x1 - x2 )/( x1- x3 );
+          scalar_name f2 = y2 /( x2 - x0 ) /( x2 - x1 )/( x2- x3 );
+          scalar_name f3 = y3 /( x3 - x0 ) /( x3 - x1 )/( x3- x2 );
 
           scalar_name a0 = f0;
           scalar_name b0 = f0*( -( x1 + x2 + x3 ) );
