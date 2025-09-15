@@ -15,7 +15,7 @@
        {
         public:
           typedef scalar_name         scalar_type;
-          typedef std::size_t         size_type;
+          typedef std::uint32_t         size_type, uint32_type;
 
         public:
           sobol1D()
@@ -23,25 +23,25 @@
             seed( 0 );
            }
 
-          explicit sobol1D( size_type const& seedX )
+          explicit sobol1D( uint32_type const& seedX )
            {
             seed( seedX );
            }
 
-          void seed( size_type const& s0 )
+          void seed( uint32_type const& s0 )
            {
             this->M2_d0 = s0;
             this->M2_index  = 0;
            }
 
-          size_type position()
+          uint32_type position()
            {
             return this->M2_index;
            }
 
           scalar_type next()
            {
-            size_type Is_max = 0xFFFFFF;
+            uint32_type Is_max = 0xFFFFFF;
             scalar_type Ir_value = ( (this->M2_d0) >> 8 ) * ( scalar_type(1)/ Is_max );
             updateState();
             return Ir_value;
@@ -51,14 +51,14 @@
 
         private:
         // state data
-         size_type M2_index, M2_d0;
+         uint32_type M2_index, M2_d0;
 
          void updateState()
           {
             // = Integer.numberOfTrailingZeros(~M2_index);
-            size_type c = 0;
+            uint32_type c = 0;
             {
-             uint32_t num = M2_index;
+             uint32_type num = M2_index;
              while( 1 == ( num & 1 ) )
              {
               c++;
