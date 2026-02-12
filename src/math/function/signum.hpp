@@ -1,5 +1,5 @@
-#ifndef math_function_epsilon
-#define math_function_epsilon
+#ifndef math_function_signum
+#define math_function_signum
 
 
  // ::math::function::signum

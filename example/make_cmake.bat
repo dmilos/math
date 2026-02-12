@@ -1,9 +1,16 @@
+set prg_cmake=cmake
+
+
+mkdir _build-msvc
+cd _build-msvc
+%prg_cmake% ..
+%prg_cmake% --build .
+cd ..
 
 mkdir _build-msvc_11
 cd _build-msvc_11
 %prg_cmake% ..   -DCMAKE_CXX_STANDARD=11 -DCMAKE_CXX_STANDARD_REQUIRED=ON
 %prg_cmake% --build .
-
 cd ..
 
 mkdir _build-msvc_14

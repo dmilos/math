@@ -17,7 +17,7 @@
       {
 
        template< typename scalar_name >
-        struct project
+        struct project //!< project point on to direction
         {
          public:
            typedef scalar_name scalar_type;

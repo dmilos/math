@@ -89,7 +89,7 @@ void hg1()
   ::math::linear::homography::construct<double>( h1, 0.6, 1.0 );
   print( h1 );
  }
- 
+
 void hg1_definition()
  {
   std::cout << " --- 2D ---   By definition ----- "   << std::endl;
@@ -619,10 +619,27 @@ void retarget()
 
  }
 
+void hg2_directions()
+ {
+  ::math::linear::homography::structure<double,2>  result;
+  ::math::geometry::direction::ABC2D< double > s0{  1, 0, 0 };
+  ::math::geometry::direction::ABC2D< double > s1{  0, 1, 0 };
+  ::math::geometry::direction::ABC2D< double > s2{ -1, 1, 0 };
+  ::math::geometry::direction::ABC2D< double > t0{  1, 0, 0 };
+  ::math::geometry::direction::ABC2D< double > t1{  0, 1, 0 };
+  ::math::geometry::direction::ABC2D< double > t2{ -1, 1, 0 };
+
+ ::math::linear::homography::construct<double>( result, s0, t0, s1, t1, s2, t2 );
+
+   print( result, "ID");
+ }
+
+
 int main( int argc, char*argv[] )
  {
   hg1_definition();
   hg2_definition();
+  hg2_directions();
   std::cout << " ------------- 1 -----------" << std::endl; hg1();
   std::cout << " ------------- 2 -----------" << std::endl; hg2_single_specific(); hg2_simple(); hg2_complete(); hg2_single_direct_brute(); hg2_single_invert_brute();
   std::cout << " ------------- 3 -----------" << std::endl; hg3_single();          hg3_simple(); hg3_complete(); hg3_single_direct_brute(); hg3_single_invert_brute();

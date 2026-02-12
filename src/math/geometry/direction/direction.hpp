@@ -20,3 +20,6 @@
 #include "./bisector.hpp"
 
 #include "./project.hpp"
+
+#include "./project.hpp"
+#include "./vanish.hpp"
