@@ -104,7 +104,7 @@ namespace math
                  std::swap( m[i][the_one] , m[i][12] );
                  m[i][12] = -m[i][12];
                 }
-               m[the_one][the_one]  = 1;
+               m[the_one][the_one] = 1;
                m[the_one][12] = 1;
 
                auto rank = ::math::linear::matrix::gauss( m, epsilon );

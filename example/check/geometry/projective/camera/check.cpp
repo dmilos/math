@@ -9,12 +9,12 @@
 
 void print( ::math::linear::vector::structure<double,2> const& v )
  {
-  std::cout << "[ " << v[0] << "," <<  v[1] << "]"; 
+  std::cout << "[ " << v[0] << "," <<  v[1] << "]";
  }
 
 void print( ::math::linear::vector::structure<double,3> const& v )
  {
-  std::cout << "[ " << v[0] << "," <<  v[1] << "," <<   v[2] << "]"; 
+  std::cout << "[ " << v[0] << "," <<  v[1] << "," <<   v[2] << "]";
  }
 
 void test2D( double base, double height, double p )
@@ -45,7 +45,7 @@ void check
   double Op =  projector( focus_param, O ); std::cout << "Op : "<< Op << std::endl;
   double Xp =  projector( focus_param, X ); std::cout << "Xp : "<< Xp << std::endl;
   double Yp =  projector( focus_param, Y ); std::cout << "Yp : "<< Yp << std::endl;
-  double Xl = ::math::linear::vector::distance( O, X ); std::cout << "Xl: " << Xl << std::endl; 
+  double Xl = ::math::linear::vector::distance( O, X ); std::cout << "Xl: " << Xl << std::endl;
   double Yl = ::math::linear::vector::distance( O, Y ); std::cout << "Yl: " << Yl << std::endl;
 
   double focus_local;
@@ -62,18 +62,57 @@ void check
  }
 
 
+void test_classical()
+ {
+  ::math::geometry::projective::camera::classic<double> classic;
+
+  classic.resolution( {640, 480} );
+  classic.focus( 2 );
+  //classic.window( { { -0.5, -0.5 }, { +0.5, +1.0 } } );
+  classic.aspect( 1, false );
+
+  std::cout << "F: " << classic.focus() << std::endl;
+
+  std::cout << "left_angle: "  << math::geometry::rad2deg( classic.left_angle()  ) << std::endl;
+  std::cout << "right_angle: " << math::geometry::rad2deg( classic.right_angle() ) << std::endl;
+
+  std::cout << "down_angle: " << math::geometry::rad2deg( classic.down_angle() ) << std::endl;
+  std::cout << "up_angle: "   << math::geometry::rad2deg( classic.up_angle()   ) << std::endl;
+
+  std::cout << "horizontal: " << math::geometry::rad2deg( classic.horizontal() )<< std::endl;
+  std::cout << "vertical: "   << math::geometry::rad2deg( classic.vertical()   ) << std::endl;
+
+  auto xy_a = classic.xy<int>   ( {0.5,0.5} );
+  auto xy_b = classic.xy<double>( {0.5,0.5} );
+  auto xy_c = classic.xy<int>   ( {0.0,0.0} );
+  auto xy_d = classic.xy<double>( {0.0,0.0} );
+
+  auto uv_a = classic.uv<int>   ( {320,320} );
+  auto uv_b = classic.uv<double>( {320,240} );
+
+  auto project_a = classic.projectXY<int>(    {0.0,2.0, 0.51} ); 
+  auto project_b = classic.projectXY<double>( {0.0,2.0, 0.51} ); 
+  auto project_c = classic.projectUV(    {0.0,2.0, 0.5} ); 
+  auto project_d = classic.projectUV( {0.0,2.0, 0.5});
+
+  auto princip_int   = classic.principal<int>( );
+  auto princip_float = classic.principal<float>( );
+ }
+
 int main( int argc, char *argv[] )
  {
   std::cout << "Hello World" << std::endl;
+  test_classical();
+
   ::math::geometry::projective::camera::focus::gmmb<double> gmmb;
   double f;
-  gmmb.process(f,{0,0},{0,0},{0,0},{0,0}); 
+  gmmb.process(f,{0,0},{0,0},{0,0},{0,0});
 
   check( 1, {1,1}, {2,1}, {1,2} );
   check( 2, {2,2}, {4,2}, {2,4} );
 
   for(int i=0; i< 10; ++i ){
-   double focus = 1 + 5*rand()/(double)RAND_MAX; 
+   double focus = 1 + 5*rand()/(double)RAND_MAX;
    ::math::linear::vector::structure< double, 2 > O{ 5 - 10 * rand()/(double)RAND_MAX, 5 - 10 * rand()/(double)RAND_MAX    };
    ::math::linear::vector::structure< double, 2 > X{ O[0] + 5 * rand()/(double)RAND_MAX, O[1]  };
    ::math::linear::vector::structure< double, 2 > Y{ O[0] , O[1]+ 5 * rand()/(double)RAND_MAX  };

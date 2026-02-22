@@ -2,6 +2,7 @@
 #define _6dacc71d2544408c901ba6ca7e615f09
 
 #include <sstream>
+#include <fstream>
 
 #include "math/topology/topology.hpp"
 

@@ -1,7 +1,7 @@
 #ifndef math_library_linear_algebra__vector_aritmetic_combine1_HPP_
  #define math_library_linear_algebra__vector_aritmetic_combine1_HPP_
 
- // ::math::linear::vector::combine( result, coefficient, vector ) //!<    u += l * v
+ // ::math::linear::vector::combine( result, coefficient, vector ) //!<    result += coefficient * vector
 
 
 

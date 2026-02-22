@@ -3,7 +3,8 @@
 
 // ::math::geometry::interval::confine( result, point, interval )
 // ::math::geometry::interval::confine( point, interval )
-// ::math::geometry::interval::confine( line, interval )
+// ::math::geometry::interval::confine( parametric, interval )
+// ::math::geometry::interval::confine( two, interval )
 
 #include "./structure.hpp"
 

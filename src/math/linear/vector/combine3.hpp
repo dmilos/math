@@ -1,7 +1,7 @@
 #ifndef math_library_linear_algebra__vector_aritmetic_combine3_HPP_
  #define math_library_linear_algebra__vector_aritmetic_combine3_HPP_
 
- // ::math::linear::vector::combine( result, leftC, leftV, midC, midV, rightC, rightV )
+ // ::math::linear::vector::combine( result, leftC, leftV, midC, midV, rightC, rightV )     result = leftC * leftV + midC*midV + rightC * rightV;
 
 
 

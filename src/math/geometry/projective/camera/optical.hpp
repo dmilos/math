@@ -36,7 +36,7 @@ namespace math
           ,typename    size_name = std::size_t
          >
          class optical //!< TODO rename to digital;
-          {
+          { // resolution, window, FoV 
            public:
              typedef scalar_name     scalar_type;
              typedef size_name         size_type;

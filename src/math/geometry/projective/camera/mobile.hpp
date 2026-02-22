@@ -24,7 +24,7 @@ namespace math
           ,typename    size_name = std::size_t
          >
         class mobile
-         {
+         { // to_world, to_local, digital
           public:
             typedef scalar_name  scalar_type;
 

@@ -1,7 +1,7 @@
 #ifndef math_geometry_projective_camera_h2f
 #define math_geometry_projective_camera_h2f
 
-// ::math::geometry::projective::camera::h2f( horisontal_alpha )
+// ::math::geometry::projective::camera::а2f( horisontal_alpha )
 
 
 
@@ -42,7 +42,7 @@ namespace math
          a2f //!< former h2f
           (
             scalar_name const& angle   //!< horizontal angle of view
-           ,scalar_name const& window  //!< horizontal angle of view
+           ,scalar_name const& window  //!< window
           )//! Display1D [focus,focus]x[ -window/2, +window/2 ] //!< 1D display viewed under horizontal angle
           {  //!< convert angle&window to focus
            return scalar_name(0.5) * scalar_name(window) / tan( angle / scalar_name(2) );

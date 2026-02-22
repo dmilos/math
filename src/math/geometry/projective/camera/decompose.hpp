@@ -1,7 +1,11 @@
 #ifndef math_geometry_projective_camera_decompose
 #define math_geometry_projective_camera_decompose
 
-// ::math::geometry::projective::camera::decompose( P )
+// ::math::geometry::projective::camera::decompose<scalar> decomposer( P );
+//  decomposer.process();
+//  decomposer.x0();
+//  decomposer.center();
+//  decomposer.ray();
 
 #include "../../../linear/matrix/row.hpp"
 #include "../../../linear/matrix/load.hpp"

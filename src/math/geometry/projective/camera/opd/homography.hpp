@@ -45,24 +45,24 @@ namespace math
                ,homography_type const& H     //!< homograpphy
               )
               {
-               if( false == ::math::linear::matrix::invert( m_kInvert, K ) )
+               if( false == ::math::linear::matrix::invert( this->m_kInvert, K ) )
                 {
                  return false;
                 }
-               ::math::linear::matrix::multiply( m_hClean, m_kInvert, H );
+               ::math::linear::matrix::multiply( this->m_hClean, this->m_kInvert, H );
 
-               ::math::linear::matrix::column( m_x, m_hClean, 0 );
-               ::math::linear::matrix::column( m_y, m_hClean, 1 );
-               ::math::linear::matrix::column( m_t, m_hClean, 2 );
+               ::math::linear::matrix::column( this->m_x, m_hClean, 0 );
+               ::math::linear::matrix::column( this->m_y, m_hClean, 1 );
+               ::math::linear::matrix::column( this->m_t, m_hClean, 2 );
 
-               m_l1 = m_width  / ::math::linear::vector::length( X() );
-               m_l2 = m_width  / ::math::linear::vector::length( Y() );
-               auto scale = ( m_l1 + m_l2 )/2;
+               m_l1 = m_width  / ::math::linear::vector::length( this->X() );
+               m_l2 = m_width  / ::math::linear::vector::length( this->Y() );
+               auto scale = ( this->m_l1 + this->m_l2 )/2;
 
-               ::math::linear::vector::scale( m_x, scale );
-               ::math::linear::vector::scale( m_y, scale );
-               ::math::linear::vector::cross( m_z, X(), Y() );
-               ::math::linear::vector::scale( m_t, scale/m_width );
+               ::math::linear::vector::scale( this->m_x, scale );
+               ::math::linear::vector::scale( this->m_y, scale );
+               ::math::linear::vector::cross( this->m_z, X(), Y() ); math::linear::vector::length( this->m_z, m_width );
+               ::math::linear::vector::scale( this->m_t, scale );
                return true;
               }
 
@@ -93,6 +93,14 @@ namespace math
               vector3_type const& Y()const{ return m_y; }
               vector3_type const& Z()const{ return m_z; }
               vector3_type const& T()const{ return m_t; }
+
+              void fix()
+               {       // if projection is on right cordinate system and on plane O={0,1,1}, N={0,1,0}
+                std::swap( m_t[1], m_t[2] );
+                std::swap( m_x[1], m_x[2] );
+                std::swap( m_y[1], m_y[2] );
+                std::swap( m_z[1], m_z[2] ); ::math::linear::vector::negate( m_z );
+               }
 
             private:
              scalar_type m_width ;
