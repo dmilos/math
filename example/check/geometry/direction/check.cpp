@@ -6,6 +6,33 @@
 
 using namespace std;
 
+
+
+void side( ::math::linear::vector::point<double, 2> const& A, ::math::linear::vector::point<double, 2> const& B, ::math::linear::vector::point<double, 2> const& point )
+ {
+  ::math::geometry::direction::two<double,2>            two(A,B);
+  ::math::geometry::direction::ABC2D<double>            abc;
+   abc = two;
+
+  std::cout << "side :  "   << abc.calc( point )  << std::endl;
+ }
+
+void test_side()
+ {
+    side({ 0,0 }, { 1, 0 }, { 1,-1 } );
+    side({ 0,0 }, { 1, 0 }, { 1, 0 } );
+    side({ 0,0 }, { 1, 0 }, { 1,+1 } );
+    std::cout << "--" << std::endl;
+    side({ 0,0 }, { 1, 1 }, { 1,0 } );
+    side({ 0,0 }, { 1, 1 }, { 0.5,0.5 });
+    side({ 0,0 }, { 1, 1 }, { 0,1 } );
+    std::cout << "--" << std::endl;
+    side({ 0,0 }, { 0, 1 }, { +1, 0 } );
+    side({ 0,0 }, { 0, 1 }, {  0, 0 } );
+    side({ 0,0 }, { 0, 1 }, { -1, 0 } );
+    std::cout << "--" << std::endl;
+ }
+
 void point2line()
 {
   typedef ::math::geometry::direction::parametric<double, 3> parametric3d_t;
@@ -99,6 +126,7 @@ int main( int argc, char *argv[] )
  {
   cout << "Hello World" << endl;
 
+  test_side();
   concurent();
   point2line();
 
