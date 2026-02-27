@@ -1,7 +1,10 @@
 #ifndef math_geometry_projective_epipolar_calibrate_affine
 #define math_geometry_projective_epipolar_calibrate_affine
 
-// ::math::geometry::projective::epipolar::calibrate( alpha, h_scale, v_scale )
+// ::math::geometry::projective::epipolar::calibrate::affine::processLL( right_to_left_world, left_to_local, right_to_local )
+// ::math::geometry::projective::epipolar::calibrate::affine::processLW( right_to_left_world, left_to_local, right_to_world )
+// ::math::geometry::projective::epipolar::calibrate::affine::processWL( right_to_left_world, left_to_world, right_to_local )
+// ::math::geometry::projective::epipolar::calibrate::affine::processWW( right_to_left_world, left_to_world, right_to_world )
 
 //#include <utility>
 
@@ -29,7 +32,7 @@ namespace math
                typedef scalar_name scalar_type;
                typedef ::math::linear::affine::structure< scalar_name, 3 > affine_type;
 
-               bool process ( affine_type  & right_to_left_world, affine_type const& left_to_local, affine_type const& right_to_local )
+               bool processLL( affine_type  & right_to_left_world, affine_type const& left_to_local, affine_type const& right_to_local )
                 {
                  if( false == ::math::linear::affine::invert( m_right_to_world, right_to_local ) )
                   {
@@ -42,14 +45,38 @@ namespace math
 
                bool processLW( affine_type  & right_to_left_world, affine_type const& left_to_local, affine_type const& right_to_world )
                 {
-                 m_right_to_world = right_to_world;
+                 ::math::linear::affine::compose( right_to_left_world, left_to_local, right_to_world );
+                 return true;
+                }
 
-                 ::math::linear::affine::compose( right_to_left_world, left_to_local, m_right_to_world );
+               bool processWL( affine_type  & right_to_left_world, affine_type const& left_to_world, affine_type const& right_to_local )
+                {
+                 if( false == ::math::linear::affine::invert( m_left_to_local, left_to_world ) )
+                  {
+                   return false;
+                  }
+                 if( false == ::math::linear::affine::invert( m_right_to_world, right_to_local ) )
+                  {
+                   return false;
+                  }
+
+                 ::math::linear::affine::compose( right_to_left_world, m_left_to_local, m_right_to_world );
+
                   return true;
                  }
 
+               bool processWW( affine_type  & right_to_left_world, affine_type const& left_to_world, affine_type const& right_to_world )
+                {
+                 if( false == ::math::linear::affine::invert( m_left_to_local, left_to_world ) )
+                  {
+                   return false;
+                  }
+                 ::math::linear::affine::compose( right_to_left_world, left_to_local, right_to_world );
+                 return true;
+                }
 
               public:
+                affine_type m_left_to_local;
                 affine_type m_right_to_world;
              };
 
