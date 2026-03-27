@@ -2,7 +2,7 @@
 #define math_function_bais
 
 
- // ::math::function::bais( x, value ) //!< ( x = 0.5 == identical )
+ // ::math::function::bais( x, factor ) //!< ( factor = 0.5 == identical )
 
 namespace math
  {
@@ -10,9 +10,9 @@ namespace math
    {
 
     template< typename scalar_name >
-     inline scalar_name bais( scalar_name const& x, scalar_name const& b )
+     inline scalar_name bais( scalar_name const& x, scalar_name const& factor )
       {
-       return pow( x, log( b ) / log( scalar_name( 0.5 ) ) );
+       return pow( x, log( factor ) / log( scalar_name( 0.5 ) ) );
       }
 
    }

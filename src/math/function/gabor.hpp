@@ -1,7 +1,7 @@
 #ifndef math_function_gabor2D
 #define math_function_gabor2D
 
- // ::math::function::gabor2D( {x,y} )
+ // ::math::function::gabor2D<double,1>( {x,y} )
  // ::math::function::gabor<double,1>()( x )
 
 #include <array>
@@ -110,7 +110,7 @@ namespace math
            scalar_type const & x = local[0];
            scalar_type const & y = local[1];
 
-           scalar_type vawe = cos( ( pi2 * frequency_param ) * x  + phase_shift_param );
+           scalar_type vawe = cos( ( pi2 * frequency_param ) * x + phase_shift_param );
 
            scalar_type exponent ; // = ::math::function::distribution::normal( sqrt( (gx *x)^2 + ( gy*y ) ^2) , standard_deviation_param );
            {

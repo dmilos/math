@@ -4,8 +4,6 @@
 // ::math::function::distribution::normal( x, stddev, mean )
 // ::math::function::distribution::normal( x, stddev )
 // ::math::function::distribution::normal( x )
-// ::math::function::distribution::normal
-// ::math::function::distribution::normal
 // ::math::function::distribution::normal_invert
 // ::math::function::distribution::normal_PDF
 

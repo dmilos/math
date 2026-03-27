@@ -71,7 +71,7 @@ namespace math
                   {
                    return false;
                   }
-                 ::math::linear::affine::compose( right_to_left_world, left_to_local, right_to_world );
+                 ::math::linear::affine::compose( right_to_left_world, m_left_to_local, right_to_world );
                  return true;
                 }
 

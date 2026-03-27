@@ -67,7 +67,7 @@
           result[0] = x;
           result[1] = y;
           result[2] = z;
-          result[2] = t;
+          result[3] = t;
           return result;
          }
 

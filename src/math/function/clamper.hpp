@@ -1,7 +1,7 @@
 #ifndef math_function_clamper
 #define math_function_clamper
 
- // ::math::function::ramp
+ // ::math::function::ramp(x,lower=0,higher=1)
  // ::math::function::saw
  // ::math::function::wave
  // ::math::function::sinkhole
@@ -16,8 +16,8 @@ namespace math
  {
   namespace function
    {
-
-     template< typename scalar_name >      //  _____/-----
+      //  _____/-----0
+     template< typename scalar_name >
       inline
       scalar_name
       ramp
@@ -30,13 +30,14 @@ namespace math
         return ( (value) < lower ? lower : ( higher < (value) ? higher : (value) ) ) ;
        }
 
-     template< typename scalar_name  >   //  ////////
+     //  ////////
+     template< typename scalar_name  >   
       inline
       scalar_name
       saw
        (
-         scalar_name  const& value 
-        ,scalar_name  const& lower  
+         scalar_name  const& value
+        ,scalar_name  const& lower
         ,scalar_name  const& higher
        )
        {
@@ -45,7 +46,8 @@ namespace math
         return value;
        }
 
-     template< typename scalar_name  >   //  ////////
+     //  ////////
+     template< typename scalar_name  >   
       inline
       scalar_name
       saw
@@ -58,13 +60,14 @@ namespace math
         return value;
        }
 
-     template< typename scalar_name  >   //  /\/\/\/\/
+     //  /\/\/\/\/
+     template< typename scalar_name  >   
       inline
       scalar_name
       wave
        (
          scalar_name  const& value
-        ,scalar_name  const& lower 
+        ,scalar_name  const& lower
         ,scalar_name  const& higher
        )
        {
@@ -96,7 +99,8 @@ namespace math
         return Ir_result;
        }
 
-     template< typename scalar_name  >   //  /\/\/\/\/
+     //  /\/\/\/\/
+     template< typename scalar_name  >   
       inline
       scalar_name
       wave
@@ -129,21 +133,22 @@ namespace math
         return Ir_result;
        }
 
-
-     template< typename scalar_name  >  //  \\\\\//////
+     //  \\\\\//////
+     template< typename scalar_name  >  
       inline
       scalar_name
       sinkhole
        (
         scalar_name   const& value
-        ,scalar_name  const& lower  
-        ,scalar_name  const& higher 
+        ,scalar_name  const& lower
+        ,scalar_name  const& higher
        )
        {
         return scalar_name( ::fmod( fabs( value ) - lower, higher - lower ) ) + lower;
        }
 
-     template< typename scalar_name  >  //  \\\\\//////
+     //  \\\\\//////
+     template< typename scalar_name  >  
       inline
       scalar_name
       sinkhole
@@ -154,7 +159,8 @@ namespace math
         return scalar_name( ::fmod( fabs( value ), scalar_name(1) ) );
        }
 
-      template< typename scalar_name  >  //  _____/~~~
+      //  _____/~~~
+      template< typename scalar_name  >  
       inline
       scalar_name
       relu    //  rectified linear unit  = max(lower, value )
@@ -166,7 +172,8 @@ namespace math
         return ( value < lower ? lower : value );
        }
 
-      template< typename scalar_name , typename integer_name = int >  //  _____------^^^
+      //  _____------^^^
+      template< typename scalar_name , typename integer_name = int >  
       inline
        scalar_name
        stairs  //!< AKA floor
@@ -177,7 +184,8 @@ namespace math
         return floor( value );
        }
 
-      template< typename scalar_name , typename integer_name = int >  //  _____------
+      //  _____------
+      template< typename scalar_name , typename integer_name = int >  
       inline
        scalar_name
        stairs
@@ -189,11 +197,11 @@ namespace math
         return step * floor( value / step );
        }
 
-
+     //!< [left,right] -> [0,1]
      template< typename scalar_name >
       inline
       scalar_name
-      to_one      //!< [left,right] -> [0,1]
+      to_one      
        (
          scalar_name  const& value              //!< what  goes to [0,1]
         ,scalar_name  const& left               //!< left  side of interval
@@ -203,10 +211,11 @@ namespace math
         return ( value - left ) / ( right - left );
        }
 
+     //!< [0,1] -> [left,right]
      template< typename scalar_name >
       inline
       scalar_name
-      to_any      //!< [0,1] -> [left,right] ->
+      to_any      
        (
          scalar_name  const& value              //!< what  goes to [left,right]
         ,scalar_name  const& left               //!< left  side of interval
@@ -216,10 +225,11 @@ namespace math
         return value * ( right - left ) + left ;
        }
 
+     //!< [leftA,rightA] -> [leftB,rightB]
      template< typename scalar_name >
       inline
       scalar_name
-      any_to_any      //!< [leftA,rightA] -> [leftB,rightB]
+      any_to_any      
        (
          scalar_name  const& value                //!< what  goes to [leftB,rightB]
         ,scalar_name  const& leftA
@@ -231,10 +241,11 @@ namespace math
         return ::math::function::to_any( ::math::function::to_one<scalar_name>( value, leftA, rightA ), leftB, rightB );
        }
 
+     //!< [leftA,rightA] -> [leftB,rightB]
      template< typename scalar_name >
       inline
       void
-      any_to_any_coefficient      //!< [leftA,rightA] -> [leftB,rightB]
+      any_to_any_coefficient      
        (
          scalar_name       & c0
         ,scalar_name       & c1

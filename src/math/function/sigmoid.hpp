@@ -10,7 +10,7 @@ namespace math
    {
 
     template< typename scalar_name >
-     inline int sigmoid( scalar_name const& x )
+     inline scalar_name sigmoid( scalar_name const& x )
       {
        return scalar_name(1)/( scalar_name(1) + exp(-x) );
       }
