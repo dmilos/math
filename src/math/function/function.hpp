@@ -17,5 +17,6 @@
 #include "./signum.hpp"
 #include "./ricker.hpp"
 #include "./combinations.hpp"
+#include "./sigmoid.hpp"
 
 #include "./distribution/distribution.hpp"

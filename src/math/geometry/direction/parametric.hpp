@@ -51,7 +51,6 @@ namespace math
 
          public:
            explicit parametric( two_type const& two )
-            : m_origin( two.first() )
             {
              *this = two;
             }
@@ -59,7 +58,7 @@ namespace math
          public:
            parametric & operator=( two_type const& two )
             {
-             m_origin = two.first();
+             this->origin() = two.first();
              ::math::linear::vector::subtraction( this->m_direction, two.second(), two.first() );
              return *this;
             }
@@ -117,6 +116,8 @@ namespace math
             }
          private:
            point_type m_direction;
+           
+           //std::array<point_type,2> m_data;
         };
 
       template<typename scalar_name >

@@ -92,3 +92,5 @@ example/test/codeblocks/obj
 /example/_build-msvc_Clang_17
 /example/_build-msvc_Clang_20
 /example/_cmakeVS
+/example/_buildVS
+/example/_build-msvc

@@ -321,7 +321,11 @@ table.table_cost
 
         <dt><b>Paul Heckbert</b> </dt>
         <dd>
-          Same idea same principle, only difference Paul Heckbert assuem that h<sub>33</sub> = 1. In here value h<sub>33</sub> has no constraint. </b>
+          Same idea, similar principle.
+          <ul>
+            <li>Assuem that h<sub>33</sub> = 1. In here value h<sub>33</sub> has no constraint. </li>
+            <li>Direct calculation from qudrilateral to square and vice versa. In here transfromation has two step first is affine part, second is simple homography part. </li>
+          </ul>
         </dd>
      </dl>
    </dd>
@@ -414,6 +418,8 @@ table.table_cost
             </td> </tr>
            <tr> <td> 0 &ne; (1-Y)<sup>2</sup> + ( 1-X )<sup>2</sup> + ( X+Y-1 )<sup>2</sup> <br>
               Always &ne; 0. <br> Always exists. </td> </tr>
+
+        <tr> <td> If we observe as function we have minimum at (X,Y)=(2/3,2/3). </td> </tr>
          </table>
 
         <br>... and vice versa <br><br>
@@ -837,7 +843,13 @@ table.table_cost
         Here are several proposed values to do that:
         <dl>
          <dt><b>&lambda; = 1/h<sub>33</sub></b></dt>
-          <dd>This is one of the most common way to do.</dd>
+          <dd>This is one of the most common way to do. Nummerircal error may occure if h<sub>33</sub> is very small comparint to h<sub>31</sub> and h<sub>32</sub></dd>
+
+         <dt><b>&lambda;= <i>s</i>/||h<sub>3*</sub>||, <i>s</i> &isin; &reals; <i>s</i> &ne; 0;</b> </dt>
+          <dd>
+            Another common way to do. <i>s</i> i usually equal to 1.
+           </dd>
+
          <dt><b>&lambda;= <i>s</i>/||h<sub>*1</sub>||, <i>s</i> &isin; &reals; <i>s</i> &ne; 0;</b> </dt>
           <dd>
             Observe first column as 3D vector. <i>s</i> i usually equal to 1.
@@ -847,13 +859,18 @@ table.table_cost
          <dt><b>&lambda;= 1/||h<sub>*1</sub> &Cross; h<sub>*2</sub>||</b></dt>
            <dd>
             h<sub>*1</sub> &Cross; h<sub>*2</sub> is normal of source plane.
-
            </dd>
+
          <dt><b> v = h<sub>*1</sub> &Cross; h<sub>*2</sub>;<br> &lambda; = 1/|| v<sub>x</sub>&middot;v<sub>x</sub> + v<sub>y</sub>&middot;v<sub>y</sub>||</b></dt>
           <dd>
             This cross product also give equation of horizon or vanish line on target plane( <i>z</i>=1 ).<br>
             First and second coordinate will present direction of line in form:
              x&middot;cos( &alpha; ) + y&middot;sin( &alpha; ) - r = 0
+          </dd>
+
+         <dt><b>&lambda;= h<sub>*3</sub> &middot; ( h<sub>*1</sub> &Cross; h<sub>*2</sub> ) </b></dt>
+          <dd>
+           Distance of plane from origin.
           </dd>
 
         <dl>

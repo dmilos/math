@@ -49,7 +49,7 @@ namespace math
                return m_C;
               }
 
-             vector3_type const& center( bool const& recalc = true ) //!< camera center
+             vector3_type const& center( bool const& recalc = true ) //!< camera center in 3d world
               {
                ::math::linear::matrix::invert( m_iM, m_M );
                ::math::linear::matrix::transform( m_C, m_iM, m_p4 );
