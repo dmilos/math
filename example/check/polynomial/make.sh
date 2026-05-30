@@ -3,11 +3,27 @@
 echo [$(date)]$(pwd)
  
 
-cd ./solve
+cd ./cubic
 ./make.sh
 cd ..
 
 cd ./interpolate
+./make.sh
+cd ..
+
+cd ./linear
+./make.sh
+cd ..
+
+cd ./quadric
+./make.sh
+cd ..
+
+cd ./quartic
+./make.sh
+cd ..
+
+cd ./solve
 ./make.sh
 cd ..
 

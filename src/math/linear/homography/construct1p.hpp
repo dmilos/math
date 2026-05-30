@@ -24,7 +24,7 @@ namespace math
      {
 
       template<  typename scalar_name >
-       void construct //!< REFERENT function. Essentially this is definition of homograph !!!
+       void construct //!< REFERENT function. Essentially this is definition of homography !!!
         (
           ::math::linear::homography::structure< scalar_name, 1 >          & result
          ,::math::geometry::direction::parametric<scalar_name, 2>       const& source

@@ -28,7 +28,7 @@ namespace math
          ,::math::linear::vector::structure<      scalar_name, dimension_number >    const& point
          )
         {
-         scalar_name divisor  =  display2space[dimension_number][dimension_number];
+         scalar_name divisor = display2space[dimension_number][dimension_number];
 
          for( ::math::type::size_type i=0; i < dimension_number; ++i )
           {
@@ -114,6 +114,7 @@ namespace math
 
          return /*result*/;
         }
+
 
        template<  typename scalar_name >
         ::math::geometry::direction::ABC2D<scalar_name> &

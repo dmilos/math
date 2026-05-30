@@ -44,10 +44,10 @@ template< typename scalar_name, math::type::size_t width_number, math::type::siz
   }
 
 template< typename scalar_name, math::type::size_t dimension_number >
- void print ( ::math::linear::vector::structure<scalar_name,dimension_number> const& v )
+ void print ( ::math::linear::vector::structure<scalar_name,dimension_number> const& v, std::string const& comment = "" )
   {
-   std::cout << "{" ;
-
+   std::cout << comment << "{" ;
+ 
    for( unsigned i=0; i< dimension_number; i++ )
     {
      std::cout << "" << std::setw(10) << std::fixed << v[i] << ", ";
@@ -348,6 +348,120 @@ void hg2_single_invert_brute()
   h2 = h2;
  }
 
+void hg2_direct()
+ {
+  std::cout << " --- 2D ---  direct brute ----- "   << std::endl;
+  typedef ::math::linear::homography::structure<double,2>  homography2_type;
+  typedef ::math::linear::vector::structure<double, 2>  vector2_type;
+
+  homography2_type  h_h, h_s, h_t, H;
+  std::size_t total = 0;
+  std::size_t fail  =0 ;
+
+  double max_diff = 0;
+
+  for( double s_y = +1.0; s_y < 2;  s_y += 0.01 )
+  for( double s_x = +1.0; s_x < 2;  s_x += 0.01 )
+  for( double t_y = +1.0; t_y < 2;  t_y += 0.01 )
+  for( double t_x = +1.0; t_x < 2;  t_x += 0.01 )
+   {
+    ++total;
+    ::math::linear::homography::construct<double,2>( h_h, { t_x, t_y }, { s_x, s_y } );   ::math::linear::matrix::scale( h_h, 1/h_h[2][2] );
+
+    ::math::linear::homography::construct_invert( h_s, { s_x, s_y } );
+    ::math::linear::homography::construct( h_t, { t_x, t_y } );
+
+    ::math::linear::matrix::multiply( H, h_t, h_s ); ::math::linear::matrix::scale( H, 1/H[2][2] );
+
+    vector2_type r;
+    double difference;
+
+    ::math::linear::homography::transform( r, h_h, {0,0} );
+    difference = fabs (r[0] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_0 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[1] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_1 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    ::math::linear::homography::transform( r, h_h, {1,0} );
+    difference = fabs( r[0] - 1 ); if( 0.00001 < difference ) { ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 0 ); if( 0.00001 < difference ) { ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    ::math::linear::homography::transform( r, h_h, {0,1} );
+    difference = fabs( r[0] - 0 ); if( 0.00001 < difference ) { ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 1 ); if( 0.00001 < difference ) { ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    ::math::linear::homography::transform( r, h_h, {s_x,s_y } );
+    difference = fabs( r[0] - t_x ); if( 0.00001 < difference ) { ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - t_y ); if( 0.00001 < difference ) { ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    if( max_diff < difference )
+     {
+      max_diff = difference;
+     }
+    r=r;
+  }
+  std::cout << "total: " << total << "; " 
+            << "fail:" << fail <<"; " 
+            << 100 * (double)fail/(double)total << "; "
+            << "max_diff: " << max_diff << "; "
+            << std::endl;
+
+ }
+
+void hg2_compose()
+ {
+  std::cout << " --- 2D ---  compose brute ----- "   << std::endl;
+  typedef ::math::linear::homography::structure<double,2>  homography2_type;
+  typedef ::math::linear::vector::structure<double, 2>  vector2_type;
+
+  homography2_type h_s, h_t, h_h;
+  std::size_t total = 0;
+  std::size_t fail  =0 ;
+
+  double max_diff = 0;
+
+  for( double s_y = +0.5; s_y < 2;  s_y += 0.01 )
+  for( double s_x = +0.5; s_x < 2;  s_x += 0.01 )
+  for( double t_y = +0.5; t_y < 2;  t_y += 0.01 )
+  for( double t_x = +0.5; t_x < 2;  t_x += 0.01 )
+   {
+    ++total;
+    ::math::linear::homography::construct_invert( h_s, { s_x, s_y } );
+    ::math::linear::homography::construct( h_t, { t_x, t_y } );
+
+    ::math::linear::matrix::multiply( h_h, h_t, h_s );
+ 
+    vector2_type r;
+    double difference;
+
+    ::math::linear::homography::transform( r, h_h, {0,0} );
+    difference = fabs (r[0] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_0 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[1] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_1 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    ::math::linear::homography::transform( r, h_h, {1,0} );
+    difference = fabs( r[0] - 1 ); if( 0.00001 < difference ) { ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 0 ); if( 0.00001 < difference ) { ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    ::math::linear::homography::transform( r, h_h, {0,1} );
+    difference = fabs( r[0] - 0 ); if( 0.00001 < difference ) { ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 1 ); if( 0.00001 < difference ) { ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    ::math::linear::homography::transform( r, h_h, {s_x,s_y } );
+    difference = fabs( r[0] - t_x ); if( 0.00001 < difference ) { ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - t_y ); if( 0.00001 < difference ) { ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    if( max_diff < difference )
+     {
+      max_diff = difference;
+     }
+    r=r;
+  }
+  std::cout << "total: " << total << "; " 
+            << "fail:" << fail <<"; " 
+            << 100 * (double)fail/(double)total << "; "
+            << "max_diff: " << max_diff << "; "
+            << std::endl;
+
+
+ }
 void hg2_complete()
  {
   std::cout << " --- 2D ---   Complete ----- "   << std::endl;
@@ -401,41 +515,55 @@ void hg3_single_direct_brute()
   std::size_t total = 0;
   std::size_t fail  =0 ;
 
-  for( double z = -2; z < 2;  z += 0.01 )
-  for( double y = -2; y < 2;  y += 0.01 )
-  for( double x = -2; x < 2;  x += 0.01 )
+  double max_diff = 0;
+
+  for( double z = +0.5; z < 2;  z += 0.01 )
+  for( double y = +0.5; y < 2;  y += 0.01 )
+  for( double x = +0.5; x < 2;  x += 0.01 )
    {
     ++total;
     ::math::linear::homography::construct( h3, { x, y, z } );
+    ::math::linear::homography::construct<double,3>( h3, { x, y, z } );
 
     ::math::linear::vector::structure<double,3> r;
+    double difference;
 
     ::math::linear::homography::transform( r, h3, {0,0,0} );
-    if( 0.00001 < fabs (r[0] - 0 ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_0 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[1] - 0 ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_1 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[2] - 0 ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_2 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[0] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_0 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[1] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_1 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[2] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_2 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
 
     ::math::linear::homography::transform( r, h3, {1,0,0} );
-    if( 0.00001 < fabs (r[0] - 1 ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[1] - 0 ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[2] - 0 ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[0] - 1 ); if( 0.00001 < difference ) { ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 0 ); if( 0.00001 < difference ) { ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[2] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
 
     ::math::linear::homography::transform( r, h3, {0,1,0} );
-    if( 0.00001 < fabs (r[0] - 0 ) ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[1] - 1 ) ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[2] - 0 ) ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[0] - 0 ); if( 0.00001 < difference ) { ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 1 ); if( 0.00001 < difference ) { ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[2] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
 
     ::math::linear::homography::transform( r, h3, {0,0,1} );
-    if( 0.00001 < fabs (r[0] - 0 ) ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[1] - 0 ) ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[2] - 1 ) ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[0] - 0 ); if( 0.00001 < difference ) { ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 0 ); if( 0.00001 < difference ) { ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[2] - 1 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
 
     ::math::linear::homography::transform( r, h3, {1,1,1} );
-    if( 0.00001 < fabs (r[0] - x ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[1] - y ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[2] - z ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[0] - x ); if( 0.00001 < difference ) { ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - y ); if( 0.00001 < difference ) { ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[2] - z ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    if( max_diff < difference )
+     {
+      max_diff = difference;
+     }
+    r=r;
   }
-  std::cout << "total: " << total << "; " << "fail:" << fail <<"; " << 100 * (double)fail/(double)total << std::endl;
+  std::cout << "total: " << total << "; " 
+            << "fail:" << fail <<"; " 
+            << 100 * (double)fail/(double)total << "; "
+            << "max_diff: " << max_diff << "; "
+            << std::endl;
  }
 
 void hg3_single_invert_brute()
@@ -447,42 +575,56 @@ void hg3_single_invert_brute()
   std::size_t total = 0;
   std::size_t fail  =0 ;
 
-  for( double z = -2; z < 2;  z += 0.01 )
-  for( double y = -2; y < 2;  y += 0.01 )
-  for( double x = -2; x < 2;  x += 0.01 )
+  double max_diff = 0;
+  for( double z = +0.5; z < 2;  z += 0.01 )
+  for( double y = +0.5; y < 2;  y += 0.01 )
+  for( double x = +0.5; x < 2;  x += 0.01 )
    {
     ++total;
     ::math::linear::homography::construct_invert( h3, { x, y, z } );
 
     ::math::linear::vector::structure<double,3> r;
+     double difference;
 
     ::math::linear::homography::transform( r, h3, {0,0,0} );
-    if( 0.00001 < fabs (r[0] - 0 ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_0 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[1] - 0 ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_1 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[2] - 0 ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_2 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[0] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_0 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[1] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_1 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[2] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_2 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
 
     ::math::linear::homography::transform( r, h3, {1,0,0} );
-    if( 0.00001 < fabs (r[0] - 1 ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[1] - 0 ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[2] - 0 ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[0] - 1 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[2] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
 
     ::math::linear::homography::transform( r, h3, {0,1,0} );
-    if( 0.00001 < fabs (r[0] - 0 ) ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[1] - 1 ) ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[2] - 0 ) ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[0] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 1 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[2] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
 
     ::math::linear::homography::transform( r, h3, {0,0,1} );
-    if( 0.00001 < fabs (r[0] - 0 ) ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[1] - 0 ) ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[2] - 1 ) ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[0] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[2] - 1 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
 
     ::math::linear::homography::transform( r, h3, {x,y,z} );
-    if( 0.00001 < fabs (r[0] - 1 ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[1] - 1 ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
-    if( 0.00001 < fabs (r[2] - 1 ) ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[0] - 1 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 1 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[2] - 1 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+  
+    if( max_diff < difference )
+     {
+      max_diff = difference;
+     }
+
   }
-  std::cout << "total: " << total << "; " << "fail:" << fail <<"; " << 100 * (double)fail/(double)total << std::endl;
+  std::cout << "total: " << total << "; " 
+            << "fail:" << fail <<"; " 
+            << 100 * (double)fail/(double)total << "; "
+            << "max_diff: " << max_diff << "; "
+            << std::endl;
  }
+
+
 
 void hg3_single()
  {
@@ -492,37 +634,37 @@ void hg3_single()
 
   homography3_type h3;
 
-  ::math::linear::homography::construct( h3, { 1, 1, 1 } );
+  ::math::linear::homography::construct<double,3>( h3, { 1, 1, 1 } );
   print( h3, "  --- { 1, 1, 1 } " );
   std::cout << "    "; apply<double,3>( h3, {1, 1, 1} ); std::cout << std::endl; std::cout << std::endl;
 
-  ::math::linear::homography::construct( h3, { 1, 2, 3 } );
+  ::math::linear::homography::construct<double, 3>( h3, { 1, 2, 3 } );
   print( h3, "  --- { 1, 2, 3 } " );
   std::cout << "    "; apply<double,3>( h3, {1, 1, 1} ); std::cout << std::endl;
 
-  ::math::linear::homography::construct( h3, { 3, 2, 1 } );
+  ::math::linear::homography::construct<double, 3>( h3, { 3, 2, 1 } );
   print( h3, "  --- { 3, 2, 1 } " );
   std::cout << "    "; apply<double,3>( h3, {1, 1, 1} ); std::cout << std::endl;
 
-  ::math::linear::homography::construct( h3, { 0.5, 0.5, 0.5 } );
+  ::math::linear::homography::construct<double, 3>( h3, { 0.5, 0.5, 0.5 } );
   print( h3, "  --- { 0.5, 0.5, 0.5 } " );
   std::cout << "    "; apply<double,3>( h3, {1, 1, 1} ); std::cout << std::endl;
 
   std::cout << " --- 3D ---   Single invert ----- "   << std::endl;
 
-  ::math::linear::homography::construct_invert( h3, { 1, 1, 1 } );
+  ::math::linear::homography::construct_invert<double, 3>( h3, { 1, 1, 1 } );
   print( h3, "  --- { 1, 1, 1 } " );
   std::cout << "    "; apply<double,3>( h3, {1, 1, 1} ); std::cout << std::endl; std::cout << std::endl;
 
-  ::math::linear::homography::construct_invert( h3, { 1, 2, 3 } );
+  ::math::linear::homography::construct_invert<double, 3>( h3, { 1, 2, 3 } );
   print( h3, "  --- { 1, 2, 3 } " );
   std::cout << "    "; apply<double,3>( h3, {1, 2, 3} ); std::cout << std::endl; std::cout << std::endl;
 
-  ::math::linear::homography::construct_invert( h3, { 3, 2, 1 } );
+  ::math::linear::homography::construct_invert<double, 3>( h3, { 3, 2, 1 } );
   print( h3, "  --- { 3, 2, 1 } " );
   std::cout << "    "; apply<double,3>( h3, {3, 2, 1} ); std::cout << std::endl; std::cout << std::endl;
 
-  ::math::linear::homography::construct_invert( h3, { 0.5, 0.5, 0.5 } );
+  ::math::linear::homography::construct_invert<double, 3>( h3, { 0.5, 0.5, 0.5 } );
   print( h3, "  --- { 0.5, 0.5, 0.5 } " );
   std::cout << "    "; apply<double,3>( h3, { 0.5, 0.5, 0.5 } ); std::cout << std::endl; std::cout << std::endl;
  }
@@ -635,14 +777,230 @@ void hg2_directions()
  }
 
 
+void hg4()
+ {
+  typedef ::math::linear::homography::structure<double, 4>  homography4_type;
+  typedef ::math::linear::vector::structure<double, 4>  vector4_type;
+  typedef ::math::linear::vector::structure<double, 5>  vector5_type;
+
+  homography4_type h4;
+  vector4_type T;
+
+  for( int i=0; i< 10; ++i )
+   {
+    T = { 1 + rand() / (double)RAND_MAX,1 + rand() / (double)RAND_MAX,1 + rand() / (double)RAND_MAX, 1 + rand()/(double)RAND_MAX  };
+
+  ::math::linear::homography::construct<double,4>( h4, T );
+
+  //::math::linear::homography::transform<double,4>( T, h4, { 0, 0, 0, 0 } );  print<double,5>( S, "" ); std::cout << std::endl;
+  //::math::linear::homography::transform<double,4>( T, h4, { 1, 0, 0, 0 } );  print<double,5>( S, "" ); std::cout << std::endl;
+  //::math::linear::homography::transform<double,4>( T, h4, { 0, 1, 0, 0 } );  print<double,5>( S, "" ); std::cout << std::endl;
+  //::math::linear::homography::transform<double,4>( T, h4, { 0, 0, 1, 0 } );  print<double,5>( S, "" ); std::cout << std::endl;
+  //::math::linear::homography::transform<double,4>( T, h4, { 0, 0, 0, 1 } );  print<double,5>( S, "" ); std::cout << std::endl;
+
+   print<double, 4>( T, "" ); std::cout << std::endl;
+  ::math::linear::homography::transform<double,4>( T, h4, { 1, 1, 1, 1 } );  print<double,4>( T, "" ); std::cout << std::endl;
+
+  //::math::linear::homography::transform<double,4>( S, h4, T ); print<double,5>( S  ); std::cout << std::endl;
+  std::cout << std::endl;
+   }
+
+ }
+
+void hg4_inv()
+ {
+  typedef ::math::linear::homography::structure<double, 4>  homography4_type;
+  typedef ::math::linear::vector::structure<double, 4>  vector4_type;
+  typedef ::math::linear::vector::structure<double, 5>  vector5_type;
+
+  homography4_type h4;
+  vector4_type T;
+
+  for( int i=0; i< 10; ++i )
+   {
+    T = { 1 + rand() / (double)RAND_MAX,1 + rand() / (double)RAND_MAX,1 + rand() / (double)RAND_MAX, 1 + rand()/(double)RAND_MAX  };
+    //T = { 1 ,1 ,1 , 1 };
+
+    ::math::linear::homography::construct_invert<double,4>( h4, T );
+
+    ::math::linear::homography::transform<double,4>( T, h4, { 0, 0, 0, 0  } );  print<double,4>( T, "" ); std::cout << std::endl;
+    ::math::linear::homography::transform<double,4>( T, h4, { 1, 0, 0, 0  } );  print<double,4>( T, "" ); std::cout << std::endl;
+    ::math::linear::homography::transform<double,4>( T, h4, { 0, 1, 0, 0  } );  print<double,4>( T, "" ); std::cout << std::endl;
+    ::math::linear::homography::transform<double,4>( T, h4, { 0, 0, 1, 0  } );  print<double,4>( T, "" ); std::cout << std::endl;
+    ::math::linear::homography::transform<double,4>( T, h4, { 0, 0, 0, 1  } );  print<double,4>( T, "" ); std::cout << std::endl;
+
+    print<double, 4>( T, "" ); // std::cout << std::endl;
+    ::math::linear::homography::transform<double,4>( T, h4, { T[0], T[1], T[2], T[3] } );  print<double,4>( T, "" ); std::cout << std::endl;
+
+    //::math::linear::homography::transform<double,4>( S, h4, T ); print<double,5>( S  ); std::cout << std::endl;
+    std::cout << std::endl;
+   }
+
+ }
+
+
+void hg4_single_direct_brute()
+ {
+  std::cout << " --- 4D ---   Single direct brute ----- "   << std::endl;
+  typedef ::math::linear::homography::structure<double,4>  homography4_type;
+
+  homography4_type h4;
+  std::size_t total = 0;
+  std::size_t fail  =0 ;
+
+  double max_diff = 0;
+
+  for( double z = +0.5; z < 2;  z += 0.01 )
+  for( double y = +0.5; y < 2;  y += 0.01 )
+  for( double x = +0.5; x < 2;  x += 0.02 )
+  for( double t = +0.5; t < 2;  t += 0.02 )
+   {
+    ++total;
+
+    ::math::linear::homography::construct<double,4>( h4, { x, y, z, t } );
+
+    ::math::linear::vector::structure<double,4> r;
+    double difference;
+
+    ::math::linear::homography::transform( r, h4, {0,0,0,0} );
+    difference = fabs (r[0] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_0 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[1] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_1 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[2] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_2 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[3] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_2 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    ::math::linear::homography::transform( r, h4, {1,0,0,0 } );
+    difference = fabs( r[0] - 1 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[2] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[3] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    ::math::linear::homography::transform( r, h4, {0,1,0,0 } );
+    difference = fabs( r[0] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 1 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[2] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[3] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    ::math::linear::homography::transform( r, h4, {0,0,1,0 } );
+    difference = fabs( r[0] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[2] - 1 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[3] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    ::math::linear::homography::transform( r, h4, {0,0,0,1 } );
+    difference = fabs( r[0] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[2] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[3] - 1 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    ::math::linear::homography::transform( r, h4, {1,1,1,1 } );
+    difference = fabs( r[0] - x ); if( 0.00001 < difference ) { ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - y ); if( 0.00001 < difference ) { ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[2] - z ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[3] - t ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    if( max_diff < difference )
+     {
+      max_diff = difference;
+     }
+    r=r;
+  }
+  std::cout << "total: " << total << "; " 
+            << "fail:" << fail <<"; " 
+            << 100 * (double)fail/(double)total << "; "
+            << "max_diff: " << max_diff << "; "
+            << std::endl;
+ }
+
+void hg4_single_invert_brute()
+ {
+  std::cout << " --- 4D ---   Single invert brute ----- "   << std::endl;
+  typedef ::math::linear::homography::structure<double,4>  homography3_type;
+
+  homography3_type h3;
+  std::size_t total = 0;
+  std::size_t fail  =0 ;
+
+  double max_diff = 0;
+  for( double z = +0.5; z < 2;  z += 0.02 )
+  for( double y = +0.5; y < 2;  y += 0.02 )
+  for( double x = +0.5; x < 2;  x += 0.01 )
+  for( double t = +0.5; t < 2;  t += 0.01 )
+   {
+    ++total;
+    ::math::linear::homography::construct_invert<double,4>( h3, { x, y, z,t } );
+
+    ::math::linear::vector::structure<double, 4> r;
+     double difference;
+
+    ::math::linear::homography::transform( r, h3, {0,0,0,0} );
+    difference = fabs (r[0] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_0 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[1] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_1 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[2] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_2 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs (r[3] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _000_2 " << r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    ::math::linear::homography::transform( r, h3, {1,0,0,0} );
+    difference = fabs( r[0] - 1 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[2] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[3] - 0 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _100_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    ::math::linear::homography::transform( r, h3, {0,1,0,0} );
+    difference = fabs( r[0] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 1 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[2] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[3] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _010_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+    ::math::linear::homography::transform( r, h3, {0,0,1,0} );
+    difference = fabs( r[0] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[2] - 1 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[3] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+
+    ::math::linear::homography::transform( r, h3, {0,0,0,1} );
+    difference = fabs( r[0] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[2] - 0 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[3] - 1 ); if( 0.00001 < difference ){ ++fail; /* std::cout << "P: "<< x << ","<< y << "," << z << " _001_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+
+
+    ::math::linear::homography::transform( r, h3, {x,y,z,t} );
+    difference = fabs( r[0] - 1 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_0 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[1] - 1 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_1 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[2] - 1 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+    difference = fabs( r[3] - 1 ); if( 0.00001 < difference ){ ++fail; /*std::cout << "P: "<< x << ","<< y << "," << z << " _xyz_2 "<< r[0] << ", "<<  r[1] << ", "<<  r[2]  <<std::endl; */ }
+  
+    if( max_diff < difference )
+     {
+      max_diff = difference;
+     }
+
+  }
+  std::cout << "total: " << total << "; " 
+            << "fail:" << fail <<"; " 
+            << 100 * (double)fail/(double)total << "; "
+            << "max_diff: " << max_diff << "; "
+            << std::endl;
+ }
+
+
+
+
 int main( int argc, char*argv[] )
  {
+  hg2_direct();
+  //hg2_compose();
+  return 0;
+
+  hg4();
+  hg4_inv();
   hg1_definition();
   hg2_definition();
   hg2_directions();
   std::cout << " ------------- 1 -----------" << std::endl; hg1();
   std::cout << " ------------- 2 -----------" << std::endl; hg2_single_specific(); hg2_simple(); hg2_complete(); hg2_single_direct_brute(); hg2_single_invert_brute();
   std::cout << " ------------- 3 -----------" << std::endl; hg3_single();          hg3_simple(); hg3_complete(); hg3_single_direct_brute(); hg3_single_invert_brute();
+  std::cout << " ------------- 4 -----------" << std::endl;                                                      hg4_single_direct_brute(); hg4_single_invert_brute();
 
   //{
   // ::math::linear::homography::structure<double,15>   m15;

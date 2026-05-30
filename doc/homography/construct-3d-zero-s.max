@@ -1,0 +1,30 @@
+f(x, y,z) :=
+     (y * z * (x + y + z - 1 - 2* x ))^2
+   + (x * z *(x + y + z - 1 - 2* y))^2
+   + (x * y *(x + y + z - 1 - 2* z))^2
+   + (2*x*y*z)^2;
+grad: [diff(f(x, y,z), x),diff(f(x, y,z), y), diff(f(x, y,z), z)];
+solve([grad[1]=0, grad[2]=0, grad[3]=0], [x, y,z]);
+
+---
+
+
+eqns : [
+  0=y * z * (x + y + z - 1 - 2* x )
+ ,0=x * z *(x + y + z - 1 - 2* y)
+ ,0= x * y *(x + y + z - 1 - 2* z)
+ ,0= x*y*z
+ ];
+
+ solve( eqns,[
+  x, y, z
+ ] );
+
+ [x=0,y=%r2,z=0],
+ [x=0,y=0,z=%r4],
+ [x=0,y=%r6,z=1-%r6] 
+ 
+ [x=%r1,y=0,z=0],
+ [x=%r5,y=0,z=1-%r5],
+ 
+ [x=%r3,y=1-%r3,z=0],

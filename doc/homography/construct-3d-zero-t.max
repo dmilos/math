@@ -1,0 +1,11 @@
+f(x, y,z) := 
+     (1-(-x+y+z))^2 
+   + (1-(+x-y+z))^2 
+   + (1-(+x+y-z))^2 
+   + (x+y+z-1)^2;
+   
+   
+grad: [diff(f(x, y,z), x),diff(f(x, y,z), y), diff(f(x, y,z), z)];
+solve([grad[1]=0, grad[2]=0, grad[3]=0], [x, y,z]);
+
+/* [[x=1/2,y=1/2,z=1/2]] */

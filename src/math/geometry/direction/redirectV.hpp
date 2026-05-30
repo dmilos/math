@@ -24,7 +24,7 @@ namespace math
        >
        void
        redirect( std::vector< ::math::geometry::direction::ABC2D< scalar_name > > & beam )
-        {
+        { //! Flip direction so all directions has less than 90 deg with lead direction
          typedef ::math::geometry::direction::ABC2D< scalar_name >    ABC2D_type;
 
          ABC2D_type orientation = beam[ beam.size()/2 ].normalize();
@@ -48,11 +48,11 @@ namespace math
        >
        void
        redirect( std::vector< ::math::geometry::direction::polar< scalar_name > > & beam )
-        {
+        { //! Flip direction so all directions has less than 90 deg with lead direction
          using namespace ::math::linear::vector;
          typedef ::math::geometry::direction::polar< scalar_name >    polar_type;
 
-         polar_type & orientation =  beam[  beam.size()/2].fix();
+         polar_type & orientation =  beam[  beam.size()/2 ].fix();
 
          for( auto & direction: beam )
           {

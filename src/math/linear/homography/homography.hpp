@@ -4,6 +4,7 @@
 #include "./construct2p.hpp"
 #include "./construct3.hpp"
 #include "./construct3l.hpp"
+#include "./constructn.hpp"
 
 #include "./transform.hpp"
 #include "./structure.hpp"

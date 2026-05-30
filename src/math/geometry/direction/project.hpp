@@ -1,7 +1,7 @@
 #ifndef math_geometry_direction_project_HPP_
  #define math_geometry_direction_project_HPP_
 
-// ::math::geometry::direction::project( point, direction )
+// point = ::math::geometry::direction::project<double>().project( point, direction )
 
 #include "./parametric.hpp"
 #include "./two.hpp"
@@ -30,6 +30,9 @@
            typedef ::math::geometry::direction::parametric<scalar_name, 2> parametric_type;
            //typedef ::math::geometry::direction::two<scalar_name, 2>               two_type;
 
+         public:
+           project(){}
+         public:
           point2D_type process( point2D_type const& point, ABC2D_type const& direction )
            {
             auto const& A = direction.A();
@@ -46,6 +49,7 @@
             return result;
            }
 
+         public:
           point2D_type process( ABC2D_type const& direction )  //!< This will project origin to direction
            {
             point2D_type result;

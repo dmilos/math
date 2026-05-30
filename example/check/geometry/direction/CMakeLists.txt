@@ -3,4 +3,4 @@
 
 add_executable(   Math_Geometry_Direction__check             check.cpp )
 add_executable(   Math_Geometry_Direction__test             test.cpp )
-#add_executable(   Math_Geometry_Direction             testOCV.cpp )
+add_subdirectory(   ocv )

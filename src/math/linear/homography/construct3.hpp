@@ -60,9 +60,9 @@ namespace math
          scalar_name Y = T[1];
          scalar_name Z = T[2];
 
-         scalar_name A =                  Y * Z * ( Z + Y - X - scalar_name(1) );
-         scalar_name B =                  X * Z * ( X - Y + Z - scalar_name(1) );
-         scalar_name C =                  X * Y * ( X + Y - Z - scalar_name(1) );
+         scalar_name A =                      Y * Z * ( Z + Y - X - scalar_name(1) );
+         scalar_name B =                  X *     Z * ( X - Y + Z - scalar_name(1) );
+         scalar_name C =                  X * Y *     ( X + Y - Z - scalar_name(1) );
          scalar_name D = scalar_name(2) * X * Y * Z;
 
          scalar_name M = std::max< scalar_name > ( std::max< scalar_name >( fabs(A), fabs(B) ), std::max< scalar_name >( fabs(C), fabs(D) ) );
@@ -76,7 +76,6 @@ namespace math
          result[0][2] = 0;      result[1][2] = 0;     result[2][2] = C + D;  result[3][2] = C;
          result[0][3] = 0;      result[1][3] = 0;     result[2][3] = 0;      result[3][3] = D;
         }
-
 
       template<  typename scalar_name >
        bool construct

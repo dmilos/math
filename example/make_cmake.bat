@@ -1,4 +1,3 @@
-set prg_cmake=cmake
 
 
 mkdir _build-msvc
@@ -6,6 +5,9 @@ cd _build-msvc
 %prg_cmake% ..
 %prg_cmake% --build .
 cd ..
+
+pause
+exit
 
 mkdir _build-msvc_11
 cd _build-msvc_11

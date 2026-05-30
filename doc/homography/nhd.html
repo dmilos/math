@@ -45,9 +45,6 @@ table.table_cost
     border: 0px solid black;
     border-collapse: collapse;
  }
-
-
-
 </style>
  </head>
  <body>
@@ -86,11 +83,12 @@ table.table_cost
         </ul>
       </li>
       <li>Assembling</li>
+      <li>Higher Dimensions</li>
+      <li>Constraints</li>
+      <li>Shortcut</li>
       <li>Miscellaneous
-
         <ul>
             <li>Source code</li>
-            <li>Remarks</li>
             <li>Off topic</li>
             <li>Links</li>
         </ul>
@@ -101,7 +99,7 @@ table.table_cost
 
 
   <dt><div style="break-before:page"></div><h3>Description</h3></dt>
-   <dd> Computing the plane to plane homography without fancy thing such as inversion of big matrix or eugen vectors values.<br>
+   <dd> Computing the plane to plane homography without fancy thing such as inversion of big matrix or eigenvalues.<br>
    In here it will be present method in step-by-step manner where every step has some geometric  meaning.
 
    </dd>
@@ -323,8 +321,11 @@ table.table_cost
         <dd>
           Same idea, similar principle.
           <ul>
-            <li>Assuem that h<sub>33</sub> = 1. In here value h<sub>33</sub> has no constraint. </li>
-            <li>Direct calculation from qudrilateral to square and vice versa. In here transfromation has two step first is affine part, second is simple homography part. </li>
+            <li>Assume that h<sub>33</sub> = 1. </li>
+            <li>Direct calculation from quadrilateral to square and vice versa. </li>
+            <li>Fastest closed form solution. </li>
+            <li> <img src="ph-1.png"/> </li>
+            <li> This image was taken from vector variant <b>[Heckbert99]</b>. See also <b>[Heckbert89]</b>.
           </ul>
         </dd>
      </dl>
@@ -351,7 +352,7 @@ table.table_cost
        <dd>
           If <b>L</b> is linear function then: <br>
            <b>L</b>( &alpha; &middot; <b>x</b> + &beta; &middot; <b>y</b> ) = &alpha; &middot; <b>L</b>( <b>x</b> )  + &beta; &middot; <b>L</b>( <b>y</b> ) <br> <br>
-            Represented using homography matrix ( with one of many possible decompositions ):
+            Represented using homography matrix ( with one of many possible decomposition ):
             <table>
               <tr>
                <td>
@@ -390,7 +391,7 @@ table.table_cost
                 </table>
                 </td>
              <tr>
-            <table>
+            </table>
 
             &alpha;, s<sub>x</sub>,  s<sub>y</sub>, &beta; &isin; &reals;
        </dd>
@@ -563,7 +564,6 @@ table.table_cost
              a<sub>z</sub> =<b>L<sub>s</sub></b> <b>T<sub>s</sub></b>( s<sub>z</sub> )<br>
             X = a<sub>z <sub>x</sub></sub> <br>
             Y = a<sub>z <sub>y</sub></sub> <br>
-
 
               <table  align="center" style="white-space:nowrap" >
                 <tr>
@@ -771,7 +771,6 @@ table.table_cost
             </td>
           </tr>
 
-
           <tr>
             <td align="center">
                <table>
@@ -820,21 +819,458 @@ table.table_cost
   </dd>
 
     <dt>
+     <h3><div style="break-before:page"/>Higher Dimensions</h3>
+   </dt>
+   <dd>
+    <dl>
+        <dt><h4>Equalities</h4></dt>
+        <dd>
+          (X,Y) = <b>P<sub>t</sub><sup>-1</sup></b>(1,1);<br>
+          (X,Y,Z) = <b>P<sub>t</sub><sup>-1</sup></b>(1,1,1);<br>
+          (X,Y,Z,T) = <b>P<sub>t</sub><sup>-1</sup></b>(1,1,1,1);<br>
+          (X,Y,Z,T,S) = <b>P<sub>t</sub><sup>-1</sup></b>(1,1,1,1,1);<br>
+          (b<sub>z</sub>) = <b>P<sub>t</sub><sup>-1</sup></b>(1,...);<br>
+        </dd>
+
+        <dt><h4>0</h4></dt>
+        <dd>Nothing to see here</dd>
+        <dt><h4>1</h4></dt>
+        <dd>
+
+              <table style="white-space:nowrap" >
+                <tr>
+                  <td align="center" > <b>P<sub>t</sub><sup>-1</sup></b> = &nbsp; </td>
+                  <td align="center">
+
+                    <table class="matrix">
+                        <tr>  <td> X </td>  <td class ="left_fence"> 0 </td>   </tr>
+                        <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                        <tr>   <td> X </td> <td class ="left_fence"> 1-X </td> </tr>
+                    </table>
+
+                  </td>
+                  <td> &nbsp; &nbsp; </td>
+                  <td align="center"> <b>P<sub>t</sub></b> = &nbsp; </td>
+                  <td align="center" >
+
+                   <table class="matrix" >
+                       <tr> <td>   (X - 1)</td> <td  class ="left_fence"> 0 </td>  </tr>
+                       <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                       <tr>  <td> X&middot;(X - 1) </td> <td class ="left_fence"> X </td> </tr>
+                   </table>
+
+                  </td>
+                </tr>
+              </table>
+
+
+        </dd>
+        <dt><h4>2</h4></dt>
+        <dd>
+              <table style="white-space:nowrap" >
+                <tr>
+                  <td align="center" > <b>P<sub>t</sub><sup>-1</sup></b> = &nbsp; </td>
+                  <td align="center">
+
+                    <table class="matrix">
+                        <tr>  <td> X </td> <td> 0 </td> <td class ="left_fence"> 0 </td>   </tr>
+                        <tr> <td> 0 </td> <td> Y </td> <td class ="left_fence"> 0 </td> </tr>
+                        <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                        <tr> <td> 1-Y </td> <td> 1-X </td> <td class ="left_fence"> X+Y-1 </td> </tr>
+                    </table>
+
+                  </td>
+                  <td> &nbsp; &nbsp; </td>
+                  <td align="center"> <b>P<sub>t</sub></b> = &nbsp; </td>
+                  <td align="center" >
+
+                   <table class="matrix" >
+                       <tr> <td> Y &middot; (X + Y - 1)</td> <td> 0 </td> <td  class ="left_fence"> 0 </td>  </tr>
+                       <tr> <td> 0 </td> <td> X &middot; (X + Y - 1) </td> <td class ="left_fence"> 0 </td> </tr>
+                       <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                       <tr> <td> Y&middot;(Y - 1) </td> <td> X&middot;(X - 1) </td> <td class ="left_fence"> X&middot;Y </td> </tr>
+                   </table>
+
+                  </td>
+                </tr>
+              </table>
+
+        </dd>
+
+        <dt><h4>3</h4></dt>
+        <dd>
+          <table  style="white-space:nowrap" >
+            <tr>
+              <td align="center"> <b>P<sub>t</sub><sup>-1</sup></b> = &nbsp; </td>
+              <td align="center" >
+               <table class="matrix" >
+                   <tr> <td> 2 &middot; X</td> <td> 0 </td><td> 0 </td> <td  class ="left_fence"> 0 </td>  </tr>
+                   <tr> <td> 0 </td> <td> 2 &middot; Y </td> <td> 0 </td> <td class ="left_fence"> 0 </td> </tr>
+                   <tr> <td> 0 </td> <td> 0 </td> <td> 2 &middot; Z </td> <td class ="left_fence"> 0 </td> </tr>
+                   <tr> <td colspan=4 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                   <tr> <td> 1+X-Y-Z </td> <td> 1-X+Y-Z </td>  <td> 1-X+Y+Z </td> <td class ="left_fence">X+Y+Z-1 </td> </tr>
+               </table>
+              </td>
+            </tr>
+          </table>
+          <table>
+              <tr>
+                  <td align="center"> <b>P<sub>t</sub></b> = &nbsp; </td>
+                  <td align="center" >
+                   <table class="matrix" >
+                       <tr> <td> Y &middot; Z &middot; (X + Y + Z - 1)</td> <td> 0 </td> <td> 0 </td> <td  class ="left_fence"> 0 </td>  </tr>
+                       <tr> <td> 0 </td> <td> X &middot; Z &middot; (X + Y + Z - 1) </td> <td> 0 </td> <td class ="left_fence"> 0 </td> </tr>
+                       <tr> <td> 0 </td> <td> 0 </td> <td> X &middot; Y &middot;  (X + Y + Z - 1) </td> <td class ="left_fence"> 0 </td> </tr>
+                       <tr> <td colspan=4 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                       <tr> <td>Y &middot; Z &middot; (X + Y + Z - 1 - 2&middot; X ) </td>  <td>X &middot; Z &middot;(X + Y + Z - 1 - 2&middot; Y) </td> <td> X &middot; Y &middot;(X + Y + Z - 1 - 2&middot; Z) </td> <td class ="left_fence"> 2&middot;X&middot;Y&middot;Z </td> </tr>
+                   </table>
+                  </td>
+            </tr>
+          </table>
+        </dd>
+
+        <dt><h4>4</h4></dt>
+        <dd>
+          <table  style="white-space:nowrap" >
+            <tr>
+              <td> &nbsp; &nbsp; </td>
+              <td align="center"> <b>P<sub>t</sub><sup>-1</sup></b> = &nbsp; </td>
+              <td align="center" >
+               <table class="matrix" >
+                   <tr> <td> 3 &middot; X</td>  <td> 0 </td><td> 0 </td> <td> 0 </td> <td  class ="left_fence"> 0 </td>  </tr>
+                   <tr> <td> 0 </td> <td> 3 &middot; Y </td> <td> 0 </td><td> 0 </td> <td class ="left_fence"> 0 </td> </tr>
+                   <tr> <td> 0 </td> <td> 0 </td> <td> 3 &middot; Z </td><td> 0 </td> <td class ="left_fence"> 0 </td> </tr>
+                   <tr> <td> 0 </td> <td> 0 </td> <td> 0  </td> <td>3 &middot; T  </td><td class ="left_fence"> 0 </td> </tr>
+                   <tr> <td colspan=5 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                   <tr> <td> 1+X-Y-Z-T </td> <td> 1-X+Y-Z-T  </td>  <td> 1-X-Y+Z-T  </td> <td> 1-X-Y-Z+T  </td> <td class ="left_fence">X+Y+Z+T-1 </td> </tr>
+               </table>
+              </td>
+            </tr>
+          </table>
+        </dd>
+
+        <dt><h4>5</h4></dt>
+        <dd>
+          <table  style="white-space:nowrap" >
+            <tr>
+              <td> &nbsp; &nbsp; </td>
+              <td align="center"> <b>P<sub>t</sub><sup>-1</sup></b> = &nbsp; </td>
+              <td align="center" >
+               <table class="matrix" >
+                   <tr> <td> 4 &middot; X</td>  <td> 0 </td><td> 0 </td> <td> 0 </td>  <td> 0 </td> <td  class ="left_fence"> 0 </td>  </tr>
+                   <tr> <td> 0 </td> <td> 4 &middot; Y </td> <td> 0 </td><td> 0 </td>  <td> 0 </td> <td class ="left_fence"> 0 </td> </tr>
+                   <tr> <td> 0 </td> <td> 0 </td> <td> 4 &middot; Z </td><td> 0 </td>  <td> 0 </td> <td class ="left_fence"> 0 </td> </tr>
+                   <tr> <td> 0 </td> <td> 0 </td> <td> 0  </td> <td>4 &middot; T  </td> <td> 0 </td><td class ="left_fence"> 0 </td> </tr>
+                   <tr> <td> 0 </td> <td> 0 </td> <td> 0  </td> <td> 0  </td> <td> 4 &middot; S </td><td class ="left_fence"> 0 </td> </tr>
+                   <tr> <td colspan=6 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                   <tr> <td> 1+X-Y-Z-T-S </td> <td> 1-X+Y-Z-T-S  </td>  <td> 1-X-Y+Z-T-S  </td> <td> 1-X-Y-Z+T-S  </td> </td> <td> 1-X-Y-Z-T+S  </td> <td class ="left_fence">X+Y+Z+T+S-1 </td> </tr>
+               </table>
+              </td>
+            </tr>
+          </table>
+        </dd>
+
+        <dt><h4>n</h4></dt>
+        <dd>
+
+          <table  style="white-space:nowrap"  >
+            <tr >
+              <td align="center"> <b>P<sub>t</sub><sup>-1</sup></b> = &nbsp; </td>
+              <td align="center" >
+               <table class="matrix" >
+                 <tr> <td> (n-1) &middot; b<sub>z<sub>1</sub></sub></td>  <td> 0 </td><td> ... </td> <td> ... </td>  <td> 0 </td> <td  class ="left_fence"> 0 </td>  </tr>
+                 <tr> <td> 0 </td> <td> ... </td> <td> 0 </td><td> ... </td>  <td> ... </td> <td class ="left_fence"> 0 </td> </tr>
+                 <tr> <td> ... </td> <td> 0 </td> <td> (n-1) &middot; b<sub>z<sub>i</sub></sub> </td><td> 0 </td>  <td> ... </td> <td class ="left_fence"> 0 </td> </tr>
+                 <tr> <td> ... </td> <td> ... </td> <td> 0  </td> <td>...  </td> <td> 0 </td><td class ="left_fence"> 0 </td> </tr>
+                 <tr> <td> 0 </td> <td> ... </td> <td> ...  </td> <td> 0  </td> <td> (n-1) &middot; b<sub>z<sub>n</sub></sub> </td><td class ="left_fence"> 0 </td> </tr>
+                 <tr> <td colspan=6 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                 <tr> <td> ... </td> <td> ...  </td>  <td>
+                      <table>
+                        <tr><td >&nbsp; </td><td > n</td><td >&nbsp; </td></tr>
+                        <tr><td >1+ b<sub>z<sub>i</sub></sub> - </td><td  >  &sum; </td><td  > b<sub>z<sub>i</sub></sub> </td></tr>
+                        <tr><td >&nbsp; </td><td > j=1, j&ne;i </td><td >&nbsp; </td></tr>
+                      </table>
+                   </td> <td> ...  </td> <td> ...  </td>
+                   <td class ="left_fence">
+                    <table>
+                      <tr><td >&nbsp; </td><td > n</td><td >&nbsp; </td></tr>
+                      <tr><td >(-1) + </td><td  >  &sum; </td><td  > b<sub>z<sub>i</sub></sub> </td></tr>
+                      <tr><td >&nbsp; </td><td > j=1</td><td >&nbsp; </td></tr>
+                    </table>
+                   </td>
+                  </tr>
+               </table>
+              </td>
+             </tr>
+             <tr> <td>   </td>
+               <td align=center>
+                      <table>
+                        <tr><td >&nbsp; </td><td >&nbsp; </td><td > n</td><td >&nbsp; </td></tr>
+                        <tr><td > 0 &ne; </td><td >(-1)+ b<sub>z<sub>i</sub></sub> - </td><td  >  &sum; </td><td  > b<sub>z<sub>i</sub></sub> </td></tr>
+                        <tr><td >&nbsp; </td><td >&nbsp; </td><td > j=1 </td><td >&nbsp; </td></tr>
+                      </table>
+               </td>
+             </tr>
+             <tr>
+              <td align="center"> <b>P<sub>t</sub></b> = &nbsp; </td>
+              <td >
+                <table class="matrix" >
+                 <tr> <td> ... </td>  <td> 0 </td><td> ... </td> <td> ... </td>  <td> 0 </td> <td  class ="left_fence"> 0 </td>  </tr>
+                 <tr> <td> 0 </td> <td> ... </td> <td> 0 </td><td> ... </td>  <td> ... </td> <td class ="left_fence"> 0 </td> </tr>
+                 <tr> <td> ... </td> <td> 0 </td> <td>
+
+                  <table>
+                    <tr>   <td >&nbsp; </td><td > n</td><td >&nbsp; </td>       <td >&nbsp; </td>     <td >&nbsp; </td><td > n</td><td >&nbsp; </td><td >&nbsp; </td></tr>
+                    <tr>   <td>  ( </td><td  > &prod; </td><td  > b<sub>z<sub>j</sub></sub>  </td>  <td >) ( </td>           <td >(-1) + </td><td  >  &sum; </td><td  > b<sub>z<sub>j</sub></sub> </td><td >) </td></tr>
+                    <tr>   <td >&nbsp; </td><td > j=1,j&ne;i</td><td >&nbsp; </td>    <td >&nbsp; </td>        <td >&nbsp; </td><td > j=1   </td><td >&nbsp; </td><td >&nbsp; </td></tr>
+                   </table>
+
+                 </td><td> 0 </td>  <td> ... </td> <td class ="left_fence"> 0 </td> </tr>
+                 <tr> <td> ... </td> <td> ... </td> <td> 0  </td> <td>...  </td> <td> 0 </td><td class ="left_fence"> 0 </td> </tr>
+                 <tr> <td> 0 </td> <td> ... </td> <td> ...  </td> <td> 0  </td> <td> ... </td><td class ="left_fence"> 0 </td> </tr>
+                 <tr> <td colspan=6 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                 <tr> <td> ... </td> <td> ...  </td>  <td>
+
+                  <table >
+                    <tr>   <td >&nbsp; </td><td > n</td><td >&nbsp; </td>       <td >&nbsp; </td>     <td >&nbsp; </td><td align="center" > n</td><td >&nbsp; </td><td >&nbsp; </td></tr>
+                    <tr>   <td>  ( </td><td  > &prod; </td><td  > b<sub>z<sub>j</sub></sub>  </td>  <td >) ( </td>           <td >(n-1) &middot; b<sub>z<sub>i</sub></sub> + </td><td  >  &sum; </td><td  > b<sub>z<sub>j</sub></sub> </td><td >) </td></tr>
+                    <tr>   <td >&nbsp; </td><td > j=1,j&ne;i</td><td >&nbsp; </td>    <td >&nbsp; </td>        <td >&nbsp; </td><td > j=1   </td><td >&nbsp; </td><td >&nbsp; </td></tr>
+                   </table>
+
+                   </td> <td> ...  </td> <td> ...  </td>
+                   <td class ="left_fence">
+                    <table >
+                      <tr><td >&nbsp; </td><td align="center" > n </td><td >&nbsp; </td></tr>
+                      <tr><td>  (n-1)  </td><td  > &prod; </td><td  > b<sub>z<sub>i</sub></sub>  </td></tr>
+                      <tr><td >&nbsp; </td><td > j=1</td><td >&nbsp; </td></tr>
+                    </table>
+                   </td>
+                  </tr>
+               </table>
+              </td>
+            </tr>
+             <tr> <td>   </td>
+               <td align=center>
+                      <table>
+                        <tr><td >&nbsp; </td><td >&nbsp; </td><td align="center" >n</td><td >&nbsp; </td></tr>
+                        <tr><td > 0 &ne; </td><td >  </td><td align="center" >&prod;</td><td  > b<sub>z<sub>i</sub></sub> </td></tr>
+                        <tr><td >&nbsp; </td><td >&nbsp; </td><td > j=1 </td><td >&nbsp; </td></tr>
+                      </table>
+               </td>
+             </tr>
+          </table>
+        </dd>
+    </dl>
+   </dd>
+
+   <dt> <h3><div style="break-before:page"/>Constraints</h3> </dt>
+   <dd>
+    Q: Whats are constraints?<br/>
+
+    <dl>
+     <dt> <i>area</i>( s<sub>0</sub>, s<sub>x</sub>, s<sub>y</sub>  ) &ne; 0;<br>
+          <i>area</i>( t<sub>0</sub>, t<sub>x</sub>, t<sub>y</sub>  ) &ne; 0;
+     </dt>
+     <dd>
+     First constraint is obvious: Does Affine transformation from ( s<sub>0</sub>, s<sub>x</sub>, s<sub>y</sub> ) -> ( t<sub>0</sub>, t<sub>x</sub>, t<sub>y</sub> ) exists.
+     <br/><i>Let make note that h<sub>33</sub> = 1.</i>
+    </dd>
+     <dt>
+      t<sub>z</sub> &ne;  t<sub>0</sub>, t<sub>z</sub> &ne;  t<sub>x</sub>, t<sub>z</sub> &ne;  t<sub>y</sub>
+     </dt>
+     <dd>
+      Observing <b>P<sub>s</sub></b>  constraints are:  t<sub>z</sub> &ne;  t<sub>0</sub>, t<sub>z</sub> &ne;  t<sub>x</sub>, t<sub>z</sub> &ne;  t<sub>y</sub>.<br/>
+      There is not constrains from:  <b>P<sub>t</sub><sup>-1</sup></b>.
+    </dd>
+
+     <dt>
+       s<sub>0</sub> &ne; s<sub>z</sub>   <br>
+       s<sub>x</sub> &ne; s<sub>z</sub>   <br>
+       s<sub>y</sub> &ne; s<sub>z</sub>   <br>
+       <s>t<sub>z<sub>y</sub></sub>+t<sub>z<sub>x</sub></sub>-1 &ne; 0</s> <br>
+     </dt>
+     <dd>
+       From Source system:<blockquote>
+        <table>
+          <tr><td>0 &middot; H<sub>11</sub>+ 0 &middot; H<sub>12</sub>+ H<sub>13</sub> =  0&middot;(  0&middot;H<sub>31</sub>+ 0&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
+          <tr><td>0 &middot; H<sub>21</sub>+ 0 &middot; H<sub>22</sub>+ H<sub>23</sub> =  0&middot;(  0&middot;H<sub>31</sub>+ 0&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
+          <tr><td>1 &middot; H<sub>11</sub>+ 0 &middot; H<sub>12</sub>+ H<sub>13</sub> =  1&middot;(  1&middot;H<sub>31</sub>+ 0&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
+          <tr><td>1 &middot; H<sub>21</sub>+ 0 &middot; H<sub>22</sub>+ H<sub>23</sub> =  0&middot;(  1&middot;H<sub>31</sub>+ 0&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
+          <tr><td>0 &middot; H<sub>11</sub>+ 1 &middot; H<sub>12</sub>+ H<sub>13</sub> =  0&middot;(  0&middot;H<sub>31</sub>+ 1&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
+          <tr><td>0 &middot; H<sub>21</sub>+ 1 &middot; H<sub>22</sub>+ H<sub>23</sub> =  1&middot;(  0&middot;H<sub>31</sub>+ 1&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
+          <tr><td>s<sub>z<sub>x</sub></sub> &middot;H<sub>11</sub>+ s<sub>z<sub>y</sub></sub>&middot;H<sub>12</sub>+ H<sub>13</sub> =  1&middot;( s<sub>z<sub>x</sub></sub>&middot;H<sub>31</sub>+ s<sub>z<sub>y</sub></sub>&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
+          <tr><td>s<sub>z<sub>x</sub></sub> &middot;H<sub>21</sub>+ s<sub>z<sub>y</sub></sub>&middot;H<sub>22</sub>+ H<sub>23</sub> =  1&middot;( s<sub>z<sub>x</sub></sub>&middot;H<sub>31</sub>+ s<sub>z<sub>y</sub></sub>&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
+        </table>
+<br/>
+        Result:
+<blockquote>
+H<sub>11</sub>=&lambda;<sub>s</sub> &middot;(s<sub>z<sub>y</sub></sub>+ s<sub>z<sub>x</sub></sub>-1 )/s<sub>z<sub>x</sub></sub> <br/>
+H<sub>22</sub>=&lambda;<sub>s</sub> &middot;(s<sub>z<sub>y</sub></sub>+ s<sub>z<sub>x</sub></sub>-1 )/s<sub>z<sub>y</sub></sub> <br/>
+H<sub>31</sub>=&lambda;<sub>s</sub> &middot;(s<sub>z<sub>y</sub></sub>-1 )/s<sub>z<sub>x</sub></sub> <br/>
+H<sub>32</sub>=&lambda;<sub>s</sub> &middot;(s<sub>z<sub>x</sub></sub>-1 )/s<sub>z<sub>y</sub></sub><br/>
+H<sub>33</sub>=&lambda;<sub>s</sub>  <br/>
+
+&lambda;<sub>s</sub> &in; &reals;
+
+<blockquote>
+ For  0 = &lambda;<sub>s</sub>  solution become useless:
+   H<sub>11</sub> = H<sub>22</sub> = H<sub>31</sub> = H<sub>32</sub> = H<sub>33</sub> = 0.<br/>
+
+ For  0 &ne; &lambda;<sub>s</sub>  choices are : <i>1</i>, s<sub>z<sub>x</sub></sub>, s<sub>z<sub>y</sub></sub> or s<sub>z<sub>x</sub></sub> &middot; s<sub>z<sub>y</sub></sub>
+
+</blockquote>
+
+</blockquote>
+Lets take &lambda; = s<sub>z<sub>x</sub></sub> * s<sub>z<sub>y</sub></sub>. As previously stated: (X,Y) &notin;{(0,0),(1,0), (0,1)}.<br>
+
+Case: X = 0 and Y &notin;{0,1} then<br>
+<blockquote>
+                   <table class="matrix" >
+                       <tr> <td> Y &middot; Y - 1</td> <td> 0 </td> <td  class ="left_fence"> 0 </td>  </tr>
+                       <tr> <td> 0 </td> <td> 0 </td> <td class ="left_fence"> 0 </td> </tr>
+                       <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                       <tr> <td> Y&middot;(Y - 1) </td> <td> 0 </td> <td class ="left_fence"> 0 </td> </tr>
+                   </table>  
+                   (0,0)=P(0,0)<br>
+                   (1,0)=P(1,0)<br>
+                   (0,0)=P(0,1) &lt;- fail <br>
+                   (0,0)=P(0,Y)&lt;- fail <br>
+</blockquote>
+
+Case: Y = 0 and X &notin;{0,1} then<br>
+Case: X = 1 and Y &notin;{0,1} then<br>
+Case: Y = 1 and X &notin;{0,1} then<br>
+
+</blockquote>
+
+
+
+       From target system:<blockquote>
+        <table>
+          <tr><td>0 &middot; H<sub>11</sub>+ 0 &middot; H<sub>12</sub>+ H<sub>13</sub> =  0&middot;(  0&middot;H<sub>31</sub>+ 0&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
+          <tr><td>0 &middot; H<sub>21</sub>+ 0 &middot; H<sub>22</sub>+ H<sub>23</sub> =  0&middot;(  0&middot;H<sub>31</sub>+ 0&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
+          <tr><td>1 &middot; H<sub>11</sub>+ 0 &middot; H<sub>12</sub>+ H<sub>13</sub> =  1&middot;(  1&middot;H<sub>31</sub>+ 0&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
+          <tr><td>1 &middot; H<sub>21</sub>+ 0 &middot; H<sub>22</sub>+ H<sub>23</sub> =  0&middot;(  1&middot;H<sub>31</sub>+ 0&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
+          <tr><td>0 &middot; H<sub>11</sub>+ 1 &middot; H<sub>12</sub>+ H<sub>13</sub> =  0&middot;(  0&middot;H<sub>31</sub>+ 1&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
+          <tr><td>0 &middot; H<sub>21</sub>+ 1 &middot; H<sub>22</sub>+ H<sub>23</sub> =  1&middot;(  0&middot;H<sub>31</sub>+ 1&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
+          <tr><td>1 &middot; H<sub>11</sub>+ 1 &middot; H<sub>12</sub>+ H<sub>13</sub> =  t<sub>z<sub>x</sub></sub>&middot;( 1&middot;H<sub>31</sub>+ 1&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
+          <tr><td>1 &middot; H<sub>21</sub>+ 1 &middot; H<sub>22</sub>+ H<sub>23</sub> =  t<sub>z<sub>y</sub></sub>&middot;( 1&middot;H<sub>31</sub>+ 1&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
+        </table>
+<br/>
+        Result:
+<blockquote>
+
+H<sub>11</sub>=&lambda;<sub>t</sub>&middot; t<sub>z<sub>x</sub></sub>/(t<sub>z<sub>y</sub></sub>+t<sub>z<sub>x</sub></sub>-1),<br/>
+H<sub>22</sub>=&lambda;<sub>t</sub>&middot; t<sub>z<sub>y</sub></sub>/(t<sub>z<sub>y</sub></sub>+t<sub>z<sub>x</sub></sub>-1),<br/>
+H<sub>41</sub>=&lambda;<sub>t</sub>&middot;( 1-t<sub>z<sub>y</sub></sub> )/( t<sub>z<sub>y</sub></sub>+t<sub>z<sub>x</sub></sub>-1),<br/>
+H<sub>42</sub>=&lambda;<sub>t</sub>&middot;( 1-t<sub>z<sub>x</sub></sub> )/( t<sub>z<sub>y</sub></sub>+t<sub>z<sub>x</sub></sub>-1)),<br/>
+H<sub>44</sub>=&lambda;<sub>t</sub>
+</blockquote>
+<blockquote>
+ For  0 = &lambda;<sub>t</sub>  solution become useless:
+   H<sub>11</sub> = H<sub>22</sub> = H<sub>31</sub> = H<sub>32</sub> = H<sub>33</sub> = 0.<br/>
+
+ For  0 &ne; &lambda;<sub>t</sub> choices are : <i>1</i> or  t<sub>z<sub>y</sub></sub>+t<sub>z<sub>x</sub></sub>-1
+
+</blockquote>
+ By choosing  &lambda;<sub>t</sub> to depend of result, we use property of homography matrix to be multiplied by non zero value.<br/>
+ As stated previously such matrix produce valid values no matter values of X = t<sub>z<sub>x</sub></sub> and Y=t<sub>z<sub>y</sub></sub>
+</blockquote>
+
+
+     </dd>
+
+   </dd>
+
+   <dt><h3><div style="break-before:page"/>Shortcut</h3></dt>
+   <dd>
+     Instead to have:
+      t<sub>z</sub> = <b>P<sub>t</sub><sup>-1</sup></b> ( <b>P<sub>t</sub></b>( s<sub>z</sub> ) ,
+
+      why not use:
+      t<sub>z</sub> = (<b>P<sub>t</sub><sup>-1</sup></b> &compfn; <b>P<sub>t</sub></b> )( s<sub>z</sub> )
+     <br/>
+     Appears that formula for that still can be written in readable form.
+
+     <dl>
+      <dt>2</dt>
+      <dd>              <table style="white-space:nowrap" >
+                <tr>
+                  <td align="center" > <b>P<sub>t</sub><sup>-1</sup></b> &compfn; <b>P<sub>t</sub></b> = &nbsp; </td>
+                  <td align="center">
+
+                    <table class="matrix">
+                        <tr>  <td> t<sub>x</sub> &middot;( s<sub>x</sub>+s<sub>y</sub> -1) &middot;s<sub>y</sub> </td> <td> 0 </td> <td class ="left_fence"> 0 </td>   </tr>
+                        <tr> <td> 0 </td> <td> t<sub>y</sub> &middot;( s<sub>x</sub>+s<sub>y</sub> -1) &middot;s<sub>x</sub> </td> <td class ="left_fence"> 0 </td> </tr>
+                        <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                        <tr> <td>(t<sub>x</sub> &middot; ( s<sub>y</sub> - 1 ) - s<sub>x</sub> &middot; (  t<sub>y</sub> - 1 ) )&middot; s<sub>y</sub>  </td>
+                             <td> (t<sub>y</sub> &middot; ( s<sub>x</sub> - 1 ) - s<sub>y</sub> &middot; (  t<sub>x</sub> - 1 ) )&middot; s<sub>x</sub>  </td> <td class ="left_fence"> (s<sub>x</sub>&middot;s<sub>y</sub>)&middot;( t<sub>x</sub>+t<sub>y</sub> -1) </td> </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table></dd>
+      <dt>n-dimensional matrix is:</dt>
+      <dd>
+
+     <table width="90%">
+
+      <tr><td>
+
+
+       <table  style="white-space:nowrap" border=0 >
+            <tr >
+              <td align="center"> <b>P<sub>t</sub><sup>-1</sup></b> &compfn; <b>P<sub>t</sub></b> = &nbsp; </td>
+              <td align="center" >
+               <table class="matrix" >
+                 <tr> <td> ...</td>  <td> 0 </td><td> ... </td> <td> 0 </td>  <td> 0 </td> <td  class ="left_fence"> 0 </td>  </tr>
+                 <tr> <td> ... </td> <td> ... </td> <td>
+                    t<sub>i</sub> &middot;  &sum;<sub>s</sub> &middot;  &prod;<sub>j &ne;i</sub> s<sub>j</sub>
+
+                    </td><td> ... </td>  <td> ... </td> <td class ="left_fence"> 0 </td> </tr>
+                 <tr> <td> 0 </td> <td> 0 </td> <td> ...  </td> <td> 0  </td> <td> ... </td><td class ="left_fence"> 0 </td> </tr>
+                 <tr> <td colspan=6 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
+                 <tr> <td> ... </td> <td> ...  </td>  <td>
+                      ( t<sub>i</sub> &middot; ( &sum;<sub>s</sub> - s<sub>i</sub>  ) - s<sub>i</sub> &middot; ( &sum;<sub>t</sub> - t<sub>i</sub>  ) ) &middot; &prod;<sub>j &ne;i</sub> s<sub>j</sub>
+                   </td> <td> ...  </td> <td> ...  </td>
+                   <td class ="left_fence">
+                     &prod;<sub> j</sub>s<sub> j</sub> &middot;  &sum;<sub>t</sub>
+
+                   </td>
+                  </tr>
+               </table>
+              </td>
+             </tr>
+             <tr > <td colspan=2>
+               <blockquote>
+               &sum;<sub>s</sub> = (-1) + &sum;s<sub>i</sub><br>
+               &sum;<sub>t</sub> = (-1) + &sum;t<sub>i</sub><br>
+               </blockquote>
+             </td> </tr >
+       </table>
+
+      </td><td><img src="s2t.png"/></td></tr>
+
+     </table>
+      </dd>
+     </dl>
+     <br/>
+
+     <br/>
+
+
+
+   </dd>
+    <dt>
      <h3><div style="break-before:page"/>Miscellaneous</h3>
    </dt>
    <dd>
     <dl>
       <dt><h4>Source code</h4><dt>
       <dd>
+       github.com/dmilos/math/linar/homography/construct1.hpp<br>
        github.com/dmilos/math/linar/homography/construct2.hpp<br>
-      </dd>
-
-      <dt><h4>Remarks</h4><dt>
-      <dd>
-       <ul>
-        <li> This can be easily extend to higher dimensions</li>
-        <li> With appropriate effort it can be make in close form.</li>
-       <ul>
+       github.com/dmilos/math/linar/homography/construct3.hpp<br>
+       github.com/dmilos/math/linar/homography/constructn.hpp<br>
       </dd>
 
       <dt><h4>Off topic</h4><dt>
@@ -843,9 +1279,9 @@ table.table_cost
         Here are several proposed values to do that:
         <dl>
          <dt><b>&lambda; = 1/h<sub>33</sub></b></dt>
-          <dd>This is one of the most common way to do. Nummerircal error may occure if h<sub>33</sub> is very small comparint to h<sub>31</sub> and h<sub>32</sub></dd>
+          <dd>This is one of the most common way to do. Numerical error may occur if h<sub>33</sub> is very small comparing to h<sub>31</sub> and h<sub>32</sub></dd>
 
-         <dt><b>&lambda;= <i>s</i>/||h<sub>3*</sub>||, <i>s</i> &isin; &reals; <i>s</i> &ne; 0;</b> </dt>
+         <dt><b>&lambda;= <i>s</i>/||h<sub>3&middot;</sub>||, <i>s</i> &isin; &reals; <i>s</i> &ne; 0;</b> </dt>
           <dd>
             Another common way to do. <i>s</i> i usually equal to 1.
            </dd>
@@ -861,7 +1297,7 @@ table.table_cost
             h<sub>*1</sub> &Cross; h<sub>*2</sub> is normal of source plane.
            </dd>
 
-         <dt><b> v = h<sub>*1</sub> &Cross; h<sub>*2</sub>;<br> &lambda; = 1/|| v<sub>x</sub>&middot;v<sub>x</sub> + v<sub>y</sub>&middot;v<sub>y</sub>||</b></dt>
+         <dt><b>&lambda; = 1/|| v<sub>x</sub>&middot;v<sub>x</sub> + v<sub>y</sub>&middot;v<sub>y</sub>||; v = h<sub>*1</sub> &Cross; h<sub>*2</sub>;</b></dt>
           <dd>
             This cross product also give equation of horizon or vanish line on target plane( <i>z</i>=1 ).<br>
             First and second coordinate will present direction of line in form:
@@ -881,17 +1317,18 @@ table.table_cost
         <li> https://en.wikipedia.org/wiki/Homography </li>
 
         <li>
-             Projective Mappings for Image Warping, Paul Heckbert, 15-869, Image-Based Modeling and Rendering, 13 Sept 1999.
+          <b>[Heckbert89]</b> <i>Fundamentals of Texture Mapping and Image Warping</i>, Paul S. Heckbert, 17 June 1989.
         </li>
         <li>
-             Fundamentals of Texture Mapping and Image Warping, Paul S. Heckbert, 17 June 1989.
+            <b>[Heckbert99]</b> <i>Projective Mappings for Image Warping</i>, Paul Heckbert, 15-869, Image-Based Modeling and Rendering, 13 Sept 1999.
         </li>
        </ul>
       </dd>
-    <dl>
+    </dl>
     </dd>
  </dl>
-
+<hr>
+<div align="right" >QED</div>
  </body>
 </html>
 

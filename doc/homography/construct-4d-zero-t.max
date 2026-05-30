@@ -1,0 +1,12 @@
+f(x, y,z,t) := 
+     (1-(-x+y+z+t))^2 
+   + (1-(+x-y+z+t))^2 
+   + (1-(+x+y-z+t))^2 
+   + (1-(+x+y+z-t))^2 
+   + (x+y+z+t-1)^2;
+   
+grad: [diff(f(x, y,z,t), x),diff(f(x, y,z,t), y), diff(f(x, y,z,t), z), diff(f(x, y,z,t), t)];
+solve([grad[1]=0, grad[2]=0, grad[3]=0, grad[4]=0], [x, y,z,t]);
+
+
+/* [x=3/8,y=3/8,z=3/8,t=3/8] */
