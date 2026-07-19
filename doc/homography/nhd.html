@@ -119,6 +119,7 @@ table.table_cost
         </dd>
         <dt><h4>Homography</h4></dt>
         <dd>
+          <b>H</b>: &reals;<sup>2</sup> &rarr; &reals;<sup>2</sup><br>
           Definition: project (first) plane to (second) plane.
 
            <table>
@@ -144,16 +145,16 @@ table.table_cost
 
             <table  cellpadding="0" border=0 >
                <tr> <td rowspan="4"> x' = </td>   </tr>
-               <tr> <td></td>     <td> x&middot;h<sub>11</sub> + x&middot;h<sub>12</sub>  +  h<sub>13</sub>   </td>  </tr>
+               <tr> <td></td>     <td> x&middot;h<sub>11</sub> + y&middot;h<sub>12</sub>  +  h<sub>13</sub>   </td>  </tr>
                <tr> <td></td>     <td> <hr>  </td>   </tr>
-               <tr> <td></td>     <td> x&middot;h<sub>31</sub> + x&middot;h<sub>32</sub>  +  h<sub>33</sub>  </td> </tr>
+               <tr> <td></td>     <td> x&middot;h<sub>31</sub> + y&middot;h<sub>32</sub>  +  h<sub>33</sub>  </td> </tr>
             </table>
              <br>
             <table  cellpadding="0" border=0 >
                <tr> <td rowspan="4"> y' = </td>   </tr>
-               <tr> <td></td>     <td> x&middot;h<sub>21</sub> + x&middot;h<sub>22</sub>  +  h<sub>23</sub>   </td>  </tr>
+               <tr> <td></td>     <td> x&middot;h<sub>21</sub> + y&middot;h<sub>22</sub>  +  h<sub>23</sub>   </td>  </tr>
                <tr> <td></td>     <td> <hr>  </td>   </tr>
-               <tr> <td></td>     <td> x&middot;h<sub>31</sub> + x&middot;h<sub>32</sub>  +  h<sub>33</sub>  </td> </tr>
+               <tr> <td></td>     <td> x&middot;h<sub>31</sub> + y&middot;h<sub>32</sub>  +  h<sub>33</sub>  </td> </tr>
             </table>
 
               </td>
@@ -178,7 +179,7 @@ table.table_cost
             <li>  s<sub>0</sub>, s<sub>x</sub>, s<sub>y</sub>, s<sub>z</sub> &isin; &reals;<sup>2</sup> </li>
             <li>  t<sub>0</sub>, t<sub>x</sub>, t<sub>y</sub>, t<sub>z</sub> &isin; &reals;<sup>2</sup> </li>
             <li> <i>o</i>=(0,0)</li>
-            <li> <i>area</i>( s<sub>i</sub>, s<sub>j</sub>, s<sub>k</sub>  ) &ne; 0; i &ne; j &ne; k; i, j, k &isin; { 0, x, y, z }, this condition can be relaxed to only <i>area</i>( s<sub>0</sub>, s<sub>x</sub>, s<sub>y</sub>  ) &ne; 0; </li>
+            <li> <i>area</i>( s<sub>i</sub>, s<sub>j</sub>, s<sub>k</sub>  ) &ne; 0; i &ne; j &ne; k; i, j, k &isin; { 0, x, y, z }</li>
             <li> <i>area</i>( t<sub>i</sub>, t<sub>j</sub>, t<sub>k</sub>  ) &ne; 0; i &ne; j &ne; k; i, j, k &isin; { 0, x, y, z }</li>
 
             <li> Nice to have: <br>
@@ -325,7 +326,7 @@ table.table_cost
             <li>Direct calculation from quadrilateral to square and vice versa. </li>
             <li>Fastest closed form solution. </li>
             <li> <img src="ph-1.png"/> </li>
-            <li> This image was taken from vector variant <b>[Heckbert99]</b>. See also <b>[Heckbert89]</b>.
+            <li> This image was taken from <b>[Heckbert99]</b>. See also <b>[Heckbert89]</b>.
           </ul>
         </dd>
      </dl>
@@ -795,10 +796,22 @@ table.table_cost
      <h4><div style="break-before:page"/>Homographies, Assemble</h4>
    </dt>
    <dd>
+   Final matrix can be calculated:
+   <blockquote>
     <b>H</b>
      = (<b>P<sub>t</sub></b>    <b>L<sub>t</sub></b> <b>T<sub>t</sub></b>   )<sup>-1</sup>   <b>P<sub>s</sub></b>  <b>L<sub>s</sub></b>   <b>T<sub>s</sub></b>
      = <b>T<sub>t</sub><sup>-1</sup></b>   <b>L<sub>t</sub><sup>-1</sup></b>   <b>P<sub>t</sub><sup>-1</sup></b>   <b>P<sub>s</sub></b>  <b>L<sub>s</sub></b>   <b>T<sub>s</sub></b>
-   </dd>
+   </blockquote>
+
+   <b>[Heckbert99]</b> solution by using presented elements:
+
+   <blockquote>
+    Case 1 : <b>C<sub>1</sub></b> = <b>T<sub>t</sub><sup>-1</sup></b> &compfn;  <b>L<sub>t</sub><sup>-1</sup></b> &compfn; <b>P<sub>t</sub><sup>-1</sup></b>
+     </br>
+     Case 2 : <b>C<sub>2</sub></b> = <b>P<sub>s</sub></b> &compfn; <b>L<sub>s</sub></b> &compfn; <b>T<sub>s</sub></b>
+   </blockquote>
+
+   Total usage of numerical operations:
 
    <blockquote>
     <table  class ="table_cost" style="white-space:nowrap" >
@@ -813,6 +826,7 @@ table.table_cost
       <tr align="center" ><td>&sum;</td> <td>7</td><td>27</td><td>20</td><td>54</td></tr>
     </table>
    </blockquote>
+   </dd>
 
    </dl>
 
@@ -829,7 +843,7 @@ table.table_cost
           (X,Y,Z) = <b>P<sub>t</sub><sup>-1</sup></b>(1,1,1);<br>
           (X,Y,Z,T) = <b>P<sub>t</sub><sup>-1</sup></b>(1,1,1,1);<br>
           (X,Y,Z,T,S) = <b>P<sub>t</sub><sup>-1</sup></b>(1,1,1,1,1);<br>
-          (b<sub>z</sub>) = <b>P<sub>t</sub><sup>-1</sup></b>(1,...);<br>
+          <b>b<sub>z</sub></b> = <b>P<sub>t</sub><sup>-1</sup></b>(1,...);<br>
         </dd>
 
         <dt><h4>0</h4></dt>
@@ -1065,120 +1079,28 @@ table.table_cost
 
    <dt> <h3><div style="break-before:page"/>Constraints</h3> </dt>
    <dd>
-    Q: Whats are constraints?<br/>
 
     <dl>
-     <dt> <i>area</i>( s<sub>0</sub>, s<sub>x</sub>, s<sub>y</sub>  ) &ne; 0;<br>
-          <i>area</i>( t<sub>0</sub>, t<sub>x</sub>, t<sub>y</sub>  ) &ne; 0;
-     </dt>
-     <dd>
-     First constraint is obvious: Does Affine transformation from ( s<sub>0</sub>, s<sub>x</sub>, s<sub>y</sub> ) -> ( t<sub>0</sub>, t<sub>x</sub>, t<sub>y</sub> ) exists.
-     <br/><i>Let make note that h<sub>33</sub> = 1.</i>
-    </dd>
      <dt>
-      t<sub>z</sub> &ne;  t<sub>0</sub>, t<sub>z</sub> &ne;  t<sub>x</sub>, t<sub>z</sub> &ne;  t<sub>y</sub>
+       <ul>
      </dt>
      <dd>
-      Observing <b>P<sub>s</sub></b>  constraints are:  t<sub>z</sub> &ne;  t<sub>0</sub>, t<sub>z</sub> &ne;  t<sub>x</sub>, t<sub>z</sub> &ne;  t<sub>y</sub>.<br/>
-      There is not constrains from:  <b>P<sub>t</sub><sup>-1</sup></b>.
+      If we use any tree point and try to make affine transform those tree points must make triangle with non zero area.<br/>
+      <br/>
+      For higher dimension constraints are similar. Any volume must be non zero.<br/>
+
+      3d:
+
+       <ul>
+        <li> <i>volume</i>( s<sub>i</sub>, s<sub>j</sub>, s<sub>k</sub>, s<sub>l</sub>  ) &ne; 0; i &ne; j &ne; k&ne; l; i, j, k, l &isin; { 0, 1, 2, 3 , 4 }</li>
+        <li> <i>volume</i>( t<sub>i</sub>, t<sub>j</sub>, t<sub>k</sub>, t<sub>l</sub>  ) &ne; 0; i &ne; j &ne; k&ne; l; i, j, k, l &isin; { 0, 1, 2, 3 , 4 }</li>
+       </ul>
+
+
+
+      Additional requirements previously mentioned are sub set of this one.<br/>
     </dd>
 
-     <dt>
-       s<sub>0</sub> &ne; s<sub>z</sub>   <br>
-       s<sub>x</sub> &ne; s<sub>z</sub>   <br>
-       s<sub>y</sub> &ne; s<sub>z</sub>   <br>
-       <s>t<sub>z<sub>y</sub></sub>+t<sub>z<sub>x</sub></sub>-1 &ne; 0</s> <br>
-     </dt>
-     <dd>
-       From Source system:<blockquote>
-        <table>
-          <tr><td>0 &middot; H<sub>11</sub>+ 0 &middot; H<sub>12</sub>+ H<sub>13</sub> =  0&middot;(  0&middot;H<sub>31</sub>+ 0&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
-          <tr><td>0 &middot; H<sub>21</sub>+ 0 &middot; H<sub>22</sub>+ H<sub>23</sub> =  0&middot;(  0&middot;H<sub>31</sub>+ 0&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
-          <tr><td>1 &middot; H<sub>11</sub>+ 0 &middot; H<sub>12</sub>+ H<sub>13</sub> =  1&middot;(  1&middot;H<sub>31</sub>+ 0&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
-          <tr><td>1 &middot; H<sub>21</sub>+ 0 &middot; H<sub>22</sub>+ H<sub>23</sub> =  0&middot;(  1&middot;H<sub>31</sub>+ 0&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
-          <tr><td>0 &middot; H<sub>11</sub>+ 1 &middot; H<sub>12</sub>+ H<sub>13</sub> =  0&middot;(  0&middot;H<sub>31</sub>+ 1&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
-          <tr><td>0 &middot; H<sub>21</sub>+ 1 &middot; H<sub>22</sub>+ H<sub>23</sub> =  1&middot;(  0&middot;H<sub>31</sub>+ 1&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
-          <tr><td>s<sub>z<sub>x</sub></sub> &middot;H<sub>11</sub>+ s<sub>z<sub>y</sub></sub>&middot;H<sub>12</sub>+ H<sub>13</sub> =  1&middot;( s<sub>z<sub>x</sub></sub>&middot;H<sub>31</sub>+ s<sub>z<sub>y</sub></sub>&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
-          <tr><td>s<sub>z<sub>x</sub></sub> &middot;H<sub>21</sub>+ s<sub>z<sub>y</sub></sub>&middot;H<sub>22</sub>+ H<sub>23</sub> =  1&middot;( s<sub>z<sub>x</sub></sub>&middot;H<sub>31</sub>+ s<sub>z<sub>y</sub></sub>&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
-        </table>
-<br/>
-        Result:
-<blockquote>
-H<sub>11</sub>=&lambda;<sub>s</sub> &middot;(s<sub>z<sub>y</sub></sub>+ s<sub>z<sub>x</sub></sub>-1 )/s<sub>z<sub>x</sub></sub> <br/>
-H<sub>22</sub>=&lambda;<sub>s</sub> &middot;(s<sub>z<sub>y</sub></sub>+ s<sub>z<sub>x</sub></sub>-1 )/s<sub>z<sub>y</sub></sub> <br/>
-H<sub>31</sub>=&lambda;<sub>s</sub> &middot;(s<sub>z<sub>y</sub></sub>-1 )/s<sub>z<sub>x</sub></sub> <br/>
-H<sub>32</sub>=&lambda;<sub>s</sub> &middot;(s<sub>z<sub>x</sub></sub>-1 )/s<sub>z<sub>y</sub></sub><br/>
-H<sub>33</sub>=&lambda;<sub>s</sub>  <br/>
-
-&lambda;<sub>s</sub> &in; &reals;
-
-<blockquote>
- For  0 = &lambda;<sub>s</sub>  solution become useless:
-   H<sub>11</sub> = H<sub>22</sub> = H<sub>31</sub> = H<sub>32</sub> = H<sub>33</sub> = 0.<br/>
-
- For  0 &ne; &lambda;<sub>s</sub>  choices are : <i>1</i>, s<sub>z<sub>x</sub></sub>, s<sub>z<sub>y</sub></sub> or s<sub>z<sub>x</sub></sub> &middot; s<sub>z<sub>y</sub></sub>
-
-</blockquote>
-
-</blockquote>
-Lets take &lambda; = s<sub>z<sub>x</sub></sub> * s<sub>z<sub>y</sub></sub>. As previously stated: (X,Y) &notin;{(0,0),(1,0), (0,1)}.<br>
-
-Case: X = 0 and Y &notin;{0,1} then<br>
-<blockquote>
-                   <table class="matrix" >
-                       <tr> <td> Y &middot; Y - 1</td> <td> 0 </td> <td  class ="left_fence"> 0 </td>  </tr>
-                       <tr> <td> 0 </td> <td> 0 </td> <td class ="left_fence"> 0 </td> </tr>
-                       <tr> <td colspan=3 style="padding:0px " > <hr style="margin:0px"> </td> </tr>
-                       <tr> <td> Y&middot;(Y - 1) </td> <td> 0 </td> <td class ="left_fence"> 0 </td> </tr>
-                   </table>  
-                   (0,0)=P(0,0)<br>
-                   (1,0)=P(1,0)<br>
-                   (0,0)=P(0,1) &lt;- fail <br>
-                   (0,0)=P(0,Y)&lt;- fail <br>
-</blockquote>
-
-Case: Y = 0 and X &notin;{0,1} then<br>
-Case: X = 1 and Y &notin;{0,1} then<br>
-Case: Y = 1 and X &notin;{0,1} then<br>
-
-</blockquote>
-
-
-
-       From target system:<blockquote>
-        <table>
-          <tr><td>0 &middot; H<sub>11</sub>+ 0 &middot; H<sub>12</sub>+ H<sub>13</sub> =  0&middot;(  0&middot;H<sub>31</sub>+ 0&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
-          <tr><td>0 &middot; H<sub>21</sub>+ 0 &middot; H<sub>22</sub>+ H<sub>23</sub> =  0&middot;(  0&middot;H<sub>31</sub>+ 0&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
-          <tr><td>1 &middot; H<sub>11</sub>+ 0 &middot; H<sub>12</sub>+ H<sub>13</sub> =  1&middot;(  1&middot;H<sub>31</sub>+ 0&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
-          <tr><td>1 &middot; H<sub>21</sub>+ 0 &middot; H<sub>22</sub>+ H<sub>23</sub> =  0&middot;(  1&middot;H<sub>31</sub>+ 0&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
-          <tr><td>0 &middot; H<sub>11</sub>+ 1 &middot; H<sub>12</sub>+ H<sub>13</sub> =  0&middot;(  0&middot;H<sub>31</sub>+ 1&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
-          <tr><td>0 &middot; H<sub>21</sub>+ 1 &middot; H<sub>22</sub>+ H<sub>23</sub> =  1&middot;(  0&middot;H<sub>31</sub>+ 1&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
-          <tr><td>1 &middot; H<sub>11</sub>+ 1 &middot; H<sub>12</sub>+ H<sub>13</sub> =  t<sub>z<sub>x</sub></sub>&middot;( 1&middot;H<sub>31</sub>+ 1&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
-          <tr><td>1 &middot; H<sub>21</sub>+ 1 &middot; H<sub>22</sub>+ H<sub>23</sub> =  t<sub>z<sub>y</sub></sub>&middot;( 1&middot;H<sub>31</sub>+ 1&middot;H<sub>32</sub> + H<sub>33</sub> )</td></tr>
-        </table>
-<br/>
-        Result:
-<blockquote>
-
-H<sub>11</sub>=&lambda;<sub>t</sub>&middot; t<sub>z<sub>x</sub></sub>/(t<sub>z<sub>y</sub></sub>+t<sub>z<sub>x</sub></sub>-1),<br/>
-H<sub>22</sub>=&lambda;<sub>t</sub>&middot; t<sub>z<sub>y</sub></sub>/(t<sub>z<sub>y</sub></sub>+t<sub>z<sub>x</sub></sub>-1),<br/>
-H<sub>41</sub>=&lambda;<sub>t</sub>&middot;( 1-t<sub>z<sub>y</sub></sub> )/( t<sub>z<sub>y</sub></sub>+t<sub>z<sub>x</sub></sub>-1),<br/>
-H<sub>42</sub>=&lambda;<sub>t</sub>&middot;( 1-t<sub>z<sub>x</sub></sub> )/( t<sub>z<sub>y</sub></sub>+t<sub>z<sub>x</sub></sub>-1)),<br/>
-H<sub>44</sub>=&lambda;<sub>t</sub>
-</blockquote>
-<blockquote>
- For  0 = &lambda;<sub>t</sub>  solution become useless:
-   H<sub>11</sub> = H<sub>22</sub> = H<sub>31</sub> = H<sub>32</sub> = H<sub>33</sub> = 0.<br/>
-
- For  0 &ne; &lambda;<sub>t</sub> choices are : <i>1</i> or  t<sub>z<sub>y</sub></sub>+t<sub>z<sub>x</sub></sub>-1
-
-</blockquote>
- By choosing  &lambda;<sub>t</sub> to depend of result, we use property of homography matrix to be multiplied by non zero value.<br/>
- As stated previously such matrix produce valid values no matter values of X = t<sub>z<sub>x</sub></sub> and Y=t<sub>z<sub>y</sub></sub>
-</blockquote>
-
-
-     </dd>
 
    </dd>
 
@@ -1265,14 +1187,42 @@ H<sub>44</sub>=&lambda;<sub>t</sub>
    </dt>
    <dd>
     <dl>
-      <dt><h4>Source code</h4><dt>
+       <dt><h4>*this</h4><dt>
       <dd>
-       github.com/dmilos/math/linar/homography/construct1.hpp<br>
-       github.com/dmilos/math/linar/homography/construct2.hpp<br>
-       github.com/dmilos/math/linar/homography/construct3.hpp<br>
-       github.com/dmilos/math/linar/homography/constructn.hpp<br>
+        Latest version of this document can be found at:<br>
+
+        &nbsp; &nbsp; &nbsp; https://github.com/dmilos/math/blob/master/doc/homography/nhd.html<br>
+
       </dd>
 
+      <dt><h4>Source code</h4><dt>
+      <dd>
+       <dl>
+        <dt>c++<dt>
+         <dd>
+           https://github.com/dmilos/math/blob/master/src/math/linear/homography/construct1.hpp<br>
+           https://github.com/dmilos/math/blob/master/src/math/linear/homography/construct2.hpp<br>
+           https://github.com/dmilos/math/blob/master/src/math/linear/homography/construct3.hpp<br>
+           https://github.com/dmilos/math/blob/master/src/math/linear/homography/constructn.hpp<br>
+         </dd>
+        <dt>Maxima<dt>
+         <dd>
+           https://github.com/dmilos/math/blob/master/doc/homography/construct.max<br>
+           https://github.com/dmilos/math/blob/master/doc/homography/construct-2d.max<br>
+           https://github.com/dmilos/math/blob/master/doc/homography/construct-2d-zero-s.max<br>
+           https://github.com/dmilos/math/blob/master/doc/homography/construct-2d-zero-t.max<br>
+           https://github.com/dmilos/math/blob/master/doc/homography/construct-3d.max<br>
+           https://github.com/dmilos/math/blob/master/doc/homography/construct-3d-check.max<br>
+           https://github.com/dmilos/math/blob/master/doc/homography/construct-3d-zero-s.max<br>
+           https://github.com/dmilos/math/blob/master/doc/homography/construct-3d-zero-t.max<br>
+           https://github.com/dmilos/math/blob/master/doc/homography/construct-4d.max<br>
+           https://github.com/dmilos/math/blob/master/doc/homography/construct-4d-zero-t.max<br>
+           https://github.com/dmilos/math/blob/master/doc/homography/construct-5d.max<br>
+           https://github.com/dmilos/math/blob/master/doc/homography/construct-practical.max<br>
+         </dd>
+       <dl>
+      </dd>
+ 
       <dt><h4>Off topic</h4><dt>
       <dd>
         Homography matrix can be multiplied by some non zero factor for better utilization.<br>

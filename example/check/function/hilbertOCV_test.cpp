@@ -54,11 +54,10 @@ int mainOCV( int argc, char *argv[] )
   int frame_height = 600;
   int frame_width  = 800;
   
-    Mat frame( frame_height,frame_width,CV_8UC3 );
+    cvMat frame( frame_height,frame_width,CV_8UC3 );
 
  initUI( );
-  cv::Mat frame( frame_height, frame_width,  CV_8UC1 );
-  while( true )
+   while( true )
    {
     monitor( frame );
     cv::imshow( "Frame-frame", frame );

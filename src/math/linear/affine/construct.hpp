@@ -46,7 +46,7 @@
            ::math::linear::affine::structure<scalar_name,2>                   & result
           ,std::array< ::math::linear::vector::point<scalar_name,2>, 3 > const& target
          )
-         { // target[i] = result( source[i] )
+         { // target[i] = result( {{0,...0},{1,...},...,{0,...,1}} )
           ::math::linear::vector::vector<scalar_name,2> x, y;
 
           ::math::linear::vector::subtraction( x, target[1], target[0] );
@@ -89,7 +89,7 @@
            ::math::linear::affine::structure<scalar_name,3>                   & result
           ,std::array< ::math::linear::vector::point<scalar_name,3>, 4 > const& target
          )
-         { // target[i] = result( source[i] )
+         { // target[i] = result( { {0,...0},{1,...},...,{0,...,1} } )
           ::math::linear::vector::vector<scalar_name,3> x, y, z;
 
           ::math::linear::vector::subtraction( x, target[1], target[0] );
@@ -166,7 +166,7 @@
            ::math::linear::affine::structure<scalar_name,4>                   & result
           ,std::array< ::math::linear::vector::point<scalar_name,4>, 5 > const& target
          )
-         { // target[i] = result( source[i] )
+         { // target[i] = result( { {0,...0},{1,...},...,{0,...,1} } )
           ::math::linear::vector::vector<scalar_name,4> x, y, z, t;
 
           ::math::linear::vector::subtraction( x, target[1], target[0] );

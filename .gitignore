@@ -94,3 +94,4 @@ example/test/codeblocks/obj
 /example/_cmakeVS
 /example/_buildVS
 /example/_build-msvc
+_build-msvc
