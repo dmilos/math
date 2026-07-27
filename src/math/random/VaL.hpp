@@ -4,7 +4,7 @@
  // ::math::random::VaPND<scalar_name, size_type, dimension_number>
 
 #include "./vdc.hpp"
-#include "../function/lebesgueND.hpp"
+#include "../function/sfc/lebesgueND.hpp"
 #include "../linear/vector/structure.hpp"
 
 namespace math

@@ -4,7 +4,7 @@
  // ::math::random::VaPND<scalar_name, size_type, dimension_number>
 
 #include "./vdc.hpp"
-#include "../function/peanoND.hpp"
+#include "../function/sfc/peanoND.hpp"
 #include "../linear/vector/structure.hpp"
 
 namespace math

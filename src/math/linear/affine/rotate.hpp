@@ -2,6 +2,7 @@
  #define Dh_math_linear_affine_rotate
 
  // ::math::linear::affine::rotate<scalar_name>
+ // ::math::linear::affine::rotate<scalar_name>
 
 #include <limits>
 
@@ -18,31 +19,56 @@
      namespace affine
       {
 
-         template< typename scalar_name>
-          inline
-          bool
-          rotate
-           (
-             ::math::linear::affine::structure< scalar_name, 3 >          &   result
-            ,::math::linear::vector::structure< scalar_name, 3 >       const& pivot
-            ,::math::linear::vector::structure< scalar_name, 3 >       const& direction
-            ,                                   scalar_name            const& angle
-           )
-           {
-            typedef ::math::linear::affine::structure< scalar_name, 3 >  affine_type;
-            affine_type I_move; ::math::linear::affine::id( I_move );  ::math::linear::vector::negate( I_move.vector(), pivot );
+       template< typename scalar_name>
+        inline
+        bool
+        rotate
+         (
+           ::math::linear::affine::structure< scalar_name, 2 >            & result
+          ,::math::linear::vector::structure< scalar_name, 2 >       const& pivot
+          ,                                   scalar_name            const& angle
+         )
+         {
+          typedef ::math::linear::affine::structure< scalar_name, 2 >  affine_type;
+          affine_type I_move; ::math::linear::affine::id( I_move );  ::math::linear::vector::negate( I_move.vector(), pivot );
 
-            affine_type I_rotate; ::math::linear::affine::id( I_rotate );
-            ::math::linear::matrix::rotate( I_rotate.matrix(), direction, angle );
+          affine_type I_rotate; ::math::linear::affine::id( I_rotate );
+          ::math::linear::matrix::rotate( I_rotate.matrix(), angle );
 
-            affine_type I_back; ::math::linear::affine::id( I_back ); I_back.vector() = pivot;
+          affine_type I_back; ::math::linear::affine::id( I_back ); I_back.vector() = pivot;
 
-            affine_type I_tmp;
-            ::math::linear::affine::compose( I_tmp, I_rotate, I_move );
+          affine_type I_tmp;
+          ::math::linear::affine::compose( I_tmp, I_rotate, I_move );
 
-            ::math::linear::affine::compose( result, I_back, I_tmp );
-            return true;
-           }
+          ::math::linear::affine::compose( result, I_back, I_tmp );
+          return true;
+         }
+
+       template< typename scalar_name>
+        inline
+        bool
+        rotate
+         (
+           ::math::linear::affine::structure< scalar_name, 3 >            & result
+          ,::math::linear::vector::structure< scalar_name, 3 >       const& pivot
+          ,::math::linear::vector::structure< scalar_name, 3 >       const& direction
+          ,                                   scalar_name            const& angle
+         )
+         {
+          typedef ::math::linear::affine::structure< scalar_name, 3 >  affine_type;
+          affine_type I_move; ::math::linear::affine::id( I_move );  ::math::linear::vector::negate( I_move.vector(), pivot );
+
+          affine_type I_rotate; ::math::linear::affine::id( I_rotate );
+          ::math::linear::matrix::rotate( I_rotate.matrix(), direction, angle );
+
+          affine_type I_back; ::math::linear::affine::id( I_back ); I_back.vector() = pivot;
+
+          affine_type I_tmp;
+          ::math::linear::affine::compose( I_tmp, I_rotate, I_move );
+
+          ::math::linear::affine::compose( result, I_back, I_tmp );
+          return true;
+         }
 
       }
     }
