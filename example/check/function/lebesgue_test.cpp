@@ -11,6 +11,9 @@ int g_calc = 0;
 #endif
 
 
+#if defined(__clang__)
+#pragma clang diagnostic ignored "-Wself-assign"
+#endif
 
 int main( int argc, char *argv[] )
  {

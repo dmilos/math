@@ -19,7 +19,6 @@ namespace math
      inline void lebesgue2D( scalar_name & x, scalar_name &y, scalar_name value, size_name iteration = 16 )
       {
        static const size_name  dimension_number = 2;
-       static const size_name  square = dimension_number * dimension_number;
        scalar_name add = scalar_name( 1 );
 
        x = y = scalar_name(1) / scalar_name( 2 ) /  scalar_name( 1 << iteration );

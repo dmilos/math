@@ -48,6 +48,10 @@ void putPixel( std::vector< std::uint8_t> & image, std::array<std::size_t,2> con
   putPixel( image, size, { x,y } );
  }
 
+#if defined(__clang__)
+#pragma clang diagnostic ignored "-Wmissing-braces"
+#endif
+
 int main( int argc, char *argv[] )
  {
   std::cout << "Hello World" << std::endl;
@@ -95,22 +99,22 @@ int main( int argc, char *argv[] )
 
     y = ::math::function::distribution::normal<double>( x, sqrt(2*3.141),0);
     putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x, hi_y }, {x,y} );
-    
+
     y = ::math::function::distribution::normal<double>( x, 0.9,     0 );
     putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x, hi_y }, {x,y} );
-    
+
     y = ::math::function::distribution::normal<double>( x, 0.8, 0 );
     putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x, hi_y }, {x,y} );
-    
+
     y = ::math::function::distribution::normal<double>( x, 0.7, -0.1 );
     putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x, hi_y }, {x,y} );
-    
+
     y = ::math::function::distribution::normal<double>( x, 0.6, 0.1 );
     putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x, hi_y }, {x,y} );
-    
-    y   = -1*::math::function::distribution::normal_cumulative<double>( x, 0.8 ) + ::math::function::distribution::normal_cumulative_ZS<double>( x, 0.8 );  
+
+    y   = -1*::math::function::distribution::normal_cumulative<double>( x, 0.8 ) + ::math::function::distribution::normal_cumulative_ZS<double>( x, 0.8 );
     putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x,hi_y},{x,y});
-                    
+
 y=-1*::math::function::distribution::normal_cumulative<double>(x,0.7)+::math::function::distribution::normal_cumulative_ZS<double>(x,0.7);
     putPixel( image, {(std::size_t)width,(std::size_t)height}, { lo_x, lo_y, hi_x, hi_y }, {x,y} );
 

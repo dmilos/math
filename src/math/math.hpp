@@ -6,6 +6,20 @@
 #include <utility>
 #include <cstdint>
 
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-braces"
+#pragma clang diagnostic ignored "-Wunused-local-typedef"
+#pragma clang diagnostic ignored "-Wswitch-bool"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wswitch-bool"
+#endif
+
+
 #include "./type/type.hpp"
 
 #include "./constants.hpp"
@@ -21,5 +35,16 @@
 #include "./random/random.hpp"
 #include "./statistic/statistic.hpp"
 //#include "./topology/topology.hpp"
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+
+#if defined(__GNUC__)
+
+#pragma GCC diagnostic pop
+
+#endif
+
 
 #endif

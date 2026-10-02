@@ -191,7 +191,7 @@ namespace math
           ,scalar_name const& coefficient
          )
          {
-          scalar_name ab = B-A;
+          //scalar_name ab = B-A;
           scalar_name bc = C-B;
           scalar_name ac = C-A;
 

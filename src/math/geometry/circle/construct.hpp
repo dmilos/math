@@ -29,7 +29,7 @@
          )
          {
           auto bisector_first = ::math::geometry::direction::bisector( first, second );
-          auto bisector_secnd = ::math::geometry::direction::bisector( first, third );
+        //auto bisector_secnd = ::math::geometry::direction::bisector( first, third  );
           auto bisector_third = ::math::geometry::direction::bisector( second, third );
 
           ::math::linear::vector::point<  scalar_name, 2 > center;

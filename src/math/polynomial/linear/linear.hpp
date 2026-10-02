@@ -2,3 +2,4 @@
 #include "./interpolate.hpp"
 #include "./evaluate.hpp"
 #include "./shift.hpp"
+#include "./construct.hpp"

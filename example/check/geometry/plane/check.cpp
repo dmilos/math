@@ -4,6 +4,11 @@
 
 #include "math/math.hpp"
 
+#ifdef __clang__
+    #pragma clang diagnostic ignored "-Wunused-variable"
+    #pragma clang diagnostic ignored "-Wself-assign-overloaded"
+#endif
+
 using namespace std;
 
 template < typename scalar_name >

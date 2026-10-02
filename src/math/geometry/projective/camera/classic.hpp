@@ -150,6 +150,7 @@ namespace math
               {
                switch( prefer_width )
                 {
+                 default:
                  case( true ):
                   {
                    scalar_type X = (this->m_window[1][0]-this->m_window[0][0])/ this->resolution()[0];

@@ -6,6 +6,12 @@
 
 #include "math/geometry/plane/horizon.hpp"
 
+#ifdef __clang__
+    #pragma clang diagnostic ignored "-Wunused-variable"
+    //#pragma clang diagnostic ignored "-Wself-assign-overloaded"
+#endif
+
+
 using namespace std;
 
   ::math::geometry::direction::ABC2D<double> horizon;

@@ -28,6 +28,10 @@ void putPixel( std::vector< std::uint8_t> & image, std::array<std::size_t,2> con
   putPixel( image, size, { x,y }, color );
  }
 
+#if defined(__clang__)
+#pragma clang diagnostic ignored "-Wmissing-braces"
+#endif
+
 int main( int argc, char *argv[] )
  {
   std::cout << "Hello World" << std::endl;

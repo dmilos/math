@@ -38,12 +38,12 @@
             return false;
            }
 
-          center_param[0] = ( a[0]*a[0]  + a[1]*a[1] ) * ( b[1] - c[1] )
-                          + ( b[0]*b[0]  + b[1]*b[1] ) * ( c[1] - a[1] )
-                          + ( c[0]*c[0]  + c[1]*c[1] ) * ( a[1] - b[1] );
-          center_param[1] = ( a[0]*a[0]  + a[1]*a[1] ) * ( c[0] - b[0] )
-                          + ( b[0]*b[0]  + b[1]*b[1] ) * ( a[0] - c[0] )
-                          + ( c[0]*c[0]  + c[1]*c[1] ) * ( b[0] - a[0] );
+          center_param[0] = A2 * ( b[1] - c[1] )
+                          + B2 * ( c[1] - a[1] )
+                          + C2 * ( a[1] - b[1] );
+          center_param[1] = A2 * ( c[0] - b[0] )
+                          + B2 * ( a[0] - c[0] )
+                          + C2 * ( b[0] - a[0] );
 
           center_param[0] /= D;
           center_param[1] /= D;

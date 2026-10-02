@@ -3,3 +3,7 @@
 #include "./interpolate.hpp"
 #include "./evaluate.hpp"
 #include "./shift.hpp"
+#include "./construct.hpp"
+#include "./cardano.hpp"
+#include "./viete.hpp"
+#include "./trivial.hpp"

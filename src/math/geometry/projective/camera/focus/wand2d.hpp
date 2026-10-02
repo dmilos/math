@@ -79,13 +79,13 @@ namespace math
              ,scalar_name     const& lengthW      //!< length of wand,
             )
             {
-             scalar_name epsilon = 1e-6;
+             //scalar_name epsilon = 1e-6;
              scalar_name gamma;
              if( false == ::math::geometry::triangle::angle_gamma( gamma, distanceA, distanceB, lengthW ) ) return false;
 
              scalar_name r = (fabs(A)+B)/( scalar_name(2) * sin( gamma ));
              scalar_name y = sqrt( r*r - (fabs(A)-B)*(fabs(A)-B)/scalar_name(2*2));
-             scalar_name h = ((fabs(A)+B)/scalar_name(2) ) /tan( gamma );
+             scalar_name h = ((fabs(A)+B)/scalar_name(2) ) / tan( gamma );
              focus = y + h;
              return true;
             }

@@ -163,7 +163,7 @@ namespace math
                   }
                 else
                  {
-                  iterator = iterator;
+                  // iterator = iterator;
                  }
                 }
 

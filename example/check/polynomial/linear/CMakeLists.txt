@@ -3,4 +3,4 @@
 add_executable(  Math_Plynomial_Linear_Evaluate            evaluate.cpp )
 add_executable(  Math_Plynomial_Linear_Solve                  solve.cpp )
 add_executable(  Math_Plynomial_Linear_Interpolate      interpolate.cpp )
-
+add_executable(  Math_Plynomial_Linear_Construct          construct.cpp )

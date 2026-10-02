@@ -64,7 +64,14 @@
        inline
        scalar_name monicing( ::math::polynomial::structure::fixed< scalar_name, size_number > &coefficient, scalar_name const& epsilon = 1e-6 )
         {
-         return math::polynomial::monicing( coefficient.data(), coefficient.size(), epsilon );
+         return math::polynomial::monicing( coefficient.data(), size_number, epsilon );
+        }
+
+      template< typename scalar_name, ::math::type::size_type size_number >
+       inline
+       scalar_name monicing( ::math::polynomial::structure::fixed< scalar_name, size_number > &output, ::math::polynomial::structure::fixed< scalar_name, size_number > const& input, scalar_name const& epsilon = 1e-6 )
+        {
+         return math::polynomial::monicing( output.data(), input.data(), size_number, epsilon );
         }
 
     }

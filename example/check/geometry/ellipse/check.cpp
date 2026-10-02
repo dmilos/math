@@ -6,6 +6,10 @@
 
 using namespace std;
 
+#if defined(__clang__)
+// TODO check #pragma clang diagnostic ignored "-Wself-assign-overloaded"
+#endif
+
 int main( int argc, char *argv[] )
  {
   cout << "Hello World" << endl;

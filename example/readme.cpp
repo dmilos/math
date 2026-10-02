@@ -6,6 +6,10 @@
 
 using namespace std;
 
+#if defined(__clang__)
+#pragma clang diagnostic ignored "-Wself-assign-overloaded"
+#endif
+
 int main( int argc, char *argv[] )
  {
   ::math::linear::vector::point<double,2>   point{100,100};

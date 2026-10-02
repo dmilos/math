@@ -28,8 +28,8 @@ namespace math
 
                       loaded(){ }
              explicit loaded( data_name const& data_param ):m_data(data_param){ }
-             explicit loaded( data_name const& data_param, face_type const& face ):m_data(data_param), base_type(face) { }
-             explicit loaded( data_name const& data_param, face_type const& face, cell_type const& cell ):m_data(data_param), base_type(face,cell){ }
+             explicit loaded( data_name const& data_param, face_type const& face ):base_type(face),m_data(data_param)  { }
+             explicit loaded( data_name const& data_param, face_type const& face, cell_type const& cell ):base_type(face,cell), m_data(data_param){ }
 
            public:
              data_name const& data() const{ return m_data; }

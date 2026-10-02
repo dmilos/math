@@ -24,17 +24,21 @@
           > // Expect Monic and depressed
           unsigned ferrari( scalar_name root[4], scalar_name const coefficient[5], scalar_name const& epsilon = 1e-12 )
            {  // [0] + [1] * x + [2] * x ^2 + 0.0. * x^3 +  1.0 * x^4
+            root[3]=root[2]=root[1]=root[0]=NAN;
+
             scalar_name const& p = coefficient[2];
             scalar_name const& q = coefficient[1];
             scalar_name const& r = coefficient[0];
 
-            if( q * q < epsilon )
+            scalar_name Q = q * q;
+            if( Q < epsilon )
              {
               scalar_name biC[3]={ r, p, 1 };
               return math::polynomial::quartic::solve::bi( root, biC, epsilon );
              }
 
-            scalar_name resolventC[ 4 ]={ -q*q, 2*p*p-scalar_name(8)*r, scalar_name(8)*p, scalar_name(8) };
+
+            scalar_name resolventC[ 4 ]={ -Q, 2*p*p-scalar_name(8)*r, scalar_name(8)*p, scalar_name(8) };
             scalar_name resultC[ 3 ];
             unsigned countC = ::math::polynomial::cubic::solve::general( resultC, resolventC, epsilon );
             if( 0 == countC )

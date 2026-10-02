@@ -4,6 +4,15 @@
 
 #include "math/math.hpp"
 
+#ifdef __clang__
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wmissing-braces"
+    #pragma clang diagnostic ignored "-Wunused-local-typedef"
+    #pragma clang diagnostic ignored "-Wunused-variable"
+    #pragma clang diagnostic ignored "-Wself-assign-overloaded"
+#endif
+
+
 using namespace std;
 
 int main(int argc, char* argv[])

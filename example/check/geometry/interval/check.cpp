@@ -6,6 +6,10 @@
 
 using namespace std;
 
+#if defined(__clang__)
+#pragma clang diagnostic ignored "-Wself-assign"
+#endif
+
 int main( int argc, char *argv[] )
  {
   cout << "Hello World" << endl;

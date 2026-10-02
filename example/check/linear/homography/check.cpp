@@ -5,6 +5,15 @@
 
 #include "math/math.hpp"
 
+#ifdef __clang__
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wmissing-braces"
+    #pragma clang diagnostic ignored "-Wunused-local-typedef"
+    #pragma clang diagnostic ignored "-Wunused-variable"
+    #pragma clang diagnostic ignored "-Wself-assign-overloaded"
+#endif
+
+
 template< typename scalar_name, math::type::size_t width_number, math::type::size_t height_number >
  void monic( ::math::linear::matrix::structure<scalar_name,width_number,height_number> & m )
   {

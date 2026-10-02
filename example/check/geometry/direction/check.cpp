@@ -7,6 +7,10 @@
 using namespace std;
 
 
+#ifdef __clang__
+    #pragma clang diagnostic ignored "-Wunused-variable"
+    #pragma clang diagnostic ignored "-Wself-assign-overloaded"
+#endif
 
 void side( ::math::linear::vector::point<double, 2> const& A, ::math::linear::vector::point<double, 2> const& B, ::math::linear::vector::point<double, 2> const& point )
  {

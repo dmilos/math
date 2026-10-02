@@ -4,6 +4,11 @@
 
 #include "math/math.hpp"
 
+#if defined(__clang__)
+#pragma clang diagnostic ignored "-Wunused-local-typedef"
+#endif
+
+
 using namespace std;
 
 template< typename scalar_name >
