@@ -29,13 +29,23 @@ void hg()
 
     ::math::linear::homography::construct<double>( h, {1,1} );
     print( h );
-    
+
 }
- 
+
+void jacobian()
+ {
+  ::math::linear::matrix::structure<  double, 3, 3 >       result;
+  ::math::linear::homography::structure<  double, 3 >   H    ;
+  ::math::linear::vector::structure<double,3>           point;
+
+  ::math::linear::homography::jacobian( result, H, point );
+
+ }
+
 int main( int argc, char*argv[] )
  {
   hg();
 
-  
+
   return 0;
  }

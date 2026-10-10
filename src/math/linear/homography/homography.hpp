@@ -11,6 +11,8 @@
 #include "./convert.hpp"
 #include "./compose.hpp"
 
+#include "./jacobian.hpp"
+
 #include "./horizon.hpp"     //!< move in camera
 #include "./principal.hpp"   //!< move in camera
 #include "./normalize.hpp"   //!< move in camera

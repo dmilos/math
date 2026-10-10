@@ -12,7 +12,9 @@
   {
    namespace random
     {
-
+     // April 25, 2018 by Martin Roberts
+     // The Unreasonable Effectiveness of Quasirandom Sequences
+     // https://web.archive.org/web/20250301162105/https://extremelearning.com.au/unreasonable-effectiveness-of-quasirandom-sequences/
      template< typename scalar_name, ::math::type::size_type dimension_number >
       class congruent
        {
@@ -25,7 +27,8 @@
           congruent()
            {
             math::linear::vector::fill( m_seed, 0.5 );
-            scalar_type g = 1.22074408460575947536;
+          //scalar_type g = 1.22074408460575947536;
+            scalar_type g = ::math::function::cbrt( 0.5+sqrt( 849.0)/18.0) + ::math::function::cbrt( 0.5-sqrt(849.0)/18.0) ;
             m_move[0] = scalar_type(1)/ g;
             m_move[1] = scalar_type(1)/ ( g*g );
             m_move[2] = scalar_type(1)/ ( g*g*g );
@@ -81,6 +84,7 @@
           congruent()
            {
             this->seed( 0.5 );
+          //scalar_type phi = 1.61180339887498948482 ;
             scalar_type phi = ( sqrt(5) + 1 )/scalar_type(2);
             m_move = scalar_type(1)/scalar_type(phi);
            }
@@ -137,6 +141,7 @@
           congruent()
            {
             this->seed( { 0.5, 0.5 } );
+          //scalar_type plastic = 1.324717957244746 ;
             scalar_type plastic =    pow( (scalar_type(9) + sqrt(scalar_type(69)))/scalar_type(18), scalar_type(1)/scalar_type(3))
                                   +  pow( (scalar_type(9) - sqrt(scalar_type(69)))/scalar_type(18), scalar_type(1)/scalar_type(3));
             m_move[0] = scalar_type(1) /( plastic );
