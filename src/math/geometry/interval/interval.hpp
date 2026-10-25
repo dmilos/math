@@ -17,4 +17,4 @@
 #include "./size.hpp"
 #include "./reframe.hpp"
 #include "./remap.hpp"
-
+#include "./distance.hpp"

@@ -30,7 +30,7 @@ namespace math
          public:
            typedef scalar_name scalar_type;
            typedef ::math::linear::vector::structure<scalar_type,3> point_type;
-           typedef ::math::linear::matrix::structure<double,3,3> matrix_type;
+           typedef ::math::linear::matrix::structure<scalar_name,3,3> matrix_type;
            typedef ::math::linear::homography::structure<scalar_type,2> homography_type;
            typedef ::math::geometry::direction::ABC2D<scalar_type> ABC_type;
 

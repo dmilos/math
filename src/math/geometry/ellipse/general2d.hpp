@@ -137,9 +137,9 @@
               auto Bt = B;
               auto Ct = C;
 
-              F = F;
-              E = E; 
-              D = D;
+            //F = F;
+            //E = E; 
+            //D = D;
               C = At * sin_theta*sin_theta        + Bt * cos_theta * sin_theta                             + Ct * cos_theta*cos_theta ;
               B = At * 2 * cos_theta * sin_theta  + Bt *( cos_theta * cos_theta - sin_theta * sin_theta )  + Ct *2*(-1) * ( sin_theta*cos_theta ); //!< == 0
               A = At * cos_theta* cos_theta       + Bt * (-1) * cos_theta * sin_theta                      + Ct * sin_theta*sin_theta;

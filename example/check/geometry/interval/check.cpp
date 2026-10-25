@@ -23,7 +23,7 @@ int main( int argc, char *argv[] )
   typedef ::math::geometry::direction::two<float,10> two10_t;
 
   typedef ::math::geometry::interval::structure<float,3> interval3_t;
-  typedef ::math::geometry::interval::structure<float,3>::point_type point3_t;
+  //typedef ::math::geometry::interval::structure<float,3>::point_type point3_t;
   typedef ::math::linear::affine::structure<float,3> affine3_t;
 
   interval_t  i1, i2, i3;

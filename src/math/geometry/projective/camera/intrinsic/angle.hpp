@@ -27,7 +27,7 @@ namespace math
             )
             {
              auto focus = ::math::geometry::projective::camera::a2f( angle );
-             ::math::geometry::projective::camera::intrinsic::K<double>()( result, focus );
+             ::math::geometry::projective::camera::intrinsic::K<scalar_name>()( result, focus );
             }
 
          }

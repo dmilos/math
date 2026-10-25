@@ -42,10 +42,10 @@ namespace math
                 { //! re-target exiting homography to be applied on image
                  m_window = window;
 
-                 m_target = interval_type{ display_type{ 0, (double)resolution[1] }, display_type{ (double)resolution[0], 0 } };
+                 m_target = interval_type{ display_type{ 0, (scalar_name)resolution[1] }, display_type{ (scalar_name)resolution[0], 0 } };
                  interval_type  const& codomain = window;
                  interval_type  const& domain = window;
-                 m_source = interval_type{ display_type{ 0, (double)resolution[1] }, display_type{ (double)resolution[0], 0 } };
+                 m_source = interval_type{ display_type{ 0, (scalar_name)resolution[1] }, display_type{ (scalar_name)resolution[0], 0 } };
 
                  return ::math::linear::homography::retarget( H, homography_type( H ), m_target, codomain, domain, m_source );
                 }
