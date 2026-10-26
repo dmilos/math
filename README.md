@@ -113,4 +113,3 @@ int main( int argc, char *argv[] )
 ### Tested against:
   - GCC 12.4.0
   - MSVC 2022 (17.4.4)
-
